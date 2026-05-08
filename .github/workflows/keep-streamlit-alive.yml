@@ -1,0 +1,51 @@
+# ═══════════════════════════════════════════════════════════════
+# GitHub Action: Keep Streamlit Apps Alive
+# File: .github/workflows/keep-streamlit-alive.yml
+#
+# This pings your Streamlit apps every 24 hours so they don't
+# go dormant on Streamlit Community Cloud's free tier.
+# Update the URLs below if you add more apps.
+# ═══════════════════════════════════════════════════════════════
+
+name: Keep Streamlit Apps Alive
+
+on:
+  schedule:
+    # Runs every day at 08:00 UTC (1:30 PM IST)
+    - cron: '0 8 * * *'
+  workflow_dispatch:   # allow manual trigger from Actions tab
+
+jobs:
+  ping-apps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Ping DataCo AI Delivery Risk Predictor
+        # ── UPDATE: correct URL as of this PR ──────────────────
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            --max-time 30 \
+            "https://ai-delivery-risk-predictor-dataco.streamlit.app")
+          echo "DataCo app responded with HTTP $HTTP_STATUS"
+          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
+            echo "✅ DataCo app is awake."
+          else
+            echo "⚠️  DataCo app returned $HTTP_STATUS — may still be waking."
+          fi
+
+      # ── Add more apps below as you deploy them ───────────────
+
+      - name: Ping Job Market Analysis App
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            --max-time 30 \
+            "https://anshul-job-market.streamlit.app")
+          echo "Job Market app responded with HTTP $HTTP_STATUS"
+
+      - name: Ping DataCo SCM Dashboard (legacy / placeholder)
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            --max-time 30 \
+            "https://anshul-dataco-scm.streamlit.app")
+          echo "DataCo SCM app responded with HTTP $HTTP_STATUS"
