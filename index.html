@@ -1,19 +1,12 @@
-html
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Anshul Silhare — Operations & Data Analytics Portfolio. PGDM Research & Business Analytics at WeSchool Mumbai. SQL, Python, Power BI, Supply Chain Analytics.">
-<meta property="og:title" content="Anshul Silhare — Analytics & Operations Portfolio">
-<meta property="og:description" content="PGDM Research & Business Analytics | WeSchool Mumbai '27 | SQL, Python, Power BI, Supply Chain">
-<meta property="og:url" content="https://anshulsilhare.github.io">
-<title>Anshul Silhare: Operations & Data Analytics</title>
+<title>Anshul Silhare — Operations & Data Analytics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
 <style>
 /* ─── DESIGN TOKENS ─────────────────────────────────────── */
 :root {
@@ -435,7 +428,7 @@ section { position: relative; z-index: 1; }
   display: flex; flex-direction: column;
   position: relative; overflow: hidden;
   transition: border-color .3s, transform .3s, box-shadow .3s;
-  cursor: pointer;
+  cursor: default;
 }
 .project-card::before {
   content: '';
@@ -856,6 +849,102 @@ section { position: relative; z-index: 1; }
 .modal-close:hover { background: var(--surface); color: var(--accent); border-color: var(--accent); }
 .modal-iframe { flex: 1; width: 100%; border: none; background: #fff; }
 
+/* ─── AI FEATURED CARD ──────────────────────────────────── */
+.project-card-ai:hover {
+  box-shadow: 0 16px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(56,189,248,.35), 0 0 32px rgba(56,189,248,.08);
+}
+.project-card-ai::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: var(--radius2);
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(56,189,248,.5), rgba(45,212,191,.3), rgba(56,189,248,.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s ease;
+}
+.project-card-ai:hover::after { opacity: 1; }
+.card-circuit-bg {
+  position: absolute; inset: 0;
+  border-radius: var(--radius2);
+  overflow: hidden; pointer-events: none; z-index: 0;
+  opacity: .6; transition: opacity .3s;
+}
+.project-card-ai:hover .card-circuit-bg { opacity: 1; }
+.project-card-ai > *:not(.card-circuit-bg) { position: relative; z-index: 1; }
+.card-ai-badge {
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .06em;
+  color: var(--teal); background: rgba(45,212,191,.1);
+  border: 1px solid rgba(45,212,191,.25);
+  padding: .15rem .55rem; border-radius: 99px;
+}
+/* ─── UNDER THE HOOD ────────────────────────────────────── */
+.hood-wrapper {
+  margin: .8rem 0;
+  border: 1px solid rgba(56,189,248,.15);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(13,19,32,.6);
+}
+.hood-toggle {
+  width: 100%; display: flex; align-items: center; gap: .6rem;
+  padding: .65rem .9rem; background: transparent; border: none;
+  cursor: pointer; color: var(--text2); transition: background .2s, color .2s; text-align: left;
+}
+.hood-toggle:hover { background: rgba(56,189,248,.05); color: var(--accent); }
+.hood-toggle[aria-expanded="true"] { color: var(--accent); }
+.hood-arrow { font-size: .55rem; color: var(--accent); transition: transform .25s ease; display: inline-block; }
+.hood-toggle[aria-expanded="true"] .hood-arrow { transform: rotate(90deg); }
+.hood-body {
+  border-top: 1px solid rgba(56,189,248,.1);
+  padding: .8rem .9rem; display: flex; flex-direction: column; gap: .8rem;
+  animation: hoodOpen .25s ease forwards;
+}
+@keyframes hoodOpen { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
+.hood-item { display: flex; gap: .8rem; align-items: flex-start; }
+.hood-num {
+  font-family: var(--mono); font-size: .6rem; font-weight: 600;
+  color: var(--accent); background: rgba(56,189,248,.1);
+  border: 1px solid rgba(56,189,248,.2);
+  border-radius: 4px; padding: .1rem .4rem; flex-shrink: 0;
+  margin-top: .15rem; letter-spacing: .05em;
+}
+.hood-title { font-family: var(--mono); font-size: .72rem; font-weight: 600; color: var(--text); margin-bottom: .25rem; }
+.hood-desc { font-family: var(--mono); font-size: .65rem; color: var(--text3); line-height: 1.65; }
+.hood-desc code { color: var(--teal); background: rgba(45,212,191,.08); padding: .05rem .3rem; border-radius: 3px; font-size: .62rem; }
+/* ─── STREAMLIT NOTICE ──────────────────────────────────── */
+.streamlit-notice {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-family: var(--mono); font-size: .6rem; color: var(--text3);
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+  border-radius: 4px; padding: .25rem .6rem; margin-bottom: .5rem;
+}
+.streamlit-notice-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--amber); opacity: .7;
+  animation: pulse-dot 2.5s infinite; flex-shrink: 0;
+}
+/* ─── ENHANCED MODAL IFRAME WRAP ────────────────────────── */
+.modal-iframe-wrap { flex: 1; position: relative; display: flex; flex-direction: column; }
+.modal-loading {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem;
+  background: var(--bg); z-index: 2; transition: opacity .4s ease;
+}
+.modal-loading.hidden { opacity: 0; pointer-events: none; }
+.modal-spinner {
+  width: 32px; height: 32px;
+  border: 2px solid rgba(56,189,248,.15);
+  border-top-color: var(--accent);
+  border-radius: 50%; animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.modal-loading-text { font-family: var(--mono); font-size: .72rem; color: var(--text3); letter-spacing: .06em; }
+.modal-loading-sub { font-family: var(--mono); font-size: .62rem; color: var(--text3); opacity: .7; text-align: center; max-width: 300px; line-height: 1.6; }
+.modal-fallback-link { font-family: var(--mono); font-size: .7rem; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.modal-iframe-wrap iframe { flex: 1; width: 100%; border: none; background: #fff; min-height: 0; }
+
 /* ─── ANIMATIONS ─────────────────────────────────────────── */
 @keyframes fadeUp {
   to { opacity: 1; transform: none; }
@@ -919,8 +1008,8 @@ section { position: relative; z-index: 1; }
     <p class="hero-sub">PGDM Research &amp; Business Analytics · WeSchool Mumbai '27 · Operations | Supply Chain | Data Analytics</p>
     <div class="hero-ctas">
       <a href="#projects" class="btn btn-primary">View Projects ↓</a>
-      <a href="https://linkedin.com/in/anshul-silhare" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn →</a>
-      <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="btn btn-outline">GitHub →</a>
+      <a href="https://linkedin.com/in/anshul-silhare" target="_blank" class="btn btn-outline">LinkedIn →</a>
+      <a href="https://github.com/AnshulSilhare" target="_blank" class="btn btn-outline">GitHub →</a>
     </div>
     <div class="hero-counters">
       <div class="counter-item">
@@ -966,11 +1055,11 @@ section { position: relative; z-index: 1; }
           </div>
           <div class="meta-item">
             <span class="meta-icon">🔗</span>
-            <a href="https://linkedin.com/in/anshul-silhare" target="_blank" rel="noopener noreferrer">linkedin.com/in/anshul-silhare</a>
+            <a href="https://linkedin.com/in/anshul-silhare" target="_blank">linkedin.com/in/anshul-silhare</a>
           </div>
           <div class="meta-item">
             <span class="meta-icon">⚡</span>
-            <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer">github.com/AnshulSilhare</a>
+            <a href="https://github.com/AnshulSilhare" target="_blank">github.com/AnshulSilhare</a>
           </div>
           <div class="meta-item">
             <span class="meta-icon">🎓</span>
@@ -1157,31 +1246,90 @@ section { position: relative; z-index: 1; }
           <div class="metric"><div class="metric-val">Pure T-SQL</div><div class="metric-lbl">No third-party ETL</div></div>
         </div>
         <div class="card-actions">
-          <a href="https://github.com/AnshulSilhare/sql-data-warehouse-project" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh">⚡ GitHub</a>
+          <a href="https://github.com/AnshulSilhare/sql-data-warehouse-project" target="_blank" class="card-btn card-btn-gh">⚡ GitHub</a>
           <button class="card-btn card-btn-soon" disabled>— No Live Demo</button>
         </div>
       </div>
 
-      <!-- P2 -->
-      <div class="project-card featured reveal">
+      <!-- P2 — DataCo AI (FEATURED) -->
+      <div class="project-card featured project-card-ai reveal">
+        <div class="card-circuit-bg" aria-hidden="true">
+          <svg width="100%" height="100%" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30"  cy="30"  r="3" stroke="rgba(56,189,248,.18)" stroke-width="1"/>
+            <circle cx="370" cy="30"  r="3" stroke="rgba(56,189,248,.18)" stroke-width="1"/>
+            <circle cx="30"  cy="230" r="3" stroke="rgba(56,189,248,.18)" stroke-width="1"/>
+            <circle cx="200" cy="130" r="5" stroke="rgba(56,189,248,.22)" stroke-width="1"/>
+            <line x1="30"  y1="30"  x2="80"  y2="30"  stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="80"  y1="30"  x2="80"  y2="80"  stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="80"  y1="80"  x2="160" y2="80"  stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="160" y1="80"  x2="200" y2="130" stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="370" y1="30"  x2="320" y2="30"  stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="320" y1="30"  x2="320" y2="80"  stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="320" y1="80"  x2="240" y2="80"  stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="240" y1="80"  x2="200" y2="130" stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="200" y1="130" x2="200" y2="200" stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="200" y1="200" x2="30"  y2="200" stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <line x1="30"  y1="200" x2="30"  y2="230" stroke="rgba(56,189,248,.12)" stroke-width="1"/>
+            <circle cx="80"  cy="80"  r="2.5" fill="rgba(56,189,248,.2)"/>
+            <circle cx="320" cy="80"  r="2.5" fill="rgba(56,189,248,.2)"/>
+            <circle cx="200" cy="200" r="2.5" fill="rgba(56,189,248,.2)"/>
+          </svg>
+        </div>
         <div class="card-top">
-          <span class="card-num">02</span>
-          <span class="card-status status-ongoing">Ongoing</span>
+          <div style="display:flex;align-items:center;gap:.6rem">
+            <span class="card-num">02</span>
+            <span class="card-ai-badge">🤖 ML / AI</span>
+          </div>
+          <span class="card-status status-complete">Complete</span>
         </div>
-        <div class="card-title">DataCo Supply Chain — Delivery Risk & Ops MIS</div>
+        <div class="card-title">DataCo Supply Chain —<br><span style="color:var(--accent)">AI Delivery Risk Predictor</span></div>
         <div class="card-tags">
-          <span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Power BI</span><span class="tag">Logistics Analytics</span>
+          <span class="tag">Machine Learning</span><span class="tag">Random Forest</span><span class="tag">Streamlit</span><span class="tag">Supply Chain AI</span><span class="tag">Python</span><span class="tag">Scikit-Learn</span><span class="tag">Predictive Analytics</span>
         </div>
-        <div class="card-desc">End-to-end operational analytics system for a multi-node logistics network. Built to monitor SLA adherence, detect delay patterns, and provide real-time risk visibility before dispatch.</div>
+        <div class="card-desc">End-to-end ML web application predicting supply chain delivery delays <em>before they happen</em> using a Random Forest Classifier. Outputs a probability risk score ("85% certain this order will be delayed") with Explainable AI feature importance — plus bulk CSV processing for 500+ orders at once.</div>
         <div class="card-metrics">
-          <div class="metric"><div class="metric-val">180K+</div><div class="metric-lbl">Records Processed</div></div>
-          <div class="metric"><div class="metric-val">SLA</div><div class="metric-lbl">Adherence Tracking</div></div>
-          <div class="metric"><div class="metric-val">Pre-Dispatch</div><div class="metric-lbl">Risk Identification</div></div>
-          <div class="metric"><div class="metric-val">TAT</div><div class="metric-lbl">Order Optimization</div></div>
+          <div class="metric"><div class="metric-val">180K+</div><div class="metric-lbl">Records Trained On</div></div>
+          <div class="metric"><div class="metric-val">240+</div><div class="metric-lbl">Engineered Features</div></div>
+          <div class="metric"><div class="metric-val">Random Forest</div><div class="metric-lbl">Classifier</div></div>
+          <div class="metric"><div class="metric-val">Real-time + Bulk</div><div class="metric-lbl">Prediction Modes</div></div>
+        </div>
+        <div class="hood-wrapper">
+          <button class="hood-toggle" onclick="toggleHood(this)" aria-expanded="false">
+            <span class="hood-arrow">▶</span>
+            <span style="font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase">Under the Hood</span>
+            <span style="font-family:var(--mono);font-size:.6rem;color:var(--text3);margin-left:auto">3 engineering challenges solved</span>
+          </button>
+          <div class="hood-body" hidden>
+            <div class="hood-item">
+              <span class="hood-num">01</span>
+              <div>
+                <div class="hood-title">Matrix Dimensionality Fix</div>
+                <div class="hood-desc">Model trained on 240+ One-Hot Encoded columns, UI takes only 4 inputs. Solved with a dynamic routing script using <code>model.feature_names_in_</code> that generates a zero-filled 240-column skeleton matrix and maps inputs to correct indices.</div>
+              </div>
+            </div>
+            <div class="hood-item">
+              <span class="hood-num">02</span>
+              <div>
+                <div class="hood-title">Self-Healing Scaler</div>
+                <div class="hood-desc">Built logic to isolate numerical columns via <code>scaler.feature_names_in_</code>, scale only those columns, then stitch the dataframe back — preventing shape mismatch errors during inference.</div>
+              </div>
+            </div>
+            <div class="hood-item">
+              <span class="hood-num">03</span>
+              <div>
+                <div class="hood-title">Conda Dependency Resolution</div>
+                <div class="hood-desc">Resolved C++ DLL conflicts between PyArrow and Scikit-Learn in Python 3.13 via strict <code>conda-forge</code> channel pinning and explicit environment constraints.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="streamlit-notice">
+          <span class="streamlit-notice-dot"></span>
+          <span>Hosted on Streamlit Community Cloud — may take ~30s to wake on first visit</span>
         </div>
         <div class="card-actions">
-          <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh">⚡ GitHub</a>
-          <button class="card-btn card-btn-demo" onclick="openModal('DataCo Supply Chain — Delivery Risk & Ops MIS','https://anshul-dataco-scm.streamlit.app')">▶ Live Demo</button>
+          <a href="https://github.com/AnshulSilhare/ai-dataco-supply-chain" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh">⚡ GitHub</a>
+          <button class="card-btn card-btn-demo" onclick="openModal('DataCo Supply Chain — AI Delivery Risk Predictor','https://ai-delivery-risk-predictor-dataco.streamlit.app')">🚀 Live Demo</button>
         </div>
       </div>
 
@@ -1203,7 +1351,7 @@ section { position: relative; z-index: 1; }
           <div class="metric"><div class="metric-val">$98K</div><div class="metric-lbl">Python Median Salary</div></div>
         </div>
         <div class="card-actions">
-          <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh">⚡ GitHub</a>
+          <a href="https://github.com/AnshulSilhare" target="_blank" class="card-btn card-btn-gh">⚡ GitHub</a>
           <button class="card-btn card-btn-demo" onclick="openModal('Data Analyst Job Market Analysis','https://anshul-job-market.streamlit.app')">▶ Live Demo</button>
         </div>
       </div>
@@ -1226,7 +1374,7 @@ section { position: relative; z-index: 1; }
           <div class="metric"><div class="metric-val">8 Entities</div><div class="metric-lbl">Data Backend</div></div>
         </div>
         <div class="card-actions">
-          <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh">⚡ GitHub</a>
+          <a href="https://github.com/AnshulSilhare" target="_blank" class="card-btn card-btn-gh">⚡ GitHub</a>
           <button class="card-btn card-btn-soon" disabled>⏳ Coming Soon</button>
         </div>
       </div>
@@ -1249,7 +1397,7 @@ section { position: relative; z-index: 1; }
           <div class="metric"><div class="metric-val">48 hr</div><div class="metric-lbl">SLA Validated</div></div>
         </div>
         <div class="card-actions">
-          <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh">⚡ GitHub</a>
+          <a href="https://github.com/AnshulSilhare" target="_blank" class="card-btn card-btn-gh">⚡ GitHub</a>
           <button class="card-btn card-btn-soon" disabled>⏳ Coming Soon</button>
         </div>
       </div>
@@ -1272,7 +1420,7 @@ section { position: relative; z-index: 1; }
           <div class="metric"><div class="metric-val">↓ Risk</div><div class="metric-lbl">Stockout Reduction</div></div>
         </div>
         <div class="card-actions">
-          <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh">⚡ GitHub</a>
+          <a href="https://github.com/AnshulSilhare" target="_blank" class="card-btn card-btn-gh">⚡ GitHub</a>
           <button class="card-btn card-btn-soon" disabled>⏳ Coming Soon</button>
         </div>
       </div>
@@ -1481,7 +1629,7 @@ section { position: relative; z-index: 1; }
         <p class="contact-cta-sub">Open to Summer Internship and Final Placement opportunities in Operations Analytics, Supply Chain Analytics, and Data / Business Analytics. Currently interning at Nerolac Nerofix — available for opportunities from August 2026.</p>
         <div class="hero-ctas" style="margin-top:0">
           <a href="mailto:anshulsilhare@gmail.com" class="btn btn-primary">Send Email ↗</a>
-          <a href="https://linkedin.com/in/anshul-silhare" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn →</a>
+          <a href="https://linkedin.com/in/anshul-silhare" target="_blank" class="btn btn-outline">LinkedIn →</a>
         </div>
       </div>
       <div>
@@ -1490,11 +1638,11 @@ section { position: relative; z-index: 1; }
             <span class="contact-link-icon">✉</span>
             <span>anshulsilhare@gmail.com</span>
           </a>
-          <a href="https://linkedin.com/in/anshul-silhare" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <a href="https://linkedin.com/in/anshul-silhare" target="_blank" class="contact-link">
             <span class="contact-link-icon">🔗</span>
             <span>linkedin.com/in/anshul-silhare</span>
           </a>
-          <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <a href="https://github.com/AnshulSilhare" target="_blank" class="contact-link">
             <span class="contact-link-icon">⚡</span>
             <span>github.com/AnshulSilhare</span>
           </a>
@@ -1518,7 +1666,15 @@ section { position: relative; z-index: 1; }
         <button class="modal-close" onclick="closeModal()">✕</button>
       </div>
     </div>
-    <iframe class="modal-iframe" id="modalIframe" src="" allowfullscreen></iframe>
+    <div class="modal-iframe-wrap">
+      <div class="modal-loading" id="modalLoading">
+        <div class="modal-spinner"></div>
+        <div class="modal-loading-text">Loading app...</div>
+        <div class="modal-loading-sub" id="modalLoadingSub">If this is the first visit today, Streamlit may take ~30 seconds to wake up.</div>
+        <a href="#" id="modalFallbackLink" target="_blank" rel="noopener noreferrer" class="modal-fallback-link" style="display:none">App taking too long? Open directly ↗</a>
+      </div>
+      <iframe class="modal-iframe" id="modalIframe" src="" allowfullscreen onload="handleIframeLoad()"></iframe>
+    </div>
   </div>
 </div>
 
@@ -1622,25 +1778,50 @@ heroObserver.observe(document.getElementById('hero'));
 /* ── Modal ────────────────────────────────────────────────── */
 function openModal(title, url) {
   const isMobile = window.innerWidth < 700;
-  if (isMobile) {
-    window.open(url, '_blank');
-    return;
-  }
+  if (isMobile) { window.open(url, '_blank'); return; }
   document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalIframe').src = url;
   document.getElementById('modalNewTab').href = url;
+  document.getElementById('modalFallbackLink').href = url;
+  const loading = document.getElementById('modalLoading');
+  const sub = document.getElementById('modalLoadingSub');
+  const fallback = document.getElementById('modalFallbackLink');
+  loading.classList.remove('hidden');
+  fallback.style.display = 'none';
+  sub.textContent = 'If this is the first visit today, Streamlit may take ~30 seconds to wake up.';
+  document.getElementById('modalIframe').src = url;
+  clearTimeout(window._modalFallbackTimer);
+  window._modalFallbackTimer = setTimeout(() => {
+    if (!loading.classList.contains('hidden')) {
+      fallback.style.display = 'inline';
+      sub.textContent = 'App is waking up — this can take ~30s on first load.';
+    }
+  }, 20000);
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function handleIframeLoad() {
+  document.getElementById('modalLoading').classList.add('hidden');
+  clearTimeout(window._modalFallbackTimer);
 }
 
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.getElementById('modalIframe').src = '';
+  document.getElementById('modalLoading').classList.remove('hidden');
+  clearTimeout(window._modalFallbackTimer);
   document.body.style.overflow = '';
 }
 
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+/* ── Under the Hood toggle ────────────────────────────────── */
+function toggleHood(btn) {
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', String(!expanded));
+  btn.nextElementSibling.hidden = expanded;
 }
 
 document.addEventListener('keydown', e => {
