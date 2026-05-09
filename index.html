@@ -118,7 +118,6 @@ nav.scrolled {
   background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(14,165,233,.07) 0%, transparent 70%),
               radial-gradient(ellipse 40% 40% at 20% 70%, rgba(45,212,191,.05) 0%, transparent 60%);
 }
-/* Animated particles */
 .particle {
   position: absolute;
   width: 2px; height: 2px;
@@ -219,7 +218,6 @@ nav.scrolled {
 }
 .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-/* hero counters */
 .hero-counters {
   display: flex; flex-wrap: wrap; gap: 2rem;
   margin-top: 4rem;
@@ -272,7 +270,6 @@ section { position: relative; z-index: 1; }
 }
 .section-title .dim { color: var(--text3); }
 
-/* fade-up reveal */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 
@@ -803,8 +800,8 @@ section { position: relative; z-index: 1; }
 }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
 .modal-box {
-  width: 100%; max-width: 1000px;
-  height: 88vh;
+  width: 100%; max-width: 1100px;
+  height: 90vh;
   background: var(--surface);
   border: 1px solid var(--border2);
   border-radius: 16px;
@@ -816,9 +813,10 @@ section { position: relative; z-index: 1; }
 .modal-overlay.open .modal-box { transform: scale(1); }
 .modal-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: .9rem 1.2rem;
+  padding: .9rem 1.4rem;
   background: var(--surface2);
   border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 .modal-title {
   font-family: var(--mono);
@@ -828,6 +826,19 @@ section { position: relative; z-index: 1; }
 }
 .modal-title strong { color: var(--accent); }
 .modal-actions { display: flex; align-items: center; gap: 1rem; }
+/* HF Space badge in modal header */
+.modal-hf-badge {
+  display: inline-flex; align-items: center; gap: .35rem;
+  font-family: var(--mono); font-size: .62rem;
+  color: var(--teal);
+  background: rgba(45,212,191,.08);
+  border: 1px solid rgba(45,212,191,.2);
+  padding: .2rem .6rem; border-radius: 99px;
+}
+.modal-hf-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--green); animation: pulse-dot 2s infinite;
+}
 .modal-newtab {
   font-family: var(--mono);
   font-size: .7rem;
@@ -847,7 +858,53 @@ section { position: relative; z-index: 1; }
   transition: all .2s;
 }
 .modal-close:hover { background: var(--surface); color: var(--accent); border-color: var(--accent); }
-.modal-iframe { flex: 1; width: 100%; border: none; background: #fff; }
+/* iframe wrapper fills remaining modal height */
+.modal-iframe-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.modal-loading {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem;
+  background: var(--bg); z-index: 2;
+  transition: opacity .4s ease;
+}
+.modal-loading.hidden { opacity: 0; pointer-events: none; }
+.modal-spinner {
+  width: 36px; height: 36px;
+  border: 2px solid rgba(56,189,248,.15);
+  border-top-color: var(--accent);
+  border-radius: 50%; animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.modal-loading-icon { font-size: 2rem; margin-bottom: .5rem; }
+.modal-loading-text {
+  font-family: var(--mono); font-size: .78rem;
+  color: var(--text2); letter-spacing: .06em;
+}
+.modal-loading-sub {
+  font-family: var(--mono); font-size: .65rem;
+  color: var(--text3); text-align: center;
+  max-width: 340px; line-height: 1.7;
+}
+.modal-fallback-link {
+  font-family: var(--mono); font-size: .72rem;
+  color: var(--accent);
+  text-decoration: underline; text-underline-offset: 3px;
+  margin-top: .5rem;
+}
+/* The actual iframe — fills all remaining space */
+.modal-iframe-wrap iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: var(--bg);
+  display: block;
+}
 
 /* ─── AI FEATURED CARD ──────────────────────────────────── */
 .project-card-ai:hover {
@@ -879,6 +936,7 @@ section { position: relative; z-index: 1; }
   border: 1px solid rgba(45,212,191,.25);
   padding: .15rem .55rem; border-radius: 99px;
 }
+
 /* ─── UNDER THE HOOD ────────────────────────────────────── */
 .hood-wrapper {
   margin: .8rem 0;
@@ -913,37 +971,21 @@ section { position: relative; z-index: 1; }
 .hood-title { font-family: var(--mono); font-size: .72rem; font-weight: 600; color: var(--text); margin-bottom: .25rem; }
 .hood-desc { font-family: var(--mono); font-size: .65rem; color: var(--text3); line-height: 1.65; }
 .hood-desc code { color: var(--teal); background: rgba(45,212,191,.08); padding: .05rem .3rem; border-radius: 3px; font-size: .62rem; }
-/* ─── STREAMLIT NOTICE ──────────────────────────────────── */
-.streamlit-notice {
+
+/* ─── HF SPACE NOTICE (replaces streamlit notice) ─────── */
+.hf-notice {
   display: inline-flex; align-items: center; gap: .4rem;
-  font-family: var(--mono); font-size: .6rem; color: var(--text3);
-  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
-  border-radius: 4px; padding: .25rem .6rem; margin-bottom: .5rem;
+  font-family: var(--mono); font-size: .6rem;
+  color: var(--teal);
+  background: rgba(45,212,191,.06);
+  border: 1px solid rgba(45,212,191,.18);
+  border-radius: 4px; padding: .25rem .65rem; margin-bottom: .5rem;
 }
-.streamlit-notice-dot {
+.hf-notice-dot {
   width: 5px; height: 5px; border-radius: 50%;
-  background: var(--amber); opacity: .7;
-  animation: pulse-dot 2.5s infinite; flex-shrink: 0;
+  background: var(--green);
+  animation: pulse-dot 2s infinite; flex-shrink: 0;
 }
-/* ─── ENHANCED MODAL IFRAME WRAP ────────────────────────── */
-.modal-iframe-wrap { flex: 1; position: relative; display: flex; flex-direction: column; }
-.modal-loading {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 1rem;
-  background: var(--bg); z-index: 2; transition: opacity .4s ease;
-}
-.modal-loading.hidden { opacity: 0; pointer-events: none; }
-.modal-spinner {
-  width: 32px; height: 32px;
-  border: 2px solid rgba(56,189,248,.15);
-  border-top-color: var(--accent);
-  border-radius: 50%; animation: spin 1s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.modal-loading-text { font-family: var(--mono); font-size: .72rem; color: var(--text3); letter-spacing: .06em; }
-.modal-loading-sub { font-family: var(--mono); font-size: .62rem; color: var(--text3); opacity: .7; text-align: center; max-width: 300px; line-height: 1.6; }
-.modal-fallback-link { font-family: var(--mono); font-size: .7rem; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-.modal-iframe-wrap iframe { flex: 1; width: 100%; border: none; background: #fff; min-height: 0; }
 
 /* ─── ANIMATIONS ─────────────────────────────────────────── */
 @keyframes fadeUp {
@@ -1205,7 +1247,7 @@ section { position: relative; z-index: 1; }
             <span class="current-tag">Active</span>
           </div>
           <div class="skill-item">
-            <span class="skill-name">Streamlit</span>
+            <span class="skill-name">Gradio · HF Spaces</span>
             <span class="current-tag">Active</span>
           </div>
           <div class="skill-item">
@@ -1251,7 +1293,7 @@ section { position: relative; z-index: 1; }
         </div>
       </div>
 
-      <!-- P2 — DataCo AI (FEATURED) -->
+      <!-- P2 — DataCo AI (FEATURED) — NOW ON HF SPACES -->
       <div class="project-card featured project-card-ai reveal">
         <div class="card-circuit-bg" aria-hidden="true">
           <svg width="100%" height="100%" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1284,7 +1326,7 @@ section { position: relative; z-index: 1; }
         </div>
         <div class="card-title">DataCo Supply Chain —<br><span style="color:var(--accent)">AI Delivery Risk Predictor</span></div>
         <div class="card-tags">
-          <span class="tag">Machine Learning</span><span class="tag">Random Forest</span><span class="tag">Streamlit</span><span class="tag">Supply Chain AI</span><span class="tag">Python</span><span class="tag">Scikit-Learn</span><span class="tag">Predictive Analytics</span>
+          <span class="tag">Machine Learning</span><span class="tag">Random Forest</span><span class="tag">Gradio</span><span class="tag">HF Spaces</span><span class="tag">Python</span><span class="tag">Scikit-Learn</span><span class="tag">Predictive Analytics</span>
         </div>
         <div class="card-desc">End-to-end ML web application predicting supply chain delivery delays <em>before they happen</em> using a Random Forest Classifier. Outputs a probability risk score ("85% certain this order will be delayed") with Explainable AI feature importance — plus bulk CSV processing for 500+ orders at once.</div>
         <div class="card-metrics">
@@ -1323,13 +1365,19 @@ section { position: relative; z-index: 1; }
             </div>
           </div>
         </div>
-        <div class="streamlit-notice">
-          <span class="streamlit-notice-dot"></span>
-          <span>Hosted on Streamlit Community Cloud — may take ~30s to wake on first visit</span>
+        <!-- HF Space notice — replaces Streamlit notice -->
+        <div class="hf-notice">
+          <span class="hf-notice-dot"></span>
+          <span>Hosted on Hugging Face Spaces · loads instantly in-page</span>
         </div>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/ai-dataco-supply-chain" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh">⚡ GitHub</a>
-          <button class="card-btn card-btn-demo" onclick="openModal('DataCo Supply Chain — AI Delivery Risk Predictor','https://ai-delivery-risk-predictor-dataco.streamlit.app')">🚀 Live Demo</button>
+          <button class="card-btn card-btn-demo"
+            onclick="openModal(
+              'DataCo Supply Chain — AI Delivery Risk Predictor',
+              'https://anshulsilhare-ai-dataco-supply-chain.hf.space',
+              'hf'
+            )">🚀 Live Demo</button>
         </div>
       </div>
 
@@ -1352,7 +1400,7 @@ section { position: relative; z-index: 1; }
         </div>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare" target="_blank" class="card-btn card-btn-gh">⚡ GitHub</a>
-          <button class="card-btn card-btn-demo" onclick="openModal('Data Analyst Job Market Analysis','https://anshul-job-market.streamlit.app')">▶ Live Demo</button>
+          <button class="card-btn card-btn-demo" onclick="openModal('Data Analyst Job Market Analysis','https://anshul-job-market.streamlit.app','streamlit')">▶ Live Demo</button>
         </div>
       </div>
 
@@ -1657,23 +1705,43 @@ section { position: relative; z-index: 1; }
 </section>
 
 <!-- ─── MODAL ─────────────────────────────────────────────────── -->
+<!--
+  The modal renders an iframe for desktop (≥700px).
+  On mobile it opens in a new tab instead (iframes are unusable on small screens).
+  For HF Spaces the loading message is tuned to be instant.
+  For Streamlit it warns about the ~30s cold-start.
+-->
 <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-title">Live Demo — <strong id="modalTitle">Project</strong></div>
       <div class="modal-actions">
+        <!-- Dynamic badge swaps between HF and Streamlit -->
+        <span class="modal-hf-badge" id="modalBadge" style="display:none">
+          <span class="modal-hf-dot"></span>
+          <span id="modalBadgeText">Hugging Face Spaces</span>
+        </span>
         <a href="#" id="modalNewTab" target="_blank" rel="noopener noreferrer" class="modal-newtab">Open in new tab ↗</a>
-        <button class="modal-close" onclick="closeModal()">✕</button>
+        <button class="modal-close" onclick="closeModal()" title="Close (Esc)">✕</button>
       </div>
     </div>
     <div class="modal-iframe-wrap">
+      <!-- Loading overlay shown until iframe fires onload -->
       <div class="modal-loading" id="modalLoading">
+        <div class="modal-loading-icon" id="modalLoadingIcon">⬡</div>
         <div class="modal-spinner"></div>
-        <div class="modal-loading-text">Loading app...</div>
-        <div class="modal-loading-sub" id="modalLoadingSub">If this is the first visit today, Streamlit may take ~30 seconds to wake up.</div>
-        <a href="#" id="modalFallbackLink" target="_blank" rel="noopener noreferrer" class="modal-fallback-link" style="display:none">App taking too long? Open directly ↗</a>
+        <div class="modal-loading-text" id="modalLoadingText">Loading app…</div>
+        <div class="modal-loading-sub" id="modalLoadingSub">Starting up…</div>
+        <a href="#" id="modalFallbackLink" target="_blank" rel="noopener noreferrer"
+           class="modal-fallback-link" style="display:none">
+          Taking too long? Open directly ↗
+        </a>
       </div>
-      <iframe class="modal-iframe" id="modalIframe" src="" allowfullscreen onload="handleIframeLoad()"></iframe>
+      <!-- The iframe — src is set by openModal() -->
+      <iframe id="modalIframe" src="" allowfullscreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+              onload="handleIframeLoad()">
+      </iframe>
     </div>
   </div>
 </div>
@@ -1683,133 +1751,148 @@ section { position: relative; z-index: 1; }
 /* ── Particles ────────────────────────────────────────────── */
 (function() {
   const canvas = document.getElementById('heroCanvas');
-  const count = 35;
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < 35; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
     const x = Math.random() * 100;
-    const dx = (Math.random() - 0.5) * 80;
-    const dur = 7 + Math.random() * 10;
-    const del = Math.random() * 8;
-    const size = Math.random() > 0.7 ? 3 : 2;
-    p.style.cssText = `
-      left:${x}%;
-      --sx: ${x}vw; --dx: ${dx}px;
-      --sy: ${80 + Math.random() * 30}vh;
-      --dur: ${dur}s; --del: ${del}s;
-      width:${size}px; height:${size}px;
-      opacity: 0;
-    `;
+    p.style.cssText = `left:${x}%;--sx:${x}vw;--dx:${(Math.random()-.5)*80}px;
+      --sy:${80+Math.random()*30}vh;--dur:${7+Math.random()*10}s;
+      --del:${Math.random()*8}s;width:${Math.random()>.7?3:2}px;height:${Math.random()>.7?3:2}px;`;
     canvas.appendChild(p);
   }
 })();
 
-/* ── Nav scroll ───────────────────────────────────────────── */
-const navbar = document.getElementById('navbar');
+/* ── Nav scroll + active link ─────────────────────────────── */
+const navbar   = document.getElementById('navbar');
 const navLinks = document.querySelectorAll('.nav-links a');
 const sections = document.querySelectorAll('section[id]');
 
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
-
-  // active nav
   let current = '';
-  sections.forEach(s => {
-    if (window.scrollY >= s.offsetTop - 120) current = s.id;
-  });
-  navLinks.forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-  });
-
-  // reveal
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
   document.querySelectorAll('.reveal').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 80) el.classList.add('visible');
+    if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
   });
 });
 window.dispatchEvent(new Event('scroll'));
 
 /* ── Mobile nav ───────────────────────────────────────────── */
-function toggleNav() {
-  document.getElementById('navLinks').classList.toggle('open');
-}
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
 
 /* ── Counter animation ────────────────────────────────────── */
 function animateCounters() {
   document.querySelectorAll('[data-target]').forEach(el => {
-    const target = parseInt(el.dataset.target);
-    const prefix = el.dataset.prefix || '';
-    const suffix = el.dataset.suffix || '';
+    const target   = parseInt(el.dataset.target);
+    const prefix   = el.dataset.prefix  || '';
+    const suffix   = el.dataset.suffix  || '';
     const isDecimal = el.dataset.decimal;
     const duration = 2000;
-    const start = performance.now();
-
+    const start    = performance.now();
     function step(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const ease = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(target * ease);
-
-      if (isDecimal) {
-        // R² 9636 → 0.9636
-        const val = (current / 10000).toFixed(4);
-        el.textContent = prefix + val + suffix;
-      } else if (target >= 10000) {
-        el.textContent = prefix + current.toLocaleString('en-IN') + suffix;
-      } else {
-        el.textContent = prefix + current + suffix;
-      }
-
-      if (progress < 1) requestAnimationFrame(step);
+      const p    = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      const cur  = Math.round(target * ease);
+      el.textContent = isDecimal
+        ? prefix + (cur / 10000).toFixed(4) + suffix
+        : prefix + (target >= 10000 ? cur.toLocaleString('en-IN') : cur) + suffix;
+      if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   });
 }
-
-// Trigger counters once hero is visible
-const heroObserver = new IntersectionObserver((entries) => {
-  if (entries[0].isIntersecting) {
-    setTimeout(animateCounters, 900);
-    heroObserver.disconnect();
-  }
+new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) { setTimeout(animateCounters, 900); entries[0].target.__io.disconnect(); }
+}, { threshold: 0.3 }).observe(
+  Object.assign(document.getElementById('hero'), {
+    __io: new IntersectionObserver((e) => { if (e[0].isIntersecting) { setTimeout(animateCounters, 900); heroObs.disconnect(); } }, {threshold:.3})
+  })
+);
+// Simpler trigger
+const heroEl = document.getElementById('hero');
+const heroObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) { setTimeout(animateCounters, 900); heroObs.disconnect(); }
 }, { threshold: 0.3 });
-heroObserver.observe(document.getElementById('hero'));
+heroObs.observe(heroEl);
 
 /* ── Modal ────────────────────────────────────────────────── */
-function openModal(title, url) {
-  const isMobile = window.innerWidth < 700;
-  if (isMobile) { window.open(url, '_blank'); return; }
+/*
+  openModal(title, url, type)
+    type = 'hf'        → Hugging Face Space (fast, badge shown)
+    type = 'streamlit' → Streamlit (slow cold-start warning)
+    type = anything else → generic loader
+  On mobile (<700px) always opens a new tab — iframes don't work well.
+*/
+function openModal(title, url, type) {
+  if (window.innerWidth < 700) { window.open(url, '_blank'); return; }
+
+  // Populate header
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalNewTab').href = url;
   document.getElementById('modalFallbackLink').href = url;
-  const loading = document.getElementById('modalLoading');
-  const sub = document.getElementById('modalLoadingSub');
-  const fallback = document.getElementById('modalFallbackLink');
-  loading.classList.remove('hidden');
+
+  // Badge
+  const badge     = document.getElementById('modalBadge');
+  const badgeTxt  = document.getElementById('modalBadgeText');
+  const loadIcon  = document.getElementById('modalLoadingIcon');
+  const loadText  = document.getElementById('modalLoadingText');
+  const loadSub   = document.getElementById('modalLoadingSub');
+  const fallback  = document.getElementById('modalFallbackLink');
+
   fallback.style.display = 'none';
-  sub.textContent = 'If this is the first visit today, Streamlit may take ~30 seconds to wake up.';
+
+  if (type === 'hf') {
+    badge.style.display   = 'inline-flex';
+    badgeTxt.textContent  = 'Hugging Face Spaces';
+    loadIcon.textContent  = '🤗';
+    loadText.textContent  = 'Connecting to HF Space…';
+    loadSub.textContent   = 'Hugging Face Spaces load quickly — should be ready in a moment.';
+    // Show fallback link after 15s (slower connection safety net)
+    clearTimeout(window._modalTimer);
+    window._modalTimer = setTimeout(() => {
+      if (!document.getElementById('modalLoading').classList.contains('hidden')) {
+        fallback.style.display = 'inline';
+        loadSub.textContent = 'Still loading? The Space may be waking up — usually under 30s.';
+      }
+    }, 15000);
+  } else if (type === 'streamlit') {
+    badge.style.display   = 'none';
+    loadIcon.textContent  = '🐍';
+    loadText.textContent  = 'Waking up Streamlit…';
+    loadSub.textContent   = 'First visit of the day? Streamlit Community Cloud may take ~30s to start.';
+    clearTimeout(window._modalTimer);
+    window._modalTimer = setTimeout(() => {
+      if (!document.getElementById('modalLoading').classList.contains('hidden')) {
+        fallback.style.display = 'inline';
+      }
+    }, 20000);
+  } else {
+    badge.style.display  = 'none';
+    loadIcon.textContent = '⬡';
+    loadText.textContent = 'Loading app…';
+    loadSub.textContent  = '';
+  }
+
+  // Reset loading state and set iframe src
+  document.getElementById('modalLoading').classList.remove('hidden');
   document.getElementById('modalIframe').src = url;
-  clearTimeout(window._modalFallbackTimer);
-  window._modalFallbackTimer = setTimeout(() => {
-    if (!loading.classList.contains('hidden')) {
-      fallback.style.display = 'inline';
-      sub.textContent = 'App is waking up — this can take ~30s on first load.';
-    }
-  }, 20000);
+
+  // Open overlay
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function handleIframeLoad() {
   document.getElementById('modalLoading').classList.add('hidden');
-  clearTimeout(window._modalFallbackTimer);
+  clearTimeout(window._modalTimer);
 }
 
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.getElementById('modalIframe').src = '';
   document.getElementById('modalLoading').classList.remove('hidden');
-  clearTimeout(window._modalFallbackTimer);
+  clearTimeout(window._modalTimer);
   document.body.style.overflow = '';
 }
 
@@ -1817,16 +1900,14 @@ function handleOverlayClick(e) {
   if (e.target === document.getElementById('modalOverlay')) closeModal();
 }
 
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
 /* ── Under the Hood toggle ────────────────────────────────── */
 function toggleHood(btn) {
   const expanded = btn.getAttribute('aria-expanded') === 'true';
   btn.setAttribute('aria-expanded', String(!expanded));
   btn.nextElementSibling.hidden = expanded;
 }
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
 </script>
 </body>
 </html>
