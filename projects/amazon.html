@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logistics Network Optimization Case Study | Anshul Silhare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #f8fafc; --bg2: #ffffff; --bg3: #f1f5f9;
+  --surface: #ffffff;
+  --border:  rgba(15,23,42,.08); --border2: rgba(15,23,42,.15);
+  --accent:  #1e3a5f; --accent2: #0e7c6b; --teal: #0e7c6b;
+  --text:    #0f172a; --text2: #475569; --text3: #94a3b8;
+  --display: 'Syne', sans-serif;
+  --body:    'DM Sans', sans-serif;
+  --mono:    'JetBrains Mono', monospace;
+  --radius:  6px; --radius2: 12px;
+  --glow:    0 4px 24px rgba(15,23,42,.07);
+}
+body.dark {
+  --bg:      #0b0f19; --bg2: #111827; --bg3: #161f30;
+  --surface: #1e293b;
+  --border:  rgba(255,255,255,.06); --border2: rgba(255,255,255,.12);
+  --accent:  #38bdf8; --accent2: #2dd4bf; --teal: #2dd4bf;
+  --text:    #f8fafc; --text2: #cbd5e1; --text3: #94a3b8;
+  --glow:    0 4px 20px rgba(0,0,0,.4);
+}
+
+/* Media grids inside case study */
+.case-media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin: 1.5rem 0; }
+.media-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius2); padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem; box-shadow: var(--glow); transition: transform 0.2s, border-color 0.2s; }
+.media-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.media-title { font-family: var(--display); font-size: 0.82rem; font-weight: 700; color: var(--accent); }
+.media-card img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); background: #fff; display: block; object-fit: contain; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--body);
+  font-size: 16px; line-height: 1.7; padding: 2rem 5vw; transition: background 0.3s, color 0.3s;
+}
+.case-container { max-width: 900px; margin: 0 auto; }
+header { margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: center; }
+.back-link { font-family: var(--body); font-size: 0.88rem; font-weight: 500; color: var(--accent2); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+.back-link:hover { text-decoration: underline; }
+.btn-print { font-family: var(--body); font-size: 0.82rem; font-weight: 500; color: var(--accent); background: transparent; border: 1px solid rgba(30,58,95,.25); padding: 0.42rem 1.1rem; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.35rem; }
+.btn-print:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.title-section { margin-bottom: 2.5rem; }
+.project-label { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent2); margin-bottom: 0.5rem; }
+h1 { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 1rem; }
+.meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; padding: 1.5rem; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius2); margin-bottom: 3rem; }
+.meta-item { display: flex; flex-direction: column; }
+.meta-label { font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; color: var(--text3); margin-bottom: 0.2rem; }
+.meta-val { font-size: 0.9rem; font-weight: 500; }
+.section { margin-bottom: 2.5rem; }
+h2 { font-family: var(--display); font-size: 1.4rem; margin-bottom: 1rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+p { font-size: 0.95rem; color: var(--text2); margin-bottom: 1.2rem; }
+ul { margin-left: 1.5rem; margin-bottom: 1.2rem; color: var(--text2); }
+li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+.diagram-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius2); padding: 1.5rem; margin: 2rem 0; display: flex; justify-content: center; }
+.highlight-box { background: rgba(14,124,107,.04); border-left: 4px solid var(--accent2); padding: 1.2rem; border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: 1.5rem; }
+.highlight-title { font-weight: 600; color: var(--accent2); margin-bottom: 0.4rem; font-size: 0.95rem; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.9rem; }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--bg3); font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; color: var(--text2); }
+
+@media print {
+  body { background: #fff !important; color: #000 !important; padding: 0 !important; font-size: 11pt; }
+  .case-container { max-width: 100% !important; }
+  header, .back-link, .btn-print { display: none !important; }
+  .meta-grid { border: 1px solid #000 !important; background: #fff !important; margin-bottom: 1.5rem !important; grid-template-columns: repeat(4, 1fr) !important; padding: 0.8rem !important; }
+  h2 { border-bottom: 1px solid #000 !important; margin-top: 1rem; }
+  .diagram-box { border: 1px solid #000 !important; page-break-inside: avoid; }
+  .highlight-box { border-left: 3px solid #000 !important; background: #fff !important; page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="case-container">
+  <header>
+    <a href="../index.html" class="back-link">&larr; Back to Portfolio</a>
+    <button class="btn-print" onclick="window.print()">Print Case Study ⎙</button>
+  </header>
+
+  <div class="title-section">
+    <p class="project-label">Network Design &amp; Operations Research</p>
+    <h1>Amazon Logistics: Network Optimization</h1>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Operations Research Lead</span></div>
+    <div class="meta-item"><span class="meta-label">active DCs</span><span class="meta-val">5 Regional Distribution Hubs</span></div>
+    <div class="meta-item"><span class="meta-label">Key Outcome</span><span class="meta-val">94% SLA Coverage (&lt;48hr)</span></div>
+    <div class="meta-item"><span class="meta-label">Tech Stack</span><span class="meta-val">Python (Folium, Geopy), Excel Solver</span></div>
+  </div>
+
+  <div class="section">
+    <h2>Situation</h2>
+    <p>In high-volume e-commerce supply chains, balancing SLA commitments against Capital Expenditure (CapEx) is a major optimization problem. A legacy 3-node distribution network struggled to meet the <48-hour shipping window, forcing reliance on premium transport carriers. To lower transport costs and keep shipping times fast, the company needed a consolidated hub-and-spoke configuration.</p>
+  </div>
+
+  <div class="section">
+    <h2>Task</h2>
+    <p>My goal was to engineer a digital twin model of a 15-demand-node US network, evaluating spatial distances to select and stress-test an optimal 5-node regional distribution center (DC) strategy. The target was to cover 90% of the US population within a 48-hour transit window while minimizing total fuel consumption and shipping radius.</p>
+  </div>
+
+  <div class="section">
+    <h2>Action</h2>
+    <p>I utilized a quantitative operations research approach to design, validate, and visualize the supply chain network:</p>
+    
+    <div class="case-media-grid">
+      <div class="media-card">
+        <div class="media-title">Network Flow Simulation (US Hub-and-Spoke Routing)</div>
+        <img src="https://raw.githubusercontent.com/AnshulSilhare/Logistics-Network-Optimization/main/network-flow.gif" alt="Network Flow Simulation">
+      </div>
+    </div>
+
+    <ul>
+      <li><strong>Geospatial Geodesic Modeling</strong>: Programmed a Python scripts using Geopy to calculate geodesic distances (great-circle distance) between 15 main US city demand locations and candidate distribution sites.</li>
+      <li><strong>Hub Selection Allocation</strong>: Modeled and allocated demand nodes to 5 optimized hub locations based on proximity, transport links, and volume capacity constraints:
+        <ul>
+          <li><strong>Redlands, CA (ONT9)</strong> — Western Region</li>
+          <li><strong>Robbinsville, NJ (EWR4)</strong> — Northeast Region</li>
+          <li><strong>Louisville, KY (SDF2)</strong> — Midwest Region</li>
+          <li><strong>Coppell, TX (DFW6)</strong> — Southern Region</li>
+          <li><strong>Lakeland, FL (TPA2)</strong> — Southeast Region</li>
+        </ul>
+      </li>
+      <li><strong>Service Level Audit</strong>: Evaluated transit times across routes, validating that New York, Los Angeles, and Philadelphia could be serviced in 1 day from the nearest hub, while Houston, Boston, and Atlanta required 2 days, comfortably meeting the 48-hour SLA constraint.</li>
+      <li><strong>Interactive Map Representation</strong>: Used Python/Folium to build a dynamic geospatial visualization showing active DCs, connected spokes, and delivery service zones.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Result</h2>
+    <div class="highlight-box">
+      <div class="highlight-title">Network Optimization Outcomes</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Legacy Network</th>
+            <th>Optimized (5-Node)</th>
+            <th>SLA &amp; Environmental Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Average Delivery Radius</strong></td>
+            <td>390 km</td>
+            <td><strong>249 km</strong></td>
+            <td><strong>36% reduction</strong> in local delivery radius, cutting lead time.</td>
+          </tr>
+          <tr>
+            <td><strong>SLA Compliance (&lt;48hr)</strong></td>
+            <td>78%</td>
+            <td><strong>94%</strong></td>
+            <td>Met and exceeded the 90% US population coverage goal.</td>
+          </tr>
+          <tr>
+            <td><strong>Fuel Consumption</strong></td>
+            <td>Baseline (100%)</td>
+            <td><strong>-18%</strong></td>
+            <td>Significant fuel reduction from optimal routing assignments.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Reflection</h2>
+    <p>This study demonstrates that network consolidation is a highly effective way to cut emissions and transport cost simultaneously. By reducing average delivery radius by 36%, we not only secured our 2-day delivery promise but also reduced carbon footprint. In future studies, I would add local variable tolling and carrier fuel-surcharges into the cost function for even greater pricing accuracy.</p>
+  </div>
+</div>
+<script>
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+  }
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.theme) {
+      if (e.data.theme === 'dark') {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }
+  });
+</script>
+</body>
+</html>

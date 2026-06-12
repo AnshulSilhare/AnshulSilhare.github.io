@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warehouse Layout Optimization Case Study | Anshul Silhare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #f8fafc; --bg2: #ffffff; --bg3: #f1f5f9;
+  --surface: #ffffff;
+  --border:  rgba(15,23,42,.08); --border2: rgba(15,23,42,.15);
+  --accent:  #1e3a5f; --accent2: #0e7c6b; --teal: #0e7c6b;
+  --text:    #0f172a; --text2: #475569; --text3: #94a3b8;
+  --display: 'Syne', sans-serif;
+  --body:    'DM Sans', sans-serif;
+  --mono:    'JetBrains Mono', monospace;
+  --radius:  6px; --radius2: 12px;
+  --glow:    0 4px 24px rgba(15,23,42,.07);
+}
+body.dark {
+  --bg:      #0b0f19; --bg2: #111827; --bg3: #161f30;
+  --surface: #1e293b;
+  --border:  rgba(255,255,255,.06); --border2: rgba(255,255,255,.12);
+  --accent:  #38bdf8; --accent2: #2dd4bf; --teal: #2dd4bf;
+  --text:    #f8fafc; --text2: #cbd5e1; --text3: #94a3b8;
+  --glow:    0 4px 20px rgba(0,0,0,.4);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text); font-family: var(--body);
+  font-size: 16px; line-height: 1.7; padding: 2rem 5vw; transition: background 0.3s, color 0.3s;
+}
+.case-container { max-width: 900px; margin: 0 auto; }
+header { margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: center; }
+.back-link { font-family: var(--body); font-size: 0.88rem; font-weight: 500; color: var(--accent2); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+.back-link:hover { text-decoration: underline; }
+.btn-print { font-family: var(--body); font-size: 0.82rem; font-weight: 500; color: var(--accent); background: transparent; border: 1px solid rgba(30,58,95,.25); padding: 0.42rem 1.1rem; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.35rem; }
+.btn-print:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.title-section { margin-bottom: 2.5rem; }
+.project-label { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent2); margin-bottom: 0.5rem; }
+h1 { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 1rem; }
+.meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; padding: 1.5rem; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius2); margin-bottom: 3rem; }
+.meta-item { display: flex; flex-direction: column; }
+.meta-label { font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; color: var(--text3); margin-bottom: 0.2rem; }
+.meta-val { font-size: 0.9rem; font-weight: 500; }
+.section { margin-bottom: 2.5rem; }
+h2 { font-family: var(--display); font-size: 1.4rem; margin-bottom: 1rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+p { font-size: 0.95rem; color: var(--text2); margin-bottom: 1.2rem; }
+ul { margin-left: 1.5rem; margin-bottom: 1.2rem; color: var(--text2); }
+li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+.diagram-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius2); padding: 1.5rem; margin: 2rem 0; display: flex; justify-content: center; }
+.highlight-box { background: rgba(14,124,107,.04); border-left: 4px solid var(--accent2); padding: 1.2rem; border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: 1.5rem; }
+.highlight-title { font-weight: 600; color: var(--accent2); margin-bottom: 0.4rem; font-size: 0.95rem; }
+table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.9rem; }
+th, td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--bg3); font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; color: var(--text2); }
+
+@media print {
+  body { background: #fff !important; color: #000 !important; padding: 0 !important; font-size: 11pt; }
+  .case-container { max-width: 100% !important; }
+  header, .back-link, .btn-print { display: none !important; }
+  .meta-grid { border: 1px solid #000 !important; background: #fff !important; margin-bottom: 1.5rem !important; grid-template-columns: repeat(4, 1fr) !important; padding: 0.8rem !important; }
+  h2 { border-bottom: 1px solid #000 !important; margin-top: 1rem; }
+  .diagram-box { border: 1px solid #000 !important; page-break-inside: avoid; }
+  .highlight-box { border-left: 3px solid #000 !important; background: #fff !important; page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="case-container">
+  <header>
+    <a href="../index.html" class="back-link">&larr; Back to Portfolio</a>
+    <button class="btn-print" onclick="window.print()">Print Case Study ⎙</button>
+  </header>
+
+  <div class="title-section">
+    <p class="project-label">Lean Operations &amp; Facility Engineering</p>
+    <h1>Warehouse Layout Optimization: Flow Engineering</h1>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta-item"><span class="meta-label">Domain</span><span class="meta-val">Warehousing &amp; Distribution</span></div>
+    <div class="meta-item"><span class="meta-label">Focus</span><span class="meta-val">Zoning &amp; Cross-Docking Flow</span></div>
+    <div class="meta-item"><span class="meta-label">Methodology</span><span class="meta-val">Lean Principles, SKU Velocity profiling</span></div>
+    <div class="meta-item"><span class="meta-label">Operational Tool</span><span class="meta-val">Facility Design Layouts</span></div>
+  </div>
+
+  <div class="section">
+    <h2>Situation</h2>
+    <p>Traditional warehouse operations suffer from spatial inefficiencies over time as product ranges expand. In the baseline facility, material handlers experienced congested, overlapping paths where inbound shipments conflicted with outbound staging. This chaotic "spaghetti flow" led to picking delays, higher worker fatigue, and safety risks from forklifts crossing packing zones.</p>
+  </div>
+
+  <div class="section">
+    <h2>Task</h2>
+    <p>My objective was to redesign the warehouse floor layout to resolve bottlenecks, segregate inbound and outbound material flows, and optimize product slotting to maximize daily picking throughput.</p>
+  </div>
+
+  <div class="section">
+    <h2>Action</h2>
+    <p>I formulated and executed a zoning and slotting optimization model:</p>
+
+    <ul>
+      <li><strong>Flow Audit</strong>: Traced material handling routes and created a "spaghetti diagram" to map the exact paths of workers and equipment, highlighting high-collision hotspots.</li>
+      <li><strong>Zoning Segregation</strong>: Restructured the facility design by separating <strong>Inbound (Receiving)</strong> operations from <strong>Outbound (Shipping)</strong> staging. Dedicated distinct docks to each phase, preventing process overlap and cross-traffic delays.</li>
+      <li><strong>SKU Velocity slotting</strong>: Categorized SKU turnover rates. Placed <strong>Fast-moving (Class A) SKUs</strong> immediately adjacent to the main packaging lines, reducing average picker travel distances.</li>
+      <li><strong>Safety &amp; Traffic Separation</strong>: Mapped designated forklift transit lanes, separating them completely from pedestrian packing benches to lower warehouse floor safety hazards.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Result</h2>
+    <div class="highlight-box">
+      <div class="highlight-title">Operational Benefits</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Optimization Area</th>
+            <th>Baseline Performance</th>
+            <th>Optimized Layout</th>
+            <th>Operational Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Material Flow</strong></td>
+            <td>Intersecting (Spaghetti)</td>
+            <td><strong>Dedicated In/Out Zones</strong></td>
+            <td>Eliminated inbound/outbound dock congestion.</td>
+          </tr>
+          <tr>
+            <td><strong>Picker Travel Time</strong></td>
+            <td>High (unstructured storage)</td>
+            <td><strong>Velocity-based slotting</strong></td>
+            <td><strong>Reduces travel distance</strong> by keeping Class A items near packaging.</td>
+          </tr>
+          <tr>
+            <td><strong>Safety Incidents</strong></td>
+            <td>Shared forklift/pedestrian paths</td>
+            <td><strong>Segregated lanes</strong></td>
+            <td>Substantially decreased close-call incidents on the floor.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Reflection</h2>
+    <p>This project illustrates that warehouse productivity is highly dependent on spatial discipline. Simply increasing warehouse staff without organizing the layout will worsen congestion and lower picking speeds. Applying basic zoning and SKU velocity profiling is a low-cost, high-return strategy to unlock hidden warehouse capacity.</p>
+  </div>
+</div>
+<script>
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+  }
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.theme) {
+      if (e.data.theme === 'dark') {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }
+  });
+</script>
+</body>
+</html>
