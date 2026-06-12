@@ -44,6 +44,10 @@
   --nav-bg:  rgba(255,255,255,.85); --nav-scrolled-bg: rgba(255,255,255,.98);
   --contact-bg: #1e3a5f;
   --contact-text-hl: rgba(255,255,255,.55);
+  --glass-bg:      rgba(255, 255, 255, 0.08);
+  --glass-border:  rgba(15, 23, 42, 0.08);
+  --glass-shadow:  0 8px 32px rgba(15, 23, 42, 0.14);
+  --glass-blur:    blur(16px);
 }
 body.dark {
   --bg:      #0b0f19; --bg2: #111827; --bg3: #161f30;
@@ -57,6 +61,10 @@ body.dark {
   --nav-bg:  rgba(11,15,25,.8); --nav-scrolled-bg: rgba(11,15,25,.95);
   --contact-bg: #111827;
   --contact-text-hl: var(--accent);
+  --glass-bg:      rgba(30, 41, 59, 0.08);
+  --glass-border:  rgba(255, 255, 255, 0.14);
+  --glass-shadow:  0 8px 32px rgba(0, 0, 0, 0.42);
+  --glass-blur:    blur(16px);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -96,14 +104,14 @@ nav.scrolled { background: var(--nav-scrolled-bg); box-shadow: 0 1px 20px rgba(0
 .nav-toggle span { width: 22px; height: 1.5px; background: var(--text2); transition: all .3s; }
 
 /* ─── HERO ────────────────────────────────────────────── */
-#hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 0 5vw; background: var(--bg2); }
+#hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; padding: 0 5vw; background: transparent; }
 .hero-canvas {
   position: absolute; inset: 0; z-index: 0;
   background: radial-gradient(ellipse 65% 55% at 85% 25%, rgba(14,124,107,.055) 0%, transparent 65%),
               radial-gradient(ellipse 50% 45% at 5%  80%, rgba(30,58,95,.04)   0%, transparent 60%);
 }
 .hero-canvas::after { content: ''; position: absolute; top: 0; right: 0; width: 42%; height: 100%; background: linear-gradient(135deg, transparent 55%, rgba(14,124,107,.025) 100%); pointer-events: none; }
-.hero-inner { position: relative; z-index: 2; max-width: 820px; width: 100%; padding-top: 4rem; }
+.hero-inner { position: relative; z-index: 3; max-width: 820px; width: 100%; padding-top: 4rem; }
 .hero-status {
   display: inline-flex; align-items: center; gap: .6rem;
   font-family: var(--body); font-size: .78rem; font-weight: 500;
@@ -148,19 +156,23 @@ nav.scrolled { background: var(--nav-scrolled-bg); box-shadow: 0 1px 20px rgba(0
 .hero-scroll-line { width: 28px; height: 1px; background: var(--text3); }
 
 /* ─── SECTIONS ────────────────────────────────────────── */
-section { position: relative; z-index: 1; }
+section { position: relative; }
+.hero-inner, .section-wrap, .contact-wrap {
+  position: relative;
+  z-index: 3;
+}
 .section-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 5vw; }
 .section-header { margin-bottom: 3.5rem; }
 .section-label { font-family: var(--mono); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent2); margin-bottom: .6rem; }
 .section-title { font-family: var(--display); font-size: clamp(2rem,4vw,3rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; color: var(--text); }
 .section-title .dim { color: var(--text3); }
-.reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity; }
 .reveal.visible { opacity: 1; transform: none; }
 
 /* ─── ABOUT ───────────────────────────────────────────── */
-#about { background: var(--bg3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+#about { background: transparent; border: none; }
 .about-grid { display: grid; grid-template-columns: 300px 1fr; gap: 4rem; align-items: start; }
-.profile-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius2); padding: 2rem; position: sticky; top: 80px; box-shadow: var(--glow); }
+.profile-card { background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 2rem; position: sticky; top: 80px; box-shadow: var(--glass-shadow); }
 .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--teal)); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 1.2rem; }
 .profile-name { font-family: var(--display); font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: .2rem; }
 .profile-role { font-family: var(--body); font-size: .75rem; color: var(--teal); font-weight: 500; margin-bottom: 1.5rem; }
@@ -174,10 +186,10 @@ section { position: relative; z-index: 1; }
 .flow-tag { font-family: var(--mono); font-size: .7rem; color: var(--accent); background: rgba(30,58,95,.06); border: 1px solid rgba(30,58,95,.14); padding: .3rem .8rem; border-radius: 4px; }
 
 /* ─── EXPERTISE ──────────────────────────────────────── */
-#stack { background: var(--bg2); }
+#stack { background: transparent; }
 .stack-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; }
-.stack-category { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius2); padding: 1.5rem; transition: border-color .25s, transform .25s, box-shadow .25s; }
-.stack-category:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glow-md); }
+.stack-category { background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 1.5rem; box-shadow: var(--glass-shadow); transition: border-color .25s, transform .25s, box-shadow .25s; }
+.stack-category:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 .cat-header { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.2rem; }
 .cat-icon { width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: .9rem; }
 .cat-title { font-family: var(--body); font-size: .82rem; font-weight: 500; color: var(--text2); }
@@ -198,21 +210,21 @@ section { position: relative; z-index: 1; }
 .icon-svg svg { display: block; }
 
 /* ─── PROJECTS ────────────────────────────────────────── */
-#projects { background: var(--bg3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+#projects { background: transparent; border: none; }
 .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .project-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius2);
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2);
   padding: 1.8rem; display: flex; flex-direction: column; position: relative; overflow: hidden;
-  transition: border-color .3s, transform .3s, box-shadow .3s; cursor: default;
+  box-shadow: var(--glass-shadow); transition: border-color .3s, transform .3s, box-shadow .3s; cursor: default;
 }
 .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
-.project-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: var(--glow-md); }
+.project-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: var(--glass-shadow); }
 .project-card:hover::before { transform: scaleX(1); }
 
 /* Live internship project - full width featured */
 .project-card-live {
   grid-column: 1 / -1;
-  background: linear-gradient(135deg, var(--surface) 0%, rgba(22,163,74,.025) 100%);
+  background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(22,163,74,.025) 100%);
   border-color: rgba(22,163,74,.18);
 }
 .project-card-live::before { background: linear-gradient(90deg, var(--green), var(--accent2)); }
@@ -222,7 +234,7 @@ section { position: relative; z-index: 1; }
 /* Featured project - full width */
 .project-card-featured {
   grid-column: 1 / -1;
-  background: linear-gradient(135deg, var(--surface) 0%, rgba(14,124,107,.02) 100%);
+  background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(14,124,107,.02) 100%);
   border-color: rgba(14,124,107,.14);
 }
 .project-card-featured::before { background: linear-gradient(90deg, var(--accent), var(--teal)); }
@@ -258,11 +270,11 @@ section { position: relative; z-index: 1; }
 .card-btn-soon { color: var(--text3); background: transparent; border-color: var(--border); cursor: not-allowed; }
 
 /* ─── CERTIFICATIONS ──────────────────────────────────── */
-#certs { background: var(--bg2); }
+#certs { background: transparent; }
 .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: .85rem; }
-.cert-card { position: relative; overflow: hidden; display: flex; gap: .8rem; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius2); padding: 1.1rem 1.2rem; transition: border-color .25s, transform .25s, box-shadow .25s; }
+.cert-card { position: relative; overflow: hidden; display: flex; gap: .8rem; align-items: flex-start; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 1.1rem 1.2rem; box-shadow: var(--glass-shadow); transition: border-color .25s, transform .25s, box-shadow .25s; }
 .cert-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
-.cert-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glow); }
+.cert-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 .cert-card:hover::before { transform: scaleX(1); }
 .cert-icon { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .cert-icon svg { display: block; }
@@ -292,15 +304,15 @@ section { position: relative; z-index: 1; }
 .cert-card-program {
   grid-column: 1 / -1;
   align-items: flex-start;
-  background: linear-gradient(135deg, var(--surface) 0%, rgba(14,124,107,.02) 100%);
+  background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(14,124,107,.02) 100%);
   border-color: rgba(14,124,107,.14);
 }
-.cert-card-program:hover { border-color: rgba(14,124,107,.28); transform: translateY(-3px); box-shadow: var(--glow); }
+.cert-card-program:hover { border-color: rgba(14,124,107,.28); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 
 /* ─── EXPERIENCE ──────────────────────────────────────── */
-#experience { background: var(--bg3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+#experience { background: transparent; border: none; }
 .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-.exp-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius2); padding: 2rem; position: relative; box-shadow: var(--glow); }
+.exp-card { background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 2rem; position: relative; box-shadow: var(--glass-shadow); }
 .exp-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(180deg, var(--accent), var(--teal)); border-radius: var(--radius2) 0 0 var(--radius2); }
 .exp-badge { font-family: var(--body); font-size: .72rem; font-weight: 500; color: var(--green); background: rgba(22,163,74,.07); border: 1px solid rgba(22,163,74,.2); padding: .2rem .7rem; border-radius: 99px; display: inline-block; margin-bottom: 1rem; }
 .exp-role { font-family: var(--display); font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: .3rem; }
@@ -308,17 +320,18 @@ section { position: relative; z-index: 1; }
 .exp-period { font-family: var(--mono); font-size: .7rem; color: var(--text3); margin-bottom: .7rem; }
 .exp-project-title { font-family: var(--body); font-size: .78rem; font-weight: 500; color: var(--accent); margin-bottom: .5rem; padding: .4rem .7rem; background: rgba(30,58,95,.04); border-left: 2px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; }
 .exp-desc { font-size: .88rem; color: var(--text2); line-height: 1.75; }
+#leadership { background: transparent; }
 .leadership-list { display: flex; flex-direction: column; gap: 1.2rem; }
-.lead-item { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius2); padding: 1.3rem; transition: border-color .3s, transform .3s, box-shadow .3s; }
+.lead-item { position: relative; overflow: hidden; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 1.3rem; box-shadow: var(--glass-shadow); transition: border-color .3s, transform .3s, box-shadow .3s; }
 .lead-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
-.lead-item:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glow); }
+.lead-item:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 .lead-item:hover::before { transform: scaleX(1); }
 .lead-title { font-family: var(--display); font-size: .92rem; font-weight: 600; color: var(--text); margin-bottom: .2rem; }
 .lead-org { font-family: var(--body); font-size: .72rem; color: var(--teal); font-weight: 500; margin-bottom: .5rem; }
 .lead-desc { font-size: .82rem; color: var(--text2); line-height: 1.65; }
 
 /* ─── EDUCATION ──────────────────────────────────────── */
-#education { background: var(--bg2); }
+#education { background: transparent; }
 .edu-timeline { display: flex; flex-direction: column; }
 .edu-item { display: grid; grid-template-columns: 180px 28px 1fr; gap: 0 1.5rem; align-items: stretch; padding-bottom: 2.5rem; }
 .edu-item:last-child { padding-bottom: 0; }
@@ -334,25 +347,31 @@ section { position: relative; z-index: 1; }
 .edu-detail.highlight { color: var(--teal); border-color: rgba(14,124,107,.25); background: rgba(14,124,107,.06); }
 
 /* ─── CONTACT / FOOTER ────────────────────────────────── */
-#contact { background: var(--contact-bg); transition: background 0.3s; }
+#contact { background: transparent; transition: background 0.3s; }
 .contact-wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 5vw 3rem; }
 .contact-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 4rem; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }
-.contact-cta-title { font-family: var(--display); font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 700; line-height: 1.2; color: #fff; margin-bottom: 1rem; }
-.contact-cta-title .accent { color: var(--contact-text-hl); }
-.contact-cta-sub { font-size: .9rem; color: rgba(255, 255, 255, 0.75); line-height: 1.75; margin-bottom: 1.5rem; }
+.contact-cta-title { font-family: var(--display); font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+.contact-cta-title .accent { color: var(--accent); }
+.contact-cta-sub { font-size: .9rem; color: var(--text2); line-height: 1.75; margin-bottom: 1.5rem; }
 #contact .btn-primary { background: var(--accent2); color: #fff; }
 #contact .btn-primary:hover { background: var(--teal); transform: translateY(-2px); box-shadow: var(--glow); }
-#contact .btn-outline { color: rgba(255, 255, 255, 0.8); border-color: rgba(255, 255, 255, 0.25); }
-#contact .btn-outline:hover { border-color: #fff; color: #fff; transform: translateY(-2px); }
+#contact .btn-outline { color: var(--text2); border-color: var(--border2); }
+#contact .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 .contact-links { display: flex; flex-direction: column; gap: 1rem; }
-.contact-link { display: flex; align-items: center; gap: 1rem; font-family: var(--body); font-size: .85rem; color: rgba(255,255,255,.8); padding: 1rem 1.3rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); transition: all .2s; }
-.contact-link:hover { background: rgba(255,255,255,.08); color: #fff; transform: translateX(4px); }
-.contact-link-icon { color: rgba(255,255,255,.45); font-size: 1rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 1rem; font-family: var(--body); font-size: .85rem; color: var(--text); padding: 1rem 1.3rem;
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border); border-radius: var(--radius); transition: all .2s;
+  box-shadow: var(--glass-shadow);
+}
+.contact-link:hover { background: rgba(255,255,255,.55); color: var(--accent); transform: translateX(4px); }
+body.dark .contact-link:hover { background: rgba(30,41,59,.55); color: var(--accent); }
+.contact-link-icon { color: var(--accent); font-size: 1rem; }
 .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.footer-copy { font-family: var(--body); font-size: .75rem; color: rgba(255,255,255,.45); }
-.footer-tagline { font-family: var(--body); font-size: .75rem; color: rgba(255,255,255,.4); }
-.footer-tagline a { color: rgba(255,255,255,.6); transition: color .2s; }
-.footer-tagline a:hover { color: #fff; }
+.footer-copy { font-family: var(--body); font-size: .75rem; color: var(--text3); }
+.footer-tagline { font-family: var(--body); font-size: .75rem; color: var(--text3); }
+.footer-tagline a { color: var(--text2); transition: color .2s; }
+.footer-tagline a:hover { color: var(--accent); }
 
 /* ─── MODAL ───────────────────────────────────────────── */
 .modal-overlay { position: fixed; inset: 0; z-index: 999; background: rgba(15,23,42,.75); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
@@ -463,9 +482,9 @@ body.dark .moon-icon { display: none !important; }
 
 /* Testimonials */
 .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-.testimonial-card { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius2); padding: 1.8rem; box-shadow: var(--glow); display: flex; flex-direction: column; justify-content: space-between; transition: border-color .3s, transform .3s, box-shadow .3s; }
+.testimonial-card { position: relative; overflow: hidden; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 1.8rem; box-shadow: var(--glass-shadow); display: flex; flex-direction: column; justify-content: space-between; transition: border-color .3s, transform .3s, box-shadow .3s; }
 .testimonial-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
-.testimonial-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glow-md); }
+.testimonial-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 .testimonial-card:hover::before { transform: scaleX(1); }
 .testimonial-text { font-style: italic; font-size: .88rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.2rem; }
 .testimonial-author { display: flex; align-items: center; gap: .7rem; }
@@ -475,21 +494,67 @@ body.dark .moon-icon { display: none !important; }
 .testimonial-role { font-size: .7rem; color: var(--text3); }
 
 /* Contact Form */
-.contact-form { display: flex; flex-direction: column; gap: .85rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.07); padding: 1.8rem; border-radius: var(--radius2); }
+.contact-form { display: flex; flex-direction: column; gap: .85rem; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); padding: 1.8rem; border-radius: var(--radius2); box-shadow: var(--glass-shadow); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
 .form-group { display: flex; flex-direction: column; gap: .3rem; }
-.form-label { font-family: var(--mono); font-size: .65rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.05em; }
-.form-input, .form-textarea { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--radius); padding: .6rem .8rem; color: #fff; font-family: var(--body); font-size: .85rem; transition: border-color 0.2s, background 0.2s; }
-.form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent2); background: rgba(255, 255, 255, 0.06); }
+.form-label { font-family: var(--mono); font-size: .65rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.05em; }
+.form-input, .form-textarea { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: .6rem .8rem; color: var(--text); font-family: var(--body); font-size: .85rem; transition: border-color 0.2s, background 0.2s; }
+.form-input:focus, .form-textarea:focus { outline: none; border-color: var(--accent2); background: var(--bg2); }
 .form-textarea { resize: vertical; min-height: 100px; }
 .contact-form .btn-submit { align-self: flex-start; margin-top: .4rem; background: var(--accent2); color: #fff; font-weight: 600; border: none; cursor: pointer; padding: 0.7rem 1.4rem; border-radius: var(--radius); transition: all 0.2s; }
 .contact-form .btn-submit:hover { background: var(--teal); transform: translateY(-2px); box-shadow: var(--glow); }
 
 /* GitHub Widget */
-.github-widget { display: flex; align-items: center; gap: .8rem; margin-top: 1.5rem; padding: 1rem 1.2rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07); border-radius: var(--radius); }
+.github-widget { display: flex; align-items: center; gap: .8rem; margin-top: 1.5rem; padding: 1rem 1.2rem; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius); box-shadow: var(--glass-shadow); }
 .gh-stat-item { display: flex; flex-direction: column; }
-.gh-stat-val { font-family: var(--mono); font-size: .95rem; font-weight: 600; color: #fff; }
-.gh-stat-lbl { font-family: var(--body); font-size: .68rem; color: rgba(255, 255, 255, 0.65); }
+.gh-stat-val { font-family: var(--mono); font-size: .95rem; font-weight: 600; color: var(--text); }
+.gh-stat-lbl { font-family: var(--body); font-size: .68rem; color: var(--text2); }
+
+/* ─── GRADIENT MESH BACKGROUND ───────────────────────── */
+.gradient-mesh {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+  background: var(--bg); transition: background .4s ease;
+}
+.mesh-blob {
+  position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15;
+  mix-blend-mode: normal; transition: all 1s ease;
+}
+body.dark .mesh-blob {
+  mix-blend-mode: screen; opacity: 0.08;
+}
+.blob1 {
+  width: 600px; height: 600px;
+  background: var(--teal);
+  top: -10%; left: -10%;
+  animation: orbit1 25s ease-in-out infinite alternate;
+}
+.blob2 {
+  width: 500px; height: 500px;
+  background: var(--accent);
+  bottom: -10%; right: -10%;
+  animation: orbit2 30s ease-in-out infinite alternate;
+}
+.blob3 {
+  width: 400px; height: 400px;
+  background: var(--accent2);
+  top: 40%; left: 30%;
+  animation: orbit3 20s ease-in-out infinite alternate;
+}
+@keyframes orbit1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(100px, 80px) scale(1.1); }
+  100% { transform: translate(-50px, 150px) scale(0.9); }
+}
+@keyframes orbit2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-120px, -60px) scale(0.85); }
+  100% { transform: translate(80px, -150px) scale(1.15); }
+}
+@keyframes orbit3 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(150px, -100px) scale(1.2); }
+  100% { transform: translate(-100px, 50px) scale(0.8); }
+}
 
 /* Print Stylesheet */
 @media print {
@@ -508,11 +573,35 @@ body.dark .moon-icon { display: none !important; }
 </style>
 </head>
 <body>
+<div class="gradient-mesh">
+  <div class="mesh-blob blob1"></div>
+  <div class="mesh-blob blob2"></div>
+  <div class="mesh-blob blob3"></div>
+</div>
 <script>
   if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.body.classList.add('dark');
   }
 </script>
+
+<!-- SCROLL WEAVING PATH BACKGROUND -->
+<svg id="scroll-svg" style="position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 2; overflow: visible;">
+  <defs>
+    <linearGradient id="scroll-gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.15" />
+      <stop offset="50%" stop-color="var(--teal)" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="var(--accent2)" stop-opacity="0.15" />
+    </linearGradient>
+    <linearGradient id="scroll-gradient-active" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.85" />
+      <stop offset="50%" stop-color="var(--teal)" stop-opacity="1.0" />
+      <stop offset="100%" stop-color="var(--accent2)" stop-opacity="0.85" />
+    </linearGradient>
+  </defs>
+  <path id="scroll-path-bg" stroke="url(#scroll-gradient)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path id="scroll-path-active" stroke="url(#scroll-gradient-active)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <circle id="scroll-dot" r="6" fill="var(--teal)" style="filter: drop-shadow(0 0 6px var(--teal)); transition: opacity 0.25s; opacity: 0;" />
+</svg>
 
 <!-- NAV -->
 <nav id="navbar">
@@ -546,7 +635,7 @@ body.dark .moon-icon { display: none !important; }
     <div class="hero-status">Open to Opportunities · Operations, Supply Chain &amp; Analytics</div>
     <h1 class="hero-name">
       Anshul<br>
-      <span class="accent-word">Silhare.</span>
+      <span class="accent-word">Silhare<span id="hero-period">.</span></span>
     </h1>
     <p class="hero-tagline">Helping businesses make better <span class="hl">operational decisions through data.</span></p>
     <p class="hero-sub">PGDM Research &amp; Business Analytics · WeSchool Mumbai '27 · Operations | Supply Chain | Analytics</p>
@@ -666,8 +755,8 @@ body.dark .moon-icon { display: none !important; }
     </div>
 
     <div class="skills-subgroup-label reveal">Technical Skills</div>
-    <div class="stack-categories reveal">
-      <div class="stack-category">
+    <div class="stack-categories ">
+      <div class="stack-category reveal">
         <div class="cat-header">
           <div class="cat-icon" style="background:rgba(30,58,95,.08);color:var(--accent)">⚙</div>
           <div class="cat-title">Data &amp; Querying</div>
@@ -689,7 +778,7 @@ body.dark .moon-icon { display: none !important; }
           <div class="skill-item" data-skill="excel"><span class="skill-name">Advanced Excel</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
         </div>
       </div>
-      <div class="stack-category">
+      <div class="stack-category reveal">
         <div class="cat-header">
           <div class="cat-icon" style="background:rgba(14,124,107,.08);color:var(--teal)">📊</div>
           <div class="cat-title">Visualization &amp; Reporting</div>
@@ -703,8 +792,8 @@ body.dark .moon-icon { display: none !important; }
     </div>
 
     <div class="skills-subgroup-label reveal">Other Skills</div>
-    <div class="stack-categories reveal">
-      <div class="stack-category">
+    <div class="stack-categories ">
+      <div class="stack-category reveal">
         <div class="cat-header">
           <div class="cat-icon" style="background:rgba(217,119,6,.08);color:var(--amber)">🏭</div>
           <div class="cat-title">Operations &amp; Supply Chain</div>
@@ -715,7 +804,7 @@ body.dark .moon-icon { display: none !important; }
           <div class="skill-item" data-skill="operations"><span class="skill-name">Lean Six Sigma (DMAIC)</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div></div></div>
         </div>
       </div>
-      <div class="stack-category">
+      <div class="stack-category reveal">
         <div class="cat-header">
           <div class="cat-icon" style="background:rgba(124,58,237,.08);color:#7c3aed">🧩</div>
           <div class="cat-title">Project Management</div>
@@ -946,8 +1035,8 @@ body.dark .moon-icon { display: none !important; }
       <span class="cert-inst-name">Google</span>
       <span class="cert-inst-count">4 certifications</span>
     </div>
-    <div class="certs-grid reveal">
-      <div class="cert-card cert-card-program" data-skills="python pandas statistics sql">
+    <div class="certs-grid ">
+      <div class="cert-card cert-card-program reveal" data-skills="python pandas statistics sql">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
         <div>
           <div class="cert-name">Google Advanced Data Analytics Professional Certificate <span class="in-progress-label">In Progress</span></div>
@@ -964,15 +1053,15 @@ body.dark .moon-icon { display: none !important; }
           </div>
         </div>
       </div>
-      <div class="cert-card" data-skills="python statistics">
+      <div class="cert-card reveal" data-skills="python statistics">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
         <div><div class="cert-name">Foundations of Data Science</div><div class="cert-org">Google</div><div class="cert-date">Jun 2026</div></div>
       </div>
-      <div class="cert-card" data-skills="pandas">
+      <div class="cert-card reveal" data-skills="pandas">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
         <div><div class="cert-name">Go Beyond Numbers: Translate Data into Insights</div><div class="cert-org">Google</div><div class="cert-date">Jun 2026</div></div>
       </div>
-      <div class="cert-card" data-skills="statistics">
+      <div class="cert-card reveal" data-skills="statistics">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
         <div><div class="cert-name">The Power of Statistics</div><div class="cert-org">Google</div><div class="cert-date">Jun 2026</div></div>
       </div>
@@ -986,24 +1075,24 @@ body.dark .moon-icon { display: none !important; }
       <span class="cert-inst-name">Microsoft</span>
       <span class="cert-inst-count">5 certifications</span>
     </div>
-    <div class="certs-grid reveal">
-      <div class="cert-card" data-skills="powerbi">
+    <div class="certs-grid ">
+      <div class="cert-card reveal" data-skills="powerbi">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
         <div><div class="cert-name">Data Analysis &amp; Visualization with Power BI</div><div class="cert-org">Microsoft</div><div class="cert-date">Dec 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="powerbi">
+      <div class="cert-card reveal" data-skills="powerbi">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
         <div><div class="cert-name">Data Modeling in Power BI</div><div class="cert-org">Microsoft</div><div class="cert-date">Dec 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="powerbi">
+      <div class="cert-card reveal" data-skills="powerbi">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
         <div><div class="cert-name">Harnessing the Power of Data with Power BI</div><div class="cert-org">Microsoft</div><div class="cert-date">Sep 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="sql">
+      <div class="cert-card reveal" data-skills="sql">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
         <div><div class="cert-name">SQL Foundations</div><div class="cert-org">Microsoft</div><div class="cert-date">Sep 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="excel">
+      <div class="cert-card reveal" data-skills="excel">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
         <div><div class="cert-name">Preparing Data for Analysis with Microsoft Excel</div><div class="cert-org">Microsoft</div><div class="cert-date">Sep 2025</div></div>
       </div>
@@ -1017,8 +1106,8 @@ body.dark .moon-icon { display: none !important; }
       <span class="cert-inst-name">Rutgers University</span>
       <span class="cert-inst-count">6 certifications</span>
     </div>
-    <div class="certs-grid reveal">
-      <div class="cert-card cert-card-program" data-skills="supplychain planning operations">
+    <div class="certs-grid ">
+      <div class="cert-card cert-card-program reveal" data-skills="supplychain planning operations">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
         </div>
@@ -1035,31 +1124,31 @@ body.dark .moon-icon { display: none !important; }
           </div>
         </div>
       </div>
-      <div class="cert-card" data-skills="supplychain">
+      <div class="cert-card reveal" data-skills="supplychain">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
         </div>
         <div><div class="cert-name">Supply Chain Management Strategy</div><div class="cert-org">Rutgers University</div><div class="cert-date">Dec 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="supplychain">
+      <div class="cert-card reveal" data-skills="supplychain">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
         </div>
         <div><div class="cert-name">Supply Chain Sourcing</div><div class="cert-org">Rutgers University</div><div class="cert-date">Dec 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="planning">
+      <div class="cert-card reveal" data-skills="planning">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
         </div>
         <div><div class="cert-name">Supply Chain Planning</div><div class="cert-org">Rutgers University</div><div class="cert-date">Nov 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="operations">
+      <div class="cert-card reveal" data-skills="operations">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
         </div>
         <div><div class="cert-name">Supply Chain Operations</div><div class="cert-org">Rutgers University</div><div class="cert-date">Nov 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="operations">
+      <div class="cert-card reveal" data-skills="operations">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
         </div>
@@ -1075,14 +1164,14 @@ body.dark .moon-icon { display: none !important; }
       <span class="cert-inst-name">Vanderbilt University</span>
       <span class="cert-inst-count">2 certifications</span>
     </div>
-    <div class="certs-grid reveal">
-      <div class="cert-card" data-skills="modeling">
+    <div class="certs-grid ">
+      <div class="cert-card reveal" data-skills="modeling">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
         </div>
         <div><div class="cert-name">Generative AI for Leaders</div><div class="cert-org">Vanderbilt University</div><div class="cert-date">Sep 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="modeling">
+      <div class="cert-card reveal" data-skills="modeling">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
         </div>
@@ -1098,14 +1187,14 @@ body.dark .moon-icon { display: none !important; }
       <span class="cert-inst-name">University of California, Davis</span>
       <span class="cert-inst-count">2 certifications</span>
     </div>
-    <div class="certs-grid reveal">
-      <div class="cert-card" data-skills="tableau">
+    <div class="certs-grid ">
+      <div class="cert-card reveal" data-skills="tableau">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/ucdavis.png" alt="UC Davis" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2) translateY(3px)">
         </div>
         <div><div class="cert-name">Essential Design Principles for Tableau</div><div class="cert-org">University of California, Davis</div><div class="cert-date">Sep 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="tableau">
+      <div class="cert-card reveal" data-skills="tableau">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/ucdavis.png" alt="UC Davis" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2) translateY(3px)">
         </div>
@@ -1121,26 +1210,26 @@ body.dark .moon-icon { display: none !important; }
       <span class="cert-inst-name">Other Institutions</span>
       <span class="cert-inst-count">4 certifications</span>
     </div>
-    <div class="certs-grid reveal">
-      <div class="cert-card" data-skills="planning">
+    <div class="certs-grid ">
+      <div class="cert-card reveal" data-skills="planning">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/uva.png" alt="University of Virginia" style="width:85%;height:85%;object-fit:contain">
         </div>
         <div><div class="cert-name">Foundations of Business Strategy</div><div class="cert-org">University of Virginia</div><div class="cert-date">Sep 2025</div></div>
       </div>
-      <div class="cert-card" data-skills="excel">
+      <div class="cert-card reveal" data-skills="excel">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/excel.png" alt="Microsoft Excel" style="width:100%;height:100%;object-fit:contain;transform:scale(1.35)">
         </div>
         <div><div class="cert-name">Advanced Microsoft Excel</div><div class="cert-org">Kyle Pew</div></div>
       </div>
-      <div class="cert-card" data-skills="operations">
+      <div class="cert-card reveal" data-skills="operations">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/forage.png" alt="Forage" style="width:100%;height:100%;object-fit:contain">
         </div>
         <div><div class="cert-name">EA Product Management Simulation</div><div class="cert-org">Electronic Arts × Forage</div></div>
       </div>
-      <div class="cert-card" data-skills="operations">
+      <div class="cert-card reveal" data-skills="operations">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/atlassian.png" alt="Atlassian" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
         </div>
@@ -1156,8 +1245,8 @@ body.dark .moon-icon { display: none !important; }
       <span class="cert-inst-name">In Progress</span>
       <span class="cert-inst-count">1 remaining</span>
     </div>
-    <div class="certs-grid reveal">
-      <div class="cert-card" style="border-color:rgba(217,119,6,.2)" data-skills="python pandas statistics sql">
+    <div class="certs-grid ">
+      <div class="cert-card reveal" style="border-color:rgba(217,119,6,.2)" data-skills="python pandas statistics sql">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
         <div><div class="cert-name">Google Advanced Data Analytics: Courses 4–7 <span class="in-progress-label">In Progress</span></div><div class="cert-org">Google</div></div>
       </div>
@@ -1251,39 +1340,37 @@ body.dark .moon-icon { display: none !important; }
 </section>
 
 <!-- LEADERSHIP & RESPONSIBILITIES -->
-<section id="leadership" style="background: var(--bg3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+<section id="leadership">
   <div class="section-wrap">
     <div class="section-header reveal">
       <p class="section-label">07 · Leadership &amp; Responsibilities</p>
       <h2 class="section-title">Leadership &amp; <span class="dim">Responsibilities.</span></h2>
     </div>
-    <div class="reveal">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-        <div class="lead-item">
+        <div class="lead-item reveal">
           <div class="lead-title">Management Committee · Science Society</div>
           <div class="lead-org">Hislop College, Nagpur · 2023–2025</div>
           <div class="lead-desc">Coordinated operations and event logistics for <strong>10+ inter-collegiate science events</strong> over a 2-year tenure. Led a cross-functional team of <strong>15+ coordinators</strong>; managed scheduling, resource allocation, and budget tracking for <strong>500+ attendees</strong>.</div>
         </div>
-        <div class="lead-item">
+        <div class="lead-item reveal">
           <div class="lead-title">Management Committee</div>
           <div class="lead-org">Golden Hour Organisation</div>
           <div class="lead-desc">Coordinated multi-team student initiatives, managing resource planning, procurement, and scheduling of community programs. Successfully executed <strong>12 community drives</strong>, streamlining volunteer scheduling to impact <strong>100+ beneficiaries</strong>.</div>
         </div>
-        <div class="lead-item">
+        <div class="lead-item reveal">
           <div class="lead-title">Community Contributor</div>
           <div class="lead-org">Positivity XO</div>
           <div class="lead-desc">Contributed to child-focused community programs, supporting logistical coordination and outreach operations for weekly events. Optimized resource supply lines for local chapters, ensuring <strong>100% on-time delivery</strong> of materials for educational workshops.</div>
         </div>
       </div>
-    </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-wrap">
-    <div class="contact-top reveal">
-      <div>
+    <div class="contact-top">
+      <div class="reveal">
         <h2 class="contact-cta-title">Open to full-time<br>placements from<br><span class="accent">August 2026.</span></h2>
         <p class="contact-cta-sub">Targeting roles in Operations Analytics, Supply Chain Analytics, and Data / Business Analytics. Currently interning at Nerolac Nerofix, actively building toward my final placement.</p>
         <div class="hero-ctas" style="margin-top:0">
@@ -1293,17 +1380,17 @@ body.dark .moon-icon { display: none !important; }
       </div>
       <div>
         <div class="contact-links" style="margin-bottom: 1.5rem;">
-          <a href="mailto:anshulsilhare@gmail.com" class="contact-link">
+          <a href="mailto:anshulsilhare@gmail.com" class="contact-link reveal">
             <span class="contact-link-icon">✉</span>
             <span>anshulsilhare@gmail.com</span>
           </a>
-          <a href="https://linkedin.com/in/anshul-silhare" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <a href="https://linkedin.com/in/anshul-silhare" target="_blank" rel="noopener noreferrer" class="contact-link reveal">
             <span class="contact-link-icon">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
             </span>
             <span>linkedin.com/in/anshul-silhare</span>
           </a>
-          <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="contact-link reveal">
             <span class="contact-link-icon">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: middle;"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg>
             </span>
@@ -1311,7 +1398,7 @@ body.dark .moon-icon { display: none !important; }
           </a>
         </div>
         
-        <div id="githubWidget" class="github-widget">
+        <div id="githubWidget" class="github-widget reveal">
           <div class="gh-stat-item">
             <span class="gh-stat-val" id="ghRepoCount">-</span>
             <span class="gh-stat-lbl">Public Repos</span>
@@ -1383,8 +1470,14 @@ function cacheSectionOffsets() {
 
 // Initial caching
 cacheSectionOffsets();
-window.addEventListener('load', cacheSectionOffsets);
-window.addEventListener('resize', cacheSectionOffsets);
+window.addEventListener('load', () => {
+  cacheSectionOffsets();
+  generateWeavingPath();
+});
+window.addEventListener('resize', () => {
+  cacheSectionOffsets();
+  generateWeavingPath();
+});
 
 let scrollTick = false;
 window.addEventListener('scroll', () => {
@@ -1408,6 +1501,9 @@ window.addEventListener('scroll', () => {
       navLinks.forEach(a => {
         a.classList.toggle('active', a.getAttribute('href') === '#' + current);
       });
+      
+      // Update weaving scroll progress
+      updateWeavingScroll();
       
       scrollTick = false;
     });
@@ -1650,12 +1746,190 @@ const initRevealAnimations = () => {
   revealElements.forEach(el => observer.observe(el));
 };
 
+// Dynamic Weaving Scroll Path Generator
+let activePathLength = 0;
+let scrollPathActive = null;
+let scrollDot = null;
+
+function generateWeavingPath() {
+  const svg = document.getElementById('scroll-svg');
+  const pathBg = document.getElementById('scroll-path-bg');
+  scrollPathActive = document.getElementById('scroll-path-active');
+  scrollDot = document.getElementById('scroll-dot');
+  if (!svg || !pathBg || !scrollPathActive) return;
+
+  const docHeight = document.documentElement.scrollHeight;
+  svg.style.height = docHeight + 'px';
+  svg.setAttribute('height', docHeight);
+  svg.removeAttribute('viewBox');
+  
+  const width = window.innerWidth;
+  if (width < 768) {
+    pathBg.setAttribute('d', '');
+    scrollPathActive.setAttribute('d', '');
+    if (scrollDot) scrollDot.style.opacity = '0';
+    activePathLength = 0;
+    return;
+  }
+  if (scrollDot) scrollDot.style.opacity = '1';
+
+  // Weave relative to the centered 1100px content container boundaries
+  const margin = 80;
+  const leftLimit = width > 1100 ? (width - 1100) / 2 + margin : margin;
+  const rightLimit = width > 1100 ? (width + 1100) / 2 - margin : width - margin;
+  const getX = (pct) => leftLimit + (rightLimit - leftLimit) * pct;
+
+  const anchors = [];
+  
+  const getSectionY = (selector, offset = 120) => {
+    const el = document.querySelector(selector);
+    if (!el) return null;
+    const rect = el.getBoundingClientRect();
+    return rect.top + window.scrollY + offset;
+  };
+
+  // 1. Start at the period "." of "Silhare." in Hero
+  const period = document.getElementById('hero-period');
+  let startX = getX(0.8);
+  let startY = 150;
+  if (period) {
+    const rect = period.getBoundingClientRect();
+    startX = rect.left + window.scrollX + rect.width / 2;
+    startY = rect.top + window.scrollY + rect.height / 2;
+  }
+  anchors.push({ x: startX, y: startY });
+
+  // 2. About Section (left side)
+  const yAbout = getSectionY('#about', 120);
+  if (yAbout !== null) {
+    anchors.push({ x: getX(0.2), y: yAbout });
+  }
+
+  // 3. Experience Section (right side)
+  const yExp = getSectionY('#experience', 120);
+  if (yExp !== null) {
+    anchors.push({ x: getX(0.8), y: yExp });
+  }
+
+  // 4. Expertise Section (left side)
+  const yStack = getSectionY('#stack', 120);
+  if (yStack !== null) {
+    anchors.push({ x: getX(0.2), y: yStack });
+  }
+
+  // 5. Projects Section (right side)
+  const yProjects = getSectionY('#projects', 120);
+  if (yProjects !== null) {
+    anchors.push({ x: getX(0.8), y: yProjects });
+  }
+
+  // 6. Certifications Section (left side)
+  const yCerts = getSectionY('#certs', 120);
+  if (yCerts !== null) {
+    anchors.push({ x: getX(0.2), y: yCerts });
+  }
+
+  // 7. Education Section (right side)
+  const yEdu = getSectionY('#education', 120);
+  if (yEdu !== null) {
+    anchors.push({ x: getX(0.8), y: yEdu });
+  }
+
+  // 8. Leadership Section (left side)
+  const yLeadership = getSectionY('#leadership', 120);
+  if (yLeadership !== null) {
+    anchors.push({ x: getX(0.2), y: yLeadership });
+  }
+
+  // 9. Contact Section (center)
+  const yContact = getSectionY('#contact', 100);
+  if (yContact !== null) {
+    anchors.push({ x: getX(0.5), y: yContact });
+  }
+
+  if (anchors.length < 2) return;
+
+  // Construct Bezier Path weaving diagonally and smoothly
+  let d = `M ${anchors[0].x} ${anchors[0].y}`;
+  for (let i = 0; i < anchors.length - 1; i++) {
+    const p0 = anchors[i];
+    const p1 = anchors[i + 1];
+    
+    const dy = p1.y - p0.y;
+    const cpY1 = p0.y + dy / 3;
+    const cpY2 = p0.y + 2 * dy / 3;
+    
+    let cpX1 = p0.x;
+    let cpX2 = p1.x;
+    
+    // For the first segment (Hero Period -> About Section), we want it to go out to the right of the period first
+    if (i === 0) {
+      cpX1 = p0.x + 120;
+    }
+    
+    d += ` C ${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${p1.x} ${p1.y}`;
+  }
+
+  pathBg.setAttribute('d', d);
+  scrollPathActive.setAttribute('d', d);
+  
+  activePathLength = scrollPathActive.getTotalLength();
+  scrollPathActive.style.strokeDasharray = activePathLength;
+  scrollPathActive.style.strokeDashoffset = activePathLength;
+  
+  updateWeavingScroll();
+}
+
+function updateWeavingScroll() {
+  if (activePathLength <= 0 || !scrollPathActive) return;
+  
+  const scrollY = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight;
+  const winHeight = window.innerHeight;
+  
+  // Start drawing exactly from the period dot Y coordinate
+  const period = document.getElementById('hero-period');
+  const yStart = period 
+    ? (period.getBoundingClientRect().top + window.scrollY + period.getBoundingClientRect().height / 2) 
+    : 150;
+
+  // Smoothly transition the leading offset from 0 (at scrollY = 0) to 65% of viewport height (at scrollY >= 300)
+  const leadLimit = 300; // px of scroll to transition
+  const maxLead = winHeight * 0.65;
+  const currentLead = scrollY > 0 
+    ? (scrollY < leadLimit ? (scrollY / leadLimit) * maxLead : maxLead)
+    : 0;
+  const targetY = scrollY + currentLead;
+  
+  // Dynamically find end of path (yContact) or fallback to document scroll height minus footer
+  const contactSection = document.querySelector('#contact');
+  const yEnd = contactSection 
+    ? (contactSection.getBoundingClientRect().top + window.scrollY + 100)
+    : (docHeight - 600);
+    
+  let scrollPercent = (targetY - yStart) / (yEnd - yStart);
+  scrollPercent = Math.max(0, Math.min(1, scrollPercent));
+  
+  scrollPathActive.style.strokeDashoffset = activePathLength * (1 - scrollPercent);
+  
+  if (scrollDot) {
+    try {
+      const point = scrollPathActive.getPointAtLength(activePathLength * scrollPercent);
+      scrollDot.setAttribute('cx', point.x);
+      scrollDot.setAttribute('cy', point.y);
+    } catch(e) {
+      // Fallback
+    }
+  }
+}
+
 // Document ready initializations
 document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initSkillsHighlight();
   initRevealAnimations();
   fetchGitHubStats();
+  generateWeavingPath();
 });
 </script>
 </body>
