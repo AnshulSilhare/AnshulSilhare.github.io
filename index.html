@@ -48,6 +48,7 @@
   --glass-bg:      rgba(255, 255, 255, 0.08);
   --glass-border:  rgba(15, 23, 42, 0.08);
   --glass-shadow:  0 10px 36px rgba(15, 23, 42, 0.24);
+  --glass-shadow-hover: 0 20px 48px rgba(15, 23, 42, 0.15), 0 8px 24px rgba(13, 148, 136, 0.15);
   --glass-blur:    blur(8px); 
   --blob3:   var(--accent2);
   --preview-btn-bg: rgba(30, 58, 95, 0.05);
@@ -72,6 +73,7 @@ body.dark {
   --glass-bg:      rgba(30, 41, 59, 0.08);
   --glass-border:  rgba(255, 255, 255, 0.14);
   --glass-shadow:  0 8px 32px rgba(0, 0, 0, 0.42);
+  --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(45, 212, 191, 0.15);
   --glass-blur:    blur(8px); 
   --blob3:   var(--accent2);
   --preview-btn-bg: rgba(255, 255, 255, 0.05);
@@ -103,13 +105,13 @@ nav {
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 1.5rem; height: 54px; max-width: 1100px; width: calc(100% - 2.5rem);
   background: transparent; border: none;
-  transition: all .4s cubic-bezier(.4,0,.2,1);
+  transition: top .4s cubic-bezier(.4,0,.2,1), height .4s cubic-bezier(.4,0,.2,1);
 }
 nav::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
   background: var(--nav-bg); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--glass-border); border-radius: 99px;
-  box-shadow: var(--glow); transition: all .4s cubic-bezier(.4,0,.2,1);
+  box-shadow: var(--glow); transition: background .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1);
 }
 nav.scrolled {
   top: .75rem;
@@ -267,7 +269,7 @@ section { position: relative; }
   box-shadow: var(--glass-shadow); transition: border-color .3s, transform .3s, box-shadow .3s; cursor: default;
 }
 .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--nav-grad-start), var(--nav-grad-end)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
-.project-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: var(--glass-shadow); }
+.project-card:hover { border-color: var(--border2); transform: translateY(-8px); box-shadow: var(--glass-shadow-hover); }
 .project-card:hover::before { transform: scaleX(1); }
 
 /* Live internship project - full width featured */
@@ -310,7 +312,18 @@ section { position: relative; }
 .metric { display: flex; flex-direction: column; }
 .metric-val { font-family: var(--mono); font-size: .82rem; font-weight: 600; color: var(--accent); }
 .metric-lbl { font-family: var(--body); font-size: .65rem; color: var(--text3); margin-top: .1rem; }
-.card-actions { display: flex; gap: .7rem; margin-top: auto; }
+.card-actions {
+  display: flex; gap: .7rem; margin-top: auto;
+  padding: 1.25rem 1.8rem;
+  margin: 1.4rem -1.8rem -1.8rem -1.8rem;
+  border-top: 1px solid var(--glass-border);
+  background: linear-gradient(160deg, rgba(20, 184, 166, 0.04) 0%, rgba(20, 184, 166, 0.09) 100%);
+  align-items: center;
+}
+body.dark .card-actions {
+  background: linear-gradient(160deg, rgba(20, 184, 166, 0.08) 0%, rgba(20, 184, 166, 0.15) 100%);
+  border-top-color: rgba(13, 148, 136, 0.15);
+}
 .card-btn { display: inline-flex; align-items: center; gap: .4rem; font-family: var(--mono); font-size: .68rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; padding: .5rem 1rem; border-radius: var(--radius); cursor: pointer; transition: all .2s; border: 1px solid transparent; }
 .card-btn-gh { color: var(--text2); border-color: var(--border2); background: transparent; }
 .card-btn-gh:hover { color: var(--accent); border-color: var(--accent); }
@@ -389,10 +402,15 @@ section { position: relative; }
   flex: 1 1 100%;
   background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(14,124,107,.03) 100%);
   border-color: rgba(14,124,107,.14);
+  transition: transform 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              border-radius 0.35s ease;
 }
 .cert-card-program:hover {
+  transform: translateY(-5px);
   border-color: rgba(14,124,107,.32);
-  box-shadow: 0 12px 40px rgba(13, 148, 136, 0.10), var(--glass-shadow);
+  box-shadow: 0 16px 45px rgba(13, 148, 136, 0.15), var(--glass-shadow);
 }
 
 /* Content row inside a card */
@@ -1354,10 +1372,13 @@ body.dark .contact-link:hover { background: rgba(30,41,59,.55); color: var(--acc
 /* ─── ADDED ENHANCEMENT STYLES ────────────────────────── */
 
 /* Skill Highlight Proof System */
-.skill-item { cursor: pointer; transition: all 0.2s ease; }
+.skill-item { cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease; }
 .skill-item:hover { border-color: var(--accent2); background: rgba(14,124,107,.03); }
 .skill-item.active { border-color: var(--accent2) !important; background: rgba(14,124,107,.08) !important; }
-.project-card, .cert-card, .exp-card { transition: all 0.3s ease; }
+.project-card, .cert-card, .exp-card { 
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; 
+  will-change: transform, opacity; 
+}
 .project-card.dimmed, .cert-card.dimmed, .exp-card.dimmed { opacity: 0.22; transform: scale(0.97); pointer-events: none; }
 .project-card.highlighted, .cert-card.highlighted, .exp-card.highlighted { border-color: var(--accent2) !important; box-shadow: 0 0 16px rgba(14,124,107,.25) !important; }
 
@@ -2183,29 +2204,33 @@ body.dark .mesh-blob {
     </div>
     <div class="certs-grid ">
       <div class="cert-card reveal" data-skills="modeling">
-      <div class="cert-card-main">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-          <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
+        <div class="cert-card-main">
+          <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
+            <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
+          </div>
+          <div><div class="cert-name">Generative AI for Leaders</div></div>
         </div>
-        <div><div class="cert-name">Generative AI for Leaders</div></div>
-      </div>
-      <div class="cert-actions-drawer">
-        <div class="cert-actions-inner">
-          <a href="https://www.coursera.org/account/accomplishments/verify/414IN9TWBPEW" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn" data-img="./certs/genai_leaders.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
-      <div class="cert-card-main">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-          <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
-        </div>
-        <div><div class="cert-name">Prompt Engineering for ChatGPT</div></div>
-      </div>
-      <div class="cert-actions-drawer">
-        <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        <div class="cert-actions-drawer">
+          <div class="cert-actions-inner">
+            <a href="https://www.coursera.org/account/accomplishments/verify/414IN9TWBPEW" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+            <button class="preview-btn" data-img="./certs/genai_leaders.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="cert-card reveal" data-skills="modeling">
+        <div class="cert-card-main">
+          <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
+            <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
+          </div>
+          <div><div class="cert-name">Prompt Engineering for ChatGPT</div></div>
+        </div>
+        <div class="cert-actions-drawer">
+          <div class="cert-actions-inner">
+            <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+            <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- UC Davis -->
@@ -2242,6 +2267,10 @@ body.dark .mesh-blob {
         <div class="cert-actions-inner">
           <a href="https://www.coursera.org/account/accomplishments/verify/AXBPYIJAX6VC" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
           <button class="preview-btn" data-img="./certs/tableau_fundamentals.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
+    </div>
     <div class="cert-inst-divider reveal">
       <div class="cert-inst-logo" style="background:var(--bg3);border:1px solid var(--border)">
         <span style="font-family:var(--mono);font-size:.7rem;font-weight:600;color:var(--text3)">+</span>
@@ -2251,29 +2280,33 @@ body.dark .mesh-blob {
     </div>
     <div class="certs-grid ">
       <div class="cert-card reveal" data-skills="planning">
-      <div class="cert-card-main">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-          <img src="./logos/uva.png" alt="University of Virginia" style="width:85%;height:85%;object-fit:contain">
+        <div class="cert-card-main">
+          <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
+            <img src="./logos/uva.png" alt="University of Virginia" style="width:85%;height:85%;object-fit:contain">
+          </div>
+          <div><div class="cert-name">Foundations of Business Strategy</div></div>
         </div>
-        <div><div class="cert-name">Foundations of Business Strategy</div></div>
-      </div>
-      <div class="cert-actions-drawer">
-        <div class="cert-actions-inner">
-          <a href="https://coursera.org/verify/HTL4ZI37EG2Z" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn" data-img="./certs/business_strategy.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
-      <div class="cert-card-main">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-          <img src="./logos/excel.png" alt="Microsoft Excel" style="width:100%;height:100%;object-fit:contain;transform:scale(1.35)">
-        </div>
-        <div><div class="cert-name">Advanced Microsoft Excel</div></div>
-      </div>
-      <div class="cert-actions-drawer">
-        <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn" data-img="./certs/excel_advanced.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        <div class="cert-actions-drawer">
+          <div class="cert-actions-inner">
+            <a href="https://coursera.org/verify/HTL4ZI37EG2Z" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+            <button class="preview-btn" data-img="./certs/business_strategy.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="cert-card reveal" data-skills="excel">
+        <div class="cert-card-main">
+          <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
+            <img src="./logos/excel.png" alt="Microsoft Excel" style="width:100%;height:100%;object-fit:contain;transform:scale(1.35)">
+          </div>
+          <div><div class="cert-name">Advanced Microsoft Excel</div></div>
+        </div>
+        <div class="cert-actions-drawer">
+          <div class="cert-actions-inner">
+            <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+            <button class="preview-btn" data-img="./certs/excel_advanced.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          </div>
+        </div>
+      </div>
       <div class="cert-card reveal" data-skills="operations">
       <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
@@ -2836,6 +2869,8 @@ const initRevealAnimations = () => {
 let activePathLength = 0;
 let scrollPathActive = null;
 let scrollDot = null;
+let weavingStartY = 150;
+let weavingEndY = 0;
 
 function generateWeavingPath() {
   const svg = document.getElementById('scroll-svg');
@@ -2883,6 +2918,7 @@ function generateWeavingPath() {
     startX = rect.left + window.scrollX + rect.width / 2;
     startY = rect.top + window.scrollY + rect.height / 2;
   }
+  weavingStartY = startY;
   anchors.push({ x: startX, y: startY });
 
   // 2. About Section (left side)
@@ -2931,6 +2967,9 @@ function generateWeavingPath() {
   const yContact = getSectionY('#contact', 100);
   if (yContact !== null) {
     anchors.push({ x: getX(0.5), y: yContact });
+    weavingEndY = yContact;
+  } else {
+    weavingEndY = docHeight - 600;
   }
 
   if (anchors.length < 2) return;
@@ -2970,14 +3009,9 @@ function updateWeavingScroll() {
   if (activePathLength <= 0 || !scrollPathActive) return;
   
   const scrollY = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight;
   const winHeight = window.innerHeight;
   
-  // Start drawing exactly from the period dot Y coordinate
-  const period = document.getElementById('hero-period');
-  const yStart = period 
-    ? (period.getBoundingClientRect().top + window.scrollY + period.getBoundingClientRect().height / 2) 
-    : 150;
+  const yStart = weavingStartY;
 
   // Smoothly transition the leading offset from 0 (at scrollY = 0) to 65% of viewport height (at scrollY >= 300)
   const leadLimit = 300; // px of scroll to transition
@@ -2987,13 +3021,10 @@ function updateWeavingScroll() {
     : 0;
   const targetY = scrollY + currentLead;
   
-  // Dynamically find end of path (yContact) or fallback to document scroll height minus footer
-  const contactSection = document.querySelector('#contact');
-  const yEnd = contactSection 
-    ? (contactSection.getBoundingClientRect().top + window.scrollY + 100)
-    : (docHeight - 600);
+  const yEnd = weavingEndY;
     
   let scrollPercent = (targetY - yStart) / (yEnd - yStart);
+  if (yEnd <= yStart) scrollPercent = 0;
   scrollPercent = Math.max(0, Math.min(1, scrollPercent));
   
   scrollPathActive.style.strokeDashoffset = activePathLength * (1 - scrollPercent);
