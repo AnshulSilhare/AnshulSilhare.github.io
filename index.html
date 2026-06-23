@@ -50,6 +50,8 @@
   --glass-shadow:  0 10px 36px rgba(15, 23, 42, 0.24);
   --glass-shadow-hover: 0 20px 48px rgba(15, 23, 42, 0.15), 0 8px 24px rgba(13, 148, 136, 0.15);
   --glass-blur:    blur(8px); 
+  --blob1:   var(--teal);
+  --blob2:   var(--accent);
   --blob3:   var(--accent2);
   --preview-btn-bg: rgba(30, 58, 95, 0.05);
   --preview-btn-border: rgba(30, 58, 95, 0.18);
@@ -75,6 +77,8 @@ body.dark {
   --glass-shadow:  0 8px 32px rgba(0, 0, 0, 0.42);
   --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(45, 212, 191, 0.15);
   --glass-blur:    blur(8px); 
+  --blob1:   var(--teal);
+  --blob2:   var(--accent);
   --blob3:   var(--accent2);
   --preview-btn-bg: rgba(255, 255, 255, 0.05);
   --preview-btn-border: rgba(255, 255, 255, 0.12);
@@ -85,6 +89,15 @@ body.dark {
 body.dark #scroll-path-active { opacity: 0.35; }
 body.dark #scroll-path-bg { opacity: 0.15; }
 body.dark #scroll-dot { filter: drop-shadow(0 0 3px var(--teal)); }
+#scroll-path-active {
+  will-change: stroke-dashoffset;
+}
+#scroll-dot {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  transform-box: fill-box;
+  transform-origin: center;
+}
 body.dark #scroll-gradient stop:first-child,
 body.dark #scroll-gradient-active stop:first-child {
   stop-color: #38bdf8;
@@ -1574,9 +1587,9 @@ body.dark .mesh-blob {
     <p class="hero-tagline">Helping businesses make better <span class="hl">operational decisions through data.</span></p>
     <p class="hero-sub">PGDM Research &amp; Business Analytics · WeSchool Mumbai '27 · Operations | Supply Chain | Analytics</p>
     <div class="hero-ctas">
-      <a href="#projects" class="btn btn-primary">View Projects ↓</a>
       <a href="https://linkedin.com/in/anshul-silhare" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><span class="icon-svg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></span> LinkedIn</a>
       <a href="https://github.com/AnshulSilhare" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><span class="icon-svg"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
+      <a href="#projects" class="btn btn-primary">View Projects ↓</a>
     </div>
     <div class="hero-counters">
       <div class="counter-item">
@@ -2571,10 +2584,12 @@ function cacheSectionOffsets() {
 // Initial caching
 cacheSectionOffsets();
 window.addEventListener('load', () => {
+  cachedWinHeight = window.innerHeight;
   cacheSectionOffsets();
   generateWeavingPath();
 });
 window.addEventListener('resize', () => {
+  cachedWinHeight = window.innerHeight;
   cacheSectionOffsets();
   generateWeavingPath();
 });
@@ -2598,9 +2613,12 @@ window.addEventListener('scroll', () => {
         }
       }
       
-      navLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-      });
+      if (current !== lastActiveSection) {
+        lastActiveSection = current;
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        });
+      }
       
       // Update weaving scroll progress
       updateWeavingScroll();
@@ -2871,6 +2889,9 @@ let scrollPathActive = null;
 let scrollDot = null;
 let weavingStartY = 150;
 let weavingEndY = 0;
+let cachedWeavingPoints = [];
+let lastActiveSection = '';
+let cachedWinHeight = window.innerHeight;
 
 function generateWeavingPath() {
   const svg = document.getElementById('scroll-svg');
@@ -3002,6 +3023,19 @@ function generateWeavingPath() {
   scrollPathActive.style.strokeDasharray = activePathLength;
   scrollPathActive.style.strokeDashoffset = activePathLength;
   
+  // Pre-calculate path points at 1000 steps to avoid layout thrashing via getPointAtLength on scroll
+  const steps = 1000;
+  cachedWeavingPoints = [];
+  for (let i = 0; i <= steps; i++) {
+    const pct = i / steps;
+    try {
+      const pt = scrollPathActive.getPointAtLength(activePathLength * pct);
+      cachedWeavingPoints.push({ x: pt.x, y: pt.y });
+    } catch (e) {
+      cachedWeavingPoints.push({ x: 0, y: 0 });
+    }
+  }
+  
   updateWeavingScroll();
 }
 
@@ -3009,7 +3043,7 @@ function updateWeavingScroll() {
   if (activePathLength <= 0 || !scrollPathActive) return;
   
   const scrollY = window.scrollY;
-  const winHeight = window.innerHeight;
+  const winHeight = cachedWinHeight;
   
   const yStart = weavingStartY;
 
@@ -3029,14 +3063,17 @@ function updateWeavingScroll() {
   
   scrollPathActive.style.strokeDashoffset = activePathLength * (1 - scrollPercent);
   
-  if (scrollDot) {
-    try {
-      const point = scrollPathActive.getPointAtLength(activePathLength * scrollPercent);
-      scrollDot.setAttribute('cx', point.x);
-      scrollDot.setAttribute('cy', point.y);
-    } catch(e) {
-      // Fallback
-    }
+  if (scrollDot && cachedWeavingPoints.length > 0) {
+    const rawIdx = scrollPercent * (cachedWeavingPoints.length - 1);
+    const idx0 = Math.floor(rawIdx);
+    const idx1 = Math.min(cachedWeavingPoints.length - 1, idx0 + 1);
+    const ratio = rawIdx - idx0;
+    const p0 = cachedWeavingPoints[idx0];
+    const p1 = cachedWeavingPoints[idx1];
+    const px = p0.x + (p1.x - p0.x) * ratio;
+    const py = p0.y + (p1.y - p0.y) * ratio;
+    
+    scrollDot.style.transform = `translate3d(${px}px, ${py}px, 0)`;
   }
 }
 
