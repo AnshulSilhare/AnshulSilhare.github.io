@@ -32,7 +32,7 @@
   --bg:      #f8fafc; --bg2: #ffffff; --bg3: #f1f5f9;
   --surface: #ffffff; --surface2: #f8fafc;
   --border:  rgba(15,23,42,.08); --border2: rgba(15,23,42,.15);
-  --accent:  #1e3a5f; --accent-title:  #1d4ed8; --accent2: #0f8a75; --teal: #0f8a75;
+  --accent:  #1e3a5f; --accent-title:  #1d4ed8; --accent2: #0d9488; --teal: #0d9488;
   --amber:   #d97706; --green: #16a34a; --red: #dc2626;
   --text:    #0f172a; --text2: #475569; --text3: #94a3b8;
   --mono:    'DM Sans', sans-serif;
@@ -41,10 +41,11 @@
   --radius:  6px; --radius2: 12px;
   --glow:    0 4px 24px rgba(15,23,42,.07);
   --glow-md: 0 8px 32px rgba(15,23,42,.1);
-  --nav-bg:  rgba(255, 255, 255, 0.08); --nav-scrolled-bg: rgba(255, 255, 255, 0.08);
+  --nav-bg:  rgba(255, 255, 255, 0.08); --nav-scrolled-bg: rgba(255, 255, 255, 0.08); --nav-mobile-bg: rgba(248, 250, 252, 0.92);
+  --nav-grad-start: #065f46; --nav-grad-end: #10b981;
   --contact-bg: #1e3a5f;
   --contact-text-hl: rgba(255,255,255,.55);
-  --glass-bg:      rgba(255, 255, 255, 0.03);
+  --glass-bg:      rgba(255, 255, 255, 0.08);
   --glass-border:  rgba(15, 23, 42, 0.08);
   --glass-shadow:  0 10px 36px rgba(15, 23, 42, 0.24);
   --glass-blur:    blur(16px); 
@@ -60,10 +61,11 @@ body.dark {
   --text:    #f8fafc; --text2: #cbd5e1; --text3: #94a3b8;
   --glow:    0 4px 20px rgba(0,0,0,.4);
   --glow-md: 0 12px 30px rgba(0,0,0,.55);
-  --nav-bg:  rgba(11,15,25,.25); --nav-scrolled-bg: rgba(11,15,25,.55);
+  --nav-bg:  rgba(11,15,25,.25); --nav-scrolled-bg: rgba(11,15,25,.55); --nav-mobile-bg: rgba(11, 15, 25, 0.92);
+  --nav-grad-start: var(--accent); --nav-grad-end: var(--teal);
   --contact-bg: #111827;
   --contact-text-hl: var(--accent);
-  --glass-bg:      rgba(30, 41, 59, 0.03);
+  --glass-bg:      rgba(30, 41, 59, 0.08);
   --glass-border:  rgba(255, 255, 255, 0.14);
   --glass-shadow:  0 8px 32px rgba(0, 0, 0, 0.42);
   --glass-blur:    blur(16px); 
@@ -105,7 +107,7 @@ nav.scrolled {
 .nav-logo { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: -.01em; white-space: nowrap; }
 .nav-links { display: flex; gap: 1.2rem; list-style: none; }
 .nav-links a { font-family: var(--body); font-size: .85rem; font-weight: 400; color: var(--text2); transition: color .2s; position: relative; padding-bottom: 2px; }
-.nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 1.5px; background: linear-gradient(90deg, var(--accent), var(--teal)); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+.nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 1.5px; background: linear-gradient(90deg, var(--nav-grad-start), var(--nav-grad-end)); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
 .nav-links a:hover, .nav-links a.active { color: var(--accent); }
 .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
 .nav-right { display: flex; align-items: center; gap: .75rem; }
@@ -249,7 +251,7 @@ section { position: relative; }
   padding: 1.8rem; display: flex; flex-direction: column; position: relative; overflow: hidden;
   box-shadow: var(--glass-shadow); transition: border-color .3s, transform .3s, box-shadow .3s; cursor: default;
 }
-.project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+.project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--nav-grad-start), var(--nav-grad-end)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
 .project-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: var(--glass-shadow); }
 .project-card:hover::before { transform: scaleX(1); }
 
@@ -303,11 +305,521 @@ section { position: relative; }
 
 /* ─── CERTIFICATIONS ──────────────────────────────────── */
 #certs { background: transparent; }
-.certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: .85rem; }
-.cert-card { position: relative; overflow: hidden; display: flex; gap: .8rem; align-items: flex-start; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 1.1rem 1.2rem; box-shadow: var(--glass-shadow); transition: border-color .25s, transform .25s, box-shadow .25s; }
-.cert-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
-.cert-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
-.cert-card:hover::before { transform: scaleX(1); }
+.certs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+/* ── Certificate Cards ─────────────────────────────────────────────────── */
+
+/* WRAPPER: this is the actual flex child in .certs-grid.
+   It holds the card + the drawer as siblings (row layout).
+   As the drawer grows in width, this wrapper expands → siblings are pushed. */
+.cert-card-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex: 1 1 280px;
+  /* No overflow:hidden here — drawer must be free to expand */
+}
+
+/* CARD: stays at flex:1 with overflow:hidden for proper border-radius.
+   overflow:hidden only clips its own children, NOT the sibling drawer. */
+.cert-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 1;
+  min-width: 0;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius2);
+  padding: 1rem 0.85rem;
+  box-shadow: var(--glass-shadow);
+  cursor: pointer;
+  transition: border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              border-radius 0.35s ease;
+}
+
+/* Accent bar */
+.cert-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--teal));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.cert-card-wrap:hover .cert-card::before,
+.cert-card:hover::before {
+  transform: scaleX(1);
+}
+.cert-card-wrap:hover .cert-card {
+  border-color: rgba(13, 148, 136, 0.35);
+  box-shadow: 0 12px 40px rgba(13, 148, 136, 0.12), var(--glass-shadow);
+}
+
+/* ── Specialisation / full-width program card ── */
+.cert-card-program {
+  flex: 1 1 100%;
+  background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(14,124,107,.03) 100%);
+  border-color: rgba(14,124,107,.14);
+}
+.cert-card-program:hover {
+  border-color: rgba(14,124,107,.32);
+  box-shadow: 0 12px 40px rgba(13, 148, 136, 0.10), var(--glass-shadow);
+}
+
+/* Content row inside a card */
+.cert-card-main {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 210px;
+}
+/* Text column must allow shrink so mini-grid gets proper width */
+.cert-card-main > div:not(.cert-icon) {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── DESKTOP (≥768px): Side drawer — sibling of card ── */
+
+@media (min-width: 768px) {
+
+  /* Fluid Accordion Grid for cards! 
+     Using a smaller flex-basis guarantees they never wrap when hovered, 
+     and adding 160px to the hovered base perfectly absorbs the drawer 
+     without over-expanding the card itself! */
+  .cert-card-wrap {
+    flex: 1 1 150px !important; 
+    transition: flex-basis 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .cert-card-wrap:hover {
+    flex-basis: 290px !important; /* 150 + 160 drawer */
+  }
+
+  /* When drawer opens, card's right corners flatten to join the drawer */
+  .cert-card-wrap:hover .cert-card:not(.cert-card-program) {
+    border-radius: var(--radius2) 0 0 var(--radius2);
+  }
+
+  /* DRAWER: sibling of .cert-card inside .cert-card-wrap.
+     Starts at width:0 and slides to 160px.
+     overflow:hidden on the drawer clips ITS OWN content during animation. */
+  .cert-card-wrap .cert-actions-drawer {
+    width: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 var(--radius2) var(--radius2) 0;
+    background: transparent;
+    border: 1px solid transparent;
+    border-left: none;
+    transition: width 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.28s ease,
+                background 0.3s ease,
+                border-color 0.3s ease;
+  }
+  body.dark .cert-card-wrap .cert-actions-drawer {
+    background: transparent;
+  }
+
+  .cert-card-wrap:hover .cert-actions-drawer {
+    width: 140px;
+    opacity: 1;
+    background: linear-gradient(160deg,
+      rgba(20, 184, 166, 0.07) 0%,
+      rgba(20, 184, 166, 0.12) 100%);
+    border-color: rgba(13, 148, 136, 0.25);
+    box-shadow: inset 6px 0 18px -6px rgba(0, 0, 0, 0.06);
+  }
+  body.dark .cert-card-wrap:hover .cert-actions-drawer {
+    background: linear-gradient(160deg,
+      rgba(20, 184, 166, 0.11) 0%,
+      rgba(20, 184, 166, 0.18) 100%);
+    box-shadow: inset 6px 0 18px -6px rgba(0, 0, 0, 0.22);
+  }
+
+  /* Inner content — fixed width prevents text wrapping during animation */
+  .cert-card-wrap .cert-actions-inner {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.85rem;
+    flex-shrink: 0;
+  }
+
+  /* Program cards keep bottom drawer (they're already 100% wide) */
+  .cert-card-program .cert-actions-drawer {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    flex-shrink: initial;
+    transition: grid-template-rows 0.38s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.28s ease;
+  }
+  .cert-card-program:hover .cert-actions-drawer {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    width: 100%;
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  .cert-card-program .cert-actions-inner {
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    width: auto;
+    padding: 0.85rem 0 0 0;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(13, 148, 136, 0.14);
+    flex-shrink: initial;
+  }
+}
+
+/* ── MOBILE (<768px): bottom-slide drawer ── */
+@media (max-width: 767px) {
+  .cert-card-wrap {
+    flex-direction: column;
+  }
+  .cert-card-wrap .cert-card:not(.cert-card-program) {
+    border-radius: var(--radius2);
+    transition: border-color 0.3s, box-shadow 0.3s,
+                border-radius 0.35s;
+  }
+  .cert-card-wrap:hover .cert-card:not(.cert-card-program) {
+    border-radius: var(--radius2) var(--radius2) 0 0;
+  }
+  .cert-card-wrap .cert-actions-drawer {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    border-radius: 0 0 var(--radius2) var(--radius2);
+    background: linear-gradient(160deg,
+      rgba(20,184,166,0.06) 0%,
+      rgba(20,184,166,0.10) 100%);
+    border: 1px solid transparent;
+    border-top: none;
+    transition: max-height 0.38s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.28s ease,
+                border-color 0.3s;
+  }
+  .cert-card-wrap:hover .cert-actions-drawer {
+    max-height: 80px;
+    opacity: 1;
+    border-color: rgba(13,148,136, 0.25);
+  }
+  .cert-card-wrap .cert-actions-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.75rem 1.2rem;
+  }
+  /* Program cards: bottom drawer inside card on mobile too */
+  .cert-card-program .cert-actions-drawer {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    width: 100%;
+    max-height: none;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    transition: grid-template-rows 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.25s;
+  }
+  .cert-card-program:hover .cert-actions-drawer {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .cert-card-program .cert-actions-inner {
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding-top: 0.85rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(13,148,136,.14);
+  }
+}
+
+/* ── Verify button ── */
+
+.preview-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0 0.55rem;
+  height: 25px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  width: 100%;
+  transition: all 0.25s;
+}
+.preview-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.verify-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0 0.55rem;
+  height: 25px;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  width: 100%;
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+}
+.verify-btn svg, .preview-btn svg {
+  width: 12px;
+  height: 12px;
+}
+.verify-btn:hover {
+  background: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(13,148,136, 0.35);
+}
+.verify-btn svg { width: 12px; height: 12px; }
+
+/* Mini Cert Cards */
+.mini-certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.55rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+.cert-mini-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.cert-mini-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-2px);
+}
+.cert-mini-main {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+.cert-mini-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  flex-shrink: 0;
+}
+.cert-mini-name {
+  font-family: var(--body);
+  font-size: 0.72rem;
+  color: var(--text2);
+  line-height: 1.3;
+  /* Allow wrapping – no truncation; grid cells constrain the width */
+  word-break: break-word;
+}
+
+.cert-mini-actions-drawer {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.25s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
+  width: 100%;
+}
+.cert-mini-card:hover .cert-mini-actions-drawer {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.cert-mini-actions-inner {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  padding-top: 0.5rem;
+  margin-top: 0.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+body.light .cert-mini-actions-inner {
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.mini-verify-btn, .mini-view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.mini-verify-btn:hover { background: var(--teal); transform: scale(1.1); }
+.mini-verify-btn svg { width: 14px; height: 14px; }
+
+.mini-view-btn {
+  background: rgba(20, 184, 166, 0.1);
+  border: 1px solid var(--teal);
+  color: var(--teal);
+}
+.mini-view-btn:hover {
+  background: var(--teal);
+  color: #fff;
+  transform: scale(1.1);
+}
+.mini-view-btn svg { width: 14px; height: 14px; }
+
+@media (max-width: 768px) {
+  .cert-actions-drawer, .cert-mini-actions-drawer {
+    grid-template-rows: 1fr !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Certificate Image Preview Modal */
+.cert-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cert-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.cert-modal-content {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius2);
+  padding: 1.2rem;
+  max-width: 90%;
+  max-height: 85%;
+  box-shadow: var(--glass-shadow);
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cert-modal.active .cert-modal-content {
+  transform: scale(1);
+}
+.cert-modal-close {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+.cert-modal-close:hover {
+  background: var(--teal);
+  transform: scale(1.1);
+}
+.cert-modal-img {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: calc(var(--radius2) - 4px);
+  object-fit: contain;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+.cert-modal-title {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+}
+
+/* Card details/names/chips */
 .cert-icon { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .cert-icon svg { display: block; }
 .cert-icon-letter { font-size: .9rem; font-weight: 700; font-family: var(--mono); color: #fff; }
@@ -315,6 +827,7 @@ section { position: relative; }
 .cert-org { font-family: var(--body); font-size: .7rem; color: var(--text3); }
 .cert-date { font-family: var(--mono); font-size: .62rem; color: var(--text3); margin-top: 2px; }
 .in-progress-label { font-family: var(--mono); font-size: .58rem; color: var(--amber); background: rgba(217,119,6,.07); border: 1px solid rgba(217,119,6,.2); padding: .15rem .5rem; border-radius: 99px; margin-left: .5rem; }
+
 /* Progress bar for multi-course programs */
 .cert-progress-wrap { margin-top: 6px; }
 .cert-progress-bar { height: 3px; background: var(--bg3); border-radius: 99px; overflow: hidden; margin-bottom: 3px; }
@@ -324,6 +837,7 @@ section { position: relative; }
 .cert-chip { font-family: var(--mono); font-size: .58rem; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
 .cert-chip-done { color: var(--green); background: rgba(22,163,74,.07); border: 1px solid rgba(22,163,74,.18); }
 .cert-chip-pending { color: var(--text3); background: var(--bg3); border: 1px solid var(--border); }
+
 /* Institution group divider */
 .cert-inst-divider {
   display: flex; align-items: center; gap: .65rem;
@@ -333,13 +847,6 @@ section { position: relative; }
 .cert-inst-logo { width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); flex-shrink: 0; overflow: hidden; }
 .cert-inst-name { font-family: var(--body); font-size: .8rem; font-weight: 500; color: var(--text2); }
 .cert-inst-count { font-family: var(--mono); font-size: .6rem; color: var(--text3); background: var(--bg3); border: 1px solid var(--border); padding: .12rem .55rem; border-radius: 99px; }
-.cert-card-program {
-  grid-column: 1 / -1;
-  align-items: flex-start;
-  background: linear-gradient(135deg, var(--glass-bg) 0%, rgba(14,124,107,.02) 100%);
-  border-color: rgba(14,124,107,.14);
-}
-.cert-card-program:hover { border-color: rgba(14,124,107,.28); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 
 /* ─── EXPERIENCE ──────────────────────────────────────── */
 #experience { background: transparent; border: none; }
@@ -355,7 +862,7 @@ section { position: relative; }
 #leadership { background: transparent; }
 .leadership-list { display: flex; flex-direction: column; gap: 1.2rem; }
 .lead-item { position: relative; overflow: hidden; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 1.3rem; box-shadow: var(--glass-shadow); transition: border-color .3s, transform .3s, box-shadow .3s; }
-.lead-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+.lead-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--nav-grad-start), var(--nav-grad-end)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
 .lead-item:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 .lead-item:hover::before { transform: scaleX(1); }
 .lead-title { font-family: var(--display); font-size: .92rem; font-weight: 600; color: var(--text); margin-bottom: .2rem; }
@@ -472,12 +979,35 @@ body.dark .contact-link:hover { background: rgba(30,41,59,.55); color: var(--acc
   .nav-links.open {
     display: flex; flex-direction: column; position: absolute;
     top: calc(100% + 0.5rem); left: 0; right: 0;
-    background: var(--nav-scrolled-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+    background: var(--nav-mobile-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
     border: 1px solid var(--glass-border); border-radius: var(--radius2);
-    padding: 1.5rem; gap: 1rem;
+    padding: 0.5rem 0.75rem; gap: 0.25rem;
     box-shadow: var(--glow-md);
     z-index: 99;
   }
+  /* Mobile nav link rows – option D with left-to-right gradient underline */
+  .nav-links.open li a {
+    display: block; width: 100%; padding: 0.75rem 0.5rem;
+    font-size: 0.9rem; font-weight: 500;
+    color: var(--text2); text-decoration: none;
+    position: relative; overflow: hidden;
+    transition: color 0.25s ease;
+  }
+  .nav-links.open li a::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--nav-grad-start), var(--nav-grad-end));
+    transition: width 0.35s ease;
+    border-radius: 2px;
+  }
+  .nav-links.open li a:hover, .nav-links.open li a.active { color: var(--text); }
+  .nav-links.open li a:hover::after, .nav-links.open li a.active::after { width: 100%; }
+  /* Separator lines between mobile menu items */
+  .nav-links.open li + li {
+    border-top: 1px solid var(--border);
+  }
+  /* Disable desktop ::after underline in mobile menu */
+  .nav-links.open li a::before { display: none; }
 }
 @media(max-width: 680px) {
   .hero-counters { gap: 1.5rem; }
@@ -525,7 +1055,7 @@ body.dark .moon-icon { display: none !important; }
 /* Testimonials */
 .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 1.5rem; margin-top: 1.5rem; }
 .testimonial-card { position: relative; overflow: hidden; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 1.8rem; box-shadow: var(--glass-shadow); display: flex; flex-direction: column; justify-content: space-between; transition: border-color .3s, transform .3s, box-shadow .3s; }
-.testimonial-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--teal)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+.testimonial-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--nav-grad-start), var(--nav-grad-end)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
 .testimonial-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 .testimonial-card:hover::before { transform: scaleX(1); }
 .testimonial-text { font-style: italic; font-size: .88rem; color: var(--text2); line-height: 1.7; margin-bottom: 1.2rem; }
@@ -647,13 +1177,9 @@ body.dark .mesh-blob {
       <stop offset="50%" stop-color="var(--teal)" stop-opacity="1.0" />
       <stop offset="100%" stop-color="var(--accent2)" stop-opacity="0.85" />
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
   </defs>
   <path id="scroll-path-bg" stroke="url(#scroll-gradient)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-  <path id="scroll-path-active" stroke="url(#scroll-gradient-active)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" />
+  <path id="scroll-path-active" stroke="url(#scroll-gradient-active)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
   <circle id="scroll-dot" r="6" fill="var(--teal)" style="filter: drop-shadow(0 0 6px var(--teal)); transition: opacity 0.25s; opacity: 0;" />
 </svg>
 
@@ -663,7 +1189,7 @@ body.dark .mesh-blob {
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#stack">Skills</a></li>
+    <li><a href="#stack">Expertise</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#certs">Certifications</a></li>
     <li><a href="#education">Education</a></li>
@@ -707,10 +1233,7 @@ body.dark .mesh-blob {
         <div class="counter-value" data-target="8.69" data-decimals="2">0.00</div>
         <div class="counter-label">PGDM GPA</div>
       </div>
-      <div class="counter-item">
-        <div class="counter-value" data-target="20" data-suffix="+">0</div>
-        <div class="counter-label">Certifications</div>
-      </div>
+
     </div>
   </div>
   <div class="hero-scroll">
@@ -803,7 +1326,7 @@ body.dark .mesh-blob {
 <section id="stack">
   <div class="section-wrap">
     <div class="section-header reveal">
-      <p class="section-label">03 · Skills</p>
+      <p class="section-label">03 · Expertise</p>
       <h2 class="section-title">Skills &amp; <span class="dim">Capabilities.</span></h2>
     </div>
 
@@ -1089,35 +1612,93 @@ body.dark .mesh-blob {
       <span class="cert-inst-count">4 certifications</span>
     </div>
     <div class="certs-grid ">
-      <div class="cert-card cert-card-program reveal" data-skills="python pandas statistics sql">
+            <div class="cert-card cert-card-program reveal" data-skills="python pandas statistics sql">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
         <div>
           <div class="cert-name">Google Advanced Data Analytics Professional Certificate <span class="in-progress-label">In Progress</span></div>
           <div class="cert-org">Google · Professional Certificate</div>
           <div class="cert-progress-wrap">
-            <div class="cert-progress-bar"><div class="cert-progress-fill" style="width:42.8%"></div></div>
-            <span class="cert-progress-text">3 of 7 courses complete</span>
+            <div class="cert-progress-bar"><div class="cert-progress-fill" style="width:71.4%"></div></div>
+            <span class="cert-progress-text">5 of 7 courses complete</span>
           </div>
           <div class="cert-course-chips">
             <span class="cert-chip cert-chip-done">Foundations of Data Science</span>
             <span class="cert-chip cert-chip-done">Go Beyond Numbers</span>
             <span class="cert-chip cert-chip-done">Power of Statistics</span>
-            <span class="cert-chip cert-chip-pending">+4 remaining</span>
+            <span class="cert-chip cert-chip-done">Regression Analysis</span>
+            <span class="cert-chip cert-chip-done">Machine Learning</span>
+            <span class="cert-chip cert-chip-pending">+2 remaining</span>
+          </div>
+          
+                    <div class="mini-certs-grid">
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+                <div class="cert-mini-name">Foundations of Data Science</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+                <div class="cert-mini-name">Go Beyond Numbers: Translate Data into Insights</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+                <div class="cert-mini-name">Power of Statistics</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+                <div class="cert-mini-name">Regression Analysis</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
+                <div class="cert-mini-name">The Nuts and Bolts of Machine Learning</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <div class="mini-btn-group" style="display:flex;gap:0.4rem;align-items:center;justify-content:center;">
+                    <a href="https://www.coursera.org/account/accomplishments/verify/Y8AD29C80P4N" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                    <a href="#" class="mini-view-btn" data-img="./certs/ml_course_certificate.png" data-title="The Nuts and Bolts of Machine Learning" title="View Certificate Image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="cert-card reveal" data-skills="python statistics">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
-        <div><div class="cert-name">Foundations of Data Science</div><div class="cert-org">Google</div><div class="cert-date">Jun 2026</div></div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Spec</a>
+        </div>
       </div>
-      <div class="cert-card reveal" data-skills="pandas">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
-        <div><div class="cert-name">Go Beyond Numbers: Translate Data into Insights</div><div class="cert-org">Google</div><div class="cert-date">Jun 2026</div></div>
-      </div>
-      <div class="cert-card reveal" data-skills="statistics">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
-        <div><div class="cert-name">The Power of Statistics</div><div class="cert-org">Google</div><div class="cert-date">Jun 2026</div></div>
-      </div>
+    </div>
     </div>
 
     <!-- Microsoft -->
@@ -1130,25 +1711,65 @@ body.dark .mesh-blob {
     </div>
     <div class="certs-grid ">
       <div class="cert-card reveal" data-skills="powerbi">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
-        <div><div class="cert-name">Data Analysis &amp; Visualization with Power BI</div><div class="cert-org">Microsoft</div><div class="cert-date">Dec 2025</div></div>
+        <div><div class="cert-name">Data Analysis &amp; Visualization with Power BI</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
       <div class="cert-card reveal" data-skills="powerbi">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
-        <div><div class="cert-name">Data Modeling in Power BI</div><div class="cert-org">Microsoft</div><div class="cert-date">Dec 2025</div></div>
+        <div><div class="cert-name">Data Modeling in Power BI</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
       <div class="cert-card reveal" data-skills="powerbi">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
-        <div><div class="cert-name">Harnessing the Power of Data with Power BI</div><div class="cert-org">Microsoft</div><div class="cert-date">Sep 2025</div></div>
+        <div><div class="cert-name">Harnessing the Power of Data with Power BI</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
       <div class="cert-card reveal" data-skills="sql">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
-        <div><div class="cert-name">SQL Foundations</div><div class="cert-org">Microsoft</div><div class="cert-date">Sep 2025</div></div>
+        <div><div class="cert-name">SQL Foundations</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
       <div class="cert-card reveal" data-skills="excel">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 21 21" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><rect fill="#F25022" x="0" y="0" width="9.5" height="9.5"/><rect fill="#7FBA00" x="11.5" y="0" width="9.5" height="9.5"/><rect fill="#00A4EF" x="0" y="11.5" width="9.5" height="9.5"/><rect fill="#FFB900" x="11.5" y="11.5" width="9.5" height="9.5"/></svg></div>
-        <div><div class="cert-name">Preparing Data for Analysis with Microsoft Excel</div><div class="cert-org">Microsoft</div><div class="cert-date">Sep 2025</div></div>
+        <div><div class="cert-name">Preparing Data for Analysis with Microsoft Excel</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
     </div>
 
     <!-- Rutgers -->
@@ -1157,16 +1778,23 @@ body.dark .mesh-blob {
         <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
       </div>
       <span class="cert-inst-name">Rutgers University</span>
-      <span class="cert-inst-count">6 certifications</span>
+      <span class="cert-inst-count">1 certification</span>
     </div>
     <div class="certs-grid ">
-      <div class="cert-card cert-card-program reveal" data-skills="supplychain planning operations">
+            <div class="cert-card cert-card-program reveal" data-skills="supplychain planning operations">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
         </div>
         <div>
           <div class="cert-name">Supply Chain Management Specialization</div>
-          <div class="cert-org">Rutgers University · 5-course specialization</div>
+          <div class="cert-org" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <span>Rutgers University · 5-course specialization</span>
+            <a href="#" class="inline-verify-link" target="_blank" style="color: var(--accent); font-size: 0.75rem; display: inline-flex; align-items: center; gap: 2px; text-decoration: none; border-bottom: 1px dashed var(--accent);" title="Verify Specialization on Coursera">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10" style="vertical-align: middle;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Verify Spec
+            </a>
+          </div>
           <div class="cert-date">Dec 2025</div>
           <div class="cert-course-chips" style="margin-top:6px">
             <span class="cert-chip cert-chip-done">Strategy</span>
@@ -1175,38 +1803,72 @@ body.dark .mesh-blob {
             <span class="cert-chip cert-chip-done">Operations</span>
             <span class="cert-chip cert-chip-done">Logistics</span>
           </div>
+          
+                    <div class="mini-certs-grid">
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
+                <div class="cert-mini-name">Supply Chain Management Strategy</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
+                <div class="cert-mini-name">Supply Chain Sourcing</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
+                <div class="cert-mini-name">Supply Chain Planning</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
+                <div class="cert-mini-name">Supply Chain Operations</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+            <div class="cert-mini-card">
+              <div class="cert-mini-main">
+                <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
+                <div class="cert-mini-name">Supply Chain Logistics</div>
+              </div>
+              <div class="cert-mini-actions-drawer">
+                <div class="cert-mini-actions-inner">
+                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="cert-card reveal" data-skills="supplychain">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-          <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Specialization</a>
         </div>
-        <div><div class="cert-name">Supply Chain Management Strategy</div><div class="cert-org">Rutgers University</div><div class="cert-date">Dec 2025</div></div>
       </div>
-      <div class="cert-card reveal" data-skills="supplychain">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-          <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
-        </div>
-        <div><div class="cert-name">Supply Chain Sourcing</div><div class="cert-org">Rutgers University</div><div class="cert-date">Dec 2025</div></div>
-      </div>
-      <div class="cert-card reveal" data-skills="planning">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-          <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
-        </div>
-        <div><div class="cert-name">Supply Chain Planning</div><div class="cert-org">Rutgers University</div><div class="cert-date">Nov 2025</div></div>
-      </div>
-      <div class="cert-card reveal" data-skills="operations">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-          <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
-        </div>
-        <div><div class="cert-name">Supply Chain Operations</div><div class="cert-org">Rutgers University</div><div class="cert-date">Nov 2025</div></div>
-      </div>
-      <div class="cert-card reveal" data-skills="operations">
-        <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-          <img src="./logos/rutgers.png" alt="Rutgers University" style="width:85%;height:85%;object-fit:contain">
-        </div>
-        <div><div class="cert-name">Supply Chain Logistics</div><div class="cert-org">Rutgers University</div><div class="cert-date">Nov 2025</div></div>
-      </div>
+    </div>
     </div>
 
     <!-- Vanderbilt -->
@@ -1219,17 +1881,33 @@ body.dark .mesh-blob {
     </div>
     <div class="certs-grid ">
       <div class="cert-card reveal" data-skills="modeling">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
         </div>
-        <div><div class="cert-name">Generative AI for Leaders</div><div class="cert-org">Vanderbilt University</div><div class="cert-date">Sep 2025</div></div>
+        <div><div class="cert-name">Generative AI for Leaders</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
       <div class="cert-card reveal" data-skills="modeling">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
         </div>
-        <div><div class="cert-name">Prompt Engineering for ChatGPT</div><div class="cert-org">Vanderbilt University</div><div class="cert-date">Sep 2025</div></div>
+        <div><div class="cert-name">Prompt Engineering for ChatGPT</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
     </div>
 
     <!-- UC Davis -->
@@ -1242,17 +1920,33 @@ body.dark .mesh-blob {
     </div>
     <div class="certs-grid ">
       <div class="cert-card reveal" data-skills="tableau">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/ucdavis.png" alt="UC Davis" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2) translateY(3px)">
         </div>
-        <div><div class="cert-name">Essential Design Principles for Tableau</div><div class="cert-org">University of California, Davis</div><div class="cert-date">Sep 2025</div></div>
+        <div><div class="cert-name">Essential Design Principles for Tableau</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
       <div class="cert-card reveal" data-skills="tableau">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/ucdavis.png" alt="UC Davis" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2) translateY(3px)">
         </div>
-        <div><div class="cert-name">Fundamentals of Visualization with Tableau</div><div class="cert-org">University of California, Davis</div><div class="cert-date">Sep 2025</div></div>
+        <div><div class="cert-name">Fundamentals of Visualization with Tableau</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
     </div>
 
     <!-- Others -->
@@ -1265,29 +1959,61 @@ body.dark .mesh-blob {
     </div>
     <div class="certs-grid ">
       <div class="cert-card reveal" data-skills="planning">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/uva.png" alt="University of Virginia" style="width:85%;height:85%;object-fit:contain">
         </div>
-        <div><div class="cert-name">Foundations of Business Strategy</div><div class="cert-org">University of Virginia</div><div class="cert-date">Sep 2025</div></div>
+        <div><div class="cert-name">Foundations of Business Strategy</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
       <div class="cert-card reveal" data-skills="excel">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/excel.png" alt="Microsoft Excel" style="width:100%;height:100%;object-fit:contain;transform:scale(1.35)">
         </div>
-        <div><div class="cert-name">Advanced Microsoft Excel</div><div class="cert-org">Kyle Pew</div></div>
+        <div><div class="cert-name">Advanced Microsoft Excel</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
       <div class="cert-card reveal" data-skills="operations">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/forage.png" alt="Forage" style="width:100%;height:100%;object-fit:contain">
         </div>
-        <div><div class="cert-name">EA Product Management Simulation</div><div class="cert-org">Electronic Arts × Forage</div></div>
+        <div><div class="cert-name">EA Product Management Simulation</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
       <div class="cert-card reveal" data-skills="operations">
+      <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/atlassian.png" alt="Atlassian" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
         </div>
-        <div><div class="cert-name">Jira Fundamentals</div><div class="cert-org">Atlassian</div><div class="cert-date">Jun 2026</div></div>
+        <div><div class="cert-name">Jira Fundamentals</div></div>
       </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
     </div>
 
     <!-- In Progress -->
@@ -1301,7 +2027,7 @@ body.dark .mesh-blob {
     <div class="certs-grid ">
       <div class="cert-card reveal" style="border-color:rgba(217,119,6,.2)" data-skills="python pandas statistics sql">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
-        <div><div class="cert-name">Google Advanced Data Analytics: Courses 4–7 <span class="in-progress-label">In Progress</span></div><div class="cert-org">Google</div></div>
+        <div><div class="cert-name">Google Advanced Data Analytics: Courses 4–7 <span class="in-progress-label">In Progress</span></div><div class="cert-org">Google</div></div></div>
       </div>
     </div>
 
@@ -1991,13 +2717,109 @@ function updateWeavingScroll() {
 }
 
 // Document ready initializations
+
+// Certificate Modal Controller
+const initCertModal = () => {
+  const modal = document.getElementById('certModal');
+  const modalImg = document.getElementById('certModalImg');
+  const modalTitle = document.getElementById('certModalTitle');
+  const closeBtn = document.getElementById('closeCertModal');
+
+  if (!modal || !closeBtn) return;
+
+  const closeModal = () => {
+    modal.classList.remove('active');
+    setTimeout(() => {
+      modalImg.src = '';
+    }, 400);
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Event listener for view buttons (using event delegation)
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.view-btn, .mini-view-btn');
+    if (btn) {
+      e.preventDefault();
+      const imgUrl = btn.getAttribute('data-img');
+      const title = btn.getAttribute('data-title') || 'Certificate';
+      if (imgUrl) {
+        modalImg.src = imgUrl;
+        modalTitle.textContent = title;
+        modal.classList.add('active');
+      }
+    }
+  });
+};
+
+
 document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initSkillsHighlight();
   initRevealAnimations();
+  initCertModal();
   fetchGitHubStats();
   generateWeavingPath();
 });
+</script>
+
+<!-- Certificate View Modal -->
+<div id="certModal" class="cert-modal">
+  <div class="cert-modal-content">
+    <button class="cert-modal-close" id="closeCertModal">&times;</button>
+    <img src="" alt="Certificate Preview" class="cert-modal-img" id="certModalImg">
+    <div class="cert-modal-title" id="certModalTitle">Certificate Title</div>
+  </div>
+</div>
+
+
+  <script>
+    /* ── Mobile menu auto-close on link click ── */
+    (function() {
+      var navLinks = document.querySelectorAll('.nav-links a');
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          setTimeout(function() {
+            var navUl = document.querySelector('.nav-links');
+            var hamburger = document.querySelector('.nav-toggle');
+            if (navUl && navUl.classList.contains('open')) {
+              navUl.classList.remove('open');
+              if (hamburger) hamburger.classList.remove('open');
+            }
+          }, 600);
+        });
+      });
+    })();
+  
+
+// ── Cert Card DOM Restructure for Side-Push Drawer ──────────────────────────
+// Non-program cards: wrap card + move drawer to sibling for clean side animation
+(function() {
+  document.querySelectorAll('.cert-card:not(.cert-card-program)').forEach(function(card) {
+    var drawer = card.querySelector('.cert-actions-drawer');
+    if (!drawer) return;
+
+    // Create wrapper
+    var wrap = document.createElement('div');
+    wrap.className = 'cert-card-wrap';
+
+    // Copy flex sizing from card to wrapper (wrapper is now the grid item)
+    wrap.style.cssText = card.style.cssText;
+
+    // Insert wrapper before card in the grid
+    card.parentNode.insertBefore(wrap, card);
+
+    // Move card into wrapper
+    wrap.appendChild(card);
+
+    // Pull drawer OUT of card, add as sibling inside wrapper
+    card.removeChild(drawer);
+    wrap.appendChild(drawer);
+  });
+})();
 </script>
 </body>
 </html>
