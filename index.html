@@ -48,10 +48,14 @@
   --glass-bg:      rgba(255, 255, 255, 0.08);
   --glass-border:  rgba(15, 23, 42, 0.08);
   --glass-shadow:  0 10px 36px rgba(15, 23, 42, 0.24);
-  --glass-blur:    blur(16px); 
-  --blob1:   var(--teal);
-  --blob2:   var(--accent);
-  --blob3:   var(--accent2); }
+  --glass-blur:    blur(8px); 
+  --blob3:   var(--accent2);
+  --preview-btn-bg: rgba(30, 58, 95, 0.05);
+  --preview-btn-border: rgba(30, 58, 95, 0.18);
+  --preview-btn-text: var(--text2);
+  --preview-btn-hover-bg: rgba(30, 58, 95, 0.1);
+  --preview-btn-hover-border: rgba(30, 58, 95, 0.3);
+  --preview-btn-hover-text: var(--accent); }
 body.dark {
   --bg:      #0b0f19; --bg2: #111827; --bg3: #161f30;
   --surface: #1e293b; --surface2: #0f172a;
@@ -68,10 +72,14 @@ body.dark {
   --glass-bg:      rgba(30, 41, 59, 0.08);
   --glass-border:  rgba(255, 255, 255, 0.14);
   --glass-shadow:  0 8px 32px rgba(0, 0, 0, 0.42);
-  --glass-blur:    blur(16px); 
-  --blob1:   var(--teal);
-  --blob2:   var(--accent);
-  --blob3:   var(--accent2); }
+  --glass-blur:    blur(8px); 
+  --blob3:   var(--accent2);
+  --preview-btn-bg: rgba(255, 255, 255, 0.05);
+  --preview-btn-border: rgba(255, 255, 255, 0.12);
+  --preview-btn-text: var(--text2);
+  --preview-btn-hover-bg: rgba(255, 255, 255, 0.15);
+  --preview-btn-hover-border: rgba(255, 255, 255, 0.28);
+  --preview-btn-hover-text: #fff; }
 body.dark #scroll-path-active { opacity: 0.35; }
 body.dark #scroll-path-bg { opacity: 0.15; }
 body.dark #scroll-dot { filter: drop-shadow(0 0 3px var(--teal)); }
@@ -94,15 +102,22 @@ nav {
   position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%); z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 1.5rem; height: 54px; max-width: 1100px; width: calc(100% - 2.5rem);
-  background: var(--nav-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  background: transparent; border: none;
+  transition: all .4s cubic-bezier(.4,0,.2,1);
+}
+nav::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: var(--nav-bg); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--glass-border); border-radius: 99px;
   box-shadow: var(--glow); transition: all .4s cubic-bezier(.4,0,.2,1);
 }
 nav.scrolled {
   top: .75rem;
+  height: 50px;
+}
+nav.scrolled::before {
   background: var(--nav-scrolled-bg);
   box-shadow: var(--glow-md);
-  height: 50px;
 }
 .nav-logo { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: -.01em; white-space: nowrap; }
 .nav-links { display: flex; gap: 1.2rem; list-style: none; }
@@ -447,6 +462,8 @@ section { position: relative; }
       rgba(20, 184, 166, 0.12) 100%);
     border-color: rgba(13, 148, 136, 0.25);
     box-shadow: inset 6px 0 18px -6px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   body.dark .cert-card-wrap:hover .cert-actions-drawer {
     background: linear-gradient(160deg,
@@ -472,21 +489,34 @@ section { position: relative; }
     display: grid;
     grid-template-rows: 0fr;
     opacity: 0;
-    width: 100%;
-    border-radius: 0;
-    border: none;
+    width: auto;
+    margin: 0 -0.85rem -1rem -0.85rem;
+    border-radius: 0 0 var(--radius2) var(--radius2);
+    border-top: 1px solid transparent;
     background: transparent;
     flex-shrink: initial;
     transition: grid-template-rows 0.38s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.3s ease,
+                background 0.3s ease,
+                box-shadow 0.3s ease,
                 opacity 0.28s ease;
   }
   .cert-card-program:hover .cert-actions-drawer {
     grid-template-rows: 1fr;
     opacity: 1;
-    width: 100%;
-    background: transparent;
-    border-color: transparent;
-    box-shadow: none;
+    border-top-color: rgba(13, 148, 136, 0.25);
+    background: linear-gradient(160deg,
+      rgba(20, 184, 166, 0.07) 0%,
+      rgba(20, 184, 166, 0.12) 100%);
+    box-shadow: inset 0 6px 18px -6px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  body.dark .cert-card-program:hover .cert-actions-drawer {
+    background: linear-gradient(160deg,
+      rgba(20, 184, 166, 0.11) 0%,
+      rgba(20, 184, 166, 0.18) 100%);
+    box-shadow: inset 0 6px 18px -6px rgba(0, 0, 0, 0.22);
   }
   .cert-card-program .cert-actions-inner {
     min-height: 0;
@@ -495,12 +525,10 @@ section { position: relative; }
     flex-direction: row;
     gap: 0.5rem;
     align-items: center;
-    width: auto;
-    padding: 0.85rem 0 0 0;
-    margin-top: 0.5rem;
-    border-top: 1px solid rgba(13, 148, 136, 0.14);
-    flex-shrink: initial;
+    padding: 0.75rem 0.85rem;
   }
+
+
 }
 
 /* ── MOBILE (<768px): bottom-slide drawer ── */
@@ -538,6 +566,8 @@ section { position: relative; }
     max-height: 80px;
     opacity: 1;
     border-color: rgba(13,148,136, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   .cert-card-wrap .cert-actions-inner {
     width: 100%;
@@ -552,17 +582,30 @@ section { position: relative; }
     display: grid;
     grid-template-rows: 0fr;
     opacity: 0;
-    width: 100%;
-    max-height: none;
-    border-radius: 0;
-    border: none;
+    width: auto;
+    margin: 0 -0.85rem -1rem -0.85rem;
+    border-radius: 0 0 var(--radius2) var(--radius2);
+    border-top: 1px solid transparent;
     background: transparent;
     transition: grid-template-rows 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+                border-color 0.3s ease,
+                background 0.3s ease,
                 opacity 0.25s;
   }
   .cert-card-program:hover .cert-actions-drawer {
     grid-template-rows: 1fr;
     opacity: 1;
+    border-top-color: rgba(13, 148, 136, 0.25);
+    background: linear-gradient(160deg,
+      rgba(20, 184, 166, 0.07) 0%,
+      rgba(20, 184, 166, 0.12) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  body.dark .cert-card-program:hover .cert-actions-drawer {
+    background: linear-gradient(160deg,
+      rgba(20, 184, 166, 0.11) 0%,
+      rgba(20, 184, 166, 0.18) 100%);
   }
   .cert-card-program .cert-actions-inner {
     min-height: 0;
@@ -570,10 +613,9 @@ section { position: relative; }
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    padding-top: 0.85rem;
-    margin-top: 0.5rem;
-    border-top: 1px solid rgba(13,148,136,.14);
+    padding: 0.75rem 0.85rem;
   }
+
 }
 
 /* ── Verify button ── */
@@ -585,9 +627,9 @@ section { position: relative; }
   gap: 0.3rem;
   padding: 0 0.55rem;
   height: 25px;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-muted);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--preview-btn-bg);
+  color: var(--preview-btn-text);
+  border: 1px solid var(--preview-btn-border);
   border-radius: 50px;
   cursor: pointer;
   font-family: inherit;
@@ -596,12 +638,17 @@ section { position: relative; }
   line-height: 1;
   white-space: nowrap;
   width: 100%;
-  transition: all 0.25s;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .preview-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--preview-btn-hover-bg);
+  color: var(--preview-btn-hover-text);
+  border-color: var(--preview-btn-hover-border);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30, 58, 95, 0.08);
+}
+body.dark .preview-btn:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 .verify-btn {
   display: inline-flex;
@@ -611,7 +658,7 @@ section { position: relative; }
   padding: 0 0.55rem;
   height: 25px;
   background: var(--accent);
-  color: #fff;
+  color: #fff !important;
   border: 1px solid transparent;
   border-radius: 50px;
   text-decoration: none;
@@ -621,18 +668,17 @@ section { position: relative; }
   line-height: 1;
   white-space: nowrap;
   width: 100%;
-  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.verify-btn:hover {
+  background: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
 }
 .verify-btn svg, .preview-btn svg {
   width: 12px;
   height: 12px;
 }
-.verify-btn:hover {
-  background: var(--teal);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(13,148,136, 0.35);
-}
-.verify-btn svg { width: 12px; height: 12px; }
 
 /* Mini Cert Cards */
 .mini-certs-grid {
@@ -640,6 +686,7 @@ section { position: relative; }
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 0.55rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
 }
 .cert-mini-card {
@@ -650,11 +697,10 @@ section { position: relative; }
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   padding: 0.6rem 0.8rem;
-  transition: border-color 0.25s, transform 0.25s;
+  transition: border-color 0.25s;
 }
 .cert-mini-card:hover {
   border-color: var(--border2);
-  transform: translateY(-2px);
 }
 .cert-mini-main {
   display: flex;
@@ -678,64 +724,11 @@ section { position: relative; }
   font-size: 0.72rem;
   color: var(--text2);
   line-height: 1.3;
-  /* Allow wrapping – no truncation; grid cells constrain the width */
   word-break: break-word;
 }
 
-.cert-mini-actions-drawer {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  transition: grid-template-rows 0.25s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
-  width: 100%;
-}
-.cert-mini-card:hover .cert-mini-actions-drawer {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-.cert-mini-actions-inner {
-  min-height: 0;
-  overflow: hidden;
-  display: flex;
-  gap: 0.4rem;
-  align-items: center;
-  padding-top: 0.5rem;
-  margin-top: 0.2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
-}
-body.light .cert-mini-actions-inner {
-  border-top: 1px solid rgba(0, 0, 0, 0.03);
-}
-
-.mini-verify-btn, .mini-view-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 50%;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-.mini-verify-btn:hover { background: var(--teal); transform: scale(1.1); }
-.mini-verify-btn svg { width: 14px; height: 14px; }
-
-.mini-view-btn {
-  background: rgba(20, 184, 166, 0.1);
-  border: 1px solid var(--teal);
-  color: var(--teal);
-}
-.mini-view-btn:hover {
-  background: var(--teal);
-  color: #fff;
-  transform: scale(1.1);
-}
-.mini-view-btn svg { width: 14px; height: 14px; }
-
 @media (max-width: 768px) {
-  .cert-actions-drawer, .cert-mini-actions-drawer {
+  .cert-card-program .cert-actions-drawer {
     grid-template-rows: 1fr !important;
     opacity: 1 !important;
   }
@@ -819,6 +812,120 @@ body.light .cert-mini-actions-inner {
   text-align: center;
 }
 
+/* Dynamic Canvas Certificate Preview */
+.cert-canvas {
+  width: 100%;
+  max-width: 580px;
+  aspect-ratio: 1.414 / 1;
+  background: #111827;
+  border: 6px double rgba(20, 184, 166, 0.3);
+  border-radius: 8px;
+  padding: 1.8rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  color: #f8fafc;
+  box-sizing: border-box;
+}
+body.light .cert-canvas {
+  background: #ffffff;
+  border-color: rgba(30, 58, 95, 0.3);
+  color: #0f172a;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+.cert-canvas-header {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 2px;
+}
+.cert-canvas-sub {
+  font-size: 0.65rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 0.2rem;
+}
+.cert-canvas-name {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0.5rem 0;
+  border-bottom: 1.5px solid rgba(20, 184, 166, 0.3);
+  padding-bottom: 0.2rem;
+  min-width: 220px;
+  text-align: center;
+}
+body.light .cert-canvas-name {
+  color: #0f172a;
+}
+.cert-canvas-body {
+  font-family: var(--body);
+  font-size: 0.8rem;
+  color: var(--text2);
+  text-align: center;
+  max-width: 85%;
+  line-height: 1.55;
+}
+.cert-canvas-course {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin-top: 0.4rem;
+}
+.cert-canvas-seal {
+  width: 48px;
+  height: 48px;
+  border: 1.5px dashed var(--teal);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  margin: 0.4rem 0;
+}
+.cert-canvas-seal-inner {
+  width: 38px;
+  height: 38px;
+  background: var(--teal);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.5rem;
+  font-weight: bold;
+}
+.cert-canvas-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 0.5rem;
+}
+.cert-canvas-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+}
+.cert-canvas-meta-label {
+  font-size: 0.55rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.cert-canvas-meta-val {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
 /* Card details/names/chips */
 .cert-icon { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .cert-icon svg { display: block; }
@@ -837,6 +944,189 @@ body.light .cert-mini-actions-inner {
 .cert-chip { font-family: var(--mono); font-size: .58rem; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
 .cert-chip-done { color: var(--green); background: rgba(22,163,74,.07); border: 1px solid rgba(22,163,74,.18); }
 .cert-chip-pending { color: var(--text3); background: var(--bg3); border: 1px solid var(--border); }
+
+/* In Progress Modal Preview */
+.cert-canvas.in-progress-mode {
+  aspect-ratio: auto;
+  border-color: rgba(217, 119, 6, 0.35);
+  justify-content: flex-start;
+  padding: 1.8rem;
+  max-width: 500px;
+}
+body.light .cert-canvas.in-progress-mode {
+  border-color: rgba(217, 119, 6, 0.45);
+}
+.in-progress-modal-view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.in-progress-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: var(--amber);
+  background: rgba(217, 119, 6, 0.08);
+  border: 1px solid rgba(217, 119, 6, 0.25);
+  padding: 0.25rem 0.6rem;
+  border-radius: 99px;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.5px;
+}
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--amber);
+  border-radius: 50%;
+  animation: progressPulse 1.8s infinite ease-in-out;
+}
+@keyframes progressPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 8px var(--amber); }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+.in-progress-title {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 0.3rem 0;
+  line-height: 1.35;
+}
+body.light .in-progress-title {
+  color: #0f172a;
+}
+.in-progress-org {
+  font-size: 0.72rem;
+  color: var(--text3);
+  margin-bottom: 1rem;
+}
+.in-progress-stats-box {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background: rgba(15, 23, 42, 0.25);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.55rem 0.5rem;
+  margin-bottom: 0.8rem;
+}
+body.light .in-progress-stats-box {
+  background: rgba(0, 0, 0, 0.02);
+}
+.in-progress-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stat-num {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--amber);
+}
+.stat-lbl {
+  font-size: 0.55rem;
+  color: var(--text3);
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+  letter-spacing: 0.5px;
+}
+.in-progress-bar-large {
+  width: 100%;
+  height: 5px;
+  background: var(--bg3);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 1.1rem;
+}
+.in-progress-fill-large {
+  height: 100%;
+  background: linear-gradient(90deg, var(--amber), #f59e0b);
+  border-radius: 99px;
+}
+.in-progress-courses-list {
+  width: 100%;
+  max-height: 160px;
+  overflow-y: auto;
+  padding-right: 4px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: left;
+}
+.in-progress-courses-list::-webkit-scrollbar {
+  width: 4px;
+}
+.in-progress-courses-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.in-progress-courses-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 99px;
+}
+.in-progress-course-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+body.light .in-progress-course-item {
+  background: rgba(0, 0, 0, 0.015);
+  border-color: rgba(0, 0, 0, 0.015);
+}
+.in-progress-course-item.completed {
+  border-color: rgba(22, 163, 74, 0.15);
+  background: rgba(22, 163, 74, 0.03);
+}
+.in-progress-course-item.remaining {
+  border-color: var(--border);
+  background: transparent;
+}
+.in-progress-course-item span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.in-progress-course-item.completed span {
+  color: var(--text2);
+}
+.in-progress-course-item .check-icon {
+  width: 12px;
+  height: 12px;
+  color: var(--green);
+  flex-shrink: 0;
+}
+.in-progress-course-item .lock-icon {
+  width: 11px;
+  height: 11px;
+  color: var(--text3);
+  flex-shrink: 0;
+}
+.in-progress-footer-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 0.65rem;
+  color: var(--text3);
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: rgba(217, 119, 6, 0.03);
+  border: 1px solid rgba(217, 119, 6, 0.1);
+  line-height: 1.35;
+  box-sizing: border-box;
+}
 
 /* Institution group divider */
 .cert-inst-divider {
@@ -973,41 +1263,84 @@ body.dark .contact-link:hover { background: rgba(30,41,59,.55); color: var(--acc
   .contact-top { grid-template-columns: 1fr; gap: 2rem; }
 }
 @media(max-width: 1024px) {
-  .nav-links { display: none; }
-  .nav-cta { display: none; }
-  .nav-toggle { display: flex; }
-  .nav-links.open {
+  .nav-links {
     display: flex; flex-direction: column; position: absolute;
     top: calc(100% + 0.5rem); left: 0; right: 0;
-    background: var(--nav-mobile-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border); border-radius: var(--radius2);
+    background: rgba(255, 255, 255, 0);
+    backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
+    border: 1px solid rgba(255, 255, 255, 0); border-radius: var(--radius2);
     padding: 0.5rem 0.75rem; gap: 0.25rem;
-    box-shadow: var(--glow-md);
+    box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0);
     z-index: 99;
+    /* Smooth transition of all properties */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.98);
+    transition: 
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+      visibility 0.3s,
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease,
+      backdrop-filter 0.3s ease,
+      -webkit-backdrop-filter 0.3s ease;
+  }
+  body.dark .nav-links {
+    background: rgba(11, 15, 25, 0);
+    border-color: rgba(255, 255, 255, 0);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0);
+  }
+  .nav-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.12);
+  }
+  body.dark .nav-links.open {
+    background: rgba(11, 15, 25, 0.55);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  }
+  .nav-cta { display: none; }
+  .nav-toggle { display: flex; }
+  nav:has(.nav-links.open)::before, nav.menu-open::before {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+  }
+  body.dark nav:has(.nav-links.open)::before, body.dark nav.menu-open::before {
+    background: rgba(11, 15, 25, 0.85) !important;
   }
   /* Mobile nav link rows – option D with left-to-right gradient underline */
-  .nav-links.open li a {
+  .nav-links li a {
     display: block; width: 100%; padding: 0.75rem 0.5rem;
     font-size: 0.9rem; font-weight: 500;
     color: var(--text2); text-decoration: none;
     position: relative; overflow: hidden;
     transition: color 0.25s ease;
   }
-  .nav-links.open li a::after {
+  .nav-links li a::after {
     content: ''; position: absolute; bottom: 0; left: 0;
     width: 0; height: 2px;
     background: linear-gradient(90deg, var(--nav-grad-start), var(--nav-grad-end));
     transition: width 0.35s ease;
     border-radius: 2px;
   }
-  .nav-links.open li a:hover, .nav-links.open li a.active { color: var(--text); }
-  .nav-links.open li a:hover::after, .nav-links.open li a.active::after { width: 100%; }
+  .nav-links li a:hover, .nav-links li a.active { color: var(--text); }
+  .nav-links li a:hover::after, .nav-links li a.active::after { width: 100%; }
   /* Separator lines between mobile menu items */
-  .nav-links.open li + li {
-    border-top: 1px solid var(--border);
+  .nav-links li + li {
+    border-top: 1px solid rgba(15, 23, 42, 0.06);
+  }
+  body.dark .nav-links li + li {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
   /* Disable desktop ::after underline in mobile menu */
-  .nav-links.open li a::before { display: none; }
+  .nav-links li a::before { display: none; }
 }
 @media(max-width: 680px) {
   .hero-counters { gap: 1.5rem; }
@@ -1622,14 +1955,7 @@ body.dark .mesh-blob {
             <div class="cert-progress-bar"><div class="cert-progress-fill" style="width:71.4%"></div></div>
             <span class="cert-progress-text">5 of 7 courses complete</span>
           </div>
-          <div class="cert-course-chips">
-            <span class="cert-chip cert-chip-done">Foundations of Data Science</span>
-            <span class="cert-chip cert-chip-done">Go Beyond Numbers</span>
-            <span class="cert-chip cert-chip-done">Power of Statistics</span>
-            <span class="cert-chip cert-chip-done">Regression Analysis</span>
-            <span class="cert-chip cert-chip-done">Machine Learning</span>
-            <span class="cert-chip cert-chip-pending">+2 remaining</span>
-          </div>
+          
           
                     <div class="mini-certs-grid">
             <div class="cert-mini-card">
@@ -1637,21 +1963,11 @@ body.dark .mesh-blob {
                 <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
                 <div class="cert-mini-name">Foundations of Data Science</div>
               </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
-              </div>
             </div>
             <div class="cert-mini-card">
               <div class="cert-mini-main">
                 <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
                 <div class="cert-mini-name">Go Beyond Numbers: Translate Data into Insights</div>
-              </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
               </div>
             </div>
             <div class="cert-mini-card">
@@ -1659,21 +1975,11 @@ body.dark .mesh-blob {
                 <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
                 <div class="cert-mini-name">Power of Statistics</div>
               </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
-              </div>
             </div>
             <div class="cert-mini-card">
               <div class="cert-mini-main">
                 <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
                 <div class="cert-mini-name">Regression Analysis</div>
-              </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
               </div>
             </div>
             <div class="cert-mini-card">
@@ -1681,21 +1987,53 @@ body.dark .mesh-blob {
                 <div class="cert-mini-icon"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div>
                 <div class="cert-mini-name">The Nuts and Bolts of Machine Learning</div>
               </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <div class="mini-btn-group" style="display:flex;gap:0.4rem;align-items:center;justify-content:center;">
-                    <a href="https://www.coursera.org/account/accomplishments/verify/Y8AD29C80P4N" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                    <a href="#" class="mini-view-btn" data-img="./certs/ml_course_certificate.png" data-title="The Nuts and Bolts of Machine Learning" title="View Certificate Image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></a>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Spec</a>
+          <a href="https://www.coursera.org/account/accomplishments/verify/Y8AD29C80P4N" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Progress</a>
+          <a href="#" class="preview-btn" data-title="Google Advanced Data Analytics Professional Certificate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</a>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- DataCamp -->
+    <div class="cert-inst-divider reveal">
+      <div class="cert-inst-logo" style="background:transparent;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+        <img src="./logos/datacamp.png" alt="DataCamp" style="width:100%;height:100%;object-fit:cover;transform:scale(1.08)">
+      </div>
+      <span class="cert-inst-name">DataCamp</span>
+      <span class="cert-inst-count">2 certifications</span>
+    </div>
+    <div class="certs-grid ">
+      <div class="cert-card reveal" data-skills="python pandas statistics">
+      <div class="cert-card-main">
+        <div class="cert-icon" style="background:transparent;border:1px solid var(--border);overflow:hidden">
+          <img src="./logos/datacamp.png" alt="DataCamp" style="width:100%;height:100%;object-fit:cover;transform:scale(1.08)">
+        </div>
+        <div><div class="cert-name">Introduction to Python</div><div class="cert-org">DataCamp · Statement of Accomplishment</div><div class="cert-date">Feb 2026 · 4 hrs</div></div>
+      </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/datacamp_introduction_to_python.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+        </div>
+      </div>
+    </div>
+      <div class="cert-card reveal" data-skills="python pandas statistics">
+      <div class="cert-card-main">
+        <div class="cert-icon" style="background:transparent;border:1px solid var(--border);overflow:hidden">
+          <img src="./logos/datacamp.png" alt="DataCamp" style="width:100%;height:100%;object-fit:cover;transform:scale(1.08)">
+        </div>
+        <div><div class="cert-name">Intermediate Python</div><div class="cert-org">DataCamp · Statement of Accomplishment</div><div class="cert-date">Feb 2026 · 4 hrs</div></div>
+      </div>
+      <div class="cert-actions-drawer">
+        <div class="cert-actions-inner">
+          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/datacamp_intermediate_python.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
         </div>
       </div>
     </div>
@@ -1717,8 +2055,8 @@ body.dark .mesh-blob {
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          <a href="https://www.coursera.org/account/accomplishments/verify/54FEPJMDCYZF" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/power_bi_analysis.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
         </div>
       </div>
     </div>
@@ -1729,8 +2067,8 @@ body.dark .mesh-blob {
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          <a href="https://www.coursera.org/account/accomplishments/verify/EOZJIYQVDK8D" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/power_bi_modeling.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
         </div>
       </div>
     </div>
@@ -1753,8 +2091,8 @@ body.dark .mesh-blob {
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          <a href="https://www.coursera.org/account/accomplishments/verify/VWEODRPLHHS6" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/sql_foundations.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
         </div>
       </div>
     </div>
@@ -1765,8 +2103,8 @@ body.dark .mesh-blob {
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          <a href="https://www.coursera.org/account/accomplishments/verify/CAZ581C2Z2TM" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/excel_preparing_data.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
         </div>
       </div>
     </div>
@@ -1788,21 +2126,9 @@ body.dark .mesh-blob {
         </div>
         <div>
           <div class="cert-name">Supply Chain Management Specialization</div>
-          <div class="cert-org" style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-            <span>Rutgers University · 5-course specialization</span>
-            <a href="#" class="inline-verify-link" target="_blank" style="color: var(--accent); font-size: 0.75rem; display: inline-flex; align-items: center; gap: 2px; text-decoration: none; border-bottom: 1px dashed var(--accent);" title="Verify Specialization on Coursera">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10" style="vertical-align: middle;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              Verify Spec
-            </a>
-          </div>
+          <div class="cert-org">Rutgers University · 5-course specialization</div>
           <div class="cert-date">Dec 2025</div>
-          <div class="cert-course-chips" style="margin-top:6px">
-            <span class="cert-chip cert-chip-done">Strategy</span>
-            <span class="cert-chip cert-chip-done">Sourcing</span>
-            <span class="cert-chip cert-chip-done">Planning</span>
-            <span class="cert-chip cert-chip-done">Operations</span>
-            <span class="cert-chip cert-chip-done">Logistics</span>
-          </div>
+          
           
                     <div class="mini-certs-grid">
             <div class="cert-mini-card">
@@ -1810,21 +2136,11 @@ body.dark .mesh-blob {
                 <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                 <div class="cert-mini-name">Supply Chain Management Strategy</div>
               </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
-              </div>
             </div>
             <div class="cert-mini-card">
               <div class="cert-mini-main">
                 <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                 <div class="cert-mini-name">Supply Chain Sourcing</div>
-              </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
               </div>
             </div>
             <div class="cert-mini-card">
@@ -1832,21 +2148,11 @@ body.dark .mesh-blob {
                 <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                 <div class="cert-mini-name">Supply Chain Planning</div>
               </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
-              </div>
             </div>
             <div class="cert-mini-card">
               <div class="cert-mini-main">
                 <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                 <div class="cert-mini-name">Supply Chain Operations</div>
-              </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
               </div>
             </div>
             <div class="cert-mini-card">
@@ -1854,18 +2160,14 @@ body.dark .mesh-blob {
                 <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                 <div class="cert-mini-name">Supply Chain Logistics</div>
               </div>
-              <div class="cert-mini-actions-drawer">
-                <div class="cert-mini-actions-inner">
-                  <a href="#" class="mini-verify-btn" target="_blank" title="Verify"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Specialization</a>
+          <a href="https://www.coursera.org/account/accomplishments/specialization/GWM4JGQWOI2B" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Specialisation</a>
+          <a href="#" class="preview-btn" data-img="./certs/rutgers_scm_specialization.png" data-title="Supply Chain Management Specialization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</a>
         </div>
       </div>
     </div>
@@ -1889,12 +2191,8 @@ body.dark .mesh-blob {
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
-        </div>
-      </div>
-    </div>
-      <div class="cert-card reveal" data-skills="modeling">
+          <a href="https://www.coursera.org/account/accomplishments/verify/414IN9TWBPEW" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/genai_leaders.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
       <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
@@ -1928,8 +2226,8 @@ body.dark .mesh-blob {
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          <a href="https://www.coursera.org/account/accomplishments/verify/YY8BY187SXMU" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/tableau_design.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
         </div>
       </div>
     </div>
@@ -1942,14 +2240,8 @@ body.dark .mesh-blob {
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
-        </div>
-      </div>
-    </div>
-    </div>
-
-    <!-- Others -->
+          <a href="https://www.coursera.org/account/accomplishments/verify/AXBPYIJAX6VC" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/tableau_fundamentals.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
     <div class="cert-inst-divider reveal">
       <div class="cert-inst-logo" style="background:var(--bg3);border:1px solid var(--border)">
         <span style="font-family:var(--mono);font-size:.7rem;font-weight:600;color:var(--text3)">+</span>
@@ -1967,12 +2259,8 @@ body.dark .mesh-blob {
       </div>
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
-          <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
-        </div>
-      </div>
-    </div>
-      <div class="cert-card reveal" data-skills="excel">
+          <a href="https://coursera.org/verify/HTL4ZI37EG2Z" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+          <button class="preview-btn" data-img="./certs/business_strategy.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
       <div class="cert-card-main">
         <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
           <img src="./logos/excel.png" alt="Microsoft Excel" style="width:100%;height:100%;object-fit:contain;transform:scale(1.35)">
@@ -1982,7 +2270,7 @@ body.dark .mesh-blob {
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
           <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          <button class="preview-btn" data-img="./certs/excel_advanced.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
         </div>
       </div>
     </div>
@@ -1996,7 +2284,7 @@ body.dark .mesh-blob {
       <div class="cert-actions-drawer">
         <div class="cert-actions-inner">
           <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-          <button class="preview-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+          <button class="preview-btn" data-img="./certs/ea_product_mgmt.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
         </div>
       </div>
     </div>
@@ -2292,7 +2580,12 @@ window.addEventListener('scroll', () => {
 window.dispatchEvent(new Event('scroll'));
 
 function toggleNav() {
-  document.getElementById('navLinks').classList.toggle('open');
+  const navLinks = document.getElementById('navLinks');
+  const navbar = document.getElementById('navbar');
+  navLinks.classList.toggle('open');
+  if (navbar) {
+    navbar.classList.toggle('menu-open', navLinks.classList.contains('open'));
+  }
 }
 
 // Back to top behavior
@@ -2722,6 +3015,7 @@ function updateWeavingScroll() {
 const initCertModal = () => {
   const modal = document.getElementById('certModal');
   const modalImg = document.getElementById('certModalImg');
+  const modalCanvas = document.getElementById('certModalCanvas');
   const modalTitle = document.getElementById('certModalTitle');
   const closeBtn = document.getElementById('closeCertModal');
 
@@ -2730,7 +3024,11 @@ const initCertModal = () => {
   const closeModal = () => {
     modal.classList.remove('active');
     setTimeout(() => {
-      modalImg.src = '';
+      if (modalImg) modalImg.src = '';
+      if (modalCanvas) {
+        modalCanvas.innerHTML = '';
+        modalCanvas.classList.remove('in-progress-mode');
+      }
     }, 400);
   };
 
@@ -2739,17 +3037,206 @@ const initCertModal = () => {
     if (e.target === modal) closeModal();
   });
 
-  // Event listener for view buttons (using event delegation)
+  // Event listener for view/preview buttons (using event delegation)
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.view-btn, .mini-view-btn');
+    const btn = e.target.closest('.view-btn, .preview-btn, .mini-view-btn, .mini-preview-btn, .mini-view-btn');
     if (btn) {
       e.preventDefault();
       const imgUrl = btn.getAttribute('data-img');
-      const title = btn.getAttribute('data-title') || 'Certificate';
+      const card = btn.closest('.cert-card, .cert-card-program, .cert-mini-card');
+      
+      let title = btn.getAttribute('data-title');
+      if (!title && card) {
+        const nameEl = card.querySelector('.cert-name, .cert-mini-name');
+        if (nameEl) title = nameEl.textContent.trim();
+      }
+      title = title || 'Certificate of Completion';
+
       if (imgUrl) {
-        modalImg.src = imgUrl;
+        // Show static image preview
+        if (modalCanvas) {
+          modalCanvas.style.display = 'none';
+          modalCanvas.classList.remove('in-progress-mode');
+        }
+        if (modalImg) {
+          modalImg.src = imgUrl;
+          modalImg.style.display = 'block';
+        }
         modalTitle.textContent = title;
         modal.classList.add('active');
+      } else if (card) {
+        // Check if card is in progress
+        const isInProgress = card.querySelector('.in-progress-label') !== null;
+        
+        if (modalImg) modalImg.style.display = 'none';
+        if (modalCanvas) {
+          if (isInProgress) {
+            modalCanvas.classList.add('in-progress-mode');
+            
+            // Get progress percentage
+            const progressFill = card.querySelector('.cert-progress-fill');
+            const progressWidth = progressFill ? progressFill.style.width : '71.4%';
+            const progressText = card.querySelector('.cert-progress-text')?.textContent || '5 of 7 courses complete';
+            
+            // Extract completed courses
+            const completedCourses = [];
+            card.querySelectorAll('.cert-mini-name').forEach(nameEl => {
+              completedCourses.push(nameEl.textContent.trim());
+            });
+            
+            let coursesListHtml = '';
+            completedCourses.forEach(course => {
+              coursesListHtml += `
+                <div class="in-progress-course-item completed">
+                  <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>${course}</span>
+                </div>
+              `;
+            });
+            
+            const totalCourses = 7;
+            const completedCount = completedCourses.length || 5;
+            const remainingCount = Math.max(0, totalCourses - completedCount);
+            for (let i = 0; i < remainingCount; i++) {
+              coursesListHtml += `
+                <div class="in-progress-course-item remaining">
+                  <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  <span style="opacity: 0.6;">Course ${completedCount + i + 1} (In Progress / Upcoming)</span>
+                </div>
+              `;
+            }
+            
+            modalCanvas.innerHTML = `
+              <div class="in-progress-modal-view">
+                <div class="in-progress-badge">
+                  <span class="pulse-dot"></span> SPECIALIZATION IN PROGRESS
+                </div>
+                <h3 class="in-progress-title">${title}</h3>
+                <p class="in-progress-org">Issuer: Google via Coursera</p>
+                
+                <div class="in-progress-stats-box">
+                  <div class="in-progress-stat">
+                    <span class="stat-num">${progressWidth}</span>
+                    <span class="stat-lbl">Overall Progress</span>
+                  </div>
+                  <div class="in-progress-stat">
+                    <span class="stat-num">${completedCount}/${totalCourses}</span>
+                    <span class="stat-lbl">Courses Complete</span>
+                  </div>
+                </div>
+                
+                <div class="in-progress-bar-large">
+                  <div class="in-progress-fill-large" style="width: ${progressWidth}"></div>
+                </div>
+                
+                <div class="in-progress-courses-list">
+                  <h4 style="margin: 0 0 0.8rem 0; font-size: 0.75rem; letter-spacing: 0.05em; opacity: 0.8; text-transform: uppercase;">Syllabus Status</h4>
+                  ${coursesListHtml}
+                </div>
+                
+                <div class="in-progress-footer-info">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--amber); margin-right: 8px; flex-shrink: 0;">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                  <span>Preview will be replaced with the official certificate once remaining modules are completed.</span>
+                </div>
+              </div>
+            `;
+          } else {
+            // Generate standard dynamic premium certificate
+            modalCanvas.classList.remove('in-progress-mode');
+            const courseName = title;
+            
+            // Extract organization name
+            let orgName = '';
+            const orgEl = card.querySelector('.cert-org');
+            if (orgEl) {
+              orgName = orgEl.textContent.trim();
+            } else {
+              // Check mini card logos
+              const imgEl = card.querySelector('.cert-mini-icon img');
+              if (imgEl && imgEl.alt) {
+                orgName = imgEl.alt;
+              } else {
+                // Check for Google SVG or fallback
+                const svgEl = card.querySelector('.cert-mini-icon svg');
+                if (svgEl) orgName = 'Google';
+                else orgName = 'Coursera Verified Authority';
+              }
+            }
+
+            // Extract date
+            let dateVal = '';
+            const dateEl = card.querySelector('.cert-date');
+            if (dateEl) {
+              dateVal = dateEl.textContent.trim();
+            } else {
+              dateVal = 'Coursera Verified';
+            }
+
+            modalCanvas.innerHTML = `
+              <div class="cert-canvas-header">CREDENTIAL PREVIEW</div>
+              <div class="cert-canvas-sub">Certificate of Completion</div>
+              <div style="font-size: 0.8rem; margin-top: 0.8rem; opacity: 0.85;">This is proudly presented to</div>
+              <div class="cert-canvas-name">Anshul Silhare</div>
+              <div class="cert-canvas-body">
+                for successfully completing the verified online course
+                <div class="cert-canvas-course">${courseName}</div>
+                offered by <span style="font-weight: 600; color: var(--teal);">${orgName}</span>
+              </div>
+              <div class="cert-canvas-seal">
+                <div class="cert-canvas-seal-inner">VERIFIED</div>
+              </div>
+              <div class="cert-canvas-footer">
+                <div class="cert-canvas-meta">
+                  <span class="cert-canvas-meta-label">Issuer</span>
+                  <span class="cert-canvas-meta-val">${orgName}</span>
+                </div>
+                <div class="cert-canvas-meta" style="align-items: flex-end;">
+                  <span class="cert-canvas-meta-label">Credential Status</span>
+                  <span class="cert-canvas-meta-val" style="color: var(--teal);">${dateVal}</span>
+                </div>
+              </div>
+            `;
+          }
+          modalCanvas.style.display = 'flex';
+        }
+        
+        modalTitle.textContent = title;
+        modal.classList.add('active');
+      }
+    }
+  });
+
+  // Delegated event listener for verify buttons to open in a centered popup window
+  document.addEventListener('click', (e) => {
+    const verifyBtn = e.target.closest('.verify-btn');
+    if (verifyBtn) {
+      const url = verifyBtn.getAttribute('href');
+      if (url && url !== '#') {
+        e.preventDefault();
+        
+        // Define small window dimensions
+        const width = 1100;
+        const height = 800;
+        
+        // Calculate screen center coordinates
+        const left = (window.screen.width / 2) - (width / 2);
+        const top = (window.screen.height / 2) - (height / 2);
+        
+        // Open centered popup window
+        window.open(
+          url, 
+          'VerifyWindow', 
+          `width=${width},height=${height},top=${top},left=${left},resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no`
+        );
       }
     }
   });
@@ -2767,12 +3254,21 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <!-- Certificate View Modal -->
+
 <div id="certModal" class="cert-modal">
+
   <div class="cert-modal-content">
+
     <button class="cert-modal-close" id="closeCertModal">&times;</button>
-    <img src="" alt="Certificate Preview" class="cert-modal-img" id="certModalImg">
+
+    <img src="" alt="Certificate Preview" class="cert-modal-img" id="certModalImg" style="display:none;">
+
+    <div id="certModalCanvas" class="cert-canvas" style="display:none;"></div>
+
     <div class="cert-modal-title" id="certModalTitle">Certificate Title</div>
+
   </div>
+
 </div>
 
 
@@ -2788,6 +3284,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (navUl && navUl.classList.contains('open')) {
               navUl.classList.remove('open');
               if (hamburger) hamburger.classList.remove('open');
+              var navbar = document.getElementById('navbar');
+              if (navbar) navbar.classList.remove('menu-open');
             }
           }, 600);
         });
@@ -2819,6 +3317,8 @@ document.addEventListener('DOMContentLoaded', () => {
     card.removeChild(drawer);
     wrap.appendChild(drawer);
   });
+
+
 })();
 </script>
 </body>
