@@ -2738,26 +2738,29 @@ function scrollToTop() {
 
 // Share portfolio link behavior
 function sharePortfolio() {
+  // Always use the clean root URL (removes hashes/parameters)
+  const shareUrl = window.location.origin + window.location.pathname;
+  
   const shareData = {
     title: 'Anshul Silhare | Portfolio',
-    text: 'Operations Analytics & Supply Chain Management Portfolio',
-    url: window.location.href
+    url: shareUrl
   };
 
   if (navigator.share) {
     navigator.share(shareData)
       .catch(err => {
         if (err.name !== 'AbortError') {
-          copyShareLink();
+          copyShareLink(shareUrl);
         }
       });
   } else {
-    copyShareLink();
+    copyShareLink(shareUrl);
   }
 }
 
-function copyShareLink() {
-  navigator.clipboard.writeText(window.location.href)
+function copyShareLink(url) {
+  const targetUrl = url || (window.location.origin + window.location.pathname);
+  navigator.clipboard.writeText(targetUrl)
     .then(() => {
       showToast('Portfolio link copied to clipboard!');
     })
