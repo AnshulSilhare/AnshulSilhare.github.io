@@ -1646,7 +1646,8 @@ body.dark .mesh-blob {
   <div class="mesh-blob blob3"></div>
 </div>
 <script>
-  if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  // Default to light mode on load; dark mode is only active if explicitly selected by the user
+  if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark');
   }
 </script>
