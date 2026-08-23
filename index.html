@@ -1203,17 +1203,22 @@ body.light .in-progress-course-item {
 .cert-inst-divider {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  margin: 3.6rem 0 1.35rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin: 3.6rem 0 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
 }
 .cert-inst-divider:first-of-type {
   margin-top: 1.5rem;
 }
-.cert-inst-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, var(--border2), transparent);
+.cert-inst-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 .cert-inst-logo {
   width: 38px;
@@ -1226,16 +1231,15 @@ body.light .in-progress-course-item {
   border: 1px solid var(--border2);
   flex-shrink: 0;
   overflow: hidden;
-  font-size: 1.3rem;
-  line-height: 1;
   box-shadow: var(--glow);
 }
 .cert-inst-name {
-  font-family: var(--display);
-  font-size: 1.08rem;
+  font-family: var(--body);
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.01em;
+  line-height: 1.35;
 }
 .cert-inst-count {
   font-family: var(--mono);
@@ -1244,8 +1248,30 @@ body.light .in-progress-course-item {
   color: var(--text2);
   background: var(--bg3);
   border: 1px solid var(--border);
-  padding: 0.2rem 0.65rem;
+  padding: 0.22rem 0.7rem;
   border-radius: 99px;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .cert-inst-divider {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin: 2.75rem 0 1rem;
+  }
+  .cert-inst-left {
+    width: 100%;
+    gap: 0.65rem;
+  }
+  .cert-inst-name {
+    font-size: 0.96rem;
+    line-height: 1.3;
+  }
+  .cert-inst-count {
+    font-size: 0.64rem;
+    align-self: flex-start;
+  }
 }
 
 /* ─── EXPERIENCE ──────────────────────────────────────── */
@@ -2271,10 +2297,12 @@ body.dark .mesh-blob {
 
     <!-- 1. Supply Chain & Operational Excellence -->
     <div class="cert-inst-divider reveal">
-      <div class="cert-inst-logo" style="background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.25);color:var(--amber);">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="6" height="6" rx="1.5"></rect><rect x="16" y="3" width="6" height="6" rx="1.5"></rect><rect x="16" y="15" width="6" height="6" rx="1.5"></rect><path d="M8 10h4a2 2 0 0 0 2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 10v6a2 2 0 0 0 2 2h2"></path><circle cx="12" cy="10" r="1.5" fill="currentColor"></circle></svg>
+      <div class="cert-inst-left">
+        <div class="cert-inst-logo" style="background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.25);color:var(--amber);">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24a1.78 1.78 0 0 0-1.8 0l-3.25 1.88a1.78 1.78 0 0 0-.9 1.55v7.66a1.78 1.78 0 0 0 .9 1.55l3.25 1.88a1.78 1.78 0 0 0 1.8 0l8.95-5.16a1.78 1.78 0 0 0 .9-1.55V9.4z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+        </div>
+        <span class="cert-inst-name">Supply Chain &amp; Operational Excellence</span>
       </div>
-      <span class="cert-inst-name">Supply Chain &amp; Operational Excellence</span>
       <span class="cert-inst-count">4 credentials · 2 Specializations</span>
     </div>
     <div class="certs-grid">
@@ -2419,10 +2447,12 @@ body.dark .mesh-blob {
 
     <!-- 2. Advanced Analytics, Machine Learning & AI -->
     <div class="cert-inst-divider reveal">
-      <div class="cert-inst-logo" style="background:rgba(14,124,107,.08);border-color:rgba(14,124,107,.25);color:var(--teal);">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"></circle><circle cx="6" cy="18" r="2.5"></circle><circle cx="18" cy="12" r="2.5"></circle><line x1="8.5" y1="7" x2="15.5" y2="11"></line><line x1="8.5" y1="17" x2="15.5" y2="13"></line><path d="M18 3.5l.8 1.6 1.7.8-1.7.8-.8 1.6-.8-1.6-1.7-.8 1.7-.8z" fill="currentColor"></path></svg>
+      <div class="cert-inst-left">
+        <div class="cert-inst-logo" style="background:rgba(14,124,107,.08);border-color:rgba(14,124,107,.25);color:var(--teal);">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path><path d="M5 3v4"></path><path d="M19 17v4"></path><path d="M3 5h4"></path><path d="M17 19h4"></path></svg>
+        </div>
+        <span class="cert-inst-name">Advanced Analytics, Machine Learning &amp; AI</span>
       </div>
-      <span class="cert-inst-name">Advanced Analytics, Machine Learning &amp; AI</span>
       <span class="cert-inst-count">5 credentials · 1 Professional Certificate</span>
     </div>
     <div class="certs-grid">
@@ -2570,10 +2600,12 @@ body.dark .mesh-blob {
 
     <!-- 3. Business Intelligence & Visual Analytics -->
     <div class="cert-inst-divider reveal">
-      <div class="cert-inst-logo" style="background:rgba(30,58,95,.08);border-color:rgba(30,58,95,.22);color:var(--accent);">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path><path d="M3 13l5-5 4 4 9-9"></path><polyline points="17 3 21 3 21 7"></polyline></svg>
+      <div class="cert-inst-left">
+        <div class="cert-inst-logo" style="background:rgba(30,58,95,.08);border-color:rgba(30,58,95,.22);color:var(--accent);">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path><path d="M3 13l5-5 4 4 9-9"></path><polyline points="17 3 21 3 21 7"></polyline></svg>
+        </div>
+        <span class="cert-inst-name">Business Intelligence &amp; Visual Analytics</span>
       </div>
-      <span class="cert-inst-name">Business Intelligence &amp; Visual Analytics</span>
       <span class="cert-inst-count">5 certifications</span>
     </div>
     <div class="certs-grid">
@@ -2669,10 +2701,12 @@ body.dark .mesh-blob {
 
     <!-- 4. Data Management, Spreadsheet Engineering & Strategy -->
     <div class="cert-inst-divider reveal">
-      <div class="cert-inst-logo" style="background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.22);color:#6366f1;">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><line x1="12" y1="8" x2="12" y2="12"></line></svg>
+      <div class="cert-inst-left">
+        <div class="cert-inst-logo" style="background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.22);color:#6366f1;">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><line x1="12" y1="8" x2="12" y2="12"></line></svg>
+        </div>
+        <span class="cert-inst-name">Data Management &amp; Strategic Operations</span>
       </div>
-      <span class="cert-inst-name">Data Management &amp; Strategic Operations</span>
       <span class="cert-inst-count">4 certifications</span>
     </div>
     <div class="certs-grid">
