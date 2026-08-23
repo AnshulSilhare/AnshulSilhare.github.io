@@ -41,15 +41,16 @@
   --radius:  6px; --radius2: 12px;
   --glow:    0 4px 24px rgba(15,23,42,.07);
   --glow-md: 0 8px 32px rgba(15,23,42,.1);
-  --nav-bg:  rgba(255, 255, 255, 0.08); --nav-scrolled-bg: rgba(255, 255, 255, 0.08); --nav-mobile-bg: rgba(248, 250, 252, 0.92);
+  --nav-bg:  rgba(255, 255, 255, 0.65); --nav-scrolled-bg: rgba(255, 255, 255, 0.85); --nav-mobile-bg: rgba(248, 250, 252, 0.94);
   --nav-grad-start: #065f46; --nav-grad-end: #10b981;
   --contact-bg: #1e3a5f;
   --contact-text-hl: rgba(255,255,255,.55);
-  --glass-bg:      rgba(255, 255, 255, 0.08);
-  --glass-border:  rgba(15, 23, 42, 0.08);
-  --glass-shadow:  0 10px 36px rgba(15, 23, 42, 0.24);
-  --glass-shadow-hover: 0 20px 48px rgba(15, 23, 42, 0.15), 0 8px 24px rgba(13, 148, 136, 0.15);
-  --glass-blur:    blur(8px); 
+  --glass-bg:      rgba(255, 255, 255, 0.45);
+  --glass-border:  rgba(255, 255, 255, 0.65);
+  --glass-border-top: rgba(255, 255, 255, 0.95);
+  --glass-shadow:  0 10px 32px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --glass-shadow-hover: 0 20px 48px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.9), 0 8px 24px rgba(13, 148, 136, 0.15);
+  --glass-blur:    blur(20px) saturate(180%); 
   --blob1:   var(--teal);
   --blob2:   var(--accent);
   --blob3:   var(--accent2);
@@ -75,15 +76,16 @@ body.dark {
   --text:    #f8fafc; --text2: #cbd5e1; --text3: #94a3b8;
   --glow:    0 4px 20px rgba(0,0,0,.4);
   --glow-md: 0 12px 30px rgba(0,0,0,.55);
-  --nav-bg:  rgba(11,15,25,.25); --nav-scrolled-bg: rgba(11,15,25,.55); --nav-mobile-bg: rgba(11, 15, 25, 0.92);
+  --nav-bg:  rgba(15, 23, 42, 0.6); --nav-scrolled-bg: rgba(15, 23, 42, 0.85); --nav-mobile-bg: rgba(11, 15, 25, 0.94);
   --nav-grad-start: var(--accent); --nav-grad-end: var(--teal);
   --contact-bg: #111827;
   --contact-text-hl: var(--accent);
-  --glass-bg:      rgba(30, 41, 59, 0.08);
-  --glass-border:  rgba(255, 255, 255, 0.14);
-  --glass-shadow:  0 8px 32px rgba(0, 0, 0, 0.42);
-  --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(45, 212, 191, 0.15);
-  --glass-blur:    blur(8px); 
+  --glass-bg:      rgba(15, 23, 42, 0.55);
+  --glass-border:  rgba(255, 255, 255, 0.09);
+  --glass-border-top: rgba(255, 255, 255, 0.22);
+  --glass-shadow:  0 10px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 8px 24px rgba(45, 212, 191, 0.15);
+  --glass-blur:    blur(20px) saturate(180%); 
   --blob1:   var(--teal);
   --blob2:   var(--accent);
   --blob3:   var(--accent2);
@@ -137,9 +139,39 @@ nav {
 }
 nav::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
-  background: var(--nav-bg); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border); border-radius: 99px;
-  box-shadow: var(--glow); transition: background .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1);
+  background: var(--nav-bg);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid var(--glass-border);
+  border-top-color: var(--glass-border-top);
+  border-radius: 99px;
+  box-shadow:
+    0 4px 24px rgba(15,23,42,.07),
+    inset 0 1px 0 rgba(255,255,255,.4),
+    inset 0 -1px 0 rgba(0,0,0,.04);
+  transition: background .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1), border-color .4s ease;
+}
+nav::after {
+  content: ''; position: absolute; inset: -2px; z-index: -2;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #00f0ff, #a855f7, #ec4899, #f59e0b, #00f0ff);
+  background-size: 300% 100%;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+nav:hover::after {
+  opacity: 0.35;
+  animation: siriGlowShift 5s linear infinite;
+}
+body.dark nav:hover::after {
+  opacity: 0.55;
+}
+@keyframes siriGlowShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 nav.scrolled {
   top: .75rem;
@@ -147,7 +179,10 @@ nav.scrolled {
 }
 nav.scrolled::before {
   background: var(--nav-scrolled-bg);
-  box-shadow: var(--glow-md);
+  box-shadow:
+    0 8px 32px rgba(15,23,42,.12),
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -1px 0 rgba(0,0,0,.06);
 }
 .nav-logo { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: -.01em; white-space: nowrap; }
 .nav-links { display: flex; gap: 1.2rem; list-style: none; }
@@ -292,7 +327,7 @@ section { position: relative; }
 #projects { background: transparent; border: none; }
 .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .project-card {
-  background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2);
+  background: var(--glass-bg); backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%); border: 1px solid var(--glass-border); border-radius: var(--radius2);
   padding: 1.8rem; display: flex; flex-direction: column; position: relative; overflow: hidden;
   box-shadow: var(--glass-shadow); transition: border-color .3s, transform .3s, box-shadow .3s; cursor: default;
 }
@@ -1228,10 +1263,15 @@ body.light .in-progress-course-item {
   align-items: center;
   justify-content: center;
   background: var(--bg2);
-  border: 1px solid var(--border2);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255,255,255,.3);
+  border-top-color: rgba(255,255,255,.5);
   flex-shrink: 0;
   overflow: hidden;
-  box-shadow: var(--glow);
+  box-shadow:
+    var(--glow),
+    inset 0 1px 0 rgba(255,255,255,.2);
 }
 .cert-inst-name {
   font-family: var(--body);
@@ -1679,7 +1719,7 @@ body.dark .floating-btn-drawer .btn-drawer-text {
 .testimonial-role { font-size: .7rem; color: var(--text3); }
 
 /* Contact Form */
-.contact-form { display: flex; flex-direction: column; gap: .85rem; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); padding: 1.8rem; border-radius: var(--radius2); box-shadow: var(--glass-shadow); }
+.contact-form { display: flex; flex-direction: column; gap: .85rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(28px) saturate(180%); -webkit-backdrop-filter: blur(28px) saturate(180%); border: 1px solid rgba(255,255,255,.3); border-top-color: rgba(255,255,255,.5); padding: 1.8rem; border-radius: var(--radius2); box-shadow: 0 10px 36px rgba(15,23,42,.24), inset 0 1px 0 rgba(255,255,255,.2), inset 0 -1px 0 rgba(0,0,0,.03); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
 .form-group { display: flex; flex-direction: column; gap: .3rem; }
 .form-label { font-family: var(--mono); font-size: .65rem; color: var(--text2); text-transform: uppercase; letter-spacing: 0.05em; }
@@ -1769,14 +1809,377 @@ body.dark .mesh-blob {
 @media(max-width: 680px) {
   .form-row { grid-template-columns: 1fr; }
 }
+
+/* ─── LIQUID GLASS: Hero Orb ─────────────────────────── */
+.hero-liquid-orb {
+  position: absolute;
+  width: 340px; height: 340px;
+  top: 14%; right: 8%;
+  border-radius: 54% 46% 62% 38% / 45% 58% 42% 55%;
+  background: linear-gradient(135deg, rgba(13,148,136,.14), rgba(59,130,246,.12), rgba(168,85,247,.09));
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.4);
+  border-top-color: rgba(255,255,255,.8);
+  box-shadow:
+    inset 0 2px 14px rgba(255,255,255,.45),
+    inset 0 -2px 10px rgba(0,0,0,.04),
+    0 20px 50px rgba(13,148,136,.12),
+    -3px -3px 20px rgba(0,240,255,.15),
+    3px 3px 20px rgba(236,72,153,.15);
+  animation: liquidMorph 16s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+body.dark .hero-liquid-orb {
+  background: linear-gradient(135deg, rgba(45,212,191,.08), rgba(59,130,246,.08), rgba(168,85,247,.06));
+  border-color: rgba(255,255,255,.1);
+  border-top-color: rgba(255,255,255,.3);
+  box-shadow:
+    inset 0 1px 8px rgba(255,255,255,.15),
+    0 20px 50px rgba(0,0,0,.5),
+    -3px -3px 20px rgba(56,189,248,.18),
+    3px 3px 20px rgba(236,72,153,.18);
+  opacity: 0.7;
+}
+@keyframes liquidMorph {
+  0% {
+    border-radius: 54% 46% 62% 38% / 45% 58% 42% 55%;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    border-radius: 40% 60% 48% 52% / 58% 38% 62% 42%;
+    transform: translate(25px, -20px) scale(1.04) rotate(8deg);
+  }
+  66% {
+    border-radius: 65% 35% 55% 45% / 40% 65% 35% 60%;
+    transform: translate(-20px, 25px) scale(0.96) rotate(-6deg);
+  }
+  100% {
+    border-radius: 48% 52% 38% 62% / 60% 42% 58% 40%;
+    transform: translate(15px, -10px) scale(1.02) rotate(4deg);
+  }
+}
+
+/* ─── LIQUID GLASS: Dark Mode Nav ────────────────────── */
+body.dark nav::before {
+  background: var(--nav-bg);
+  border-color: var(--glass-border);
+  border-top-color: var(--glass-border-top);
+  box-shadow:
+    0 6px 30px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 0 -1px 0 rgba(0,0,0,.25);
+}
+body.dark nav.scrolled::before {
+  background: var(--nav-scrolled-bg);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.2),
+    inset 0 -1px 0 rgba(0,0,0,.3);
+}
+
+/* ─── LIQUID GLASS: Card Specular Surfaces ───────────── */
+.about-bio, .profile-card, .stack-category, .exp-card, .lead-item, .testimonial-card, .github-widget, .cert-card {
+  border-top-color: var(--glass-border-top);
+}
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.08) 60%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: none;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+}
+.project-card:hover::after {
+  opacity: 1;
+  left: 200%;
+  transition: left 0.75s ease-in-out, opacity 0.3s ease;
+}
+body.dark .project-card::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 40%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.04) 60%,
+    transparent 100%
+  );
+}
+
+/* ─── LIQUID GLASS: Dark Mode Cert Badge ─────────────── */
+body.dark .cert-inst-logo {
+  border-color: rgba(255,255,255,.08);
+  border-top-color: rgba(255,255,255,.15);
+  box-shadow:
+    0 4px 24px rgba(0,0,0,.3),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* ─── LIQUID GLASS: Dark Mode Contact Form ───────────── */
+body.dark .contact-form {
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+  border-top-color: var(--glass-border-top);
+  box-shadow:
+    0 10px 36px rgba(0,0,0,.4),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -1px 0 rgba(0,0,0,.2);
+}
+
+/* ─── SIRI DYNAMIC ISLAND LOADER ─────────────────────── */
+.siri-loader {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: flex-start; justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.siri-loader.fade-out {
+  opacity: 0;
+}
+.siri-loader .siri-bg {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  animation: siriBgFade 2.4s cubic-bezier(.4,0,.2,1) forwards;
+}
+.siri-loader .siri-stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 1.25rem;
+}
+.siri-loader .siri-island {
+  position: relative;
+  width: 140px; height: 38px;
+  background: #090d16;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  animation: siriIslandMorph 2.4s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+.siri-loader .siri-glow-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 99px;
+  background: conic-gradient(from 0deg, #00f0ff, #7000ff, #ff007f, #ff8a00, #00f0ff);
+  filter: blur(7px);
+  opacity: 0.9;
+  animation: siriRotateGlow 3s linear infinite, siriGlowExpand 2.4s ease forwards;
+  z-index: -1;
+}
+.siri-loader .siri-liquid-core {
+  position: absolute;
+  inset: -15px;
+  filter: url(#gooey);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.9;
+}
+.siri-loader .siri-drop {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00f0ff, #a855f7, #ff007f);
+  opacity: 0;
+}
+.siri-loader .siri-drop.d1 {
+  width: 28px; height: 28px; top: 8px; left: 25%;
+  animation: siriDrop1 2.4s ease-out forwards;
+}
+.siri-loader .siri-drop.d2 {
+  width: 36px; height: 36px; top: 8px; right: 25%;
+  animation: siriDrop2 2.4s ease-out forwards;
+}
+.siri-loader .siri-drop.d3 {
+  width: 44px; height: 44px; top: 12px; left: 45%;
+  animation: siriDrop3 2.4s ease-out forwards;
+}
+.siri-loader .siri-pill-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  z-index: 3;
+  animation: siriContentFade 2.4s ease forwards;
+}
+.siri-loader .siri-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #2dd4bf;
+  box-shadow: 0 0 8px #2dd4bf;
+}
+.siri-loader .siri-wave {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+  height: 14px;
+}
+.siri-loader .siri-wave i {
+  display: block;
+  width: 2.5px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #00f0ff, #ec4899);
+  animation: siriWavePulse 0.8s ease-in-out infinite alternate;
+}
+.siri-loader .siri-wave i:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.siri-loader .siri-wave i:nth-child(2) { height: 14px; animation-delay: 0.25s; }
+.siri-loader .siri-wave i:nth-child(3) { height: 10px; animation-delay: 0.4s; }
+.siri-loader .siri-wave i:nth-child(4) { height: 7px; animation-delay: 0.15s; }
+.siri-loader .siri-text {
+  font-family: var(--display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.5px;
+}
+.siri-loader .siri-ripple {
+  position: absolute;
+  top: 15px; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,240,255,0.25) 0%, rgba(168,85,247,0.18) 35%, rgba(255,0,127,0.1) 60%, transparent 75%);
+  filter: blur(25px);
+  opacity: 0;
+  pointer-events: none;
+  animation: siriRippleEffect 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes siriRotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes siriWavePulse {
+  0% { transform: scaleY(0.4); }
+  100% { transform: scaleY(1.3); }
+}
+@keyframes siriIslandMorph {
+  0% { width: 140px; height: 38px; border-radius: 99px; }
+  25% { width: 180px; height: 44px; transform: scale(1.05); }
+  50% { width: 260px; height: 48px; }
+  75% { width: min(1100px, calc(100vw - 2.5rem)); height: 54px; border-radius: 99px; background: rgba(9,13,22,0.6); }
+  100% { width: min(1100px, calc(100vw - 2.5rem)); height: 54px; border-radius: 99px; background: transparent; opacity: 0; }
+}
+@keyframes siriContentFade {
+  0%, 40% { opacity: 1; transform: scale(1); }
+  60% { opacity: 0; transform: scale(0.85); }
+  100% { opacity: 0; }
+}
+@keyframes siriGlowExpand {
+  0% { opacity: 0.9; transform: scale(1); }
+  35% { opacity: 1; transform: scale(1.1); filter: blur(10px); }
+  60% { opacity: 0.8; transform: scale(1.4); filter: blur(18px); }
+  100% { opacity: 0; transform: scale(2.2); filter: blur(30px); }
+}
+@keyframes siriDrop1 {
+  0%, 20% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  40% { opacity: 0.8; transform: translate(-45px, 35px) scale(1.4); }
+  75% { opacity: 0.4; transform: translate(-90px, 80px) scale(2); }
+  100% { opacity: 0; transform: translate(-130px, 120px) scale(2.5); }
+}
+@keyframes siriDrop2 {
+  0%, 20% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  45% { opacity: 0.85; transform: translate(45px, 45px) scale(1.5); }
+  80% { opacity: 0.4; transform: translate(90px, 95px) scale(2.2); }
+  100% { opacity: 0; transform: translate(130px, 130px) scale(2.6); }
+}
+@keyframes siriDrop3 {
+  0%, 20% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  50% { opacity: 0.9; transform: translate(0, 60px) scale(1.8); }
+  85% { opacity: 0.3; transform: translate(0, 130px) scale(2.6); }
+  100% { opacity: 0; transform: translate(0, 180px) scale(3); }
+}
+@keyframes siriRippleEffect {
+  0%, 15% { width: 80px; height: 80px; opacity: 0; }
+  40% { width: 350px; height: 280px; opacity: 0.9; }
+  75% { width: 900px; height: 600px; opacity: 0.5; }
+  100% { width: 1400px; height: 900px; opacity: 0; }
+}
+@keyframes siriBgFade {
+  0%, 65% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ─── LIQUID GLASS: Mobile Performance Safeguards ────── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-liquid-orb { animation: none; }
+  .siri-loader { display: none; }
+}
+@media (max-width: 768px) {
+  .hero-liquid-orb {
+    width: 180px; height: 180px;
+    top: 10%; right: 5%;
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+  }
+  nav::before {
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+  .project-card::after { display: none; }
+  .contact-form {
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+  }
+}
 </style>
 </head>
 <body>
+<!-- Siri Dynamic Island Loader -->
+<div class="siri-loader" id="siriLoader">
+  <div class="siri-bg"></div>
+  <div class="siri-stage">
+    <div class="siri-ripple"></div>
+    <div class="siri-island">
+      <div class="siri-glow-ring"></div>
+      <div class="siri-liquid-core">
+        <span class="siri-drop d1"></span>
+        <span class="siri-drop d2"></span>
+        <span class="siri-drop d3"></span>
+      </div>
+      <div class="siri-pill-content">
+        <span class="siri-dot"></span>
+        <span class="siri-wave">
+          <i></i><i></i><i></i><i></i>
+        </span>
+        <span class="siri-text">Intelligence</span>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="gradient-mesh">
   <div class="mesh-blob blob1"></div>
   <div class="mesh-blob blob2"></div>
   <div class="mesh-blob blob3"></div>
 </div>
+<!-- Liquid Glass SVG Filters -->
+<svg class="liquid-glass-filters" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <filter id="gooey" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"/>
+      <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+    <filter id="liquid-refract" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
 <script>
   // Default to light mode on load; dark mode is only active if explicitly selected by the user
   if (localStorage.getItem('theme') === 'dark') {
@@ -1805,7 +2208,7 @@ body.dark .mesh-blob {
 
 <!-- NAV -->
 <nav id="navbar">
-  <div class="nav-logo">Anshul Silhare</div>
+  <div class="nav-logo" onclick="triggerSiriWave()" style="cursor: pointer;" title="Trigger Apple Intelligence Wave">Anshul Silhare</div>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -1833,6 +2236,7 @@ body.dark .mesh-blob {
 
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-liquid-orb"></div>
   <div class="hero-canvas"></div>
   <div class="hero-inner">
     <div class="hero-status">Open to Opportunities · Operations, Supply Chain &amp; Analytics</div>
@@ -3826,7 +4230,31 @@ const initCertModal = () => {
 };
 
 
+function triggerSiriWave() {
+  const nav = document.getElementById('navbar');
+  if (!nav) return;
+  nav.classList.remove('siri-glowing');
+  void nav.offsetWidth; // Force reflow
+  nav.classList.add('siri-glowing');
+  setTimeout(() => {
+    nav.classList.remove('siri-glowing');
+  }, 4000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Handle Siri Dynamic Island Loader removal
+  const siriLoader = document.getElementById('siriLoader');
+  if (siriLoader) {
+    setTimeout(() => {
+      siriLoader.classList.add('fade-out');
+      setTimeout(() => {
+        if (siriLoader && siriLoader.parentNode) {
+          siriLoader.remove();
+        }
+      }, 450);
+    }, 2200);
+  }
+
   initCounters();
   initSkillsHighlight();
   initRevealAnimations();
