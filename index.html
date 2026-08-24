@@ -175,21 +175,14 @@ nav.scrolled, .nav-glass.scrolled {
 }
 
 .nav-flat {
-  position: absolute;
-  inset: 4px; /* rim width — the visible refraction band thickness */
-  border-radius: 9999px;
-  backdrop-filter: var(--glass-blur); /* flat, no distortion */
-  -webkit-backdrop-filter: var(--glass-blur);
-  background: var(--glass-bg);
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.25rem;
-  transition: background 0.25s ease;
-}
-
-nav.scrolled .nav-flat {
-  background: var(--glass-bg-scrolled);
+  padding: 0 1.5rem;
+  background: transparent;
 }
 
 .nav-logo {
@@ -1882,12 +1875,20 @@ body.dark .mesh-blob {
   <circle id="scroll-dot" r="6" fill="var(--scroll-active-mid)" style="filter: drop-shadow(0 0 6px var(--scroll-active-mid)); transition: opacity 0.25s; opacity: 0;" />
 </svg>
 
-<!-- Edge Refraction SVG Displacement Filter (Desktop pointer:fine only) -->
+<!-- Edge Refraction SVG Displacement Filter (Thick 10px perimeter refraction rim) -->
 <svg style="position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
   <defs>
     <filter id="nav-edge-refract" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
-      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="16" xChannelSelector="R" yChannelSelector="G" />
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+      <feMorphology in="SourceAlpha" operator="erode" radius="10" result="centerShape" />
+      <feComposite in="SourceAlpha" in2="centerShape" operator="out" result="rimMask" />
+      <feComposite in="displaced" in2="rimMask" operator="in" result="refractedRim" />
+      <feComposite in="SourceGraphic" in2="centerShape" operator="in" result="flatCenter" />
+      <feMerge>
+        <feMergeNode in="flatCenter" />
+        <feMergeNode in="refractedRim" />
+      </feMerge>
     </filter>
   </defs>
 </svg>
