@@ -41,15 +41,20 @@
   --radius:  6px; --radius2: 12px;
   --glow:    0 4px 24px rgba(15,23,42,.07);
   --glow-md: 0 8px 32px rgba(15,23,42,.1);
-  --nav-bg:  rgba(255, 255, 255, 0.05); --nav-scrolled-bg: rgba(255, 255, 255, 0.08); --nav-mobile-bg: rgba(248, 250, 252, 0.08);
   --nav-grad-start: #065f46; --nav-grad-end: #10b981;
   --contact-bg: #1e3a5f;
   --contact-text-hl: rgba(255,255,255,.55);
-  --glass-bg:      rgba(255, 255, 255, 0.08);
-  --glass-border:  rgba(15, 23, 42, 0.08);
+  --glass-blur: blur(20px) saturate(180%) brightness(1.04);
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-bg-scrolled: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-rim-highlight: rgba(255, 255, 255, 0.85);
+  --glass-bevel: rgba(255, 255, 255, 0.15);
+  --glass-depth-shadow: rgba(0, 0, 0, 0.04);
+  --glass-elevation: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --glass-elevation-scrolled: 0 10px 32px rgba(0, 0, 0, 0.16);
   --glass-shadow:  0 10px 36px rgba(15, 23, 42, 0.24);
   --glass-shadow-hover: 0 20px 48px rgba(15, 23, 42, 0.15), 0 8px 24px rgba(13, 148, 136, 0.15);
-  --glass-blur:    blur(8px); 
   --blob1:   var(--teal);
   --blob2:   var(--accent);
   --blob3:   var(--accent2);
@@ -75,15 +80,20 @@ body.dark {
   --text:    #f8fafc; --text2: #cbd5e1; --text3: #94a3b8;
   --glow:    0 4px 20px rgba(0,0,0,.4);
   --glow-md: 0 12px 30px rgba(0,0,0,.55);
-  --nav-bg:  rgba(15, 23, 42, 0.05); --nav-scrolled-bg: rgba(15, 23, 42, 0.08); --nav-mobile-bg: rgba(15, 23, 42, 0.08);
   --nav-grad-start: var(--accent); --nav-grad-end: var(--teal);
   --contact-bg: #111827;
   --contact-text-hl: var(--accent);
-  --glass-bg:      rgba(30, 41, 59, 0.08);
-  --glass-border:  rgba(255, 255, 255, 0.14);
+  --glass-blur: blur(20px) saturate(180%) brightness(1.04);
+  --glass-bg: rgba(15, 23, 42, 0.45);
+  --glass-bg-scrolled: rgba(15, 23, 42, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-rim-highlight: rgba(255, 255, 255, 0.12);
+  --glass-bevel: rgba(255, 255, 255, 0.06);
+  --glass-depth-shadow: rgba(0, 0, 0, 0.3);
+  --glass-elevation: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --glass-elevation-scrolled: 0 10px 32px rgba(0, 0, 0, 0.45);
   --glass-shadow:  0 8px 32px rgba(0, 0, 0, 0.42);
-  --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(45, 212, 191, 0.15);
-  --glass-blur:    blur(8px); 
+  --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(45, 212, 191, 0.15); 
   --blob1:   var(--teal);
   --blob2:   var(--accent);
   --blob3:   var(--accent2);
@@ -128,65 +138,38 @@ img { display: block; max-width: 100%; }
 ::-webkit-scrollbar-thumb { background: rgba(30,58,95,.18); border-radius: 4px; }
 
 /* ─── NAV ─────────────────────────────────────────────── */
-nav {
+nav, .nav-glass {
   position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%); z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 1.5rem; height: 54px; max-width: 1100px; width: calc(100% - 2.5rem);
   background: transparent; border: none;
   transition: top .4s cubic-bezier(.4,0,.2,1), height .4s cubic-bezier(.4,0,.2,1);
 }
-nav::before {
+nav::before, .nav-glass::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
-  background: var(--nav-bg);
-  backdrop-filter: blur(5px) saturate(190%) brightness(104%);
-  -webkit-backdrop-filter: blur(5px) saturate(190%) brightness(104%);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-top-color: rgba(255, 255, 255, 0.85);
-  border-bottom-color: rgba(200, 215, 230, 0.25);
-  border-radius: 99px;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
   box-shadow:
-    0 12px 32px -4px rgba(15, 23, 42, 0.08),
-    0 4px 12px -2px rgba(15, 23, 42, 0.04),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-    inset 0 -1px 2px 0 rgba(15, 23, 42, 0.04);
-  transition: background .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1), border-color .4s cubic-bezier(.4,0,.2,1);
+    var(--glass-elevation),
+    inset 0 1px 0 var(--glass-rim-highlight),
+    inset 0 0 0 1px var(--glass-bevel),
+    inset 0 -1px 2px var(--glass-depth-shadow);
+  transition: background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
-nav.scrolled {
+nav.scrolled, .nav-glass.scrolled {
   top: .75rem;
   height: 50px;
 }
-nav.scrolled::before {
-  background: var(--nav-scrolled-bg);
-  border-top-color: rgba(255, 255, 255, 0.95);
+nav.scrolled::before, .nav-glass.scrolled::before {
+  background: var(--glass-bg-scrolled);
   box-shadow:
-    0 16px 40px -4px rgba(15, 23, 42, 0.12),
-    0 6px 16px -2px rgba(15, 23, 42, 0.06),
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
-    inset 0 -1px 2px 0 rgba(15, 23, 42, 0.06);
-}
-body.dark nav::before {
-  background: var(--nav-bg);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top-color: rgba(255, 255, 255, 0.35);
-  border-bottom-color: rgba(0, 0, 0, 0.4);
-  box-shadow:
-    0 12px 36px -4px rgba(0, 0, 0, 0.5),
-    0 4px 12px -2px rgba(0, 0, 0, 0.3),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.25),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.4);
-}
-body.dark nav.scrolled::before {
-  background: var(--nav-scrolled-bg);
-  border-top-color: rgba(255, 255, 255, 0.45);
-  box-shadow:
-    0 16px 40px -4px rgba(0, 0, 0, 0.65),
-    0 6px 16px -2px rgba(0, 0, 0, 0.4),
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.3),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
+    var(--glass-elevation-scrolled),
+    inset 0 1px 0 var(--glass-rim-highlight),
+    inset 0 0 0 1px var(--glass-bevel),
+    inset 0 -1px 2px var(--glass-depth-shadow);
 }
 .nav-logo { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: -.01em; white-space: nowrap; }
 .nav-links { display: flex; gap: 1.2rem; list-style: none; }
@@ -1534,40 +1517,35 @@ body.dark .hood-body {
     opacity: 1;
     visibility: visible;
     transform: translateY(0) scale(1);
-    background: var(--nav-mobile-bg);
-    backdrop-filter: blur(5px) saturate(190%) brightness(104%);
-    -webkit-backdrop-filter: blur(5px) saturate(190%) brightness(104%);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-top-color: rgba(255, 255, 255, 0.85);
-    border-bottom-color: rgba(200, 215, 230, 0.25);
+    background: var(--glass-bg-scrolled);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius2);
     box-shadow:
-      0 16px 40px -10px rgba(15, 23, 42, 0.14),
-      0 6px 16px -2px rgba(15, 23, 42, 0.06),
-      inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.9),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-      inset 0 -1px 2px 0 rgba(15, 23, 42, 0.04);
+      var(--glass-elevation-scrolled),
+      inset 0 1px 0 var(--glass-rim-highlight),
+      inset 0 0 0 1px var(--glass-bevel),
+      inset 0 -1px 2px var(--glass-depth-shadow);
   }
   body.dark .nav-links.open {
-    background: var(--nav-mobile-bg);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-top-color: rgba(255, 255, 255, 0.3);
-    border-bottom-color: rgba(0, 0, 0, 0.4);
+    background: var(--glass-bg-scrolled);
+    border: 1px solid var(--glass-border);
     box-shadow:
-      0 16px 40px -10px rgba(0, 0, 0, 0.55),
-      0 6px 16px -2px rgba(0, 0, 0, 0.35),
-      inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.2),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-      inset 0 -1px 2px 0 rgba(0, 0, 0, 0.4);
+      var(--glass-elevation-scrolled),
+      inset 0 1px 0 var(--glass-rim-highlight),
+      inset 0 0 0 1px var(--glass-bevel),
+      inset 0 -1px 2px var(--glass-depth-shadow);
   }
   .nav-cta { display: none; }
   .nav-toggle { display: flex; }
   nav:has(.nav-links.open)::before, nav.menu-open::before {
-    backdrop-filter: blur(5px) saturate(190%) brightness(104%) !important;
-    -webkit-backdrop-filter: blur(5px) saturate(190%) brightness(104%) !important;
-    background: var(--nav-mobile-bg) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    -webkit-backdrop-filter: var(--glass-blur) !important;
+    background: var(--glass-bg-scrolled) !important;
   }
   body.dark nav:has(.nav-links.open)::before, body.dark nav.menu-open::before {
-    background: var(--nav-mobile-bg) !important;
+    background: var(--glass-bg-scrolled) !important;
   }
   /* Mobile nav link rows – option D with left-to-right gradient underline */
   .nav-links li a {
@@ -1860,7 +1838,7 @@ body.dark .mesh-blob {
 </svg>
 
 <!-- NAV -->
-<nav id="navbar">
+<nav id="navbar" class="nav-glass">
   <div class="nav-logo">Anshul Silhare</div>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
@@ -3076,7 +3054,7 @@ window.addEventListener('scroll', () => {
   if (!scrollTick) {
     window.requestAnimationFrame(() => {
       const currentScrollY = window.scrollY;
-      navbar.classList.toggle('scrolled', currentScrollY > 60);
+      navbar.classList.toggle('scrolled', currentScrollY > 30);
       
       const btt = document.getElementById('backToTop');
       if (btt) {
