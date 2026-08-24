@@ -138,8 +138,8 @@ nav {
 nav::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
   background: var(--nav-bg);
-  backdrop-filter: blur(28px) saturate(190%) brightness(104%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%) brightness(104%);
+  backdrop-filter: blur(5px) saturate(190%) brightness(104%);
+  -webkit-backdrop-filter: blur(5px) saturate(190%) brightness(104%);
   border: 1px solid rgba(255, 255, 255, 0.45);
   border-top-color: rgba(255, 255, 255, 0.85);
   border-bottom-color: rgba(200, 215, 230, 0.25);
@@ -1535,8 +1535,8 @@ body.dark .hood-body {
     visibility: visible;
     transform: translateY(0) scale(1);
     background: var(--nav-mobile-bg);
-    backdrop-filter: blur(28px) saturate(190%) brightness(104%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%) brightness(104%);
+    backdrop-filter: blur(5px) saturate(190%) brightness(104%);
+    -webkit-backdrop-filter: blur(5px) saturate(190%) brightness(104%);
     border: 1px solid rgba(255, 255, 255, 0.45);
     border-top-color: rgba(255, 255, 255, 0.85);
     border-bottom-color: rgba(200, 215, 230, 0.25);
@@ -1562,8 +1562,8 @@ body.dark .hood-body {
   .nav-cta { display: none; }
   .nav-toggle { display: flex; }
   nav:has(.nav-links.open)::before, nav.menu-open::before {
-    backdrop-filter: blur(28px) saturate(190%) brightness(104%) !important;
-    -webkit-backdrop-filter: blur(28px) saturate(190%) brightness(104%) !important;
+    backdrop-filter: blur(5px) saturate(190%) brightness(104%) !important;
+    -webkit-backdrop-filter: blur(5px) saturate(190%) brightness(104%) !important;
     background: var(--nav-mobile-bg) !important;
   }
   body.dark nav:has(.nav-links.open)::before, body.dark nav.menu-open::before {
