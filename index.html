@@ -138,20 +138,17 @@ nav {
 nav::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
   background: var(--nav-bg);
+  border: 2px solid transparent;
+  border-radius: 99px;
   backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%);
   -webkit-backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%);
-  backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
-  -webkit-backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-top-color: rgba(255, 255, 255, 0.85);
-  border-bottom-color: rgba(200, 215, 230, 0.35);
-  border-radius: 99px;
+  backdrop-filter: blur(2px) url(#frosted) saturate(140%) contrast(102%) brightness(104%);
+  -webkit-backdrop-filter: blur(2px) url(#frosted) saturate(140%) contrast(102%) brightness(104%);
   box-shadow:
-    0 8px 30px -4px rgba(15, 23, 42, 0.1),
+    0 0 0 2px rgba(255, 255, 255, 0.6),
+    0 16px 32px rgba(15, 23, 42, 0.12),
     -1.5px 0 3px 0 rgba(236, 72, 153, 0.25),
-    1.5px 0 3px 0 rgba(6, 182, 212, 0.3),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -1.5px 2px 0 rgba(15, 23, 42, 0.06);
+    1.5px 0 3px 0 rgba(6, 182, 212, 0.3);
   transition: background .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1), border-color .4s cubic-bezier(.4,0,.2,1);
 }
 nav.scrolled {
@@ -162,35 +159,27 @@ nav.scrolled::before {
   background: var(--nav-scrolled-bg);
   backdrop-filter: blur(2px) saturate(150%) contrast(102%) brightness(104%);
   -webkit-backdrop-filter: blur(2px) saturate(150%) contrast(102%) brightness(104%);
-  backdrop-filter: blur(2px) url(#liquid-refraction) saturate(150%) contrast(102%) brightness(104%);
-  -webkit-backdrop-filter: blur(2px) url(#liquid-refraction) saturate(150%) contrast(102%) brightness(104%);
-  border-top-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(2px) url(#frosted) saturate(150%) contrast(102%) brightness(104%);
+  -webkit-backdrop-filter: blur(2px) url(#frosted) saturate(150%) contrast(102%) brightness(104%);
   box-shadow:
-    0 12px 36px -4px rgba(15, 23, 42, 0.15),
+    0 0 0 2px rgba(255, 255, 255, 0.8),
+    0 20px 40px rgba(15, 23, 42, 0.16),
     -2px 0 4px 0 rgba(236, 72, 153, 0.3),
-    2px 0 4px 0 rgba(6, 182, 212, 0.35),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -1.5px 2px 0 rgba(15, 23, 42, 0.08);
+    2px 0 4px 0 rgba(6, 182, 212, 0.35);
 }
 body.dark nav::before {
-  border-color: rgba(255, 255, 255, 0.12);
-  border-top-color: rgba(255, 255, 255, 0.3);
-  border-bottom-color: rgba(0, 0, 0, 0.4);
   box-shadow:
-    0 8px 32px -4px rgba(0, 0, 0, 0.45),
+    0 0 0 2px rgba(255, 255, 255, 0.15),
+    0 16px 32px rgba(0, 0, 0, 0.45),
     -1.5px 0 3px 0 rgba(236, 72, 153, 0.2),
-    1.5px 0 3px 0 rgba(56, 189, 248, 0.25),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.5);
+    1.5px 0 3px 0 rgba(56, 189, 248, 0.25);
 }
 body.dark nav.scrolled::before {
-  border-top-color: rgba(255, 255, 255, 0.4);
   box-shadow:
-    0 12px 36px -4px rgba(0, 0, 0, 0.6),
+    0 0 0 2px rgba(255, 255, 255, 0.25),
+    0 20px 40px rgba(0, 0, 0, 0.6),
     -2px 0 4px 0 rgba(236, 72, 153, 0.25),
-    2px 0 4px 0 rgba(56, 189, 248, 0.3),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.25),
-    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.6);
+    2px 0 4px 0 rgba(56, 189, 248, 0.3);
 }
 .nav-logo { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: -.01em; white-space: nowrap; }
 .nav-links { display: flex; gap: 1.2rem; list-style: none; }
@@ -1539,39 +1528,33 @@ body.dark .hood-body {
     visibility: visible;
     transform: translateY(0) scale(1);
     background: var(--nav-mobile-bg);
+    border: 2px solid transparent;
+    border-radius: var(--radius2);
     backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%);
     -webkit-backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%);
-    backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
-    -webkit-backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-top-color: rgba(255, 255, 255, 0.85);
-    border-bottom-color: rgba(200, 215, 230, 0.35);
+    backdrop-filter: blur(2px) url(#frosted) saturate(140%) contrast(102%) brightness(104%);
+    -webkit-backdrop-filter: blur(2px) url(#frosted) saturate(140%) contrast(102%) brightness(104%);
     box-shadow:
-      0 12px 30px -8px rgba(15, 23, 42, 0.12),
+      0 0 0 2px rgba(255, 255, 255, 0.6),
+      0 16px 32px rgba(15, 23, 42, 0.14),
       -1.5px 0 3px 0 rgba(236, 72, 153, 0.2),
-      1.5px 0 3px 0 rgba(6, 182, 212, 0.25),
-      inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.75),
-      inset 0 -1.5px 2px 0 rgba(15, 23, 42, 0.05);
+      1.5px 0 3px 0 rgba(6, 182, 212, 0.25);
   }
   body.dark .nav-links.open {
     background: var(--nav-mobile-bg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-top-color: rgba(255, 255, 255, 0.25);
-    border-bottom-color: rgba(0, 0, 0, 0.35);
     box-shadow:
-      0 12px 30px -8px rgba(0, 0, 0, 0.5),
+      0 0 0 2px rgba(255, 255, 255, 0.15),
+      0 16px 32px rgba(0, 0, 0, 0.55),
       -1.5px 0 3px 0 rgba(236, 72, 153, 0.15),
-      1.5px 0 3px 0 rgba(56, 189, 248, 0.2),
-      inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.15),
-      inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.4);
+      1.5px 0 3px 0 rgba(56, 189, 248, 0.2);
   }
   .nav-cta { display: none; }
   .nav-toggle { display: flex; }
   nav:has(.nav-links.open)::before, nav.menu-open::before {
     backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%) !important;
     -webkit-backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%) !important;
-    backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%) !important;
-    -webkit-backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%) !important;
+    backdrop-filter: blur(2px) url(#frosted) saturate(140%) contrast(102%) brightness(104%) !important;
+    -webkit-backdrop-filter: blur(2px) url(#frosted) saturate(140%) contrast(102%) brightness(104%) !important;
     background: var(--nav-mobile-bg) !important;
   }
   body.dark nav:has(.nav-links.open)::before, body.dark nav.menu-open::before {
@@ -1843,7 +1826,7 @@ body.dark .mesh-blob {
 <!-- Liquid Glass Refraction SVG Filter with Chromatic Aberration & Depth (Level 4/5) -->
 <svg style="position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
   <defs>
-    <filter id="liquid-refraction" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+    <filter id="frosted" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
       <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" result="noise" />
       <feDisplacementMap in="SourceGraphic" in2="noise" scale="80" xChannelSelector="R" yChannelSelector="G" result="dispR" />
       <feDisplacementMap in="SourceGraphic" in2="noise" scale="74" xChannelSelector="R" yChannelSelector="G" result="dispG" />
