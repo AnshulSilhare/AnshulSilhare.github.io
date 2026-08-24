@@ -41,7 +41,7 @@
   --radius:  6px; --radius2: 12px;
   --glow:    0 4px 24px rgba(15,23,42,.07);
   --glow-md: 0 8px 32px rgba(15,23,42,.1);
-  --nav-bg:  rgba(255, 255, 255, 0.05); --nav-scrolled-bg: rgba(255, 255, 255, 0.08); --nav-mobile-bg: rgba(248, 250, 252, 0.12);
+  --nav-bg:  rgba(255, 255, 255, 0.15); --nav-scrolled-bg: rgba(255, 255, 255, 0.20); --nav-mobile-bg: rgba(248, 250, 252, 0.20);
   --nav-grad-start: #065f46; --nav-grad-end: #10b981;
   --contact-bg: #1e3a5f;
   --contact-text-hl: rgba(255,255,255,.55);
@@ -75,7 +75,7 @@ body.dark {
   --text:    #f8fafc; --text2: #cbd5e1; --text3: #94a3b8;
   --glow:    0 4px 20px rgba(0,0,0,.4);
   --glow-md: 0 12px 30px rgba(0,0,0,.55);
-  --nav-bg:  rgba(11, 15, 25, 0.05); --nav-scrolled-bg: rgba(11, 15, 25, 0.12); --nav-mobile-bg: rgba(11, 15, 25, 0.18);
+  --nav-bg:  rgba(11, 15, 25, 0.15); --nav-scrolled-bg: rgba(11, 15, 25, 0.22); --nav-mobile-bg: rgba(11, 15, 25, 0.22);
   --nav-grad-start: var(--accent); --nav-grad-end: var(--teal);
   --contact-bg: #111827;
   --contact-text-hl: var(--accent);
@@ -142,15 +142,16 @@ nav::before {
   -webkit-backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%);
   backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
   -webkit-backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-top-color: rgba(255, 255, 255, 0.7);
-  border-bottom-color: rgba(200, 215, 230, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-top-color: rgba(255, 255, 255, 0.85);
+  border-bottom-color: rgba(200, 215, 230, 0.35);
   border-radius: 99px;
   box-shadow:
-    0 4px 20px rgba(15, 23, 42, 0.05),
-    0 0 1px 0 rgba(14, 165, 233, 0.15),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.6),
-    inset 0 -1px 2px 0 rgba(15, 23, 42, 0.03);
+    0 8px 30px -4px rgba(15, 23, 42, 0.1),
+    -1.5px 0 3px 0 rgba(236, 72, 153, 0.25),
+    1.5px 0 3px 0 rgba(6, 182, 212, 0.3),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1.5px 2px 0 rgba(15, 23, 42, 0.06);
   transition: background .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1), border-color .4s cubic-bezier(.4,0,.2,1);
 }
 nav.scrolled {
@@ -159,34 +160,37 @@ nav.scrolled {
 }
 nav.scrolled::before {
   background: var(--nav-scrolled-bg);
-  backdrop-filter: blur(3px) saturate(150%) contrast(102%) brightness(104%);
-  -webkit-backdrop-filter: blur(3px) saturate(150%) contrast(102%) brightness(104%);
-  backdrop-filter: blur(3px) url(#liquid-refraction) saturate(150%) contrast(102%) brightness(104%);
-  -webkit-backdrop-filter: blur(3px) url(#liquid-refraction) saturate(150%) contrast(102%) brightness(104%);
-  border-top-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(2px) saturate(150%) contrast(102%) brightness(104%);
+  -webkit-backdrop-filter: blur(2px) saturate(150%) contrast(102%) brightness(104%);
+  backdrop-filter: blur(2px) url(#liquid-refraction) saturate(150%) contrast(102%) brightness(104%);
+  -webkit-backdrop-filter: blur(2px) url(#liquid-refraction) saturate(150%) contrast(102%) brightness(104%);
+  border-top-color: rgba(255, 255, 255, 0.95);
   box-shadow:
-    0 8px 28px rgba(15, 23, 42, 0.08),
-    0 0 2px 0 rgba(14, 165, 233, 0.2),
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.75),
-    inset 0 -1px 2px 0 rgba(15, 23, 42, 0.04);
+    0 12px 36px -4px rgba(15, 23, 42, 0.15),
+    -2px 0 4px 0 rgba(236, 72, 153, 0.3),
+    2px 0 4px 0 rgba(6, 182, 212, 0.35),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1.5px 2px 0 rgba(15, 23, 42, 0.08);
 }
 body.dark nav::before {
-  border-color: rgba(255, 255, 255, 0.08);
-  border-top-color: rgba(255, 255, 255, 0.2);
-  border-bottom-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.12);
+  border-top-color: rgba(255, 255, 255, 0.3);
+  border-bottom-color: rgba(0, 0, 0, 0.4);
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.3),
-    0 0 1px 0 rgba(56, 189, 248, 0.12),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
-    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3);
+    0 8px 32px -4px rgba(0, 0, 0, 0.45),
+    -1.5px 0 3px 0 rgba(236, 72, 153, 0.2),
+    1.5px 0 3px 0 rgba(56, 189, 248, 0.25),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.5);
 }
 body.dark nav.scrolled::before {
-  border-top-color: rgba(255, 255, 255, 0.28);
+  border-top-color: rgba(255, 255, 255, 0.4);
   box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.4),
-    0 0 2px 0 rgba(56, 189, 248, 0.18),
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.4);
+    0 12px 36px -4px rgba(0, 0, 0, 0.6),
+    -2px 0 4px 0 rgba(236, 72, 153, 0.25),
+    2px 0 4px 0 rgba(56, 189, 248, 0.3),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.6);
 }
 .nav-logo { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: -.01em; white-space: nowrap; }
 .nav-links { display: flex; gap: 1.2rem; list-style: none; }
@@ -1535,37 +1539,39 @@ body.dark .hood-body {
     visibility: visible;
     transform: translateY(0) scale(1);
     background: var(--nav-mobile-bg);
-    backdrop-filter: blur(3px) saturate(140%) contrast(102%) brightness(104%);
-    -webkit-backdrop-filter: blur(3px) saturate(140%) contrast(102%) brightness(104%);
-    backdrop-filter: blur(3px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
-    -webkit-backdrop-filter: blur(3px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-top: 1px solid rgba(255, 255, 255, 0.7);
-    border-bottom: 1px solid rgba(200, 215, 230, 0.25);
+    backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%);
+    -webkit-backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%);
+    backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
+    -webkit-backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-top-color: rgba(255, 255, 255, 0.85);
+    border-bottom-color: rgba(200, 215, 230, 0.35);
     box-shadow:
-      0 12px 30px -8px rgba(15, 23, 42, 0.1),
-      0 0 1px 0 rgba(14, 165, 233, 0.15),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.6),
-      inset 0 -1px 2px 0 rgba(15, 23, 42, 0.03);
+      0 12px 30px -8px rgba(15, 23, 42, 0.12),
+      -1.5px 0 3px 0 rgba(236, 72, 153, 0.2),
+      1.5px 0 3px 0 rgba(6, 182, 212, 0.25),
+      inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.75),
+      inset 0 -1.5px 2px 0 rgba(15, 23, 42, 0.05);
   }
   body.dark .nav-links.open {
     background: var(--nav-mobile-bg);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-color: rgba(255, 255, 255, 0.25);
+    border-bottom-color: rgba(0, 0, 0, 0.35);
     box-shadow:
-      0 12px 30px -8px rgba(0, 0, 0, 0.45),
-      0 0 1px 0 rgba(56, 189, 248, 0.12),
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
-      inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3);
+      0 12px 30px -8px rgba(0, 0, 0, 0.5),
+      -1.5px 0 3px 0 rgba(236, 72, 153, 0.15),
+      1.5px 0 3px 0 rgba(56, 189, 248, 0.2),
+      inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.4);
   }
   .nav-cta { display: none; }
   .nav-toggle { display: flex; }
   nav:has(.nav-links.open)::before, nav.menu-open::before {
-    backdrop-filter: blur(3px) saturate(140%) contrast(102%) brightness(104%) !important;
-    -webkit-backdrop-filter: blur(3px) saturate(140%) contrast(102%) brightness(104%) !important;
-    backdrop-filter: blur(3px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%) !important;
-    -webkit-backdrop-filter: blur(3px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%) !important;
+    backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%) !important;
+    -webkit-backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%) !important;
+    backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%) !important;
+    -webkit-backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%) !important;
     background: var(--nav-mobile-bg) !important;
   }
   body.dark nav:has(.nav-links.open)::before, body.dark nav.menu-open::before {
@@ -1834,12 +1840,19 @@ body.dark .mesh-blob {
   <div class="mesh-blob blob3"></div>
 </div>
 
-<!-- Liquid Glass Refraction SVG Filter -->
+<!-- Liquid Glass Refraction SVG Filter with Chromatic Aberration & Depth -->
 <svg style="position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
   <defs>
-    <filter id="liquid-refraction" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.015 0.03" numOctaves="2" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
+    <filter id="liquid-refraction" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="36" xChannelSelector="R" yChannelSelector="G" result="dispR" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="33" xChannelSelector="R" yChannelSelector="G" result="dispG" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" result="dispB" />
+      <feColorMatrix in="dispR" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red" />
+      <feColorMatrix in="dispG" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green" />
+      <feColorMatrix in="dispB" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue" />
+      <feBlend in="red" in2="green" mode="screen" result="rg" />
+      <feBlend in="rg" in2="blue" mode="screen" />
     </filter>
   </defs>
 </svg>
