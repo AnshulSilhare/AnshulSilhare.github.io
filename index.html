@@ -140,6 +140,8 @@ nav::before {
   background: var(--nav-bg);
   backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%);
   -webkit-backdrop-filter: blur(2px) saturate(140%) contrast(102%) brightness(104%);
+  backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
+  -webkit-backdrop-filter: blur(2px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-top-color: rgba(255, 255, 255, 0.7);
   border-bottom-color: rgba(200, 215, 230, 0.25);
@@ -159,6 +161,8 @@ nav.scrolled::before {
   background: var(--nav-scrolled-bg);
   backdrop-filter: blur(3px) saturate(150%) contrast(102%) brightness(104%);
   -webkit-backdrop-filter: blur(3px) saturate(150%) contrast(102%) brightness(104%);
+  backdrop-filter: blur(3px) url(#liquid-refraction) saturate(150%) contrast(102%) brightness(104%);
+  -webkit-backdrop-filter: blur(3px) url(#liquid-refraction) saturate(150%) contrast(102%) brightness(104%);
   border-top-color: rgba(255, 255, 255, 0.85);
   box-shadow:
     0 8px 28px rgba(15, 23, 42, 0.08),
@@ -1533,6 +1537,8 @@ body.dark .hood-body {
     background: var(--nav-mobile-bg);
     backdrop-filter: blur(3px) saturate(140%) contrast(102%) brightness(104%);
     -webkit-backdrop-filter: blur(3px) saturate(140%) contrast(102%) brightness(104%);
+    backdrop-filter: blur(3px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
+    -webkit-backdrop-filter: blur(3px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%);
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-top: 1px solid rgba(255, 255, 255, 0.7);
     border-bottom: 1px solid rgba(200, 215, 230, 0.25);
@@ -1558,6 +1564,8 @@ body.dark .hood-body {
   nav:has(.nav-links.open)::before, nav.menu-open::before {
     backdrop-filter: blur(3px) saturate(140%) contrast(102%) brightness(104%) !important;
     -webkit-backdrop-filter: blur(3px) saturate(140%) contrast(102%) brightness(104%) !important;
+    backdrop-filter: blur(3px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%) !important;
+    -webkit-backdrop-filter: blur(3px) url(#liquid-refraction) saturate(140%) contrast(102%) brightness(104%) !important;
     background: var(--nav-mobile-bg) !important;
   }
   body.dark nav:has(.nav-links.open)::before, body.dark nav.menu-open::before {
@@ -1825,6 +1833,16 @@ body.dark .mesh-blob {
   <div class="mesh-blob blob2"></div>
   <div class="mesh-blob blob3"></div>
 </div>
+
+<!-- Liquid Glass Refraction SVG Filter -->
+<svg style="position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
+  <defs>
+    <filter id="liquid-refraction" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015 0.03" numOctaves="2" result="noise" />
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </defs>
+</svg>
 <script>
   // Default to light mode on load; dark mode is only active if explicitly selected by the user
   if (localStorage.getItem('theme') === 'dark') {
