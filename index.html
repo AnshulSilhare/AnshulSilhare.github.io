@@ -155,8 +155,8 @@ img { display: block; max-width: 100%; }
   background: var(--nav-glass-bg);
   border: 1px solid var(--nav-glass-border);
   border-radius: 9999px;
-  backdrop-filter: blur(12px) saturate(160%) brightness(1.02);
-  -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(1.02);
+  backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+  -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
   backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
   -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
   box-shadow:
@@ -268,10 +268,77 @@ body.dark .nav-links a {
 .hero-sub { font-family: var(--body); font-size: .95rem; color: var(--text2); margin-bottom: 2.5rem; opacity: 0; transform: translateY(20px); animation: fadeUp .7s .5s forwards; }
 .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; opacity: 0; transform: translateY(20px); animation: fadeUp .7s .65s forwards; }
 .btn { display: inline-flex; align-items: center; gap: .5rem; font-family: var(--body); font-size: .88rem; font-weight: 500; padding: .75rem 1.6rem; border-radius: var(--radius); cursor: pointer; transition: all .25s ease; border: none; }
-.btn-primary { background: var(--blob2); color: #fff; }
-.btn-primary:hover { background: #16305a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30,58,95,.25); }
-.btn-outline { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.btn-primary {
+  background: linear-gradient(135deg, rgba(30, 58, 95, 0.88), rgba(20, 42, 70, 0.94));
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius);
+  backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+  -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+  backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+  -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+  box-shadow:
+    0 14px 34px -4px rgba(30, 58, 95, 0.35),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 12px 1px rgba(255, 255, 255, 0.15);
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, rgba(22, 48, 90, 0.94), rgba(15, 33, 62, 0.98));
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 40px -4px rgba(30, 58, 95, 0.45),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 0 16px 2px rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+body.dark .btn-primary {
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.88), rgba(13, 148, 136, 0.94));
+  color: #0f172a;
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 14px 34px -4px rgba(45, 212, 191, 0.35),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 0 12px 1px rgba(255, 255, 255, 0.2);
+}
+body.dark .btn-primary:hover {
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.96), rgba(20, 184, 166, 1));
+  color: #0f172a;
+  box-shadow:
+    0 18px 40px -4px rgba(45, 212, 191, 0.5),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 0 16px 2px rgba(255, 255, 255, 0.3);
+}
+.btn-outline {
+  background: var(--nav-glass-bg);
+  color: var(--text);
+  border: 1px solid var(--nav-glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+  -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+  backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+  -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+  box-shadow:
+    var(--nav-glass-elevation),
+    inset 0 1px 1px 0 var(--nav-glass-rim-top),
+    inset 0 -1px 1px 0 var(--nav-glass-rim-bottom),
+    inset 0 0 10px 1px var(--nav-glass-halo);
+  transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 24px -4px rgba(15, 23, 42, 0.18),
+    inset 0 1px 1px 0 var(--nav-glass-rim-top),
+    inset 0 0 14px 1.5px var(--nav-glass-halo);
+}
+body.dark .btn-outline {
+  color: var(--text);
+}
 .hero-counters {
   display: flex; flex-wrap: wrap; gap: 2.5rem; margin-top: 3.5rem; padding-top: 2rem;
   border-top: 1px solid var(--border);
@@ -496,12 +563,55 @@ body.dark .card-actions {
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .cert-card-wrap:hover .cert-card::before,
-.cert-card:hover::before {
+.cert-card-wrap.open .cert-card::before,
+.cert-card:hover::before,
+.cert-card.open::before {
   transform: scaleX(1);
 }
-.cert-card-wrap:hover .cert-card {
+.cert-card-wrap:hover .cert-card,
+.cert-card-wrap.open .cert-card {
   border-color: rgba(13, 148, 136, 0.35);
   box-shadow: 0 12px 40px rgba(13, 148, 136, 0.12), var(--glass-shadow);
+}
+
+/* Micro-Affordance Peek Badge */
+.cert-card::after {
+  content: '✦ Verify ↗';
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  font-family: var(--body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--teal);
+  background: var(--nav-glass-bg);
+  border: 1px solid rgba(13, 148, 136, 0.25);
+  border-radius: 9999px;
+  padding: 0.22rem 0.58rem;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(3px) saturate(140%);
+  -webkit-backdrop-filter: blur(3px) saturate(140%);
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.08), inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
+  transition: opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: 5;
+}
+body.dark .cert-card::after {
+  color: var(--accent2);
+  background: rgba(45, 212, 191, 0.08);
+  border-color: rgba(45, 212, 191, 0.28);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
+}
+.cert-card-program::after {
+  content: '✦ Verify & Preview ↗';
+}
+.cert-card-wrap:hover .cert-card::after,
+.cert-card-wrap.open .cert-card::after,
+.cert-card-program:hover::after,
+.cert-card-program.open::after {
+  opacity: 0;
+  transform: scale(0.92) translateY(-2px);
 }
 
 /* ── Specialisation / full-width program card ── */
@@ -514,7 +624,8 @@ body.dark .card-actions {
               box-shadow 0.3s ease,
               border-radius 0.35s ease;
 }
-.cert-card-program:hover {
+.cert-card-program:hover,
+.cert-card-program.open {
   transform: translateY(-5px);
   border-color: rgba(14,124,107,.32);
   box-shadow: 0 16px 45px rgba(13, 148, 136, 0.15), var(--glass-shadow);
@@ -532,6 +643,7 @@ body.dark .card-actions {
 .cert-card-main > div:not(.cert-icon) {
   flex: 1;
   min-width: 0;
+  padding-right: 4.5rem; /* prevent overlap with peek badge */
 }
 
 /* ── DESKTOP (≥768px): Side drawer — sibling of card ── */
@@ -546,12 +658,14 @@ body.dark .card-actions {
     flex: 1 1 150px !important; 
     transition: flex-basis 0.42s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  .cert-card-wrap:hover {
+  .cert-card-wrap:hover,
+  .cert-card-wrap.open {
     flex-basis: 290px !important; /* 150 + 160 drawer */
   }
 
   /* When drawer opens, card's right corners flatten to join the drawer */
-  .cert-card-wrap:hover .cert-card:not(.cert-card-program) {
+  .cert-card-wrap:hover .cert-card:not(.cert-card-program),
+  .cert-card-wrap.open .cert-card:not(.cert-card-program) {
     border-radius: var(--radius2) 0 0 var(--radius2);
   }
 
@@ -579,7 +693,8 @@ body.dark .card-actions {
     background: transparent;
   }
 
-  .cert-card-wrap:hover .cert-actions-drawer {
+  .cert-card-wrap:hover .cert-actions-drawer,
+  .cert-card-wrap.open .cert-actions-drawer {
     width: 140px;
     opacity: 1;
     background: linear-gradient(160deg,
@@ -590,7 +705,8 @@ body.dark .card-actions {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
-  body.dark .cert-card-wrap:hover .cert-actions-drawer {
+  body.dark .cert-card-wrap:hover .cert-actions-drawer,
+  body.dark .cert-card-wrap.open .cert-actions-drawer {
     background: linear-gradient(160deg,
       rgba(20, 184, 166, 0.11) 0%,
       rgba(20, 184, 166, 0.18) 100%);
@@ -626,7 +742,8 @@ body.dark .card-actions {
                 box-shadow 0.3s ease,
                 opacity 0.28s ease;
   }
-  .cert-card-program:hover .cert-actions-drawer {
+  .cert-card-program:hover .cert-actions-drawer,
+  .cert-card-program.open .cert-actions-drawer {
     grid-template-rows: 1fr;
     opacity: 1;
     border-top-color: rgba(13, 148, 136, 0.25);
@@ -637,7 +754,8 @@ body.dark .card-actions {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
-  body.dark .cert-card-program:hover .cert-actions-drawer {
+  body.dark .cert-card-program:hover .cert-actions-drawer,
+  body.dark .cert-card-program.open .cert-actions-drawer {
     background: linear-gradient(160deg,
       rgba(20, 184, 166, 0.11) 0%,
       rgba(20, 184, 166, 0.18) 100%);
@@ -666,7 +784,8 @@ body.dark .card-actions {
     transition: border-color 0.3s, box-shadow 0.3s,
                 border-radius 0.35s;
   }
-  .cert-card-wrap:hover .cert-card:not(.cert-card-program) {
+  .cert-card-wrap:hover .cert-card:not(.cert-card-program),
+  .cert-card-wrap.open .cert-card:not(.cert-card-program) {
     border-radius: var(--radius2) var(--radius2) 0 0;
   }
   .cert-card-wrap .cert-actions-drawer {
@@ -687,7 +806,8 @@ body.dark .card-actions {
                 opacity 0.28s ease,
                 border-color 0.3s;
   }
-  .cert-card-wrap:hover .cert-actions-drawer {
+  .cert-card-wrap:hover .cert-actions-drawer,
+  .cert-card-wrap.open .cert-actions-drawer {
     max-height: 80px;
     opacity: 1;
     border-color: rgba(13,148,136, 0.25);
@@ -717,7 +837,8 @@ body.dark .card-actions {
                 background 0.3s ease,
                 opacity 0.25s;
   }
-  .cert-card-program:hover .cert-actions-drawer {
+  .cert-card-program:hover .cert-actions-drawer,
+  .cert-card-program.open .cert-actions-drawer {
     grid-template-rows: 1fr;
     opacity: 1;
     border-top-color: rgba(13, 148, 136, 0.25);
@@ -727,7 +848,8 @@ body.dark .card-actions {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
-  body.dark .cert-card-program:hover .cert-actions-drawer {
+  body.dark .cert-card-program:hover .cert-actions-drawer,
+  body.dark .cert-card-program.open .cert-actions-drawer {
     background: linear-gradient(160deg,
       rgba(20, 184, 166, 0.11) 0%,
       rgba(20, 184, 166, 0.18) 100%);
@@ -741,6 +863,45 @@ body.dark .card-actions {
     padding: 0.75rem 0.85rem;
   }
 
+}
+
+/* ─── CERT SECTION INTERACTIVE PILL ──────────────────── */
+.cert-interactive-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.38rem 0.95rem;
+  font-family: var(--body);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--teal);
+  background: var(--nav-glass-bg);
+  border: 1px solid var(--nav-glass-border);
+  border-radius: 9999px;
+  backdrop-filter: blur(3px) saturate(140%);
+  -webkit-backdrop-filter: blur(3px) saturate(140%);
+  box-shadow: var(--nav-glass-elevation), inset 0 1px 1px 0 var(--nav-glass-rim-top);
+  margin-bottom: 0.4rem;
+  user-select: none;
+}
+body.dark .cert-interactive-pill {
+  color: var(--accent2);
+}
+.cert-interactive-pill .pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal);
+  animation: pulseDot 2s ease-in-out infinite alternate;
+}
+body.dark .cert-interactive-pill .pulse-dot {
+  background: var(--accent2);
+  box-shadow: 0 0 8px var(--accent2);
+}
+@keyframes pulseDot {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.25); opacity: 1; }
 }
 
 /* ── Verify button ── */
@@ -1585,8 +1746,8 @@ body.dark .hood-body {
     background: var(--nav-glass-bg);
     border: 1px solid var(--nav-glass-border);
     border-radius: 9999px;
-    backdrop-filter: blur(12px) saturate(160%) brightness(1.02);
-    -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(1.02);
+    backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+    -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
     backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
     -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
     box-shadow:
@@ -1618,8 +1779,8 @@ body.dark .hood-body {
     justify-content: center !important;
     background: var(--nav-glass-bg) !important;
     border: 1px solid var(--nav-glass-border) !important;
-    backdrop-filter: blur(12px) saturate(160%) brightness(1.02) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(1.02) !important;
+    backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
     backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur) !important;
     -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur) !important;
     box-shadow:
@@ -1666,8 +1827,8 @@ body.dark .hood-body {
     background: var(--nav-glass-bg) !important;
     border: 1px solid var(--nav-glass-border) !important;
     border-radius: 9999px !important;
-    backdrop-filter: blur(12px) saturate(160%) brightness(1.02) !important;
-    -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(1.02) !important;
+    backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
     backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur) !important;
     -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur) !important;
     box-shadow:
@@ -1756,22 +1917,75 @@ body.dark .hood-body {
 /* ─── FIREFOX GLASS FALLBACK ──────────────────────────── */
 @supports (-moz-appearance: none) {
   #navbar,
-  #navbar.scrolled,
-  .mobile-tab-bar,
-  .nav-logo,
-  .theme-toggle {
-    backdrop-filter: blur(14px) saturate(160%) brightness(1.02) !important;
-    -webkit-backdrop-filter: blur(14px) saturate(160%) brightness(1.02) !important;
-    background: rgba(255, 255, 255, 0.70) !important;
+  .btn-outline,
+  .floating-btn-drawer .btn-icon-base,
+  .floating-btn-drawer .btn-drawer-text {
+    backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+  .btn-primary {
+    backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    background: linear-gradient(135deg, rgba(30, 58, 95, 0.90), rgba(20, 42, 70, 0.95)) !important;
+    color: #fff !important;
+  }
+  #navbar.scrolled {
+    backdrop-filter: blur(4px) saturate(140%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(4px) saturate(140%) brightness(1.02) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
   }
   body.dark #navbar,
-  body.dark #navbar.scrolled,
-  body.dark .mobile-tab-bar,
-  body.dark .nav-logo,
-  body.dark .theme-toggle {
-    backdrop-filter: blur(16px) saturate(160%) brightness(1.02) !important;
-    -webkit-backdrop-filter: blur(16px) saturate(160%) brightness(1.02) !important;
-    background: rgba(15, 23, 42, 0.75) !important;
+  body.dark .btn-outline,
+  body.dark .floating-btn-drawer .btn-icon-base,
+  body.dark .floating-btn-drawer .btn-drawer-text {
+    backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    background: rgba(15, 23, 42, 0.15) !important;
+  }
+  body.dark .btn-primary {
+    backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.90), rgba(13, 148, 136, 0.95)) !important;
+    color: #0f172a !important;
+  }
+  body.dark #navbar.scrolled {
+    backdrop-filter: blur(4px) saturate(140%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(4px) saturate(140%) brightness(1.02) !important;
+    background: rgba(15, 23, 42, 0.22) !important;
+  }
+
+  /* Inner elements must remain transparent on desktop */
+  #navbar .nav-logo,
+  #navbar .nav-links,
+  #navbar .nav-links a,
+  #navbar .content {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  @media(max-width: 1024px) {
+    #navbar,
+    #navbar.scrolled {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .mobile-tab-bar,
+    .nav-logo,
+    .theme-toggle {
+      backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+      -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+    }
+    body.dark .mobile-tab-bar,
+    body.dark .nav-logo,
+    body.dark .theme-toggle {
+      backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+      -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02) !important;
+      background: rgba(15, 23, 42, 0.15) !important;
+    }
   }
 }
 
@@ -1859,27 +2073,53 @@ body.dark .moon-icon { display: none !important; }
 
 /* Base Icon Circle */
 .floating-btn-drawer .btn-icon-base {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--bg2); color: var(--text2); border: 1px solid var(--border2);
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--nav-glass-bg);
+  color: var(--text);
+  border: 1px solid var(--nav-glass-border);
+  backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+  -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+  backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+  -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+  box-shadow:
+    var(--nav-glass-elevation),
+    inset 0 1px 1px 0 var(--nav-glass-rim-top),
+    inset 0 -1px 1px 0 var(--nav-glass-rim-bottom),
+    inset 0 0 12px 1px var(--nav-glass-halo);
   display: flex; align-items: center; justify-content: center;
-  box-shadow: var(--glow); z-index: 2;
-  transition: border-color 0.3s, color 0.3s, background-color 0.3s, transform 0.3s;
+  z-index: 2;
+  transition: border-color 0.3s, color 0.3s, background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 .floating-btn-drawer:hover .btn-icon-base {
-  color: var(--accent2); border-color: var(--accent2);
+  color: var(--accent);
+  border-color: var(--accent);
   transform: translateY(-2px);
+  box-shadow:
+    0 12px 28px -4px rgba(15, 23, 42, 0.22),
+    inset 0 1px 1px 0 var(--nav-glass-rim-top),
+    inset 0 0 14px 1.5px var(--nav-glass-halo);
+}
+body.dark .floating-btn-drawer .btn-icon-base {
+  color: var(--text);
 }
 
 /* Expanding Drawer Text */
 .floating-btn-drawer .btn-drawer-text {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid var(--glass-border);
-  border-right: none; height: 34px;
+  background: var(--nav-glass-bg);
+  border: 1px solid var(--nav-glass-border);
+  border-right: none; height: 36px;
+  backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+  -webkit-backdrop-filter: blur(3px) saturate(140%) brightness(1.02);
+  backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+  -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+  box-shadow:
+    var(--nav-glass-elevation),
+    inset 0 1px 1px 0 var(--nav-glass-rim-top),
+    inset 0 -1px 1px 0 var(--nav-glass-rim-bottom),
+    inset 0 0 10px 1px var(--nav-glass-halo);
   display: flex; align-items: center;
-  padding: 0 16px 0 16px; border-radius: 17px 0 0 17px;
-  color: var(--text2); font-family: var(--display); font-size: 0.8rem; font-weight: 600;
+  padding: 0 16px 0 16px; border-radius: 18px 0 0 18px;
+  color: var(--text); font-family: var(--display); font-size: 0.8rem; font-weight: 600;
   letter-spacing: 0.5px; text-transform: uppercase;
   max-width: 0; opacity: 0; overflow: hidden; white-space: nowrap;
   z-index: 1; transform: translateX(12px);
@@ -1887,8 +2127,9 @@ body.dark .moon-icon { display: none !important; }
   margin-right: -10px; /* overlay slightly under circle */
 }
 body.dark .floating-btn-drawer .btn-drawer-text {
-  background: rgba(17, 24, 39, 0.3);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: var(--nav-glass-bg);
+  border-color: var(--nav-glass-border);
+  color: var(--text);
 }
 
 /* Hover Behavior */
@@ -2545,9 +2786,14 @@ body.dark .mesh-blob {
 <!-- CERTIFICATIONS -->
 <section id="certs">
   <div class="section-wrap">
-    <div class="section-header reveal">
-      <p class="section-label">05 · Credentials</p>
-      <h2 class="section-title">Credentials &amp; <span class="dim">Certifications.</span></h2>
+    <div class="section-header reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;">
+      <div>
+        <p class="section-label">05 · Credentials</p>
+        <h2 class="section-title" style="margin-bottom:0;">Credentials &amp; <span class="dim">Certifications.</span></h2>
+      </div>
+      <div class="cert-interactive-pill">
+        <span class="pulse-dot"></span> Hover or tap cards to verify &amp; preview credentials ↗
+      </div>
     </div>
 
     <!-- 1. Supply Chain & Operational Excellence -->
@@ -4211,6 +4457,29 @@ document.addEventListener('DOMContentLoaded', () => {
     card.removeChild(drawer);
     wrap.appendChild(drawer);
   });
+
+  // ── Certificate Touch & Click Toggle for Mobile/Desktop ─────────────────────
+  function initCertToggles() {
+    var allCertItems = document.querySelectorAll('.cert-card-wrap, .cert-card-program');
+    allCertItems.forEach(function(item) {
+      item.addEventListener('click', function(e) {
+        if (e.target.closest('a, button')) return;
+        var isOpen = item.classList.contains('open');
+        allCertItems.forEach(function(c) { c.classList.remove('open'); });
+        if (!isOpen) {
+          item.classList.add('open');
+        }
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.cert-card-wrap, .cert-card-program')) {
+        allCertItems.forEach(function(c) { c.classList.remove('open'); });
+      }
+    });
+  }
+
+  initCertToggles();
 })();
 </script>
 </body>
