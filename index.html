@@ -2254,9 +2254,15 @@ body.dark .mesh-blob {
 
 
 <script>
-  // Default to light mode on load; dark mode is only active if explicitly selected by the user
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark');
+  // Always default to light mode; dark mode is ONLY active if explicitly chosen by the user
+  try {
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  } catch (e) {
+    document.body.classList.remove('dark');
   }
 </script>
 
