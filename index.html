@@ -44,19 +44,21 @@
   --nav-grad-start: #065f46; --nav-grad-end: #10b981;
   --contact-bg: #1e3a5f;
   --contact-text-hl: rgba(255,255,255,.55);
-  --glass-blur: blur(2px) saturate(160%) brightness(1.02);
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-bg-scrolled: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.65);
-  --glass-rim-highlight: rgba(255, 255, 255, 0.95);
-  --glass-rim-bottom: rgba(255, 255, 255, 0.35);
-  --glass-bevel: rgba(255, 255, 255, 0.25);
-  --glass-halo: rgba(255, 255, 255, 0.28);
-  --glass-depth-shadow: rgba(0, 0, 0, 0.08);
-  --glass-elevation: 0 10px 30px -4px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04);
-  --glass-elevation-scrolled: 0 14px 38px -4px rgba(15, 23, 42, 0.18), 0 6px 16px rgba(15, 23, 42, 0.06);
+  --glass-bg:      rgba(255, 255, 255, 0.08);
+  --glass-border:  rgba(15, 23, 42, 0.08);
   --glass-shadow:  0 10px 36px rgba(15, 23, 42, 0.24);
   --glass-shadow-hover: 0 20px 48px rgba(15, 23, 42, 0.15), 0 8px 24px rgba(13, 148, 136, 0.15);
+  --glass-blur:    blur(8px);
+  --nav-glass-blur: blur(1.5px) saturate(160%) brightness(1.03);
+  --nav-glass-bg: rgba(255, 255, 255, 0.03);
+  --nav-glass-bg-scrolled: rgba(255, 255, 255, 0.06);
+  --nav-glass-border: rgba(255, 255, 255, 0.25);
+  --nav-glass-rim-top: rgba(255, 255, 255, 0.65);
+  --nav-glass-rim-bottom: rgba(255, 255, 255, 0.15);
+  --nav-glass-halo: rgba(255, 255, 255, 0.12);
+  --nav-glass-depth-shadow: rgba(0, 0, 0, 0.04);
+  --nav-glass-elevation: 0 16px 38px -4px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(15, 23, 42, 0.06);
+  --nav-glass-elevation-scrolled: 0 18px 44px -4px rgba(15, 23, 42, 0.24), 0 6px 16px rgba(15, 23, 42, 0.08);
   --blob1:   var(--teal);
   --blob2:   var(--accent);
   --blob3:   var(--accent2);
@@ -85,17 +87,21 @@ body.dark {
   --nav-grad-start: var(--accent); --nav-grad-end: var(--teal);
   --contact-bg: #111827;
   --contact-text-hl: var(--accent);
-  --glass-blur: blur(2px) saturate(160%) brightness(1.02);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-bg-scrolled: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.28);
-  --glass-rim-highlight: rgba(255, 255, 255, 0.70);
-  --glass-rim-bottom: rgba(255, 255, 255, 0.20);
-  --glass-bevel: rgba(255, 255, 255, 0.12);
-  --glass-halo: rgba(255, 255, 255, 0.15);
-  --glass-depth-shadow: rgba(0, 0, 0, 0.45);
-  --glass-elevation: 0 12px 36px -4px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.35);
-  --glass-elevation-scrolled: 0 16px 44px -4px rgba(0, 0, 0, 0.75), 0 6px 20px rgba(0, 0, 0, 0.45);
+  --glass-bg:      rgba(30, 41, 59, 0.08);
+  --glass-border:  rgba(255, 255, 255, 0.14);
+  --glass-shadow:  0 8px 32px rgba(0, 0, 0, 0.42);
+  --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(45, 212, 191, 0.15);
+  --glass-blur:    blur(8px);
+  --nav-glass-blur: blur(1.5px) saturate(160%) brightness(1.03);
+  --nav-glass-bg: rgba(255, 255, 255, 0.02);
+  --nav-glass-bg-scrolled: rgba(255, 255, 255, 0.05);
+  --nav-glass-border: rgba(255, 255, 255, 0.12);
+  --nav-glass-rim-top: rgba(255, 255, 255, 0.40);
+  --nav-glass-rim-bottom: rgba(255, 255, 255, 0.10);
+  --nav-glass-halo: rgba(255, 255, 255, 0.08);
+  --nav-glass-depth-shadow: rgba(0, 0, 0, 0.25);
+  --nav-glass-elevation: 0 16px 42px -4px rgba(0, 0, 0, 0.70), 0 4px 16px rgba(0, 0, 0, 0.45);
+  --nav-glass-elevation-scrolled: 0 20px 48px -4px rgba(0, 0, 0, 0.80), 0 6px 20px rgba(0, 0, 0, 0.55);
   --glass-shadow:  0 8px 32px rgba(0, 0, 0, 0.42);
   --glass-shadow-hover: 0 20px 48px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(45, 212, 191, 0.15); 
   --blob1:   var(--teal);
@@ -142,48 +148,42 @@ img { display: block; max-width: 100%; }
 ::-webkit-scrollbar-thumb { background: rgba(30,58,95,.18); border-radius: 4px; }
 
 /* ─── NAV ─────────────────────────────────────────────── */
-nav, .nav-refract, .nav-glass {
+#navbar {
   position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%); z-index: 100;
   height: 54px; max-width: 1100px; width: calc(100% - 2.5rem);
   padding: 0;
-  background: var(--glass-bg);
-  border: 1.5px solid var(--glass-border);
+  background: var(--nav-glass-bg);
+  border: 1px solid var(--nav-glass-border);
   border-radius: 9999px;
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: blur(12px) saturate(160%) brightness(1.02);
+  -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(1.02);
+  backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+  -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
   box-shadow:
-    var(--glass-elevation),
-    inset 0 1.5px 1px 0 var(--glass-rim-highlight),
-    inset 0 -1.5px 1px 0 var(--glass-rim-bottom),
-    inset 0 0 0 2px var(--glass-bevel),
-    inset 0 0 18px 2px var(--glass-halo),
-    inset 0 0 24px 0 var(--glass-depth-shadow);
+    var(--nav-glass-elevation),
+    inset 0 1px 1px 0 var(--nav-glass-rim-top),
+    inset 0 -1px 1px 0 var(--nav-glass-rim-bottom),
+    inset 0 0 16px 1px var(--nav-glass-halo),
+    inset 0 0 20px 0 var(--nav-glass-depth-shadow);
   transition: top .4s cubic-bezier(.4,0,.2,1), height .4s cubic-bezier(.4,0,.2,1), background 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  will-change: transform, backdrop-filter;
+  will-change: transform;
 }
 
-@media (pointer: fine) and (min-width: 768px) {
-  nav.nav-refract {
-    backdrop-filter: url(#nav-liquid-refract) var(--glass-blur);
-    -webkit-backdrop-filter: url(#nav-liquid-refract) var(--glass-blur);
-  }
-}
-
-nav.scrolled, .nav-glass.scrolled {
+#navbar.scrolled {
   top: .75rem;
   height: 50px;
-  background: var(--glass-bg-scrolled);
+  background: var(--nav-glass-bg-scrolled);
   box-shadow:
-    var(--glass-elevation-scrolled),
-    inset 0 1.5px 1px 0 var(--glass-rim-highlight),
-    inset 0 -1.5px 1px 0 var(--glass-rim-bottom),
-    inset 0 0 0 2px var(--glass-bevel),
-    inset 0 0 18px 2px var(--glass-halo),
-    inset 0 0 24px 0 var(--glass-depth-shadow);
+    var(--nav-glass-elevation-scrolled),
+    inset 0 1px 1px 0 var(--nav-glass-rim-top),
+    inset 0 -1px 1px 0 var(--nav-glass-rim-bottom),
+    inset 0 0 18px 1.5px var(--nav-glass-halo),
+    inset 0 0 20px 0 var(--nav-glass-depth-shadow);
 }
 
-.nav-flat {
+#navbar .content {
   position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   display: flex;
@@ -1530,96 +1530,251 @@ body.dark .hood-body {
   .exp-grid { grid-template-columns: 1fr; }
   .contact-top { grid-template-columns: 1fr; gap: 2rem; }
 }
-@media(max-width: 1024px) {
-  .nav-links {
-    display: flex; flex-direction: column; position: absolute;
-    top: calc(100% + 0.5rem); left: 0; right: 0;
-    background: rgba(255, 255, 255, 0);
-    backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px);
-    border: 1px solid rgba(255, 255, 255, 0); border-radius: var(--radius2);
-    padding: 0.5rem 0.75rem; gap: 0.25rem;
-    box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0);
-    z-index: 99;
-    /* Smooth transition of all properties */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px) scale(0.98);
-    transition: 
-      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
-      visibility 0.3s,
-      background-color 0.3s ease,
-      border-color 0.3s ease,
-      box-shadow 0.3s ease,
-      backdrop-filter 0.3s ease,
-      -webkit-backdrop-filter 0.3s ease;
-  }
-  body.dark .nav-links {
-    background: rgba(11, 15, 25, 0);
-    border-color: rgba(255, 255, 255, 0);
-    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0);
-  }
-  .nav-links.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
-    background: var(--glass-bg-scrolled);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius2);
-    box-shadow:
-      var(--glass-elevation-scrolled),
-      inset 0 1px 0 var(--glass-rim-highlight),
-      inset 0 0 0 1px var(--glass-bevel),
-      inset 0 -1px 2px var(--glass-depth-shadow);
-  }
-  body.dark .nav-links.open {
-    background: var(--glass-bg-scrolled);
-    border: 1px solid var(--glass-border);
-    box-shadow:
-      var(--glass-elevation-scrolled),
-      inset 0 1px 0 var(--glass-rim-highlight),
-      inset 0 0 0 1px var(--glass-bevel),
-      inset 0 -1px 2px var(--glass-depth-shadow);
-  }
-  .nav-cta { display: none; }
-  .nav-toggle { display: flex; }
-  nav:has(.nav-links.open)::before, nav.menu-open::before {
-    backdrop-filter: var(--glass-blur) !important;
-    -webkit-backdrop-filter: var(--glass-blur) !important;
-    background: var(--glass-bg-scrolled) !important;
-  }
-  body.dark nav:has(.nav-links.open)::before, body.dark nav.menu-open::before {
-    background: var(--glass-bg-scrolled) !important;
-  }
-  /* Mobile nav link rows – option D with left-to-right gradient underline */
-  .nav-links li a {
-    display: block; width: 100%; padding: 0.75rem 0.5rem;
-    font-size: 0.9rem; font-weight: 500;
-    color: var(--text2); text-decoration: none;
-    position: relative; overflow: hidden;
-    transition: color 0.25s ease;
-  }
-  .nav-links li a::after {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    width: 0; height: 2px;
-    background: linear-gradient(90deg, var(--nav-grad-start), var(--nav-grad-end));
-    transition: width 0.35s ease;
-    border-radius: 2px;
-  }
-  .nav-links li a:hover, .nav-links li a.active { color: var(--text); }
-  .nav-links li a:hover::after, .nav-links li a.active::after { width: 100%; }
-  /* Separator lines between mobile menu items */
-  .nav-links li + li {
-    border-top: 1px solid rgba(15, 23, 42, 0.06);
-  }
-  body.dark .nav-links li + li {
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-  }
-  /* Disable desktop ::after underline in mobile menu */
-  .nav-links li a::before { display: none; }
+/* ─── MOBILE & TABLET BOTTOM FLOATING GLASS TAB BAR ────── */
+.mobile-tab-bar {
+  display: none;
 }
+
+@media(max-width: 1024px) {
+  /* Hide desktop nav links & hamburger on mobile/tablet */
+  .nav-links, .nav-toggle {
+    display: none !important;
+  }
+  
+  /* Top Nav: Deconstruct wide bar into separate floating button-wise elements */
+  #navbar, #navbar.scrolled {
+    position: fixed !important;
+    top: 0.85rem !important;
+    bottom: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+    height: auto !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 1rem !important;
+    pointer-events: none;
+    z-index: 100;
+  }
+  
+  #navbar .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  /* Top Left: Logo as a separate floating liquid glass pill button */
+  .nav-logo {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.95rem;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--text);
+    background: var(--nav-glass-bg);
+    border: 1px solid var(--nav-glass-border);
+    border-radius: 9999px;
+    backdrop-filter: blur(12px) saturate(160%) brightness(1.02);
+    -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(1.02);
+    backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+    -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur);
+    box-shadow:
+      var(--nav-glass-elevation),
+      inset 0 1px 1px 0 var(--nav-glass-rim-top),
+      inset 0 -1px 1px 0 var(--nav-glass-rim-bottom),
+      inset 0 0 12px 1px var(--nav-glass-halo);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+  }
+  .nav-logo:active {
+    transform: scale(0.96);
+  }
+
+  /* Top Right: Theme Toggle as a separate floating liquid glass circular button */
+  .nav-right {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .theme-toggle {
+    margin: 0 !important;
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 9999px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: var(--nav-glass-bg) !important;
+    border: 1px solid var(--nav-glass-border) !important;
+    backdrop-filter: blur(12px) saturate(160%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(1.02) !important;
+    backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur) !important;
+    -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur) !important;
+    box-shadow:
+      var(--nav-glass-elevation),
+      inset 0 1px 1px 0 var(--nav-glass-rim-top),
+      inset 0 -1px 1px 0 var(--nav-glass-rim-bottom),
+      inset 0 0 12px 1px var(--nav-glass-halo) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  .theme-toggle:active {
+    transform: scale(0.94);
+  }
+  .theme-toggle .btn-drawer-text {
+    display: none !important;
+  }
+  .theme-toggle .btn-icon-base {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+    background: transparent !important;
+    color: var(--text2) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* 2nd Nav Bar (Bottom Tab Bar): Firmly positioned at bottom */
+  .mobile-tab-bar {
+    display: flex !important;
+    position: fixed !important;
+    top: auto !important;
+    bottom: max(0.85rem, env(safe-area-inset-bottom, 0.85rem)) !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    z-index: 9999 !important;
+    width: calc(100% - 1.5rem) !important;
+    max-width: 460px !important;
+    height: 56px !important;
+    padding: 0 0.35rem !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+    background: var(--nav-glass-bg) !important;
+    border: 1px solid var(--nav-glass-border) !important;
+    border-radius: 9999px !important;
+    backdrop-filter: blur(12px) saturate(160%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(160%) brightness(1.02) !important;
+    backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur) !important;
+    -webkit-backdrop-filter: url(#droplet-lens-refract) var(--nav-glass-blur) !important;
+    box-shadow:
+      var(--nav-glass-elevation),
+      inset 0 1px 1px 0 var(--nav-glass-rim-top),
+      inset 0 -1px 1px 0 var(--nav-glass-rim-bottom),
+      inset 0 0 14px 1px var(--nav-glass-halo),
+      inset 0 0 18px 0 var(--nav-glass-depth-shadow) !important;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    will-change: transform;
+    pointer-events: auto !important;
+  }
+
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text3);
+    padding: 0.35rem 0.55rem;
+    border-radius: 9999px;
+    gap: 3px;
+    flex: 1;
+    max-width: 74px;
+    transition: color 0.2s ease, transform 0.15s ease, background-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .tab-item .tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .tab-item .tab-icon svg {
+    stroke: currentColor;
+    transition: stroke 0.2s ease;
+  }
+
+  .tab-item .tab-label {
+    font-family: var(--body);
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    transition: font-weight 0.2s ease, color 0.2s ease;
+  }
+
+  .tab-item:hover, .tab-item:focus {
+    color: var(--text);
+  }
+
+  .tab-item.active {
+    color: var(--teal);
+    background: rgba(14, 124, 107, 0.12);
+  }
+  body.dark .tab-item.active {
+    color: var(--accent2);
+    background: rgba(45, 212, 191, 0.15);
+  }
+
+  .tab-item.active .tab-icon {
+    transform: translateY(-1px) scale(1.1);
+  }
+
+  .tab-item.active .tab-label {
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* Footer and floating buttons clearance for mobile bottom bar */
+  footer {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 1rem)) !important;
+  }
+  #backToTop {
+    bottom: calc(5.2rem + env(safe-area-inset-bottom, 1rem)) !important;
+  }
+  #floatingShareBtn {
+    bottom: calc(5.2rem + env(safe-area-inset-bottom, 1rem)) !important;
+  }
+}
+
+/* ─── FIREFOX GLASS FALLBACK ──────────────────────────── */
+@supports (-moz-appearance: none) {
+  #navbar,
+  #navbar.scrolled,
+  .mobile-tab-bar,
+  .nav-logo,
+  .theme-toggle {
+    backdrop-filter: blur(14px) saturate(160%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(160%) brightness(1.02) !important;
+    background: rgba(255, 255, 255, 0.70) !important;
+  }
+  body.dark #navbar,
+  body.dark #navbar.scrolled,
+  body.dark .mobile-tab-bar,
+  body.dark .nav-logo,
+  body.dark .theme-toggle {
+    backdrop-filter: blur(16px) saturate(160%) brightness(1.02) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(160%) brightness(1.02) !important;
+    background: rgba(15, 23, 42, 0.75) !important;
+  }
+}
+
 @media(max-width: 680px) {
   .hero-counters { gap: 1.5rem; }
   .hero-scroll { display: none; }
@@ -1883,19 +2038,20 @@ body.dark .mesh-blob {
   <circle id="scroll-dot" r="6" fill="var(--scroll-active-mid)" style="filter: drop-shadow(0 0 6px var(--scroll-active-mid)); transition: opacity 0.25s; opacity: 0;" />
 </svg>
 
-<!-- Liquid Glass Refraction SVG Filter -->
+<!-- SVG Liquid Glass Smooth Optical Lens Filter -->
 <svg style="position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
   <defs>
-    <filter id="nav-liquid-refract" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
-      <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" result="noise" />
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G" />
+    <filter id="droplet-lens-refract" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+      <feTurbulence type="sineWave" baseFrequency="0.003 0.001" numOctaves="1" result="wave" />
+      <feDisplacementMap in="SourceGraphic" in2="wave" scale="12" xChannelSelector="R" yChannelSelector="G" result="bent" />
+      <feBlend in="bent" in2="SourceGraphic" mode="normal" />
     </filter>
   </defs>
 </svg>
 
 <!-- NAV -->
-<nav id="navbar" class="nav-refract nav-glass">
-  <div class="nav-flat">
+<nav id="navbar" class="nav-glass">
+  <div class="content">
     <div class="nav-logo">Anshul Silhare</div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
@@ -3049,6 +3205,46 @@ body.dark .mesh-blob {
   </span>
 </button>
 
+<!-- MOBILE & TABLET BOTTOM FLOATING GLASS TAB BAR -->
+<div id="mobileTabBar" class="mobile-tab-bar" role="navigation" aria-label="Mobile Navigation">
+  <a href="#about" class="tab-item" data-section="about" aria-label="About">
+    <span class="tab-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </span>
+    <span class="tab-label">About</span>
+  </a>
+  <a href="#experience" class="tab-item" data-section="experience" aria-label="Experience">
+    <span class="tab-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+    </span>
+    <span class="tab-label">Experience</span>
+  </a>
+  <a href="#stack" class="tab-item" data-section="stack" aria-label="Expertise">
+    <span class="tab-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+    </span>
+    <span class="tab-label">Skills</span>
+  </a>
+  <a href="#projects" class="tab-item" data-section="projects" aria-label="Projects">
+    <span class="tab-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    </span>
+    <span class="tab-label">Projects</span>
+  </a>
+  <a href="#education" class="tab-item" data-section="education" aria-label="Education">
+    <span class="tab-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+    </span>
+    <span class="tab-label">Education</span>
+  </a>
+  <a href="#contact" class="tab-item" data-section="contact" aria-label="Contact">
+    <span class="tab-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </span>
+    <span class="tab-label">Contact</span>
+  </a>
+</div>
+
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
   <div class="modal-box">
@@ -3075,9 +3271,11 @@ body.dark .mesh-blob {
 
 <!-- SCRIPTS -->
 <script>
-const navbar   = document.getElementById('navbar');
-const navLinks = document.querySelectorAll('.nav-links a');
-const sections = document.querySelectorAll('section[id]');
+const navbar         = document.getElementById('navbar');
+const navLinks       = document.querySelectorAll('.nav-links a');
+const mobileTabItems = document.querySelectorAll('.mobile-tab-bar .tab-item');
+const sections       = document.querySelectorAll('section[id]');
+let lastActiveSection = '';
 
 // Cache section offsets to prevent forced reflows on scroll
 let sectionOffsets = [];
@@ -3135,6 +3333,11 @@ window.addEventListener('scroll', () => {
         navLinks.forEach(a => {
           a.classList.toggle('active', a.getAttribute('href') === '#' + current);
         });
+        mobileTabItems.forEach(tab => {
+          const tabSec = tab.getAttribute('data-section');
+          const isMatch = tabSec === current || (tabSec === 'education' && current === 'certs');
+          tab.classList.toggle('active', isMatch);
+        });
       }
       
       scrollTick = false;
@@ -3144,11 +3347,23 @@ window.addEventListener('scroll', () => {
 });
 window.dispatchEvent(new Event('scroll'));
 
+// Smooth scrolling for mobile tab items
+mobileTabItems.forEach(tab => {
+  tab.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = tab.getAttribute('href').substring(1);
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      targetEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
 function toggleNav() {
   const navLinks = document.getElementById('navLinks');
   const navbar = document.getElementById('navbar');
-  navLinks.classList.toggle('open');
-  if (navbar) {
+  if (navLinks) navLinks.classList.toggle('open');
+  if (navbar && navLinks) {
     navbar.classList.toggle('menu-open', navLinks.classList.contains('open'));
   }
 }
@@ -3497,7 +3712,6 @@ let scrollDot = null;
 let weavingStartY = 150;
 let weavingEndY = 0;
 let cachedWeavingPoints = [];
-let lastActiveSection = '';
 let cachedWinHeight = window.innerHeight;
 
 function generateWeavingPath() {
@@ -3997,8 +4211,6 @@ document.addEventListener('DOMContentLoaded', () => {
     card.removeChild(drawer);
     wrap.appendChild(drawer);
   });
-
-
 })();
 </script>
 </body>
