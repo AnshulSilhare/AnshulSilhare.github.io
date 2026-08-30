@@ -76,7 +76,7 @@ Here are the projects featured on my [portfolio website](https://anshulsilhare.g
 - **Objective:** Transition logistics management from reactive historical tracking to proactive risk intervention.
 - **Methodology:** Engineered a Random Forest classifier on 180,000+ records using Python and Scikit-Learn; processed 240+ features via One-Hot Encoding and StandardScaler.
 - **Outcome:** Deployed a production-ready dashboard providing real-time, probability-based delay risk percentages for both individual and bulk order uploads.
-- **Links:** [📁 GitHub Repository](https://github.com/AnshulSilhare/ai-dataco-supply-chain) | [🚀 Live Demo](https://anshulsilhare-ai-dataco-supply-chain.hf.space)
+- **Links:** [📁 GitHub Repository](https://github.com/AnshulSilhare/ai-dataco-supply-chain) | [🚀 Live Demo](https://ai-dataco-supply-chain.onrender.com/)
 - **Key Metrics:** **180K+** Records Trained • **80%** Precision Score • **240+** Engineered Features
 
 ### 2️⃣ Rapido Logistics: Revenue Leakage & Loss Analytics

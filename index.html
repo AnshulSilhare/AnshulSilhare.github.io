@@ -2803,7 +2803,7 @@ body.dark .mesh-blob {
           <span class="card-status status-complete">Complete</span>
         </div>
         <div class="card-title">DataCo Supply Chain:<br><span style="color:var(--accent2)">AI Delivery Risk Predictor</span></div>
-        <div class="card-tags"><span class="tag">Machine Learning</span><span class="tag">Random Forest</span><span class="tag">Gradio</span><span class="tag">HF Spaces</span><span class="tag">Python</span><span class="tag">Scikit-Learn</span></div>
+        <div class="card-tags"><span class="tag">Machine Learning</span><span class="tag">Random Forest</span><span class="tag">Gradio</span><span class="tag">Render</span><span class="tag">Python</span><span class="tag">Scikit-Learn</span></div>
         <div class="card-desc">End-to-end ML web application predicting supply chain delivery delays before they happen using a Random Forest Classifier. Outputs a probability risk score with Explainable AI feature importance, plus bulk CSV processing for 500+ orders at once.</div>
         <div class="card-metrics">
           <div class="metric"><div class="metric-val">180K+</div><div class="metric-lbl">Records Trained On</div></div>
@@ -2823,10 +2823,10 @@ body.dark .mesh-blob {
             <div class="hood-item"><span class="hood-num">03</span><div><div class="hood-title">Model Size Optimisation</div><div class="hood-desc">Rebuilt a 749MB overfit model using <code>max_depth=25, min_samples_leaf=3</code>, reducing size to 22MB while retaining 80% precision on late delivery detection.</div></div></div>
           </div>
         </div>
-        <div class="hf-notice"><span class="hf-notice-dot"></span><span>Hosted on Hugging Face Spaces · loads instantly in-page</span></div>
+        <div class="hf-notice"><span class="hf-notice-dot"></span><span>Production Web App · High-performance real-time ML inference</span></div>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/ai-dataco-supply-chain" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
-          <button class="card-btn card-btn-demo" onclick="openModal('DataCo Supply Chain: AI Delivery Risk Predictor','https://anshulsilhare-ai-dataco-supply-chain.hf.space','hf')">🚀 Live Demo</button>
+          <button class="card-btn card-btn-demo" onclick="openModal('DataCo Supply Chain: AI Delivery Risk Predictor','https://ai-dataco-supply-chain.onrender.com/','render')">🚀 Live Demo</button>
         </div>
       </div>
 
@@ -4015,15 +4015,16 @@ function openModal(title, url, type) {
     }, 20000);
   } else if (type === 'render') {
     badge.style.display = 'inline-flex';
-    document.getElementById('modalBadgeText').textContent = 'DemandSense Engine';
+    const isDataCo = title.toLowerCase().includes('dataco');
+    document.getElementById('modalBadgeText').textContent = isDataCo ? 'DataCo AI Engine' : 'DemandSense Engine';
     loadIcon.textContent = '⚡';
-    loadText.textContent = 'Connecting to DemandSense AI…';
+    loadText.textContent = isDataCo ? 'Connecting to DataCo AI Predictor…' : 'Connecting to DemandSense AI…';
     loadSub.textContent = 'Launching real-time analytics dashboard.';
     clearTimeout(window._mt);
     window._mt = setTimeout(() => {
       if (!document.getElementById('modalLoading').classList.contains('hidden')) {
         fallback.style.display = 'inline';
-        loadSub.textContent = 'Connecting to cloud server…';
+        loadSub.textContent = 'Connecting to cloud server… (Render free tier may take a moment to wake up)';
       }
     }, 12000);
   } else {

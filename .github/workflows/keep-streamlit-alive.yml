@@ -26,7 +26,7 @@ jobs:
         run: |
           HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             --max-time 30 \
-            "https://ai-delivery-risk-predictor-dataco.streamlit.app")
+            "https://ai-dataco-supply-chain.onrender.com/")
           echo "DataCo app responded with HTTP $HTTP_STATUS"
           if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
             echo "✅ DataCo app is awake."
