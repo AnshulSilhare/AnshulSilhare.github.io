@@ -704,49 +704,42 @@ body.dark .cert-card-program::after {
     align-items: center;
     justify-content: center;
     border-radius: 0 var(--radius2) var(--radius2) 0;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    background: transparent;
+    border: 1px solid transparent;
     border-left: none;
     position: relative;
     box-sizing: border-box;
     transition: width 0.42s cubic-bezier(0.25, 1, 0.5, 1),
                 opacity 0.28s ease,
+                background 0.3s ease,
                 border-color 0.3s ease,
                 box-shadow 0.3s ease;
   }
-
-  /* Continuous 2px accent top line on drawer */
-  .cert-card-wrap .cert-actions-drawer::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--teal), var(--accent2));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-  .cert-card-wrap:hover .cert-actions-drawer::before,
-  .cert-card-wrap.open .cert-actions-drawer::before {
-    transform: scaleX(1);
+  body.dark .cert-card-wrap .cert-actions-drawer {
+    background: transparent;
   }
 
   .cert-card-wrap:hover .cert-actions-drawer,
   .cert-card-wrap.open .cert-actions-drawer {
     width: 140px;
     opacity: 1;
-    border-color: rgba(13, 148, 136, 0.35);
+    background: linear-gradient(160deg,
+      rgba(20, 184, 166, 0.07) 0%,
+      rgba(20, 184, 166, 0.12) 100%);
+    border-color: rgba(13, 148, 136, 0.25);
     border-left: none;
-    box-shadow: 0 12px 40px rgba(13, 148, 136, 0.12), var(--glass-shadow);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
+    box-shadow: inset 6px 0 18px -6px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   body.dark .cert-card-wrap:hover .cert-actions-drawer,
   body.dark .cert-card-wrap.open .cert-actions-drawer {
-    background: var(--glass-bg);
-    border-color: rgba(13, 148, 136, 0.35);
+    background: linear-gradient(160deg,
+      rgba(20, 184, 166, 0.11) 0%,
+      rgba(20, 184, 166, 0.18) 100%);
+    box-shadow: inset 6px 0 18px -6px rgba(0, 0, 0, 0.22);
+    border-color: rgba(13, 148, 136, 0.25);
     border-left: none;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), var(--glass-shadow);
   }
 
   /* Inner content · fixed width prevents text wrapping during animation */
