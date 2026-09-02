@@ -1183,12 +1183,41 @@ body.dark .cert-mini-card[data-img]:hover {
   background: var(--teal);
   transform: scale(1.1);
 }
+.cert-modal-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 220px;
+  padding: 2.5rem 1.5rem;
+}
+.cert-spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid rgba(14, 124, 107, 0.15);
+  border-top-color: var(--teal);
+  border-radius: 50%;
+  animation: certSpin 0.75s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+body.dark .cert-spinner {
+  border-color: rgba(45, 212, 191, 0.15);
+  border-top-color: var(--accent2);
+}
+@keyframes certSpin {
+  to { transform: rotate(360deg); }
+}
 .cert-modal-img {
   max-width: 100%;
   max-height: 70vh;
   border-radius: calc(var(--radius2) - 4px);
   object-fit: contain;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cert-modal-img.loaded {
+  opacity: 1;
 }
 .cert-modal-title {
   margin-top: 1rem;
@@ -3236,7 +3265,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://www.coursera.org/account/accomplishments/specialization/GWM4JGQWOI2B" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Specialisation</a>
-            <button class="preview-btn" data-img="./certs/rutgers_scm_specialization.png" data-title="Supply Chain Management Specialization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/rutgers_scm_specialization.webp" data-title="Supply Chain Management Specialization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3259,37 +3288,37 @@ body.dark .mesh-blob {
             <div class="cert-courses-collapse">
               <div class="cert-courses-collapse-inner">
                 <div class="mini-certs-grid">
-                  <div class="cert-mini-card" data-img="./certs/Supply Chain Analytics Essentials.png" data-title="Supply Chain Analytics Essentials (Rutgers University)">
+                  <div class="cert-mini-card" data-img="./certs/Supply Chain Analytics Essentials.webp" data-title="Supply Chain Analytics Essentials (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Supply Chain Analytics Essentials</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card" data-img="./certs/Business Intelligence and Competitive Analysis.png" data-title="Business Intelligence and Competitive Analysis (Rutgers University)">
+                  <div class="cert-mini-card" data-img="./certs/Business Intelligence and Competitive Analysis.webp" data-title="Business Intelligence and Competitive Analysis (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Business Intelligence and Competitive Analysis</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card" data-img="./certs/Demand Analytics.png" data-title="Demand Analytics (Rutgers University)">
+                  <div class="cert-mini-card" data-img="./certs/Demand Analytics.webp" data-title="Demand Analytics (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Demand Analytics</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card" data-img="./certs/Inventory Analytics.png" data-title="Inventory Analytics (Rutgers University)">
+                  <div class="cert-mini-card" data-img="./certs/Inventory Analytics.webp" data-title="Inventory Analytics (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Inventory Analytics</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card" data-img="./certs/Supply chain analytics course.png" data-title="Supply Chain Analytics (Rutgers University)">
+                  <div class="cert-mini-card" data-img="./certs/Supply chain analytics course.webp" data-title="Supply Chain Analytics (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Supply Chain Analytics</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card" data-img="./certs/Sourcing Analytics.png" data-title="Sourcing Analytics (Rutgers University)">
+                  <div class="cert-mini-card" data-img="./certs/Sourcing Analytics.webp" data-title="Sourcing Analytics (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Sourcing Analytics</div>
@@ -3303,7 +3332,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://www.coursera.org/specializations/supply-chain-analytics" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Specialisation</a>
-            <button class="preview-btn" data-img="./certs/Supply Chain Analytics Specilization.png" data-title="Supply Chain Analytics Specialization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/Supply Chain Analytics Specilization.webp" data-title="Supply Chain Analytics Specialization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3358,7 +3387,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://coursera.org/verify/specialization/50P178BG7Q7X" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Specialisation</a>
-            <button class="preview-btn" data-img="./certs/Six Sigma Green Belt.png" data-title="Six Sigma Green Belt Specialization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/Six Sigma Green Belt.webp" data-title="Six Sigma Green Belt Specialization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3377,7 +3406,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/ea_product_mgmt.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/ea_product_mgmt.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3479,7 +3508,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://coursera.org/verify/professional-cert/H2MF96LVBUMX" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Credential</a>
-            <button class="preview-btn" data-img="./certs/Google Advanced Data Analytics Professional Certificate.png" data-title="Google Advanced Data Analytics Professional Certificate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/Google Advanced Data Analytics Professional Certificate.webp" data-title="Google Advanced Data Analytics Professional Certificate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3498,7 +3527,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://www.coursera.org/account/accomplishments/verify/414IN9TWBPEW" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/genai_leaders.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/genai_leaders.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3537,7 +3566,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/datacamp_intermediate_python.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/datacamp_intermediate_python.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3557,7 +3586,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/datacamp_introduction_to_python.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/datacamp_introduction_to_python.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3586,7 +3615,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://www.coursera.org/account/accomplishments/verify/54FEPJMDCYZF" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/power_bi_analysis.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/power_bi_analysis.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3603,7 +3632,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://www.coursera.org/account/accomplishments/verify/EOZJIYQVDK8D" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/power_bi_modeling.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/power_bi_modeling.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3639,7 +3668,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://www.coursera.org/account/accomplishments/verify/YY8BY187SXMU" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/tableau_design.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/tableau_design.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3658,7 +3687,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://www.coursera.org/account/accomplishments/verify/AXBPYIJAX6VC" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/tableau_fundamentals.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/tableau_fundamentals.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3687,7 +3716,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://www.coursera.org/account/accomplishments/verify/VWEODRPLHHS6" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/sql_foundations.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/sql_foundations.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3704,7 +3733,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://www.coursera.org/account/accomplishments/verify/CAZ581C2Z2TM" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/excel_preparing_data.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/excel_preparing_data.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3723,7 +3752,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="#" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/excel_advanced.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/excel_advanced.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -3742,7 +3771,7 @@ body.dark .mesh-blob {
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://coursera.org/verify/HTL4ZI37EG2Z" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/business_strategy.png"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+            <button class="preview-btn" data-img="./certs/business_strategy.webp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -4615,6 +4644,7 @@ function updateWeavingScroll(scrollY) {
 const initCertModal = () => {
   const modal = document.getElementById('certModal');
   const modalImg = document.getElementById('certModalImg');
+  const modalLoader = document.getElementById('certModalLoader');
   const modalCanvas = document.getElementById('certModalCanvas');
   const modalTitle = document.getElementById('certModalTitle');
   const closeBtn = document.getElementById('closeCertModal');
@@ -4624,12 +4654,18 @@ const initCertModal = () => {
   const closeModal = () => {
     modal.classList.remove('active');
     setTimeout(() => {
-      if (modalImg) modalImg.src = '';
+      if (modalImg) {
+        modalImg.src = '';
+        modalImg.classList.remove('loaded');
+        modalImg.style.display = 'none';
+      }
+      if (modalLoader) modalLoader.style.display = 'none';
       if (modalCanvas) {
         modalCanvas.innerHTML = '';
         modalCanvas.classList.remove('in-progress-mode');
+        modalCanvas.style.display = 'none';
       }
-    }, 400);
+    }, 350);
   };
 
   closeBtn.addEventListener('click', closeModal);
@@ -4658,17 +4694,45 @@ const initCertModal = () => {
           modalCanvas.style.display = 'none';
           modalCanvas.classList.remove('in-progress-mode');
         }
-        if (modalImg) {
-          modalImg.src = imgUrl;
-          modalImg.style.display = 'block';
-        }
+        
         modalTitle.textContent = title;
         modal.classList.add('active');
+
+        // Check if image is already loaded/cached
+        const tempImg = new Image();
+        tempImg.src = imgUrl;
+
+        if (tempImg.complete && tempImg.naturalWidth > 0) {
+          if (modalLoader) modalLoader.style.display = 'none';
+          modalImg.src = imgUrl;
+          modalImg.style.display = 'block';
+          modalImg.classList.add('loaded');
+        } else {
+          if (modalLoader) modalLoader.style.display = 'flex';
+          modalImg.style.display = 'none';
+          modalImg.classList.remove('loaded');
+          
+          tempImg.onload = () => {
+            if (modalLoader) modalLoader.style.display = 'none';
+            modalImg.src = imgUrl;
+            modalImg.style.display = 'block';
+            requestAnimationFrame(() => {
+              modalImg.classList.add('loaded');
+            });
+          };
+          tempImg.onerror = () => {
+            if (modalLoader) modalLoader.style.display = 'none';
+            modalImg.src = imgUrl;
+            modalImg.style.display = 'block';
+            modalImg.classList.add('loaded');
+          };
+        }
       } else if (card) {
+        if (modalLoader) modalLoader.style.display = 'none';
+        if (modalImg) modalImg.style.display = 'none';
         // Check if card is in progress
         const isInProgress = card.querySelector('.in-progress-label') !== null;
         
-        if (modalImg) modalImg.style.display = 'none';
         if (modalCanvas) {
           if (isInProgress) {
             modalCanvas.classList.add('in-progress-mode');
@@ -4815,6 +4879,53 @@ const initCertModal = () => {
     }
   });
 
+  // Background intelligent preloader for certificates
+  const preloadCertificates = () => {
+    const certUrls = [];
+    document.querySelectorAll('[data-img]').forEach(el => {
+      const u = el.getAttribute('data-img');
+      if (u && !certUrls.includes(u)) certUrls.push(u);
+    });
+
+    let idx = 0;
+    function preloadNext() {
+      if (idx >= certUrls.length) return;
+      const img = new Image();
+      img.src = certUrls[idx++];
+      img.onload = img.onerror = () => {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(preloadNext, { timeout: 300 });
+        } else {
+          setTimeout(preloadNext, 40);
+        }
+      };
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(preloadNext, { timeout: 800 });
+    } else {
+      setTimeout(preloadNext, 400);
+    }
+  };
+
+  if (document.readyState === 'complete') {
+    preloadCertificates();
+  } else {
+    window.addEventListener('load', preloadCertificates, { once: true });
+  }
+
+  // Instant prefetch on card hover / touchstart
+  document.querySelectorAll('.cert-card, .cert-card-program, .cert-mini-card, .preview-btn').forEach(card => {
+    const prefetch = () => {
+      const url = card.getAttribute('data-img') || card.querySelector('[data-img]')?.getAttribute('data-img');
+      if (url) {
+        const p = new Image();
+        p.src = url;
+      }
+    };
+    card.addEventListener('mouseenter', prefetch, { passive: true, once: true });
+    card.addEventListener('touchstart', prefetch, { passive: true, once: true });
+  });
+
   // Delegated event listener for verify buttons to open in a centered popup window
   document.addEventListener('click', (e) => {
     const verifyBtn = e.target.closest('.verify-btn');
@@ -4861,19 +4972,16 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Certificate View Modal -->
 
 <div id="certModal" class="cert-modal">
-
   <div class="cert-modal-content">
-
     <button class="cert-modal-close" id="closeCertModal">&times;</button>
-
+    <div class="cert-modal-loader" id="certModalLoader" style="display:none;">
+      <div class="cert-spinner"></div>
+      <span style="font-family:var(--mono);font-size:.72rem;color:var(--text2);margin-top:.75rem;letter-spacing:0.04em;">Loading Certificate...</span>
+    </div>
     <img src="" alt="Certificate Preview" class="cert-modal-img" id="certModalImg" style="display:none;">
-
     <div id="certModalCanvas" class="cert-canvas" style="display:none;"></div>
-
     <div class="cert-modal-title" id="certModalTitle">Certificate Title</div>
-
   </div>
-
 </div>
 
 
