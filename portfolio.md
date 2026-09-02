@@ -93,7 +93,7 @@ Inventory Optimisation
 Safety Stock
 VBA
 
-Led two end-to-end supply chain optimization initiatives across Kansai Nerolac Nerofix's 7-depot national distribution network. Built a composite carrier scorecard evaluating 66 freight transporters across 8,450+ dispatches to resolve SLA bottlenecks and drive route-level carrier reallocations via a 3-page Power BI dashboard. Simultaneously engineered a multi-depot replenishment pipeline for 453 SKUs, establishing ABC-FSN classifications and dynamic Safety Stock/ROP models based on factory lead-time matrices. Delivered automated operational tools in macro-enabled Excel (.xlsm), with all frameworks approved by executive leadership (CEO & SCM Manager) for immediate network deployment.
+Led two end-to-end supply chain optimization initiatives across Kansai Nerolac Nerofix's 7-depot national distribution network. Built a composite carrier scorecard evaluating 66 freight transporters across 8,450+ dispatches to resolve SLA bottlenecks and drive route-level carrier reallocations via a 3-page Power BI dashboard. Simultaneously engineered a multi-depot replenishment pipeline for 453 SKUs, establishing ABC-FSN classifications and dynamic Safety Stock/ROP models based on factory lead-time matrices. Delivered automated operational tools in macro-enabled Excel (.xlsm), with all frameworks approved by executive leadership for immediate network deployment.
 
 8,450+
 Shipments Analyzed
@@ -105,7 +105,7 @@ Log-Scaled Scorecard
 7-Depot ROP & Safety Stock
 
 Approved
-Cleared by CEO for Deployment
+Cleared for Network Rollout
 
 View Case Study (Anonymized) | Enterprise Data Anonymized
 
