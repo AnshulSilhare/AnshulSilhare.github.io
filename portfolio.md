@@ -811,20 +811,16 @@ Positivity XO
 
 Contributed to child-focused community programs, supporting logistical coordination and outreach operations for weekly events. Optimized resource supply lines for local chapters, ensuring **100% on-time delivery** of materials for educational workshops.
 
-## Open to full-time placements from August 2026.
+## Open to full-time roles & opportunities.
 
-Targeting roles in Operations Analytics, Supply Chain Analytics, and Data / Business Analytics. Currently interning at Nerolac Nerofix, actively building toward my final placement.
+Targeting roles in Operations Analytics, Supply Chain Analytics, and Data & Business Analytics. Completed internship at Kansai Nerolac Nerofix, actively building toward my final placement.
 
 ✉
 anshulsilhare@gmail.com
 [linkedin.com/in/anshul-silhare](https://linkedin.com/in/anshul-silhare)
 [github.com/AnshulSilhare](https://github.com/AnshulSilhare)
 
-© 2026 Anshul Silhare · WeSchool Mumbai
-
-[LinkedIn](https://linkedin.com/in/anshul-silhare)  ·
-[GitHub](https://github.com/AnshulSilhare)  ·
-PGDM Research & Business Analytics '27
+© 2026 Anshul Silhare · WeSchool Mumbai · PGDM Research & Business Analytics '27
 
 Top
 ↑
