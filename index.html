@@ -1792,7 +1792,10 @@ body.light .in-progress-course-item {
 .exp-project-title { font-family: var(--body); font-size: .78rem; font-weight: 500; color: var(--accent); margin-bottom: .5rem; padding: .4rem .7rem; background: rgba(30,58,95,.04); border-left: 2px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; }
 .exp-desc { font-size: .88rem; color: var(--text2); line-height: 1.75; }
 #leadership { background: transparent; }
-.leadership-list { display: flex; flex-direction: column; gap: 1.2rem; }
+.lead-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; width: 100%; box-sizing: border-box; }
+@media (max-width: 768px) {
+  .lead-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+}
 .lead-item { position: relative; overflow: hidden; background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: var(--radius2); padding: 1.3rem; box-shadow: var(--glass-shadow); transition: border-color .3s, transform .3s, box-shadow .3s; }
 .lead-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--nav-grad-start), var(--nav-grad-end)); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
 .lead-item:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
@@ -4058,7 +4061,7 @@ body.dark .mesh-blob {
       <p class="section-label">07 · Leadership &amp; Responsibilities</p>
       <h2 class="section-title">Leadership &amp; <span class="dim">Responsibilities.</span></h2>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+    <div class="lead-grid">
       <div class="lead-item reveal">
         <div class="lead-title">Management Committee · Analytics Round Table Conference</div>
         <div class="lead-org">WeSchool Mumbai · 2025-2027</div>
