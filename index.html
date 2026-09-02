@@ -2195,7 +2195,19 @@ body.dark .hood-body {
   flex-direction: column !important;
 }
 
-.project-card .card-desc {
+/* Experience flagship card always shows full description */
+.project-card-live .card-desc,
+#experience .project-card .card-desc {
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+  overflow: visible !important;
+  font-size: 0.88rem !important;
+  line-height: 1.72 !important;
+  margin-bottom: 1.1rem !important;
+}
+
+/* Featured projects grid cards use 2-line quick-scan clamp */
+.projects-grid .project-card .card-desc {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -2206,18 +2218,18 @@ body.dark .hood-body {
   transition: all 0.3s ease;
 }
 
-.project-card.expanded .card-desc {
+.projects-grid .project-card.expanded .card-desc {
   display: block !important;
   -webkit-line-clamp: unset !important;
 }
 
-.project-card .hood-wrapper,
-.project-card .hf-notice {
+.projects-grid .project-card .hood-wrapper,
+.projects-grid .project-card .hf-notice {
   display: none;
 }
 
-.project-card.expanded .hood-wrapper,
-.project-card.expanded .hf-notice {
+.projects-grid .project-card.expanded .hood-wrapper,
+.projects-grid .project-card.expanded .hf-notice {
   display: block;
 }
 
