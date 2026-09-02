@@ -654,17 +654,16 @@ body.dark .cert-card::after {
 
 @media (min-width: 768px) {
 
-  /* Fluid Accordion Grid for cards! 
-     Using a smaller flex-basis guarantees they never wrap when hovered, 
-     and adding 160px to the hovered base perfectly absorbs the drawer 
-     without over-expanding the card itself! */
+  /* Fluid Accordion Grid for cards */
   .cert-card-wrap {
-    flex: 1 1 150px !important; 
-    transition: flex-basis 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+    flex: 1 1 200px; 
+    min-width: 0;
+    transition: flex-basis 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                flex-grow 0.42s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .cert-card-wrap:hover,
   .cert-card-wrap.open {
-    flex-basis: 290px !important; /* 150 + 160 drawer */
+    flex-grow: 2.2;
   }
 
   /* When drawer opens, card's right corners flatten to join the drawer */
@@ -5189,6 +5188,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pull drawer OUT of card, add as sibling inside wrapper
     card.removeChild(drawer);
     wrap.appendChild(drawer);
+
+    // Lock card width during hover so text & shape remain 100% frozen in place
+    wrap.addEventListener('mouseenter', function() {
+      if (window.innerWidth >= 768) {
+        var w = card.getBoundingClientRect().width;
+        if (w > 0) {
+          card.style.flex = '0 0 ' + w + 'px';
+          card.style.width = w + 'px';
+          card.style.minWidth = w + 'px';
+          card.style.maxWidth = w + 'px';
+        }
+      }
+    });
+
+    wrap.addEventListener('mouseleave', function() {
+      if (!wrap.classList.contains('open')) {
+        card.style.flex = '';
+        card.style.width = '';
+        card.style.minWidth = '';
+        card.style.maxWidth = '';
+      }
+    });
   });
 
   // ── Certificate Touch & Click Toggle for Mobile/Desktop ─────────────────────
@@ -5198,16 +5219,46 @@ document.addEventListener('DOMContentLoaded', () => {
       item.addEventListener('click', function(e) {
         if (e.target.closest('a, button')) return;
         var isOpen = item.classList.contains('open');
-        allCertItems.forEach(function(c) { c.classList.remove('open'); });
+        allCertItems.forEach(function(c) {
+          c.classList.remove('open');
+          var card = c.querySelector('.cert-card:not(.cert-card-program)');
+          if (card) {
+            card.style.flex = '';
+            card.style.width = '';
+            card.style.minWidth = '';
+            card.style.maxWidth = '';
+          }
+        });
         if (!isOpen) {
           item.classList.add('open');
+          if (window.innerWidth >= 768) {
+            var card = item.querySelector('.cert-card:not(.cert-card-program)');
+            if (card) {
+              var w = card.getBoundingClientRect().width;
+              if (w > 0) {
+                card.style.flex = '0 0 ' + w + 'px';
+                card.style.width = w + 'px';
+                card.style.minWidth = w + 'px';
+                card.style.maxWidth = w + 'px';
+              }
+            }
+          }
         }
       });
     });
 
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.cert-card-wrap, .cert-card-program')) {
-        allCertItems.forEach(function(c) { c.classList.remove('open'); });
+        allCertItems.forEach(function(c) {
+          c.classList.remove('open');
+          var card = c.querySelector('.cert-card:not(.cert-card-program)');
+          if (card) {
+            card.style.flex = '';
+            card.style.width = '';
+            card.style.minWidth = '';
+            card.style.maxWidth = '';
+          }
+        });
       }
     });
   }
