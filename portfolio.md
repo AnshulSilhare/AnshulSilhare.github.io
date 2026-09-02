@@ -78,7 +78,7 @@ Completed Internship Project
 
 Completed
 
-Nerolac Nerofix: Supply Chain Performance Analysis
+Nerolac Nerofix: Logistics Benchmarking & Inventory Optimization
 
 Supply Chain Analytics Intern  ·  Kansai Nerolac Nerofix Pvt. Ltd.
 
