@@ -541,10 +541,10 @@ h2 {
 
   <div class="section">
     <h2 class="reveal">Situation</h2>
-    <p>Kansai Nerolac Nerofix operates a national distribution network distributing industrial and retail adhesives across 7 regional hubs. The supply chain team faced two core operational challenges:</p>
+    <p>Kansai Nerolac Nerofix operates a national distribution network distributing industrial and retail adhesives across <strong>7 regional hubs</strong>. The supply chain team faced two core operational challenges:</p>
     <ul>
-      <li><strong>Outbound Logistics:</strong> Transporter performance was reviewed through manual meetings without a standardized scoring model. High-volume carriers were difficult to compare fairly against low-volume ones, and delivery delays were treated solely as transit issues without measuring internal dispatch processing time.</li>
-      <li><strong>Depot Inventory Planning:</strong> Inventory replenishment relied on flat lead-time assumptions across all locations rather than actual factory-to-depot transit distances. This led to unnecessary safety stock buffers, occasional stockout risks on fast-moving items, and undetected slow-moving inventory.</li>
+      <li><strong>Outbound Logistics:</strong> Transporter performance was reviewed through manual meetings without a <strong>standardized scoring model</strong>. High-volume carriers were difficult to compare fairly against low-volume ones, and delivery delays were treated solely as transit issues without measuring <strong>internal warehouse processing time</strong>.</li>
+      <li><strong>Depot Inventory Planning:</strong> Inventory replenishment relied on <strong>flat lead-time assumptions</strong> across all locations rather than actual factory-to-depot transit distances. This led to unnecessary <strong>safety stock buffers</strong>, occasional <strong>stockout risks on fast-moving items</strong>, and undetected <strong>slow-moving inventory</strong>.</li>
     </ul>
   </div>
 
@@ -552,8 +552,8 @@ h2 {
     <h2 class="reveal">Task</h2>
     <p>I was tasked with leading two core analytical initiatives aligned with the supply chain and logistics function:</p>
     <ul>
-      <li><strong>Transporter Scorecard &amp; SLA Breach Analysis:</strong> Build an objective, composite scoring framework to benchmark all freight carriers across routes and identify root causes of delivery SLA breaches.</li>
-      <li><strong>Dynamic Inventory Replenishment &amp; Stockout Analytics:</strong> Design a demand-driven inventory model across all 7 regional depots to calculate dynamic Safety Stock and Reorder Points (ROP) based on factory-specific lead times and ABC-FSN classifications.</li>
+      <li><strong>Transporter Scorecard &amp; SLA Breach Analysis:</strong> Build an objective, <strong>composite scoring framework</strong> to benchmark <strong>66 freight carriers</strong> across national routes and isolate root causes of <strong>delivery SLA breaches</strong>.</li>
+      <li><strong>Dynamic Inventory Replenishment &amp; Stockout Analytics:</strong> Design a demand-driven inventory model across all <strong>7 regional depots (453 SKUs)</strong> to calculate dynamic <strong>Safety Stock (SS)</strong> and <strong>Reorder Points (ROP)</strong> based on <strong>factory-specific lead times</strong>, <strong>ABC classification (80/15/5 revenue share)</strong>, and <strong>FSN movement velocity (Fast, Slow, Non-moving)</strong>.</li>
     </ul>
   </div>
 
@@ -595,9 +595,9 @@ h2 {
     </div>
 
     <ul>
-      <li><strong>ERP Data Extraction &amp; Cleaning:</strong> Extracted and validated 13 months of transactional dispatch records (8,450+ shipments across 66 carriers). Handled missing timestamps and cleaned delivery logs using Python (Pandas) to build a consolidated data foundation.</li>
-      <li><strong>Cycle Time &amp; SLA Root-Cause Analysis:</strong> Deconstructed the order cycle to evaluate internal processing vs. road transit. Identified that warehouse processing accounted for <strong>57% of total cycle time (5.40 days avg)</strong>, while actual road transit took <strong>43% (4.02 days avg)</strong>, revealing that internal delays often consumed the available delivery buffer.</li>
-      <li><strong>Log-Scaled Carrier Scorecard (Power BI):</strong> Designed a normalized composite scoring model in Power BI to evaluate carriers fairly without penalizing high-volume transporters:
+      <li><strong>1. ERP Data Extraction &amp; Cleaning:</strong> Extracted and validated <strong>13 months of transactional dispatch records (8,450+ shipments across 66 carriers)</strong>. Handled missing timestamps and cleaned delivery logs using <strong>Python (Pandas)</strong> to build a consolidated data foundation.</li>
+      <li><strong>2. Cycle Time &amp; SLA Root-Cause Analysis:</strong> Deconstructed the order-to-delivery cycle into internal processing vs. road transit. Identified that warehouse processing accounted for <strong>57% of total cycle time (5.40 days avg)</strong>, while actual road transit took <strong>43% (4.02 days avg)</strong>, proving that internal delays consumed the delivery SLA buffer.</li>
+      <li><strong>3. Log-Scaled Carrier Scorecard (Power BI):</strong> Designed a normalized <strong>composite scoring model</strong> in <strong>Power BI (DAX)</strong> to evaluate carriers fairly without volume bias:
         <div class="equation-card">
           <div class="eq-formula">
             $$\begin{aligned}
@@ -605,20 +605,22 @@ h2 {
               &\quad + \left(0.20 \times \frac{\ln(1 + \text{Shipments})}{\ln(1 + \text{Max Shipments})} \times 100\right)
             \end{aligned}$$
           </div>
-          <div class="eq-expl">Weights: 60% On-Time SLA, 20% Near-Miss compliance, and 20% Log-Scaled dispatch volume normalization.</div>
+          <div class="eq-expl">Weights: <strong>60% On-Time SLA</strong>, <strong>20% Near-Miss compliance</strong>, and <strong>20% Log-Scaled dispatch volume normalization</strong> to prevent low-volume bias.</div>
         </div>
-        Built a 3-page interactive dashboard covering national rankings, SLA breach trends, and route-level carrier drill-downs.
+        Built a <strong>3-page interactive Power BI dashboard</strong> covering national rankings, SLA breach trends, and route-level carrier drill-downs.
       </li>
-      <li><strong>Dynamic Safety Stock &amp; ROP Modeling:</strong> Replaced flat lead-time assumptions with actual factory-to-hub distance matrices and applied Pareto ABC (80/15/5) and FSN movement tagging:
+      <li><strong>4. Dynamic Safety Stock &amp; ROP Modeling:</strong> Replaced flat assumptions with <strong>factory-to-depot lead-time matrices</strong> and applied <strong>Pareto ABC (80/15/5 revenue share)</strong> and <strong>FSN movement classification (Fast, Slow, Non-moving)</strong>:
         <div class="equation-card">
           <div class="eq-formula">
-            $$\text{Safety Stock} = Z \times \sigma_d \times \sqrt{L}$$
-            $$\text{Reorder Point (ROP)} = (D_{\text{avg}} \times L) + \text{Safety Stock}$$
+            $$\begin{aligned}
+              \text{Safety Stock (SS)} &= Z \times \sigma_d \times \sqrt{L} \\[5pt]
+              \text{Reorder Point (ROP)} &= (D_{\text{avg}} \times L) + \text{SS}
+            \end{aligned}$$
           </div>
-          <div class="eq-expl">Where \(Z\) is the service level factor, \(\sigma_d\) is daily demand standard deviation, \(L\) is factory-specific lead time in days, and \(D_{\text{avg}}\) is average daily demand.</div>
+          <div class="eq-expl">Where \(Z\) is the <strong>Service Level factor (Z-score)</strong>, \(\sigma_d\) is <strong>daily demand volatility (standard deviation)</strong>, \(L\) is <strong>factory-to-hub lead time in days</strong>, and \(D_{\text{avg}}\) is <strong>average daily demand</strong>.</div>
         </div>
       </li>
-      <li><strong>Operational Deployment (Excel):</strong> Automated the analytical logic into formatted, macro-enabled Excel workbooks with live formulas. This enabled depot managers to input monthly sales and stock data to instantly recalculate replenishment triggers without needing to run code.</li>
+      <li><strong>5. Operational Deployment (Excel VBA):</strong> Automated the entire analytical pipeline into formatted, <strong>macro-enabled Excel workbooks (VBA)</strong> with dynamic live formulas. This enabled depot managers across all <strong>7 regional hubs</strong> to input monthly sales and stock data to instantly generate replenishment triggers without needing to execute code.</li>
     </ul>
   </div>
 
@@ -628,16 +630,16 @@ h2 {
       <div class="highlight-title">Quantifiable Outcomes &amp; Business Impact</div>
       <ul>
         <li><strong>Carrier Benchmarking &amp; Route Optimization:</strong> Evaluated <strong>66 transporters across 8,450+ dispatches</strong> and identified <strong>4 immediate route-level carrier reallocations</strong> on active lanes to improve on-time compliance without adding new vendors.</li>
-        <li><strong>SLA Bottleneck Identification:</strong> Isolated internal processing (5.40 days) as the primary contributor to SLA breaches, providing actionable insights to streamline order-approval workflows.</li>
+        <li><strong>SLA Bottleneck Identification:</strong> Isolated <strong>internal warehouse processing (5.40 days)</strong> as the primary contributor to SLA breaches, providing actionable insights to streamline order-approval workflows.</li>
         <li><strong>Replenishment Precision:</strong> At South Hub 1 (Bangalore), applying factory-specific lead times normalized <strong>17 SKUs</strong> from false reorder alerts and <strong>cut emergency stockout alarms by 80% (from 15 to 3)</strong>.</li>
-        <li><strong>Executive Presentation &amp; Rollout:</strong> Formally presented the Power BI dashboard and inventory tools to the <strong>CEO and Supply Chain Manager</strong>, with all solutions approved for immediate network-wide operational use.</li>
+        <li><strong>Executive Presentation &amp; Rollout:</strong> Formally presented the Power BI dashboard and inventory tools to the <strong>CEO and Supply Chain Manager</strong>, with all solutions <strong>approved for immediate network-wide operational deployment</strong>.</li>
       </ul>
     </div>
   </div>
 
   <div class="section">
     <h2 class="reveal">Reflection</h2>
-    <p>This project reinforced that effective supply chain analytics requires balancing technical precision with practical operational usability. While the core calculations were engineered using Python and SQL, delivering the final tool in an automated Excel format ensured seamless adoption by depot operations teams. Furthermore, integrating logarithmic scaling proved crucial in creating a fair, realistic carrier benchmarking model that reflected real-world transport capacity.</p>
+    <p>This project reinforced that effective supply chain analytics requires balancing technical precision with practical operational usability. While the core calculations were engineered using <strong>Python (Pandas, NumPy)</strong> and <strong>SQL</strong>, delivering the final tool in an <strong>automated Excel VBA format</strong> ensured seamless adoption by depot operations teams. Furthermore, integrating <strong>logarithmic volume scaling</strong> proved crucial in creating a fair, realistic carrier benchmarking model that reflected real-world transport capacity.</p>
   </div>
 </div>
 <script>
