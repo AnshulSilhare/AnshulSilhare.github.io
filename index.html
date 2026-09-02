@@ -654,16 +654,17 @@ body.dark .cert-card::after {
 
 @media (min-width: 768px) {
 
-  /* Fluid Accordion Grid for cards */
+  /* Fluid Accordion Grid for cards · Max 3 cards per row */
   .cert-card-wrap {
-    flex: 1 1 200px; 
-    min-width: 0;
+    flex: 1 1 calc(33.333% - 1rem); 
+    min-width: 280px;
+    max-width: 100%;
     transition: flex-basis 0.42s cubic-bezier(0.25, 1, 0.5, 1),
                 flex-grow 0.42s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .cert-card-wrap:hover,
   .cert-card-wrap.open {
-    flex-grow: 2.2;
+    flex-grow: 1.8;
   }
 
   /* When drawer opens, card's right corners flatten to join the drawer */
