@@ -809,7 +809,7 @@ Management Committee
 
 Golden Hour Organisation
 
-Coordinated multi-team student initiatives for **100+ beneficiaries**, managing planning, execution, and delivery tracking.
+Coordinated multi-team student initiatives for **100+ orphan beneficiaries**, managing planning, execution, and delivery tracking.
 
 Community Contributor
 
