@@ -475,9 +475,8 @@ h2 {
   border: 1px solid var(--glass-border);
   border-left: 3px solid var(--teal) !important;
   border-radius: var(--radius);
-  padding: 1.1rem 1.35rem;
+  padding: 1rem 1.25rem;
   margin: 1rem 0 1.25rem;
-  overflow-x: auto;
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: var(--glass-shadow);
@@ -489,20 +488,21 @@ h2 {
   box-shadow: var(--glow);
 }
 .eq-formula {
-  font-size: 1.02rem;
+  font-size: clamp(0.78rem, 1.4vw, 0.94rem);
   text-align: center;
-  padding: 0.35rem 0;
+  padding: 0.25rem 0;
   color: var(--text);
   overflow-x: auto;
+  scrollbar-width: thin;
 }
 .eq-formula .katex-display {
-  margin: 0.35rem 0;
+  margin: 0.25rem 0;
 }
 .eq-expl {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   color: var(--text3);
   margin-top: 0.5rem;
-  line-height: 1.6;
+  line-height: 1.55;
   border-top: 1px dashed var(--border);
   padding-top: 0.5rem;
 }
@@ -600,8 +600,12 @@ h2 {
       <li><strong>Log-Scaled Carrier Scorecard (Power BI):</strong> Designed a normalized composite scoring model in Power BI to evaluate carriers fairly without penalizing high-volume transporters:
         <div class="equation-card">
           <div class="eq-formula">
-            $$\text{Composite Score} = (0.60 \times \text{On-Time \%}) + (0.20 \times \text{Near-Miss \%}) + \left(0.20 \times \frac{\ln(1 + \text{Shipments})}{\ln(1 + \text{Max Shipments})} \times 100\right)$$
+            $$\begin{aligned}
+              \text{Composite Score} &= (0.60 \times \text{On-Time \%}) + (0.20 \times \text{Near-Miss \%}) \\
+              &\quad + \left(0.20 \times \frac{\ln(1 + \text{Shipments})}{\ln(1 + \text{Max Shipments})} \times 100\right)
+            \end{aligned}$$
           </div>
+          <div class="eq-expl">Weights: 60% On-Time SLA, 20% Near-Miss compliance, and 20% Log-Scaled dispatch volume normalization.</div>
         </div>
         Built a 3-page interactive dashboard covering national rankings, SLA breach trends, and route-level carrier drill-downs.
       </li>
