@@ -563,6 +563,22 @@ Preparing Data for Analysis with Microsoft Excel
 [Verify](https://www.coursera.org/account/accomplishments/verify/CAZ581C2Z2TM)
  Preview
 
+![Kennesaw State University](./logos/ksu.png)
+
+Kennesaw State University
+1 certification
+
+![Kennesaw State University](./logos/ksu.png)
+
+Six Sigma Green Belt Specialization
+
+Kennesaw State University · 4-course specialization
+
+Aug 2026
+
+[Verify Specialisation](https://coursera.org/verify/specialization/50P178BG7Q7X)
+Preview
+
 ![Rutgers University](./logos/rutgers.png)
 
 Rutgers University
