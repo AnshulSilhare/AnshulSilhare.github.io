@@ -74,43 +74,40 @@ Odoo ERP
 
 ## Professional Experience.
 
-Live Internship Project
+Completed Internship Project
 
-Ongoing
+Completed
 
 Nerolac Nerofix: Supply Chain Performance Analysis
 
-Supply Chain Analytics Intern  ·  Kansai Nerolac Nerofix Pvt. Ltd.
+Supply Chain Analytics Intern  ·  Kansai Nerolac Nerofix Pvt. Ltd.
 
-May 2026 · Present
+May 2026 - July 2026 · 2 Mos
 
 Supply Chain Analytics
-SQL
+Python
 Power BI
-Transporter Benchmarking
+SQL Server
+Transporter Scorecard
 Inventory Optimisation
-SLA Compliance
 Safety Stock
+VBA
 
-Improving Kansai Nerolac Nerofix's supply chain operations by aligning transporter delivery performance with depot inventory levels. Auditing delivery dates to verify SLA compliance and benchmark carrier performance. Analysing historical sales and stock movements to establish reorder points and safety stock levels, connecting logistics performance to inventory management to reduce stockouts, lower holding costs, and improve carrier selection decisions.
+Led two end-to-end supply chain optimization initiatives across Kansai Nerolac Nerofix's 7-depot national distribution network. Built a composite carrier scorecard evaluating 66 freight transporters across 8,450+ dispatches to resolve SLA bottlenecks and drive route-level carrier reallocations via a 3-page Power BI dashboard. Simultaneously engineered a multi-depot replenishment pipeline for 453 SKUs, establishing ABC-FSN classifications and dynamic Safety Stock/ROP models based on factory lead-time matrices. Delivered automated operational tools in macro-enabled Excel (.xlsm), with all frameworks approved by executive leadership (CEO & SCM Manager) for immediate network deployment.
 
-SLA Audit
+8,450+
+Shipments Analyzed
 
-Delivery Compliance
+66 Carriers
+Log-Scaled Scorecard
 
-Benchmarking
+453 SKUs
+7-Depot ROP & Safety Stock
 
-Transporter Analysis
+Approved
+Cleared by CEO for Deployment
 
-Reorder Points
-
-Safety Stock Design
-
-Live
-
-Active Internship Project
-
-Confidential Project
+View Case Study (Anonymized) | Enterprise Data Anonymized
 
 03 · Expertise
 
