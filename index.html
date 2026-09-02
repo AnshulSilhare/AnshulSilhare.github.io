@@ -1068,10 +1068,24 @@ body.dark .cert-courses-toggle:hover {
   padding: 0.45rem 0.65rem;
   min-height: 38px;
   box-sizing: border-box;
-  transition: border-color 0.25s, background-color 0.25s;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .cert-mini-card:hover {
   border-color: var(--border2);
+}
+.cert-mini-card[data-img] {
+  cursor: pointer;
+}
+.cert-mini-card[data-img]:hover {
+  border-color: var(--teal);
+  background: rgba(14, 124, 107, 0.07);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(14, 124, 107, 0.12);
+}
+body.dark .cert-mini-card[data-img]:hover {
+  border-color: var(--accent2);
+  background: rgba(45, 212, 191, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 .cert-mini-main {
   display: flex;
@@ -3245,37 +3259,37 @@ body.dark .mesh-blob {
             <div class="cert-courses-collapse">
               <div class="cert-courses-collapse-inner">
                 <div class="mini-certs-grid">
-                  <div class="cert-mini-card">
+                  <div class="cert-mini-card" data-img="./certs/Supply Chain Analytics Essentials.png" data-title="Supply Chain Analytics Essentials (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Supply Chain Analytics Essentials</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card">
+                  <div class="cert-mini-card" data-img="./certs/Business Intelligence and Competitive Analysis.png" data-title="Business Intelligence and Competitive Analysis (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Business Intelligence and Competitive Analysis</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card">
+                  <div class="cert-mini-card" data-img="./certs/Demand Analytics.png" data-title="Demand Analytics (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Demand Analytics</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card">
+                  <div class="cert-mini-card" data-img="./certs/Inventory Analytics.png" data-title="Inventory Analytics (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Inventory Analytics</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card">
+                  <div class="cert-mini-card" data-img="./certs/Supply chain analytics course.png" data-title="Supply Chain Analytics (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Supply Chain Analytics</div>
                     </div>
                   </div>
-                  <div class="cert-mini-card">
+                  <div class="cert-mini-card" data-img="./certs/Sourcing Analytics.png" data-title="Sourcing Analytics (Rutgers University)">
                     <div class="cert-mini-main">
                       <div class="cert-mini-icon"><img src="./logos/rutgers.png" alt="Rutgers" style="width:80%;height:80%;object-fit:contain"></div>
                       <div class="cert-mini-name">Sourcing Analytics</div>
@@ -4625,7 +4639,7 @@ const initCertModal = () => {
 
   // Event listener for view/preview buttons (using event delegation)
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.view-btn, .preview-btn, .mini-view-btn, .mini-preview-btn, .mini-view-btn');
+    const btn = e.target.closest('.view-btn, .preview-btn, .mini-view-btn, .mini-preview-btn, .cert-mini-card[data-img]');
     if (btn) {
       e.preventDefault();
       const imgUrl = btn.getAttribute('data-img');
