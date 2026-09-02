@@ -406,11 +406,11 @@ body.dark .flow-tag { background: rgba(14,124,107,.08); color: var(--teal); bord
 .stack-category:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--glass-shadow); }
 .cat-header { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.2rem; }
 .cat-icon { width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: .9rem; }
-.cat-title { font-family: var(--body); font-size: .82rem; font-weight: 500; color: var(--text2); }
 .skill-list { display: flex; flex-direction: column; gap: .5rem; }
 .skill-item { display: flex; align-items: center; justify-content: space-between; }
-.skill-name { font-family: var(--body); font-size: .82rem; color: var(--text); }
-.skill-level { display: flex; gap: 3px; }
+.skill-name { font-family: var(--body); font-size: .82rem; color: var(--text); display: inline-flex; align-items: center; gap: .55rem; }
+.skill-icon { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.skill-level { display: flex; gap: 3px; align-items: center; }
 .skill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border2); }
 .skill-dot.filled { background: var(--blob2); border-color: var(--accent); }
 .skill-item-stacked { flex-direction: column; align-items: stretch; gap: .5rem; }
@@ -2786,10 +2786,19 @@ body.dark .mesh-blob {
           <div class="cat-title">Data &amp; Querying</div>
         </div>
         <div class="skill-list">
-          <div class="skill-item" data-skill="sql"><span class="skill-name">SQL (T-SQL, MySQL)</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
+          <div class="skill-item" data-skill="sql">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></span>
+              SQL (T-SQL, MySQL)
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div>
+          </div>
           <div class="skill-item skill-item-stacked" data-skill="python">
             <div class="skill-item-top">
-              <span class="skill-name">Python for Analytics</span>
+              <span class="skill-name">
+                <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.91 2C6.44 2 6.78 4.38 6.78 4.38L6.79 6.84H12V7.61H4.66C2.37 7.61 2 9.94 2 11.89C2 13.84 2.87 16.27 4.66 16.27H6.02V14.15C6.02 11.82 7.97 9.87 10.3 9.87H14.47C15.84 9.87 16.95 8.76 16.95 7.39V4.38C16.95 4.38 17.39 2 11.91 2ZM9.44 3.42C9.97 3.42 10.4 3.85 10.4 4.38C10.4 4.91 9.97 5.34 9.44 5.34C8.91 5.34 8.48 4.91 8.48 4.38C8.48 3.85 8.91 3.42 9.44 3.42Z" fill="#3776AB"/><path d="M12.09 22C17.56 22 17.22 19.62 17.22 19.62L17.21 17.16H12V16.39H19.34C21.63 16.39 22 14.06 22 12.11C22 10.16 21.13 7.73 19.34 7.73H17.98V9.85C17.98 12.18 16.03 14.13 13.7 14.13H9.53C8.16 14.13 7.05 15.24 7.05 16.61V19.62C7.05 19.62 6.61 22 12.09 22ZM14.56 20.58C14.03 20.58 13.6 20.15 13.6 19.62C13.6 19.09 14.03 18.66 14.56 18.66C15.09 18.66 15.52 19.09 15.52 19.62C15.52 20.15 15.09 20.58 14.56 20.58Z" fill="#FFD43B"/></svg></span>
+                Python for Analytics
+              </span>
               <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div>
             </div>
             <div class="python-libs">
@@ -2800,7 +2809,13 @@ body.dark .mesh-blob {
               <span class="lib-chip">seaborn</span>
             </div>
           </div>
-          <div class="skill-item" data-skill="excel"><span class="skill-name">Advanced Excel · VBA &amp; Macros</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
+          <div class="skill-item" data-skill="excel">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="3" fill="#107C41"/><path d="M6.5 6.5L12 17.5M12 6.5L6.5 17.5M14.5 6.5H17.5V17.5H14.5" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              Advanced Excel · VBA &amp; Macros
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div>
+          </div>
         </div>
       </div>
       <div class="stack-category reveal">
@@ -2809,9 +2824,27 @@ body.dark .mesh-blob {
           <div class="cat-title">BI &amp; Visual Analytics</div>
         </div>
         <div class="skill-list">
-          <div class="skill-item" data-skill="powerbi"><span class="skill-name">Power BI · DAX &amp; Power Query</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
-          <div class="skill-item" data-skill="database"><span class="skill-name">Data Modeling · Star / Snowflake</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-          <div class="skill-item" data-skill="tableau"><span class="skill-name">Tableau · Visual Analytics</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div></div></div>
+          <div class="skill-item" data-skill="powerbi">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="13" width="3.5" height="8" rx="1" fill="#F2C811"/><rect x="10.25" y="8" width="3.5" height="13" rx="1" fill="#F2C811"/><rect x="16.5" y="3" width="3.5" height="18" rx="1" fill="#F2C811"/></svg></span>
+              Power BI · DAX &amp; Power Query
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div>
+          </div>
+          <div class="skill-item" data-skill="database">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--teal);"><rect x="3" y="3" width="6" height="6" rx="1"></rect><rect x="15" y="3" width="6" height="6" rx="1"></rect><rect x="9" y="15" width="6" height="6" rx="1"></rect><path d="M6 9v3a3 3 0 0 0 3 3h3m6-6v3a3 3 0 0 1-3 3"></path></svg></span>
+              Data Modeling · Star / Snowflake
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div>
+          </div>
+          <div class="skill-item" data-skill="tableau">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v20M2 12h20M5 5l14 14M5 19L19 5" stroke="#E97627" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="2.2" fill="#1F497D"/></svg></span>
+              Tableau · Visual Analytics
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -2824,10 +2857,34 @@ body.dark .mesh-blob {
           <div class="cat-title">Supply Chain &amp; Operations</div>
         </div>
         <div class="skill-list">
-          <div class="skill-item" data-skill="supplychain"><span class="skill-name">Inventory Optimization · Safety Stock &amp; ROP</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
-          <div class="skill-item" data-skill="operations"><span class="skill-name">Logistics Benchmarking &amp; Route Analysis</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
-          <div class="skill-item" data-skill="planning"><span class="skill-name">Sourcing, Planning &amp; Procurement</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-          <div class="skill-item" data-skill="operations"><span class="skill-name">Odoo ERP · Inventory, Sales &amp; Purchasing</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
+          <div class="skill-item" data-skill="supplychain">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber);"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></span>
+              Inventory Optimization · Safety Stock &amp; ROP
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div>
+          </div>
+          <div class="skill-item" data-skill="operations">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber);"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></span>
+              Logistics Benchmarking &amp; Route Analysis
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div>
+          </div>
+          <div class="skill-item" data-skill="planning">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber);"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect><path d="M9 14l2 2 4-4"></path></svg></span>
+              Sourcing, Planning &amp; Procurement
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div>
+          </div>
+          <div class="skill-item" data-skill="operations">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.5" fill="#714B67"/><circle cx="12" cy="12" r="4.5" fill="#ffffff"/></svg></span>
+              Odoo ERP · Inventory, Sales &amp; Purchasing
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div>
+          </div>
         </div>
       </div>
       <div class="stack-category reveal">
@@ -2836,10 +2893,34 @@ body.dark .mesh-blob {
           <div class="cat-title">Quality, Strategy &amp; AI</div>
         </div>
         <div class="skill-list">
-          <div class="skill-item" data-skill="operations"><span class="skill-name">Lean Six Sigma · DMAIC Methodology</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-          <div class="skill-item" data-skill="statistics"><span class="skill-name">Statistical Process Control (SPC)</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-          <div class="skill-item" data-skill="modeling"><span class="skill-name">Generative AI &amp; Prompt Engineering</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-          <div class="skill-item" data-skill="operations"><span class="skill-name">Agile Project Management · Jira</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
+          <div class="skill-item" data-skill="operations">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--amber);"><circle cx="12" cy="12" r="9"></circle><path d="m9 12 2 2 4-4"></path></svg></span>
+              Lean Six Sigma · DMAIC Methodology
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div>
+          </div>
+          <div class="skill-item" data-skill="statistics">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--teal);"><path d="M3 18h18M3 6h18M3 12h18M6 15l4-6 4 6 4-6"></path></svg></span>
+              Statistical Process Control (SPC)
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div>
+          </div>
+          <div class="skill-item" data-skill="modeling">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#7c3aed;"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path></svg></span>
+              Generative AI &amp; Prompt Engineering
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div>
+          </div>
+          <div class="skill-item" data-skill="operations">
+            <span class="skill-name">
+              <span class="skill-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.5 2C11.5 6.4 15.1 10 19.5 10H20V2H11.5Z" fill="#0052CC"/><path d="M4 9.5C4 13.9 7.6 17.5 12 17.5H12.5V9.5H4Z" fill="#2684FF"/><path d="M11.5 17C11.5 21.4 15.1 25 19.5 25H20V17H11.5Z" fill="#0052CC"/></svg></span>
+              Agile Project Management · Jira
+            </span>
+            <div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div>
+          </div>
         </div>
       </div>
     </div>
