@@ -82,7 +82,7 @@ Nerolac Nerofix: Logistics Benchmarking & Inventory Optimization
 
 Supply Chain Analytics Intern  ·  Kansai Nerolac Nerofix Pvt. Ltd.
 
-May 2026 - July 2026 · 2 Mos
+May 2026 - July 2026 · 2 Months
 
 Supply Chain Analytics
 Python
