@@ -113,50 +113,59 @@ View Case Study (Anonymized) | Enterprise Data Anonymized
 
 ## Skills & Capabilities.
 
-Technical Skills
+Technical Stack & Software
 
 ⚙
 
 Data & Querying
 
-SQL (T-SQL)
+SQL (T-SQL, MySQL)
 
-Python
+Python for Analytics
 
 pandas
+numpy
+scikit-learn
 matplotlib
 seaborn
-scikit-learn
 
-Advanced Excel
+Advanced Excel · VBA & Macros
 
 📊
 
-Visualization & Reporting
+BI & Visual Analytics
 
-Power BI · DAX + Power Query
+Power BI · DAX & Power Query
 
-Complex Data Models
+Data Modeling · Star / Snowflake
 
-Tableau
+Tableau · Visual Analytics
 
-Other Skills
+Domain Frameworks & Methodologies
 
 🏭
 
-Operations & Supply Chain
+Supply Chain & Operations
 
-Odoo ERP (Procurement, Inventory & Sales)
+Inventory Optimization · Safety Stock & ROP
 
-Supply Chain Planning
+Logistics Benchmarking & Route Analysis
 
-Lean Six Sigma (DMAIC)
+Sourcing, Planning & Procurement
 
-🧩
+Odoo ERP · Inventory, Sales & Purchasing
 
-Project Management
+📈
 
-Jira (Agile / Scrum)
+Quality, Strategy & AI
+
+Lean Six Sigma · DMAIC Methodology
+
+Statistical Process Control (SPC)
+
+Generative AI & Prompt Engineering
+
+Agile Project Management · Jira
 
 04 · Portfolio
 
