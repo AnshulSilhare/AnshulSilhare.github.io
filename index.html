@@ -544,34 +544,13 @@ body.dark .card-actions {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  flex: 1 0 0px;
+  flex: 1 1 0px;
   min-width: 0;
-  position: relative;
-  border-radius: var(--radius2);
-  transition: flex-basis 0.42s cubic-bezier(0.25, 1, 0.5, 1),
-              width 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+  /* No overflow:hidden here · drawer must be free to expand */
 }
 
-/* Continuous top accent bar spanning both Card + Drawer */
-.cert-card-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--teal));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 7;
-  border-radius: var(--radius2) var(--radius2) 0 0;
-  pointer-events: none;
-}
-.cert-card-wrap:hover::before,
-.cert-card-wrap.open::before {
-  transform: scaleX(1);
-}
-
-/* CARD: stays at flex:1 with overflow:hidden for proper border-radius. */
+/* CARD: stays at flex:1 with overflow:hidden for proper border-radius.
+   overflow:hidden only clips its own children, NOT the sibling drawer. */
 .cert-card {
   position: relative;
   overflow: hidden;
@@ -593,8 +572,8 @@ body.dark .card-actions {
               border-radius 0.35s ease;
 }
 
-/* Standalone program cards keep their own accent bar */
-.cert-card-program::before {
+/* Accent bar */
+.cert-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -604,14 +583,21 @@ body.dark .card-actions {
   transform-origin: left;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.cert-card-program:hover::before,
-.cert-card-program.open::before {
+.cert-card-wrap:hover .cert-card::before,
+.cert-card-wrap.open .cert-card::before,
+.cert-card:hover::before,
+.cert-card.open::before {
   transform: scaleX(1);
 }
+.cert-card-wrap:hover .cert-card,
+.cert-card-wrap.open .cert-card {
+  border-color: rgba(13, 148, 136, 0.35);
+  box-shadow: 0 12px 40px rgba(13, 148, 136, 0.12), var(--glass-shadow);
+}
 
-/* Micro-Affordance Peek Badge */
-.cert-card::after {
-  content: '✦ Verify \00bb';
+/* Micro-Affordance Peek Badge (Program Cards Only) */
+.cert-card-program::after {
+  content: '✦ Verify & Preview \00bb';
   position: absolute;
   top: 0.85rem;
   right: 0.85rem;
@@ -633,22 +619,17 @@ body.dark .card-actions {
   z-index: 5;
   white-space: nowrap;
 }
-body.dark .cert-card::after {
+body.dark .cert-card-program::after {
   color: var(--accent2);
   background: rgba(45, 212, 191, 0.08);
   border-color: rgba(45, 212, 191, 0.28);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
-}
-.cert-card-program::after {
-  content: '✦ Verify & Preview \00bb';
 }
 @media (max-width: 600px) {
   .cert-card-program::after {
     content: '✦ Verify \00bb';
   }
 }
-.cert-card-wrap:hover .cert-card::after,
-.cert-card-wrap.open .cert-card::after,
 .cert-card-program:hover::after,
 .cert-card-program.open::after {
   opacity: 0;
@@ -692,23 +673,27 @@ body.dark .cert-card::after {
 
   /* Fluid Accordion Grid for cards */
   .cert-card-wrap {
-    flex: 1 0 0px; 
+    flex: 1 1 0px; 
     min-width: 0;
-    transition: width 0.42s cubic-bezier(0.25, 1, 0.5, 1),
-                flex-basis 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+    transition: flex-grow 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .cert-card-wrap:hover,
+  .cert-card-wrap.open {
+    flex-grow: 1.6;
+    z-index: 10;
   }
 
-  /* When drawer opens, card's right corners flatten and right border is hidden to merge with drawer */
+  /* When drawer opens, card's right corners flatten to join the drawer */
   .cert-card-wrap:hover .cert-card:not(.cert-card-program),
   .cert-card-wrap.open .cert-card:not(.cert-card-program) {
     border-radius: var(--radius2) 0 0 var(--radius2);
-    border-right: none !important;
-    border-color: rgba(13, 148, 136, 0.35);
-    box-shadow: 0 12px 40px rgba(13, 148, 136, 0.12), var(--glass-shadow);
+    border-right-color: transparent;
   }
 
   /* DRAWER: sibling of .cert-card inside .cert-card-wrap.
-     Starts at width:0 and slides smoothly to 140px. */
+     Starts at width:0 and slides to 140px.
+     overflow:hidden on the drawer clips ITS OWN content during animation. */
   .cert-card-wrap .cert-actions-drawer {
     width: 0;
     flex-shrink: 0;
@@ -719,13 +704,30 @@ body.dark .cert-card::after {
     justify-content: center;
     border-radius: 0 var(--radius2) var(--radius2) 0;
     background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid transparent;
+    border: 1px solid var(--glass-border);
     border-left: none;
+    position: relative;
+    box-sizing: border-box;
     transition: width 0.42s cubic-bezier(0.25, 1, 0.5, 1),
                 opacity 0.28s ease,
-                border-color 0.3s ease;
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+  }
+
+  /* Continuous 2px accent top line on drawer */
+  .cert-card-wrap .cert-actions-drawer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--teal), var(--accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .cert-card-wrap:hover .cert-actions-drawer::before,
+  .cert-card-wrap.open .cert-actions-drawer::before {
+    transform: scaleX(1);
   }
 
   .cert-card-wrap:hover .cert-actions-drawer,
@@ -733,24 +735,17 @@ body.dark .cert-card::after {
     width: 140px;
     opacity: 1;
     border-color: rgba(13, 148, 136, 0.35);
-    border-left: 1px dashed rgba(13, 148, 136, 0.25) !important;
+    border-left: none;
     box-shadow: 0 12px 40px rgba(13, 148, 136, 0.12), var(--glass-shadow);
-    background: linear-gradient(160deg,
-      rgba(20, 184, 166, 0.08) 0%,
-      rgba(20, 184, 166, 0.14) 100%);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
   }
   body.dark .cert-card-wrap:hover .cert-actions-drawer,
   body.dark .cert-card-wrap.open .cert-actions-drawer {
-    background: linear-gradient(160deg,
-      rgba(20, 184, 166, 0.12) 0%,
-      rgba(20, 184, 166, 0.20) 100%);
-  }
-  body.dark .cert-card-wrap:hover .cert-actions-drawer,
-  body.dark .cert-card-wrap.open .cert-actions-drawer {
-    background: linear-gradient(160deg,
-      rgba(20, 184, 166, 0.11) 0%,
-      rgba(20, 184, 166, 0.18) 100%);
-    box-shadow: inset 6px 0 18px -6px rgba(0, 0, 0, 0.22);
+    background: var(--glass-bg);
+    border-color: rgba(13, 148, 136, 0.35);
+    border-left: none;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), var(--glass-shadow);
   }
 
   /* Inner content · fixed width prevents text wrapping during animation */
@@ -1503,7 +1498,6 @@ body.light .cert-canvas-name {
   color: var(--text); 
   margin-bottom: .15rem; 
   line-height: 1.35; 
-  padding-right: 4.8rem; 
   box-sizing: border-box; 
 }
 .cert-org { 
@@ -1511,7 +1505,6 @@ body.light .cert-canvas-name {
   font-size: .75rem; 
   font-weight: 500; 
   color: var(--text2); 
-  padding-right: 4.8rem; 
   box-sizing: border-box; 
 }
 .cert-card-program .cert-name,
@@ -5237,72 +5230,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pull drawer OUT of card, add as sibling inside wrapper
     card.removeChild(drawer);
     wrap.appendChild(drawer);
-  });
 
-  // Row-level hover coordination: preserves sibling widths so they slide sideways without squishing
-  document.querySelectorAll('.certs-row').forEach(function(row) {
-    var wraps = Array.from(row.querySelectorAll('.cert-card-wrap'));
-    if (wraps.length === 0) return;
-
-    function lockRow() {
-      if (window.innerWidth < 768) return;
-      wraps.forEach(function(wrap) {
-        var card = wrap.querySelector('.cert-card');
-        var w = card ? card.getBoundingClientRect().width : wrap.getBoundingClientRect().width;
+    // Lock card width during hover so text & shape remain 100% frozen in place
+    wrap.addEventListener('mouseenter', function() {
+      if (window.innerWidth >= 768) {
+        var w = card.getBoundingClientRect().width;
         if (w > 0) {
-          wrap.dataset.baseW = w;
-          wrap.style.flex = '0 0 ' + w + 'px';
-          wrap.style.width = w + 'px';
-          wrap.style.minWidth = w + 'px';
-          if (card) {
-            card.style.flex = '0 0 ' + w + 'px';
-            card.style.width = w + 'px';
-            card.style.minWidth = w + 'px';
-          }
+          card.style.flex = '0 0 ' + w + 'px';
+          card.style.width = w + 'px';
+          card.style.minWidth = w + 'px';
+          card.style.maxWidth = w + 'px';
         }
-      });
-    }
-
-    function unlockRow() {
-      wraps.forEach(function(wrap) {
-        if (!wrap.classList.contains('open')) {
-          var card = wrap.querySelector('.cert-card');
-          wrap.style.flex = '';
-          wrap.style.width = '';
-          wrap.style.minWidth = '';
-          if (card) {
-            card.style.flex = '';
-            card.style.width = '';
-            card.style.minWidth = '';
-          }
-        }
-      });
-    }
-
-    wraps.forEach(function(wrap) {
-      wrap.addEventListener('mouseenter', function() {
-        if (window.innerWidth < 768) return;
-        lockRow();
-        var baseW = parseFloat(wrap.dataset.baseW) || wrap.getBoundingClientRect().width;
-        wrap.style.flex = '0 0 ' + (baseW + 140) + 'px';
-        wrap.style.width = (baseW + 140) + 'px';
-      });
-
-      wrap.addEventListener('mouseleave', function() {
-        if (window.innerWidth < 768) return;
-        if (!wrap.classList.contains('open')) {
-          var baseW = parseFloat(wrap.dataset.baseW) || wrap.getBoundingClientRect().width;
-          wrap.style.flex = '0 0 ' + baseW + 'px';
-          wrap.style.width = baseW + 'px';
-        }
-      });
+      }
     });
 
-    row.addEventListener('mouseleave', function() {
-      if (window.innerWidth < 768) return;
-      var hasOpen = wraps.some(function(w) { return w.classList.contains('open'); });
-      if (!hasOpen) {
-        unlockRow();
+    wrap.addEventListener('mouseleave', function() {
+      if (!wrap.classList.contains('open')) {
+        card.style.flex = '';
+        card.style.width = '';
+        card.style.minWidth = '';
+        card.style.maxWidth = '';
       }
     });
   });
@@ -5317,37 +5264,25 @@ document.addEventListener('DOMContentLoaded', () => {
         allCertItems.forEach(function(c) {
           c.classList.remove('open');
           var card = c.querySelector('.cert-card:not(.cert-card-program)');
-          c.style.flex = '';
-          c.style.width = '';
-          c.style.minWidth = '';
           if (card) {
             card.style.flex = '';
             card.style.width = '';
             card.style.minWidth = '';
+            card.style.maxWidth = '';
           }
         });
         if (!isOpen) {
           item.classList.add('open');
           if (window.innerWidth >= 768) {
-            var row = item.closest('.certs-row');
-            if (row) {
-              var rWraps = row.querySelectorAll('.cert-card-wrap');
-              rWraps.forEach(function(w) {
-                var c = w.querySelector('.cert-card');
-                var bw = c ? c.getBoundingClientRect().width : w.getBoundingClientRect().width;
-                if (bw > 0) {
-                  w.dataset.baseW = bw;
-                  w.style.flex = '0 0 ' + bw + 'px';
-                  w.style.width = bw + 'px';
-                  if (c) {
-                    c.style.flex = '0 0 ' + bw + 'px';
-                    c.style.width = bw + 'px';
-                  }
-                }
-              });
-              var baseW = parseFloat(item.dataset.baseW) || item.getBoundingClientRect().width;
-              item.style.flex = '0 0 ' + (baseW + 140) + 'px';
-              item.style.width = (baseW + 140) + 'px';
+            var card = item.querySelector('.cert-card:not(.cert-card-program)');
+            if (card) {
+              var w = card.getBoundingClientRect().width;
+              if (w > 0) {
+                card.style.flex = '0 0 ' + w + 'px';
+                card.style.width = w + 'px';
+                card.style.minWidth = w + 'px';
+                card.style.maxWidth = w + 'px';
+              }
             }
           }
         }
@@ -5359,13 +5294,11 @@ document.addEventListener('DOMContentLoaded', () => {
         allCertItems.forEach(function(c) {
           c.classList.remove('open');
           var card = c.querySelector('.cert-card:not(.cert-card-program)');
-          c.style.flex = '';
-          c.style.width = '';
-          c.style.minWidth = '';
           if (card) {
             card.style.flex = '';
             card.style.width = '';
             card.style.minWidth = '';
+            card.style.maxWidth = '';
           }
         });
       }
