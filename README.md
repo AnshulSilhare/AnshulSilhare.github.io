@@ -146,11 +146,11 @@ Here are the projects featured on my [portfolio website](https://anshulsilhare.g
 ---
 
 ## 📜 Credentials & Certifications
-- 🎓 **Post Graduate Diploma in Management (PGDM) — Research & Business Analytics** | WeSchool Mumbai ('27)
+- 🎓 **Post Graduate Diploma in Management (PGDM) · Research & Business Analytics** | WeSchool Mumbai ('27)
 - 🏆 **Supply Chain Management Specialization** (Rutgers University)
-- 📊 **Power BI Certifications** (Microsoft) — *Data Analysis, Data Modeling, and Visualization*
+- 📊 **Power BI Certifications** (Microsoft) · *Data Analysis, Data Modeling, and Visualization*
 - 🗄️ **SQL Foundations** (Microsoft)
-- 🧠 **Google Advanced Data Analytics Professional Certificate** *(In Progress — 5/7 courses complete)*
+- 🧠 **Google Advanced Data Analytics Professional Certificate** *(In Progress · 5/7 courses complete)*
 - 📈 **Fundamentals of Visualization with Tableau** (University of California, Davis)
 - 🎯 **Foundations of Business Strategy** (University of Virginia)
 - 🐍 **Python Programming (Intro + Intermediate)** (DataCamp)
