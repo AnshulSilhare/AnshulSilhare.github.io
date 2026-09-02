@@ -171,7 +171,46 @@ Agile Project Management · Jira
 
 ## Featured Projects.
 
-01🤖 ML / AI
+01⚡ Enterprise SC Engine
+
+Production Ready
+
+DemandSense AI: Indian FMCG
+Multi-Echelon Demand & Inventory Engine
+
+Auto-ML Forecasting | Prescriptive LLM Agent | Indian Seasonality | Safety Stock Sizing | What-If Price Elasticity | Streamlit & Plotly
+
+Enterprise-grade demand sensing and inventory planning engine built for Indian FMCG supply chains. Automates multi-model forecasting & benchmarking (XGBoost, Prophet, SARIMAX, Holt-Winters) to eliminate stockouts during festive peaks (Diwali, Holi), dynamically size safety stocks across 90%-98% service level SLAs, and simulate lead-time disruptions to protect working capital.
+
+₹1.8 Cr+
+Revenue at Risk Protected
+
+95.2%
+Forecast Accuracy (MAPE < 5%)
+
+-28%
+Excess Inventory Holding Cost
+
+5 Regional Hubs
+20 SKUs · 109K+ Records
+
+▶
+Under the Hood
+3 Supply Chain Challenges Solved
+
+01
+5-Model Auto-ML Selection Arena
+Eliminates planner bias by running parallel backtesting across 5 statistical and ML models (XGBoost, Prophet with Indian Holiday Regressors, SARIMAX, Holt-Winters, 14d WMA). Automatically deploys the lowest-MAPE algorithm per SKU-region echelon over 60-day unseen test sets.
+
+02
+Indian Market Intelligence & Luni-Solar Festival Elasticity
+Decomposes baseline trend from volatile Indian calendar shifts (Diwali +180% surge, Holi, Navratri, Eid, Ganesh Chaturthi, Pongal), monsoon spikes, and salary cycle effects (+8% lift on 25th-5th), preventing stockouts during peak retail windows.
+
+03
+Prescriptive LLM Agent & What-If Price Elasticity
+Combines Google Gemini API (with offline rule-engine fallback) to generate executive procurement briefs with real-time what-if simulations modeling price elasticity feedback loops and supply lead-time disruptions to safeguard working capital.
+
+02🤖 ML / AI
 
 Complete
 
