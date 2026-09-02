@@ -656,10 +656,10 @@ body.dark .cert-card-program::after {
 /* Content row inside a card */
 .cert-card-main {
   display: flex;
-  gap: 1rem;
+  gap: 0.85rem;
   align-items: flex-start;
   flex: 1;
-  min-width: 210px;
+  min-width: 0;
 }
 /* Text column must allow shrink so mini-grid gets proper width */
 .cert-card-main > div:not(.cert-icon) {
@@ -676,11 +676,12 @@ body.dark .cert-card-program::after {
     flex: 1 1 0px; 
     min-width: 0;
     position: relative;
-    transition: flex-grow 0.42s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: flex 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                flex-basis 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                flex-grow 0.42s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .cert-card-wrap:hover,
   .cert-card-wrap.open {
-    flex-grow: 1.6;
     z-index: 10;
   }
 
@@ -5231,7 +5232,7 @@ document.addEventListener('DOMContentLoaded', () => {
     card.removeChild(drawer);
     wrap.appendChild(drawer);
 
-    // Lock card width during hover so text & shape remain 100% frozen in place
+    // Lock card width and expand wrapper so siblings compress and shift sideways
     wrap.addEventListener('mouseenter', function() {
       if (window.innerWidth >= 768) {
         var w = card.getBoundingClientRect().width;
@@ -5240,6 +5241,7 @@ document.addEventListener('DOMContentLoaded', () => {
           card.style.width = w + 'px';
           card.style.minWidth = w + 'px';
           card.style.maxWidth = w + 'px';
+          wrap.style.flex = '0 0 ' + (w + 140) + 'px';
         }
       }
     });
@@ -5250,6 +5252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.style.width = '';
         card.style.minWidth = '';
         card.style.maxWidth = '';
+        wrap.style.flex = '';
       }
     });
   });
@@ -5269,6 +5272,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.width = '';
             card.style.minWidth = '';
             card.style.maxWidth = '';
+            c.style.flex = '';
           }
         });
         if (!isOpen) {
@@ -5282,6 +5286,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.style.width = w + 'px';
                 card.style.minWidth = w + 'px';
                 card.style.maxWidth = w + 'px';
+                item.style.flex = '0 0 ' + (w + 140) + 'px';
               }
             }
           }
@@ -5299,6 +5304,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.width = '';
             card.style.minWidth = '';
             card.style.maxWidth = '';
+            c.style.flex = '';
           }
         });
       }
