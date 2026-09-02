@@ -2189,6 +2189,119 @@ body.dark .hood-body {
   }
 }
 
+/* ─── Projects Quick-Scan Expandable Cards (Desktop & Mobile) ─── */
+.project-card {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.project-card .card-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.project-card.expanded .card-desc {
+  display: block !important;
+  -webkit-line-clamp: unset !important;
+}
+
+.project-card .hood-wrapper,
+.project-card .hf-notice {
+  display: none;
+}
+
+.project-card.expanded .hood-wrapper,
+.project-card.expanded .hf-notice {
+  display: block;
+}
+
+/* Quick-Scan Expand/Collapse Toggle Button */
+.project-details-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0.5rem 0.85rem;
+  margin: 0.25rem 0 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  background: rgba(30,58,95,.04);
+  border: 1px dashed var(--border2);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+body.dark .project-details-btn {
+  background: rgba(255,255,255,.04);
+  color: var(--teal);
+  border-color: rgba(255,255,255,.15);
+}
+
+.project-details-btn:hover {
+  background: rgba(30,58,95,.08);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+body.dark .project-details-btn:hover {
+  background: rgba(255,255,255,.08);
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.project-details-btn:active {
+  transform: scale(0.98);
+}
+
+.project-details-btn .btn-toggle-arrow {
+  font-size: 0.8rem;
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+
+.project-card.expanded .project-details-btn .btn-toggle-arrow {
+  transform: rotate(180deg);
+}
+
+.project-card .card-actions {
+  margin-top: auto !important;
+}
+
+@media(max-width: 768px) {
+  .projects-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: visible !important;
+  }
+  .project-card {
+    padding: 1.25rem !important;
+    margin-bottom: 0 !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: none !important;
+  }
+  .project-card .card-metrics {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.45rem !important;
+    margin: 0.75rem 0 !important;
+  }
+}
+
 /* ─── ADDED ENHANCEMENT STYLES ────────────────────────── */
 
 /* Skill Highlight Proof System */
@@ -2780,7 +2893,10 @@ body.dark .mesh-blob {
             </div>
           </div>
         </div>
-        <div class="hf-notice"><span class="hf-notice-dot"></span><span>Production Web App · High-performance real-time analytics</span></div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/demandsense-ai" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh">
             <span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub
@@ -2826,6 +2942,10 @@ body.dark .mesh-blob {
           </div>
         </div>
         <div class="hf-notice"><span class="hf-notice-dot"></span><span>Production Web App · High-performance real-time ML inference</span></div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/ai-dataco-supply-chain" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
           <button class="card-btn card-btn-demo" onclick="openModal('DataCo Supply Chain: AI Delivery Risk Predictor','https://ai-dataco-supply-chain.onrender.com/','render')">🚀 Live Demo</button>
@@ -2844,6 +2964,10 @@ body.dark .mesh-blob {
           <div class="metric"><div class="metric-val">20%</div><div class="metric-lbl">Night Shift TAT Lag</div></div>
           <div class="metric"><div class="metric-val">8 Entities</div><div class="metric-lbl">Star Schema (3NF)</div></div>
         </div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/Rapido_Logistics_Analytics_SQL" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
           <button class="card-btn card-btn-demo" onclick="openModal('Case Study: Rapido Logistics Revenue Leakage','./projects/rapido.html','case')">See Details &rarr;</button>
@@ -2862,6 +2986,10 @@ body.dark .mesh-blob {
           <div class="metric"><div class="metric-val">249 km</div><div class="metric-lbl">Avg Delivery Radius</div></div>
           <div class="metric"><div class="metric-val">-18%</div><div class="metric-lbl">Fuel Consumption</div></div>
         </div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/Logistics-Network-Optimization" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
           <button class="card-btn card-btn-gh" onclick="openModal('Interactive Map: Logistics Network','https://AnshulSilhare.github.io/Logistics-Network-Optimization/map.html','folium')" style="padding:0.5rem 0.75rem;">🗺️ Map</button>
@@ -2881,6 +3009,10 @@ body.dark .mesh-blob {
           <div class="metric"><div class="metric-val">Moving Avg</div><div class="metric-lbl">Stable Model</div></div>
           <div class="metric"><div class="metric-val">↓ Expiry</div><div class="metric-lbl">Waste &amp; Stockout Mitigation</div></div>
         </div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/Pharma-Demand-Forecasting" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
           <button class="card-btn card-btn-demo" onclick="openModal('Case Study: Pharma Demand Forecasting','./projects/pharma.html','case')">See Details &rarr;</button>
@@ -2899,6 +3031,10 @@ body.dark .mesh-blob {
           <div class="metric"><div class="metric-val">ERP + CRM</div><div class="metric-lbl">Source Systems</div></div>
           <div class="metric"><div class="metric-val">Pure T-SQL</div><div class="metric-lbl">No third-party ETL</div></div>
         </div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/sql-data-warehouse-project" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
           <button class="card-btn card-btn-demo" onclick="openModal('Case Study: SQL Data Warehouse Medallion Architecture','./projects/sql-warehouse.html','case')">See Details &rarr;</button>
@@ -2917,6 +3053,10 @@ body.dark .mesh-blob {
           <div class="metric"><div class="metric-val">72%</div><div class="metric-lbl">Jobs w/o Degree Req.</div></div>
           <div class="metric"><div class="metric-val">$98K</div><div class="metric-lbl">Python Median Salary</div></div>
         </div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/us-data-jobs-analysis" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
           <button class="card-btn card-btn-gh" onclick="openModal('Data Analyst Job Market Analysis','https://anshul-job-market.streamlit.app','streamlit')" style="padding:0.5rem 0.75rem;">🚀 Demo</button>
@@ -2936,6 +3076,10 @@ body.dark .mesh-blob {
           <div class="metric"><div class="metric-val">Segregated</div><div class="metric-lbl">Forklift &amp; Pedestrian lanes</div></div>
           <div class="metric"><div class="metric-val">Throughput</div><div class="metric-lbl">Picking Cycle Optimization</div></div>
         </div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/Warehouse-Layout-Optimization" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
           <button class="card-btn card-btn-demo" onclick="openModal('Case Study: Warehouse Layout Optimization','./projects/warehouse-layout.html','case')">See Details &rarr;</button>
@@ -2954,6 +3098,10 @@ body.dark .mesh-blob {
           <div class="metric"><div class="metric-val">Swimlane</div><div class="metric-lbl">Lucidchart Visual Mapping</div></div>
           <div class="metric"><div class="metric-val">↓ Capital</div><div class="metric-lbl">Working Capital Efficiency</div></div>
         </div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/Value-Stream-Mapping" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
           <button class="card-btn card-btn-demo" onclick="openModal('Case Study: Value Stream Mapping','./projects/value-stream.html','case')">See Details &rarr;</button>
@@ -2972,6 +3120,10 @@ body.dark .mesh-blob {
           <div class="metric"><div class="metric-val">r = -0.47</div><div class="metric-lbl">Privacy vs Data Share</div></div>
           <div class="metric"><div class="metric-val">Spearman</div><div class="metric-lbl">Correlation Testing</div></div>
         </div>
+        <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
+          <span class="btn-toggle-text">Show Architecture &amp; Details</span>
+          <span class="btn-toggle-arrow">▾</span>
+        </button>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/Consumer-Behavior-Research" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
           <button class="card-btn card-btn-demo" onclick="openModal('Case Study: Consumer Behavior Analysis','./projects/consumer-behavior.html','case')">See Details &rarr;</button>
@@ -4727,6 +4879,18 @@ function toggleSpecializationCourses(btn) {
     collapse.classList.add('expanded');
     btn.setAttribute('aria-expanded', 'true');
     if (label) label.textContent = 'Hide ' + (count ? count + ' ' : '') + 'Courses';
+  }
+}
+
+// ── Projects Mobile Quick-Scan Expand/Collapse Toggle ─────────────────────────
+function toggleProjectDetails(btn) {
+  const card = btn.closest('.project-card');
+  if (!card) return;
+  const isExpanded = card.classList.toggle('expanded');
+  btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+  const textEl = btn.querySelector('.btn-toggle-text');
+  if (textEl) {
+    textEl.textContent = isExpanded ? 'Hide Architecture & Details' : 'Show Architecture & Details';
   }
 }
 </script>
