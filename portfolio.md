@@ -57,11 +57,11 @@ Operations & Analytics · WeSchool Mumbai
 PGDM student focused on Operations Management
 and Business Analytics.
 
-I completed my BSc in Biotechnology at Hislop College, Nagpur, where I developed structured analytical thinking through research-oriented coursework. Along the way I found myself consistently more engaged by the data and decision-making side of problems, which led me toward management education.
+PGDM candidate (WeSchool Mumbai), Operations Management & Business Analytics - SQL, Python, Power BI, and Supply Chain frameworks applied to real operational data.
 
-I am now pursuing PGDM in Research & Business Analytics at WeSchool Mumbai, specialising in Operations Management. I apply a methodical, evidence-based approach to business problems, working across SQL, Python, Power BI, and Supply Chain frameworks to turn operational data into clear decisions.
+I recently completed a Supply Chain Analytics internship at Nerolac Nerofix, delivering three projects with management-approved recommendations. My approach: treat every business problem like a hypothesis - collect data, test it, optimize.
 
-My focus areas are Operations Analytics, Supply Chain Planning, and business intelligence. I work on projects that involve real datasets, practical tools, and outcomes that connect directly to business impact.
+That mindset isn't an accident. It comes from a BSc in Biotechnology (Hislop College, Nagpur), where I learned that data beats assumptions. I pivoted into analytics because I cared more about interpreting results than generating them.
 
 SQL · Advanced
 Python · Modeling
