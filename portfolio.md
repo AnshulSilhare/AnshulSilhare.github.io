@@ -57,11 +57,11 @@ Operations & Analytics · WeSchool Mumbai
 PGDM student focused on Operations Management
 and Business Analytics.
 
-PGDM candidate (WeSchool Mumbai), Operations Management & Business Analytics - SQL, Python, Power BI, and Supply Chain frameworks applied to real operational data.
+I am a **PGDM candidate at WeSchool Mumbai** specializing in Operations Management and Business Analytics. I bridge the gap between hands-on data analytics and executive decision-making, applying SQL, Python, Power BI, and core Supply Chain frameworks to solve real operational bottlenecks.
 
-I recently completed a Supply Chain Analytics internship at Nerolac Nerofix, delivering three projects with management-approved recommendations. My approach: treat every business problem like a hypothesis - collect data, test it, optimize.
+During my Supply Chain Analytics internship at **Nerolac Nerofix**, I delivered three management-approved projects focused on stockout risk mitigation, secondary sales dealer clustering, and distributor dispatch SLAs. Whether building FMCG demand forecasting engines (DemandSense AI) or predictive delay classifiers (DataCo), I build tools that turn complex data into clear, **data-driven decisions** and measurable revenue protection.
 
-That mindset isn't an accident. It comes from a BSc in Biotechnology (Hislop College, Nagpur), where I learned that data beats assumptions. I pivoted into analytics because I cared more about interpreting results than generating them.
+My approach of treating every operational challenge like a testable hypothesis stems from my **BSc in Biotechnology**, where I learned that data beats assumptions. Today, I combine that scientific rigor with **Lean Six Sigma** methodologies to help supply chains run leaner, faster, and more resilient.
 
 SQL · Advanced
 Python · Modeling
