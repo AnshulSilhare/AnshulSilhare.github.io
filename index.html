@@ -396,13 +396,6 @@ section { position: relative; }
 .meta-icon { color: var(--accent2); font-size: .8rem; margin-top: .1rem; flex-shrink: 0; width: 14px; }
 .bio-intro { font-size: 1.2rem; font-weight: 500; color: var(--text); line-height: 1.55; margin-bottom: 1.5rem; word-break: break-word; }
 .bio-intro .hl { color: var(--accent2); }
-.bio-flow { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.5rem; width: 100%; box-sizing: border-box; }
-.flow-tag { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); background: rgba(30,58,95,.06); border: 1px solid rgba(30,58,95,.14); padding: .35rem .6rem; border-radius: 4px; text-align: center; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s; }
-body.dark .flow-tag { background: rgba(14,124,107,.08); color: var(--teal); border-color: rgba(14,124,107,.25); }
-@media (min-width: 1024px) {
-  .bio-flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: .45rem; }
-  .flow-tag { padding: .35rem .2rem; font-size: clamp(0.55rem, 0.72vw, 0.7rem); }
-}
 
 /* ─── EXPERTISE ──────────────────────────────────────── */
 #stack { background: transparent; }
@@ -2886,14 +2879,6 @@ body.dark .mesh-blob {
         <p class="bio-text">I am a <strong>PGDM candidate at WeSchool Mumbai</strong> specializing in Operations Management and Business Analytics. I bridge the gap between hands-on data analytics and executive decision-making, applying SQL, Python, Power BI, and core Operations and Supply Chain frameworks to solve real operational bottlenecks.</p>
         <p class="bio-text">During my Supply Chain Analytics internship at <strong>Nerolac Nerofix</strong>, I delivered three management-approved projects focused on stockout risk mitigation, secondary sales dealer clustering, and distributor dispatch SLAs. Whether building FMCG demand forecasting engines or predictive delay classifiers, I build tools that turn complex data into clear, <strong>data-driven decisions</strong> and measurable revenue protection.</p>
         <p class="bio-text">My approach of treating every operational challenge like a testable hypothesis stems from my <strong>BSc in Biotechnology</strong>, where I learned that data beats assumptions. Today, I combine that scientific rigor with <strong>Lean Six Sigma</strong> methodologies to help business operations and supply chains run leaner, faster, and more resilient.</p>
-        <div class="bio-flow">
-          <span class="flow-tag">SQL · Advanced</span>
-          <span class="flow-tag">Python · Modeling</span>
-          <span class="flow-tag">Power BI · DAX</span>
-          <span class="flow-tag">Supply Chain</span>
-          <span class="flow-tag">Lean Six Sigma</span>
-          <span class="flow-tag">Odoo ERP</span>
-        </div>
       </div>
     </div>
 
