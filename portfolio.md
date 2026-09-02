@@ -566,7 +566,7 @@ Preparing Data for Analysis with Microsoft Excel
 ![Rutgers University](./logos/rutgers.png)
 
 Rutgers University
-1 certification
+2 certifications
 
 ![Rutgers University](./logos/rutgers.png)
 
@@ -597,6 +597,41 @@ Supply Chain Operations
 Supply Chain Logistics
 
 [Verify Specialisation](https://www.coursera.org/account/accomplishments/specialization/GWM4JGQWOI2B)
+Preview
+
+![Rutgers University](./logos/rutgers.png)
+
+Supply Chain Analytics Specialization
+
+Rutgers University · 6-course specialization
+
+Aug 2026
+
+![Rutgers](./logos/rutgers.png)
+
+Supply Chain Analytics Essentials
+
+![Rutgers](./logos/rutgers.png)
+
+Business Intelligence and Competitive Analysis
+
+![Rutgers](./logos/rutgers.png)
+
+Demand Analytics
+
+![Rutgers](./logos/rutgers.png)
+
+Inventory Analytics
+
+![Rutgers](./logos/rutgers.png)
+
+Supply Chain Analytics
+
+![Rutgers](./logos/rutgers.png)
+
+Sourcing Analytics
+
+[Verify Specialisation](https://www.coursera.org/specializations/supply-chain-analytics)
 Preview
 
 ![Vanderbilt University](./logos/vanderbilt.jpg)
