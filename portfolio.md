@@ -710,9 +710,10 @@ Foundations of Business Strategy
 
 ![Microsoft Excel](./logos/excel.png)
 
-Advanced Microsoft Excel
+Microsoft Excel - Excel from Beginner to Advanced
+Kyle Pew, Office Newb · Udemy
 
-Verify
+[Verify](https://ude.my/UC-4914def4-8e1d-4e71-b454-90307aa4ab5b)
  Preview
 
 ![Forage](./logos/forage.png)
