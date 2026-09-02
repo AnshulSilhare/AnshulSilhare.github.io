@@ -793,23 +793,29 @@ Krishna Public School, Bhilai
 
 ## Leadership & Responsibilities.
 
+Management Committee · Analytics Round Table Conference
+
+WeSchool Mumbai · 2025-2027
+
+Core Management Committee member for the Analytics Round Table Conference at WeSchool; active student volunteer driving operational and logistical coordination across various institutional events.
+
 Management Committee · Science Society
 
-Hislop College, Nagpur · 2023–2025
+Hislop College, Nagpur · 2023-2025
 
-Coordinated operations and event logistics for **10+ inter-collegiate science events** over a 2-year tenure. Led a cross-functional team of **15+ coordinators**; managed scheduling, resource allocation, and budget tracking for **500+ attendees**.
+Led cross-functional initiatives across 2 years, driving process planning, operational coordination, and project tracking for inter-collegiate science events.
 
 Management Committee
 
 Golden Hour Organisation
 
-Coordinated multi-team student initiatives, managing resource planning, procurement, and scheduling of community programs. Successfully executed **12 community drives**, streamlining volunteer scheduling to impact **100+ beneficiaries**.
+Coordinated multi-team student initiatives for **100+ beneficiaries**, managing planning, execution, and delivery tracking.
 
 Community Contributor
 
 Positivity XO
 
-Contributed to child-focused community programs, supporting logistical coordination and outreach operations for weekly events. Optimized resource supply lines for local chapters, ensuring **100% on-time delivery** of materials for educational workshops.
+Supported child-focused community programs, demonstrating social responsibility and cross-team collaboration for weekly outreach initiatives.
 
 ## Open to full-time roles & opportunities.
 
