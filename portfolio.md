@@ -637,21 +637,45 @@ Preview
 ![Vanderbilt University](./logos/vanderbilt.jpg)
 
 Vanderbilt University
-2 certifications
+4 certifications
+
+![Vanderbilt University](./logos/vanderbilt.jpg)
+
+Generative AI Leadership & Strategy Specialization
+
+Vanderbilt University · 3-course specialization
+
+Aug 2026
+
+[Verify Specialisation](https://coursera.org/verify/specialization/5E2H4DJ7MW3Z)
+Preview
 
 ![Vanderbilt University](./logos/vanderbilt.jpg)
 
 Generative AI for Leaders
 
+Aug 2026
+
 [Verify](https://www.coursera.org/account/accomplishments/verify/414IN9TWBPEW)
- Preview
+Preview
 
 ![Vanderbilt University](./logos/vanderbilt.jpg)
 
 Prompt Engineering for ChatGPT
 
-Verify
- Preview
+Aug 2026
+
+[Verify](https://coursera.org/verify/OQVKDV7AWOP8)
+Preview
+
+![Vanderbilt University](./logos/vanderbilt.jpg)
+
+Trustworthy Generative AI
+
+Aug 2026
+
+[Verify](https://coursera.org/verify/584XPHAKDHY5)
+Preview
 
 ![University of California, Davis](./logos/ucdavis.png)
 
