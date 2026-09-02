@@ -57,11 +57,11 @@ Operations & Analytics · WeSchool Mumbai
 PGDM student focused on Operations Management
 and Business Analytics.
 
-I am a **PGDM candidate at WeSchool Mumbai** specializing in Operations Management and Business Analytics. I bridge the gap between hands-on data analytics and executive decision-making, applying SQL, Python, Power BI, and core Supply Chain frameworks to solve real operational bottlenecks.
+I am a **PGDM candidate at WeSchool Mumbai** specializing in Operations Management and Business Analytics. I bridge the gap between hands-on data analytics and executive decision-making, applying SQL, Python, Power BI, and core Operations and Supply Chain frameworks to solve real operational bottlenecks.
 
-During my Supply Chain Analytics internship at **Nerolac Nerofix**, I delivered three management-approved projects focused on stockout risk mitigation, secondary sales dealer clustering, and distributor dispatch SLAs. Whether building FMCG demand forecasting engines (DemandSense AI) or predictive delay classifiers (DataCo), I build tools that turn complex data into clear, **data-driven decisions** and measurable revenue protection.
+During my Supply Chain Analytics internship at **Nerolac Nerofix**, I delivered three management-approved projects focused on stockout risk mitigation, secondary sales dealer clustering, and distributor dispatch SLAs. Whether building FMCG demand forecasting engines or predictive delay classifiers, I build tools that turn complex data into clear, **data-driven decisions** and measurable revenue protection.
 
-My approach of treating every operational challenge like a testable hypothesis stems from my **BSc in Biotechnology**, where I learned that data beats assumptions. Today, I combine that scientific rigor with **Lean Six Sigma** methodologies to help supply chains run leaner, faster, and more resilient.
+My approach of treating every operational challenge like a testable hypothesis stems from my **BSc in Biotechnology**, where I learned that data beats assumptions. Today, I combine that scientific rigor with **Lean Six Sigma** methodologies to help business operations and supply chains run leaner, faster, and more resilient.
 
 SQL · Advanced
 Python · Modeling

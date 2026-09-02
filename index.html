@@ -395,9 +395,9 @@ section { position: relative; }
 .meta-icon { color: var(--accent2); font-size: .8rem; margin-top: .1rem; flex-shrink: 0; width: 14px; }
 .bio-intro { font-size: 1.2rem; font-weight: 500; color: var(--text); line-height: 1.55; margin-bottom: 1.5rem; }
 .bio-intro .hl { color: var(--accent2); }
-.bio-text { font-size: .95rem; color: var(--text2); line-height: 1.85; margin-bottom: 1.5rem; }
-.bio-flow { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; }
-.flow-tag { font-family: var(--mono); font-size: .7rem; color: var(--accent); background: rgba(30,58,95,.06); border: 1px solid rgba(30,58,95,.14); padding: .3rem .8rem; border-radius: 4px; }
+.bio-flow { display: grid; grid-template-columns: repeat(6, 1fr); gap: .45rem; margin-top: 1.5rem; width: 100%; }
+.flow-tag { font-family: var(--mono); font-size: clamp(0.55rem, 0.72vw, 0.7rem); color: var(--accent); background: rgba(30,58,95,.06); border: 1px solid rgba(30,58,95,.14); padding: .35rem .2rem; border-radius: 4px; text-align: center; white-space: nowrap; display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s; }
+body.dark .flow-tag { background: rgba(14,124,107,.08); color: var(--teal); border-color: rgba(14,124,107,.25); }
 
 /* ─── EXPERTISE ──────────────────────────────────────── */
 #stack { background: transparent; }
@@ -1667,9 +1667,9 @@ body.dark .contact-link:hover { background: rgba(30,41,59,.55); color: var(--acc
 .footer-tagline a:hover { color: var(--accent); }
 
 /* ─── MODAL ───────────────────────────────────────────── */
-.modal-overlay { position: fixed; inset: 0; z-index: 999; background: rgba(15,23,42,.75); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+.modal-overlay { position: fixed; inset: 0; z-index: 999; background: rgba(15,23,42,.78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); display: flex; align-items: center; justify-content: center; padding: 1.5rem 2vw; opacity: 0; pointer-events: none; transition: opacity .3s ease; }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
-.modal-box { width: 100%; max-width: 1100px; height: 90vh; background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transform: scale(.94); transition: transform .35s ease; box-shadow: 0 32px 80px rgba(15,23,42,.2); }
+.modal-box { width: 100%; max-width: 1480px; height: 93vh; background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; transform: scale(.95); transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 32px 90px rgba(15,23,42,.35); }
 .modal-overlay.open .modal-box { transform: scale(1); }
 .modal-header { display: flex; align-items: center; justify-content: space-between; padding: .9rem 1.4rem; background: var(--bg3); border-bottom: 1px solid var(--border); flex-shrink: 0; }
 .modal-title { font-family: var(--body); font-size: .82rem; color: var(--text2); }
@@ -2300,6 +2300,14 @@ body.dark .project-details-btn:hover {
     gap: 0.45rem !important;
     margin: 0.75rem 0 !important;
   }
+  .modal-overlay {
+    padding: 0.75rem 0.5rem !important;
+  }
+  .modal-box {
+    width: 100% !important;
+    height: 94vh !important;
+    border-radius: 12px !important;
+  }
 }
 
 /* ─── ADDED ENHANCEMENT STYLES ────────────────────────── */
@@ -2687,9 +2695,9 @@ body.dark .mesh-blob {
       </div>
       <div class="about-bio reveal">
         <p class="bio-intro">PGDM student focused on <span class="hl">Operations Management</span><br>and <span class="hl">Business Analytics.</span></p>
-        <p class="bio-text">I am a <strong>PGDM candidate at WeSchool Mumbai</strong> specializing in Operations Management and Business Analytics. I bridge the gap between hands-on data analytics and executive decision-making, applying SQL, Python, Power BI, and core Supply Chain frameworks to solve real operational bottlenecks.</p>
-        <p class="bio-text">During my Supply Chain Analytics internship at <strong>Nerolac Nerofix</strong>, I delivered three management-approved projects focused on stockout risk mitigation, secondary sales dealer clustering, and distributor dispatch SLAs. Whether building FMCG demand forecasting engines (DemandSense AI) or predictive delay classifiers (DataCo), I build tools that turn complex data into clear, <strong>data-driven decisions</strong> and measurable revenue protection.</p>
-        <p class="bio-text">My approach of treating every operational challenge like a testable hypothesis stems from my <strong>BSc in Biotechnology</strong>, where I learned that data beats assumptions. Today, I combine that scientific rigor with <strong>Lean Six Sigma</strong> methodologies to help supply chains run leaner, faster, and more resilient.</p>
+        <p class="bio-text">I am a <strong>PGDM candidate at WeSchool Mumbai</strong> specializing in Operations Management and Business Analytics. I bridge the gap between hands-on data analytics and executive decision-making, applying SQL, Python, Power BI, and core Operations and Supply Chain frameworks to solve real operational bottlenecks.</p>
+        <p class="bio-text">During my Supply Chain Analytics internship at <strong>Nerolac Nerofix</strong>, I delivered three management-approved projects focused on stockout risk mitigation, secondary sales dealer clustering, and distributor dispatch SLAs. Whether building FMCG demand forecasting engines or predictive delay classifiers, I build tools that turn complex data into clear, <strong>data-driven decisions</strong> and measurable revenue protection.</p>
+        <p class="bio-text">My approach of treating every operational challenge like a testable hypothesis stems from my <strong>BSc in Biotechnology</strong>, where I learned that data beats assumptions. Today, I combine that scientific rigor with <strong>Lean Six Sigma</strong> methodologies to help business operations and supply chains run leaner, faster, and more resilient.</p>
         <div class="bio-flow">
           <span class="flow-tag">SQL · Advanced</span>
           <span class="flow-tag">Python · Modeling</span>
