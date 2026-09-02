@@ -469,10 +469,9 @@ body.dark .flow-tag { background: rgba(14,124,107,.08); color: var(--teal); bord
 .card-num { font-family: var(--mono); font-size: .65rem; color: var(--text3); }
 .card-title { font-family: var(--display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: .6rem; line-height: 1.25; }
 .card-tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.1rem; }
-.tag { font-family: var(--mono); font-size: .68rem; font-weight: 500; color: var(--accent); background: rgba(30,58,95,.06); border: 1px solid rgba(30,58,95,.14); padding: .22rem .6rem; border-radius: 4px; }
-.card-desc { font-size: .88rem; color: var(--text2); line-height: 1.72; margin-bottom: 1.1rem; flex: 1; }
+.card-desc { font-size: .88rem; color: var(--text2); line-height: 1.68; margin-bottom: .85rem; flex: 1; }
 .card-metrics {
-  display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: 1.2rem; padding: 1rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: .35rem .75rem; margin-bottom: .85rem; padding: .55rem .85rem;
   background: rgba(255, 255, 255, 0.55); border-radius: var(--radius);
   border: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: inset 0 2px 6px rgba(15, 23, 42, 0.03);
@@ -483,9 +482,9 @@ body.dark .card-metrics {
   border-color: rgba(255, 255, 255, 0.06);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
 }
-.metric { display: flex; flex-direction: column; }
-.metric-val { font-family: var(--mono); font-size: .88rem; font-weight: 700; color: var(--accent); }
-.metric-lbl { font-family: var(--body); font-size: .70rem; font-weight: 500; color: var(--text2); margin-top: .15rem; }
+.metric { display: flex; flex-direction: column; justify-content: center; }
+.metric-val { font-family: var(--mono); font-size: .84rem; font-weight: 700; color: var(--accent); line-height: 1.2; }
+.metric-lbl { font-family: var(--body); font-size: .68rem; font-weight: 500; color: var(--text2); margin-top: .1rem; line-height: 1.2; }
 .card-actions {
   display: flex; gap: .7rem; margin-top: auto;
   padding: 1.25rem 1.8rem;
@@ -2195,32 +2194,22 @@ body.dark .hood-body {
   flex-direction: column !important;
 }
 
-/* Experience flagship card always shows full description */
+/* Project cards always show full descriptions without cropping */
 .project-card-live .card-desc,
-#experience .project-card .card-desc {
+#experience .project-card .card-desc,
+.projects-grid .project-card .card-desc {
   display: block !important;
   -webkit-line-clamp: unset !important;
   overflow: visible !important;
+  font-size: 0.86rem;
+  line-height: 1.62;
+  margin-bottom: 0.85rem;
+}
+
+#experience .project-card .card-desc {
   font-size: 0.88rem !important;
   line-height: 1.72 !important;
   margin-bottom: 1.1rem !important;
-}
-
-/* Featured projects grid cards use 2-line quick-scan clamp */
-.projects-grid .project-card .card-desc {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  font-size: 0.86rem;
-  line-height: 1.6;
-  margin-bottom: 0.75rem;
-  transition: all 0.3s ease;
-}
-
-.projects-grid .project-card.expanded .card-desc {
-  display: block !important;
-  -webkit-line-clamp: unset !important;
 }
 
 .projects-grid .project-card .hood-wrapper,
@@ -2916,7 +2905,7 @@ body.dark .mesh-blob {
           <span class="tag">PO Automation</span>
         </div>
         <div class="card-desc">
-          Enterprise-grade demand sensing and inventory planning engine built for Indian FMCG supply chains. Automates multi-model forecasting &amp; benchmarking (XGBoost, Prophet, SARIMAX, Holt-Winters) to eliminate stockouts during festive peaks (Diwali, Holi), dynamically size safety stocks across 90%–98% service level SLAs, and simulate lead-time disruptions to protect working capital.
+          Enterprise-grade demand sensing and inventory planning engine built for Indian FMCG supply chains. Automates multi-model forecasting &amp; benchmarking (XGBoost, Prophet, SARIMAX, Holt-Winters) to eliminate stockouts during festive peaks (Diwali, Holi), dynamically size safety stocks across 90%-98% service level SLAs, and simulate lead-time disruptions to protect working capital.
         </div>
         <div class="card-metrics">
           <div class="metric"><div class="metric-val">₹1.8 Cr+</div><div class="metric-lbl">Revenue at Risk Protected</div></div>
@@ -3817,7 +3806,7 @@ body.dark .mesh-blob {
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
         <div class="lead-item reveal">
           <div class="lead-title">Management Committee · Science Society</div>
-          <div class="lead-org">Hislop College, Nagpur · 2023–2025</div>
+          <div class="lead-org">Hislop College, Nagpur · 2023-2025</div>
           <div class="lead-desc">Coordinated operations and event logistics for <strong>10+ inter-collegiate science events</strong> over a 2-year tenure. Led a cross-functional team of <strong>15+ coordinators</strong>; managed scheduling, resource allocation, and budget tracking for <strong>500+ attendees</strong>.</div>
         </div>
         <div class="lead-item reveal">
