@@ -1113,6 +1113,100 @@ body.dark .cert-mini-card[data-img]:hover {
   word-break: normal;
 }
 
+/* Always expanded subcards grid */
+.cert-always-expanded-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+  margin-bottom: 0.35rem;
+  width: 100%;
+}
+@media (max-width: 900px) {
+  .cert-always-expanded-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.cert-subcard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 0.75rem 0.85rem;
+  box-sizing: border-box;
+  gap: 0.6rem;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+}
+.cert-subcard:hover {
+  border-color: var(--teal);
+  background: rgba(14, 124, 107, 0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(14, 124, 107, 0.12);
+}
+body.dark .cert-subcard:hover {
+  border-color: var(--accent2);
+  background: rgba(45, 212, 191, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.cert-subcard-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+.cert-subcard-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.cert-subcard-info {
+  flex: 1;
+  min-width: 0;
+}
+.cert-subcard-title {
+  font-family: var(--head);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.25;
+}
+.cert-subcard-org {
+  font-family: var(--body);
+  font-size: 0.72rem;
+  color: var(--text2);
+  margin-top: 0.2rem;
+  line-height: 1.2;
+}
+.cert-subcard-date {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--text3);
+  margin-top: 0.25rem;
+}
+.cert-subcard-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  width: 100%;
+  margin-top: auto;
+}
+.cert-subcard-actions .verify-btn,
+.cert-subcard-actions .preview-btn {
+  height: 24px;
+  font-size: 0.7rem;
+  padding: 0 0.45rem;
+}
+
 @media (max-width: 768px) {
   .cert-card-program .cert-actions-drawer {
     grid-template-rows: 1fr !important;
@@ -3439,7 +3533,7 @@ body.dark .mesh-blob {
         </div>
         <span class="cert-inst-name">Advanced Analytics, Machine Learning &amp; AI</span>
       </div>
-      <span class="cert-inst-count">7 credentials · 1 Professional Certificate · 1 Specialization</span>
+      <span class="cert-inst-count">4 credentials · 1 Specialization · 1 Professional Certificate</span>
     </div>
     <div class="certs-grid">
       <!-- Google Advanced Data Analytics -->
@@ -3513,8 +3607,8 @@ body.dark .mesh-blob {
         </div>
       </div>
 
-      <!-- Vanderbilt Generative AI Leadership & Strategy Specialization -->
-      <div class="cert-card cert-card-program reveal" data-skills="modeling python ai genai">
+      <!-- Vanderbilt Generative AI Leadership & Strategy Specialization (Always Expanded with 3 courses) -->
+      <div class="cert-card cert-card-program reveal" data-skills="modeling python ai genai promptengineering ethics">
         <div class="cert-card-main">
           <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
             <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
@@ -3523,72 +3617,66 @@ body.dark .mesh-blob {
             <div class="cert-name">Generative AI Leadership &amp; Strategy Specialization</div>
             <div class="cert-org">Vanderbilt University · <strong style="font-weight:600;color:var(--text);">3-course specialization</strong></div>
             <div class="cert-date">Aug 2026</div>
+
+            <div class="cert-always-expanded-grid">
+              <div class="cert-subcard" data-img="./certs/webp/genai_leaders.webp" data-title="Generative AI for Leaders (Vanderbilt University)">
+                <div class="cert-subcard-header">
+                  <div class="cert-subcard-icon">
+                    <img src="./logos/vanderbilt.jpg" alt="Vanderbilt" style="width:100%;height:100%;object-fit:contain;transform:scale(1.15)">
+                  </div>
+                  <div class="cert-subcard-info">
+                    <div class="cert-subcard-title">Generative AI for Leaders</div>
+                    <div class="cert-subcard-org">Vanderbilt University · Coursera Verified</div>
+                    <div class="cert-subcard-date">Aug 2026</div>
+                  </div>
+                </div>
+                <div class="cert-subcard-actions">
+                  <a href="https://www.coursera.org/account/accomplishments/verify/414IN9TWBPEW" class="verify-btn" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+                  <button class="preview-btn" data-img="./certs/webp/genai_leaders.webp" data-title="Generative AI for Leaders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+                </div>
+              </div>
+
+              <div class="cert-subcard" data-img="./certs/webp/Prompt Engineering For ChatGPT.webp" data-title="Prompt Engineering for ChatGPT (Vanderbilt University)">
+                <div class="cert-subcard-header">
+                  <div class="cert-subcard-icon">
+                    <img src="./logos/vanderbilt.jpg" alt="Vanderbilt" style="width:100%;height:100%;object-fit:contain;transform:scale(1.15)">
+                  </div>
+                  <div class="cert-subcard-info">
+                    <div class="cert-subcard-title">Prompt Engineering for ChatGPT</div>
+                    <div class="cert-subcard-org">Vanderbilt University · Coursera Verified</div>
+                    <div class="cert-subcard-date">Aug 2026</div>
+                  </div>
+                </div>
+                <div class="cert-subcard-actions">
+                  <a href="https://coursera.org/verify/OQVKDV7AWOP8" class="verify-btn" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+                  <button class="preview-btn" data-img="./certs/webp/Prompt Engineering For ChatGPT.webp" data-title="Prompt Engineering for ChatGPT"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+                </div>
+              </div>
+
+              <div class="cert-subcard" data-img="./certs/webp/Trustworthy Generative AI.webp" data-title="Trustworthy Generative AI (Vanderbilt University)">
+                <div class="cert-subcard-header">
+                  <div class="cert-subcard-icon">
+                    <img src="./logos/vanderbilt.jpg" alt="Vanderbilt" style="width:100%;height:100%;object-fit:contain;transform:scale(1.15)">
+                  </div>
+                  <div class="cert-subcard-info">
+                    <div class="cert-subcard-title">Trustworthy Generative AI</div>
+                    <div class="cert-subcard-org">Vanderbilt University · Coursera Verified</div>
+                    <div class="cert-subcard-date">Aug 2026</div>
+                  </div>
+                </div>
+                <div class="cert-subcard-actions">
+                  <a href="https://coursera.org/verify/584XPHAKDHY5" class="verify-btn" target="_blank" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
+                  <button class="preview-btn" data-img="./certs/webp/Trustworthy Generative AI.webp" data-title="Trustworthy Generative AI"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
         <div class="cert-actions-drawer">
           <div class="cert-actions-inner">
             <a href="https://coursera.org/verify/specialization/5E2H4DJ7MW3Z" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify Specialisation</a>
             <button class="preview-btn" data-img="./certs/webp/Generative AI Leadership & Strategy.webp" data-title="Generative AI Leadership & Strategy Specialization"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Generative AI for Leaders -->
-      <div class="cert-card reveal" data-skills="modeling ai genai">
-        <div class="cert-card-main">
-          <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-            <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
-          </div>
-          <div>
-            <div class="cert-name">Generative AI for Leaders</div>
-            <div class="cert-org">Vanderbilt University · Coursera Verified</div>
-            <div class="cert-date">Aug 2026</div>
-          </div>
-        </div>
-        <div class="cert-actions-drawer">
-          <div class="cert-actions-inner">
-            <a href="https://www.coursera.org/account/accomplishments/verify/414IN9TWBPEW" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/webp/genai_leaders.webp" data-title="Generative AI for Leaders"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Prompt Engineering for ChatGPT -->
-      <div class="cert-card reveal" data-skills="modeling ai promptengineering genai">
-        <div class="cert-card-main">
-          <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-            <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
-          </div>
-          <div>
-            <div class="cert-name">Prompt Engineering for ChatGPT</div>
-            <div class="cert-org">Vanderbilt University · Coursera Verified</div>
-            <div class="cert-date">Aug 2026</div>
-          </div>
-        </div>
-        <div class="cert-actions-drawer">
-          <div class="cert-actions-inner">
-            <a href="https://coursera.org/verify/OQVKDV7AWOP8" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/webp/Prompt Engineering For ChatGPT.webp" data-title="Prompt Engineering for ChatGPT"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Trustworthy Generative AI -->
-      <div class="cert-card reveal" data-skills="modeling ai ethics genai">
-        <div class="cert-card-main">
-          <div class="cert-icon" style="background:#fff;border:1px solid var(--border)">
-            <img src="./logos/vanderbilt.jpg" alt="Vanderbilt University" style="width:100%;height:100%;object-fit:contain;transform:scale(1.2)">
-          </div>
-          <div>
-            <div class="cert-name">Trustworthy Generative AI</div>
-            <div class="cert-org">Vanderbilt University · Coursera Verified</div>
-            <div class="cert-date">Aug 2026</div>
-          </div>
-        </div>
-        <div class="cert-actions-drawer">
-          <div class="cert-actions-inner">
-            <a href="https://coursera.org/verify/584XPHAKDHY5" class="verify-btn" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> Verify</a>
-            <button class="preview-btn" data-img="./certs/webp/Trustworthy Generative AI.webp" data-title="Trustworthy Generative AI"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> Preview</button>
           </div>
         </div>
       </div>
@@ -4717,15 +4805,15 @@ const initCertModal = () => {
 
   // Event listener for view/preview buttons (using event delegation)
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.view-btn, .preview-btn, .mini-view-btn, .mini-preview-btn, .cert-mini-card[data-img]');
+    const btn = e.target.closest('.view-btn, .preview-btn, .mini-view-btn, .mini-preview-btn, .cert-mini-card[data-img], .cert-subcard[data-img]');
     if (btn) {
       e.preventDefault();
       const imgUrl = btn.getAttribute('data-img');
-      const card = btn.closest('.cert-card, .cert-card-program, .cert-mini-card');
+      const card = btn.closest('.cert-card, .cert-card-program, .cert-mini-card, .cert-subcard');
       
       let title = btn.getAttribute('data-title');
       if (!title && card) {
-        const nameEl = card.querySelector('.cert-name, .cert-mini-name');
+        const nameEl = card.querySelector('.cert-name, .cert-mini-name, .cert-subcard-title');
         if (nameEl) title = nameEl.textContent.trim();
       }
       title = title || 'Certificate of Completion';
@@ -4956,7 +5044,7 @@ const initCertModal = () => {
   }
 
   // Instant prefetch on card hover / touchstart
-  document.querySelectorAll('.cert-card, .cert-card-program, .cert-mini-card, .preview-btn').forEach(card => {
+  document.querySelectorAll('.cert-card, .cert-card-program, .cert-mini-card, .cert-subcard, .preview-btn').forEach(card => {
     const prefetch = () => {
       const url = card.getAttribute('data-img') || card.querySelector('[data-img]')?.getAttribute('data-img');
       if (url) {
