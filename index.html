@@ -120,27 +120,31 @@ body.dark {
   --preview-btn-hover-bg: rgba(255, 255, 255, 0.15);
   --preview-btn-hover-border: rgba(255, 255, 255, 0.28);
   --preview-btn-hover-text: #fff; }
-body.dark #scroll-path-active { opacity: var(--scroll-active-opacity); }
-body.dark #scroll-dot { filter: drop-shadow(0 0 6px var(--scroll-active-mid)); }
+#scroll-path-bg {
+  opacity: 0.35;
+}
+body.dark #scroll-path-bg {
+  opacity: 0.20;
+}
 #scroll-path-active {
-  opacity: var(--scroll-active-opacity, 0.9);
+  opacity: 0.95;
   will-change: stroke-dashoffset;
 }
-#scroll-path-bg {
-  display: none;
+body.dark #scroll-path-active {
+  opacity: 0.95;
 }
 #scroll-dot {
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  transform-box: fill-box;
-  transform-origin: center;
-  fill: var(--scroll-active-mid);
-  filter: drop-shadow(0 0 6px var(--scroll-active-mid));
+  fill: var(--teal);
+  filter: drop-shadow(0 0 6px var(--teal));
+  transition: opacity 0.25s;
+}
+body.dark #scroll-dot {
+  fill: var(--teal);
+  filter: drop-shadow(0 0 6px var(--teal));
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.7; overflow-x: hidden; position: relative; -webkit-tap-highlight-color: transparent; }
-#scroll-svg { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 2; overflow: visible !important; max-height: none !important; }
+body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.7; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
 a { color: var(--accent); text-decoration: none; }
 img { display: block; max-width: 100%; }
 ::selection { background: rgba(30,58,95,.12); color: var(--text); }
@@ -2785,19 +2789,19 @@ body.dark .mesh-blob {
 <svg id="scroll-svg" style="position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 2; overflow: visible;">
   <defs>
     <linearGradient id="scroll-gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="var(--scroll-bg-start)" stop-opacity="0.15" />
-      <stop offset="50%" stop-color="var(--scroll-bg-mid)" stop-opacity="0.22" />
-      <stop offset="100%" stop-color="var(--scroll-bg-end)" stop-opacity="0.15" />
+      <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.20" />
+      <stop offset="50%" stop-color="var(--teal)" stop-opacity="0.30" />
+      <stop offset="100%" stop-color="var(--accent2)" stop-opacity="0.20" />
     </linearGradient>
     <linearGradient id="scroll-gradient-active" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="var(--scroll-active-start)" stop-opacity="1.0" />
-      <stop offset="50%" stop-color="var(--scroll-active-mid)" stop-opacity="1.0" />
-      <stop offset="100%" stop-color="var(--scroll-active-end)" stop-opacity="1.0" />
+      <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.85" />
+      <stop offset="50%" stop-color="var(--teal)" stop-opacity="1.0" />
+      <stop offset="100%" stop-color="var(--accent2)" stop-opacity="0.85" />
     </linearGradient>
   </defs>
   <path id="scroll-path-bg" stroke="url(#scroll-gradient)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
   <path id="scroll-path-active" stroke="url(#scroll-gradient-active)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-  <circle id="scroll-dot" r="6" fill="var(--scroll-active-mid)" style="filter: drop-shadow(0 0 6px var(--scroll-active-mid)); transition: opacity 0.25s; opacity: 0;" />
+  <circle id="scroll-dot" r="6" fill="var(--teal)" style="filter: drop-shadow(0 0 6px var(--teal)); transition: opacity 0.25s; opacity: 0;" />
 </svg>
 
 <!-- SVG Liquid Glass Smooth Optical Lens Filter -->
@@ -4239,14 +4243,7 @@ window.addEventListener('load', () => {
   cachedWinHeight = window.innerHeight;
   cacheSectionOffsets();
   generateWeavingPath();
-  setTimeout(generateWeavingPath, 500);
 });
-if (document.fonts && document.fonts.ready) {
-  document.fonts.ready.then(() => {
-    cacheSectionOffsets();
-    generateWeavingPath();
-  });
-}
 window.addEventListener('resize', () => {
   cachedWinHeight = window.innerHeight;
   cacheSectionOffsets();
@@ -4664,10 +4661,6 @@ const initRevealAnimations = () => {
 let activePathLength = 0;
 let scrollPathActive = null;
 let scrollDot = null;
-let weavingStartY = 150;
-let weavingEndY = 0;
-let cachedWeavingPoints = [];
-let cachedWinHeight = window.innerHeight;
 
 function generateWeavingPath() {
   const svg = document.getElementById('scroll-svg');
@@ -4676,17 +4669,8 @@ function generateWeavingPath() {
   scrollDot = document.getElementById('scroll-dot');
   if (!svg || !pathBg || !scrollPathActive) return;
 
-  const docHeight = Math.max(
-    document.body.scrollHeight,
-    document.documentElement.scrollHeight,
-    document.body.offsetHeight,
-    document.documentElement.offsetHeight,
-    document.body.clientHeight,
-    document.documentElement.clientHeight
-  );
+  const docHeight = document.documentElement.scrollHeight;
   svg.style.height = docHeight + 'px';
-  svg.style.maxHeight = 'none';
-  svg.style.overflow = 'visible';
   svg.setAttribute('height', docHeight);
   svg.removeAttribute('viewBox');
   
@@ -4724,7 +4708,6 @@ function generateWeavingPath() {
     startX = rect.left + window.scrollX + rect.width / 2;
     startY = rect.top + window.scrollY + rect.height / 2;
   }
-  weavingStartY = startY;
   anchors.push({ x: startX, y: startY });
 
   // 2. About Section (left side)
@@ -4779,9 +4762,6 @@ function generateWeavingPath() {
   const yContact = getSectionY('#contact', 100);
   if (yContact !== null) {
     anchors.push({ x: getX(0.5), y: yContact });
-    weavingEndY = yContact;
-  } else {
-    weavingEndY = docHeight - 600;
   }
 
   if (anchors.length < 2) return;
@@ -4814,19 +4794,6 @@ function generateWeavingPath() {
   scrollPathActive.style.strokeDasharray = activePathLength;
   scrollPathActive.style.strokeDashoffset = activePathLength;
   
-  // Pre-calculate path points at 1000 steps to avoid layout thrashing via getPointAtLength on scroll
-  const steps = 1000;
-  cachedWeavingPoints = [];
-  for (let i = 0; i <= steps; i++) {
-    const pct = i / steps;
-    try {
-      const pt = scrollPathActive.getPointAtLength(activePathLength * pct);
-      cachedWeavingPoints.push({ x: pt.x, y: pt.y });
-    } catch (e) {
-      cachedWeavingPoints.push({ x: 0, y: 0 });
-    }
-  }
-  
   updateWeavingScroll();
 }
 
@@ -4834,9 +4801,14 @@ function updateWeavingScroll(scrollY) {
   if (activePathLength <= 0 || !scrollPathActive) return;
   
   if (scrollY === undefined) scrollY = window.scrollY;
-  const winHeight = cachedWinHeight;
+  const docHeight = document.documentElement.scrollHeight;
+  const winHeight = window.innerHeight;
   
-  const yStart = weavingStartY;
+  // Start drawing exactly from the period dot Y coordinate
+  const period = document.getElementById('hero-period');
+  const yStart = period 
+    ? (period.getBoundingClientRect().top + window.scrollY + period.getBoundingClientRect().height / 2) 
+    : 150;
 
   // Smoothly transition the leading offset from 0 (at scrollY = 0) to 65% of viewport height (at scrollY >= 300)
   const leadLimit = 300; // px of scroll to transition
@@ -4846,25 +4818,23 @@ function updateWeavingScroll(scrollY) {
     : 0;
   const targetY = scrollY + currentLead;
   
-  const yEnd = weavingEndY;
+  // Dynamically find end of path (yContact) or fallback to document scroll height minus footer
+  const contactSection = document.querySelector('#contact');
+  const yEnd = contactSection 
+    ? (contactSection.getBoundingClientRect().top + window.scrollY + 100)
+    : (docHeight - 600);
     
   let scrollPercent = (targetY - yStart) / (yEnd - yStart);
-  if (yEnd <= yStart) scrollPercent = 0;
   scrollPercent = Math.max(0, Math.min(1, scrollPercent));
   
   scrollPathActive.style.strokeDashoffset = activePathLength * (1 - scrollPercent);
   
-  if (scrollDot && cachedWeavingPoints.length > 0) {
-    const rawIdx = scrollPercent * (cachedWeavingPoints.length - 1);
-    const idx0 = Math.floor(rawIdx);
-    const idx1 = Math.min(cachedWeavingPoints.length - 1, idx0 + 1);
-    const ratio = rawIdx - idx0;
-    const p0 = cachedWeavingPoints[idx0];
-    const p1 = cachedWeavingPoints[idx1];
-    const px = p0.x + (p1.x - p0.x) * ratio;
-    const py = p0.y + (p1.y - p0.y) * ratio;
-    
-    scrollDot.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+  if (scrollDot) {
+    try {
+      const point = scrollPathActive.getPointAtLength(activePathLength * scrollPercent);
+      scrollDot.setAttribute('cx', point.x);
+      scrollDot.setAttribute('cy', point.y);
+    } catch(e) {}
   }
 }
 
