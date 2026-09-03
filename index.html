@@ -4740,25 +4740,19 @@ function generateWeavingPath() {
     anchors.push({ x: getX(0.2), y: yCerts });
   }
 
-  // 7. Feedback / Testimonials Section (right side)
-  const yTestimonials = getSectionY('#testimonials', 120);
-  if (yTestimonials !== null) {
-    anchors.push({ x: getX(0.8), y: yTestimonials });
-  }
-
-  // 8. Education Section (left side)
-  const yEdu = getSectionY('#education', 45);
+  // 7. Education Section (right side)
+  const yEdu = getSectionY('#education', 120);
   if (yEdu !== null) {
-    anchors.push({ x: getX(0.2), y: yEdu });
+    anchors.push({ x: getX(0.8), y: yEdu });
   }
 
-  // 9. Leadership Section (right side)
+  // 8. Leadership Section (left side)
   const yLeadership = getSectionY('#leadership', 120);
   if (yLeadership !== null) {
-    anchors.push({ x: getX(0.8), y: yLeadership });
+    anchors.push({ x: getX(0.2), y: yLeadership });
   }
 
-  // 10. Contact Section (center)
+  // 9. Contact Section (center)
   const yContact = getSectionY('#contact', 100);
   if (yContact !== null) {
     anchors.push({ x: getX(0.5), y: yContact });
