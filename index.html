@@ -483,30 +483,47 @@ body.dark .card-metrics {
 }
 .metric {
   display: flex; flex-direction: column; justify-content: center;
-  padding: .55rem .75rem;
-  background: rgba(255, 255, 255, 0.65);
+  padding: .6rem .8rem;
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: var(--radius);
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 .metric:hover {
-  border-color: rgba(13, 148, 136, 0.35);
-  transform: translateY(-1px);
+  border-color: rgba(15, 23, 42, 0.18);
+  background: #ffffff;
 }
 body.dark .metric {
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: none;
 }
 body.dark .metric:hover {
-  border-color: rgba(45, 212, 191, 0.35);
-  background: rgba(15, 23, 42, 0.65);
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: none;
 }
-.metric-val { font-family: var(--mono); font-size: .92rem; font-weight: 700; color: var(--teal); line-height: 1.25; }
-body.dark .metric-val { color: var(--accent2); }
-.metric-lbl { font-family: var(--body); font-size: .67rem; font-weight: 500; color: var(--text3); margin-top: .2rem; line-height: 1.35; }
+.metric-val {
+  font-family: var(--mono);
+  font-size: .92rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+body.dark .metric-val {
+  color: #f8fafc;
+}
+.metric-lbl {
+  font-family: var(--body);
+  font-size: .67rem;
+  font-weight: 500;
+  color: var(--text3);
+  margin-top: .25rem;
+  line-height: 1.35;
+}
+body.dark .metric-lbl {
+  color: #94a3b8;
+}
 .card-actions {
   display: flex; gap: .7rem; margin-top: auto;
   padding: 1.25rem 1.8rem;
