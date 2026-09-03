@@ -3164,13 +3164,13 @@ body.dark .mesh-blob {
           <span class="card-status status-complete">Complete</span>
         </div>
         <div class="card-title">DataCo Supply Chain:<br><span style="color:var(--accent2)">AI Prescriptive Decision Support System</span></div>
-        <div class="card-tags"><span class="tag">FastAPI</span><span class="tag">Scikit-Learn</span><span class="tag">Random Forest</span><span class="tag">Prescriptive DSS</span><span class="tag">Apache ECharts</span><span class="tag">Python 3.11</span><span class="tag">Docker</span></div>
+        <div class="card-tags"><span class="tag">Machine Learning</span><span class="tag">Random Forest</span><span class="tag">Prescriptive DSS</span><span class="tag">Supply Chain Analytics</span><span class="tag">Python</span><span class="tag">SHAP (XAI)</span></div>
         <div class="card-desc">End-to-end Machine Learning Decision Support System (DSS) predicting late delivery risks and computing prescriptive freight mitigation ROI (expedited shipping vs. SLA penalty liabilities). Features SHAP feature attribution and automated Excel batch analytics.</div>
         <div class="card-metrics">
-          <div class="metric"><div class="metric-val">180K+</div><div class="metric-lbl">Training Records</div></div>
-          <div class="metric"><div class="metric-val">71.9%</div><div class="metric-lbl">Validation AUC-ROC</div></div>
-          <div class="metric"><div class="metric-val">239 &rarr; 4</div><div class="metric-lbl">Pruned Core Drivers</div></div>
-          <div class="metric"><div class="metric-val">&lt;50ms</div><div class="metric-lbl">FastAPI Inference</div></div>
+          <div class="metric"><div class="metric-val">180K+</div><div class="metric-lbl">Orders (Training Data)</div></div>
+          <div class="metric"><div class="metric-val">71.9%</div><div class="metric-lbl">AUC-ROC (Model Accuracy)</div></div>
+          <div class="metric"><div class="metric-val">4 Core Drivers</div><div class="metric-lbl">Key SCM Factors (SHAP)</div></div>
+          <div class="metric"><div class="metric-val">Real-Time + Bulk</div><div class="metric-lbl">Live Testing &amp; Excel Export</div></div>
         </div>
         <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
           <span class="btn-toggle-text">Show Architecture &amp; Details</span>
@@ -3180,7 +3180,7 @@ body.dark .mesh-blob {
           <div class="hood-body">
             <div class="hood-item"><span class="hood-num">01</span><div><div class="hood-title">Two-Stage Feature Pruning (239 &rarr; 4 Drivers)</div><div class="hood-desc">Pruned high-dimensional one-hot noise down to 4 dominant predictive drivers (<code>Sales</code>, <code>Order Profit</code>, <code>Days_Scheduled</code>, <code>Transfer Payment</code>) via Variance Thresholding (&lt;0.01) and Gini Importance, shrinking model size from 750MB to <strong>35MB</strong> and preventing overfitting.</div></div></div>
             <div class="hood-item"><span class="hood-num">02</span><div><div class="hood-title">Prescriptive Financial Optimization Engine</div><div class="hood-desc">Engineered decision logic comparing <code>Expected Profit (No Action)</code> vs <code>Expected Profit (Expedited Shipping)</code>. Automatically identifies when paying expedited freight fees saves net order profit against contractual SLA penalty liabilities.</div></div></div>
-            <div class="hood-item"><span class="hood-num">03</span><div><div class="hood-title">High-Performance FastAPI + Glassmorphism UI</div><div class="hood-desc">Migrated from Gradio to an asynchronous FastAPI backend delivering &lt;50ms inference. Engineered a custom Glassmorphic SPA featuring Tri-Capsule navigation with liquid spring physics, Apache ECharts 5.5 bidirectional SHAP attribution, and formatted Excel batch reports.</div></div></div>
+            <div class="hood-item"><span class="hood-num">03</span><div><div class="hood-title">Interactive Simulation &amp; Decision Prototype</div><div class="hood-desc">Packaged the Scikit-Learn model and prescriptive logic into a live decision dashboard with AI-assisted interface scaffolding, enabling real-time single-order simulation, SHAP root-cause breakdown, and bulk Excel batch processing.</div></div></div>
           </div>
         </div>
         <div class="hf-notice"><span class="hf-notice-dot"></span><span>⚡ Production Web App · Prescriptive Decision Support System</span></div>
