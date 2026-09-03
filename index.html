@@ -139,7 +139,8 @@ body.dark #scroll-dot { filter: drop-shadow(0 0 6px var(--scroll-active-mid)); }
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.7; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.7; overflow-x: hidden; position: relative; -webkit-tap-highlight-color: transparent; }
+#scroll-svg { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 2; overflow: visible !important; max-height: none !important; }
 a { color: var(--accent); text-decoration: none; }
 img { display: block; max-width: 100%; }
 ::selection { background: rgba(30,58,95,.12); color: var(--text); }
@@ -2781,7 +2782,7 @@ body.dark .mesh-blob {
 </script>
 
 <!-- SCROLL WEAVING PATH BACKGROUND -->
-<svg id="scroll-svg" style="position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 2; overflow: hidden; max-height: 100%;">
+<svg id="scroll-svg" style="position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 2; overflow: visible;">
   <defs>
     <linearGradient id="scroll-gradient" x1="0%" y1="0%" x2="0%" y2="100%" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="var(--scroll-bg-start)" stop-opacity="0.15" />
@@ -4238,7 +4239,14 @@ window.addEventListener('load', () => {
   cachedWinHeight = window.innerHeight;
   cacheSectionOffsets();
   generateWeavingPath();
+  setTimeout(generateWeavingPath, 500);
 });
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => {
+    cacheSectionOffsets();
+    generateWeavingPath();
+  });
+}
 window.addEventListener('resize', () => {
   cachedWinHeight = window.innerHeight;
   cacheSectionOffsets();
@@ -4668,8 +4676,17 @@ function generateWeavingPath() {
   scrollDot = document.getElementById('scroll-dot');
   if (!svg || !pathBg || !scrollPathActive) return;
 
-  const docHeight = Math.max(document.body.offsetHeight, document.documentElement.clientHeight);
+  const docHeight = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.body.clientHeight,
+    document.documentElement.clientHeight
+  );
   svg.style.height = docHeight + 'px';
+  svg.style.maxHeight = 'none';
+  svg.style.overflow = 'visible';
   svg.setAttribute('height', docHeight);
   svg.removeAttribute('viewBox');
   
@@ -4740,19 +4757,25 @@ function generateWeavingPath() {
     anchors.push({ x: getX(0.2), y: yCerts });
   }
 
-  // 7. Education Section (right side)
+  // 7. Feedback / Testimonials Section (right side)
+  const yTestimonials = getSectionY('#testimonials', 120);
+  if (yTestimonials !== null) {
+    anchors.push({ x: getX(0.8), y: yTestimonials });
+  }
+
+  // 8. Education Section (left side)
   const yEdu = getSectionY('#education', 45);
   if (yEdu !== null) {
-    anchors.push({ x: getX(0.8), y: yEdu });
+    anchors.push({ x: getX(0.2), y: yEdu });
   }
 
-  // 8. Leadership Section (left side)
+  // 9. Leadership Section (right side)
   const yLeadership = getSectionY('#leadership', 120);
   if (yLeadership !== null) {
-    anchors.push({ x: getX(0.2), y: yLeadership });
+    anchors.push({ x: getX(0.8), y: yLeadership });
   }
 
-  // 9. Contact Section (center)
+  // 10. Contact Section (center)
   const yContact = getSectionY('#contact', 100);
   if (yContact !== null) {
     anchors.push({ x: getX(0.5), y: yContact });
