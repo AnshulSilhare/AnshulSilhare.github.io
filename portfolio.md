@@ -121,6 +121,8 @@ Data & Querying
 
 SQL (T-SQL, MySQL)
 
+Advanced Excel
+
 Python for Analytics
 
 pandas
@@ -128,8 +130,6 @@ numpy
 scikit-learn
 matplotlib
 seaborn
-
-Advanced Excel · VBA & Macros
 
 📊
 
