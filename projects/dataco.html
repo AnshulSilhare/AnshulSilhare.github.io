@@ -495,75 +495,76 @@ h2 {
   </nav>
 
   <div class="title-section">
-    <p class="project-label">Machine Learning Case Study</p>
-    <h1>DataCo Supply Chain: AI Delivery Risk Predictor</h1>
+    <p class="project-label">Machine Learning &amp; Decision Science Case Study</p>
+    <h1>DataCo Supply Chain: AI Prescriptive Decision Support System</h1>
   </div>
 
   <div class="meta-grid reveal">
-    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Lead ML Engineer &amp; Developer</span></div>
+    <div class="meta-item"><span class="meta-label">Role</span><span class="meta-val">Lead ML &amp; Decision Science Developer</span></div>
     <div class="meta-item"><span class="meta-label">Dataset</span><span class="meta-val">DataCo Supply Chain (180K+ Rows)</span></div>
-    <div class="meta-item"><span class="meta-label">Deployment</span><span class="meta-val">Hugging Face Spaces (Gradio)</span></div>
-    <div class="meta-item"><span class="meta-label">Tech Stack</span><span class="meta-val">Python, Scikit-Learn, Pandas, Gradio</span></div>
+    <div class="meta-item"><span class="meta-label">Deployment</span><span class="meta-val">Docker Containerized (FastAPI / Render)</span></div>
+    <div class="meta-item"><span class="meta-label">Tech Stack</span><span class="meta-val">FastAPI, Scikit-Learn, SHAP, ECharts, Docker</span></div>
   </div>
 
   <div class="section">
     <h2 class="reveal">Situation</h2>
-    <p>In global supply chains, delay notifications are usually reactive, managers discover a shipment is late only after the SLA has been violated. Reactive management leads to expedited shipping costs, production downtime, and customer dissatisfaction. Proactive visibility requires predicting delay probability before the shipment leaves the warehouse.</p>
+    <p>In global supply chains, delay notifications are traditionally reactive: managers discover a shipment is late only after the contractual SLA has been breached, triggering direct financial chargebacks (eroding net margins by up to 25%). Reactive management often causes costly "blind expediting" where companies spend more on expedited freight than the order's profit margin is worth.</p>
   </div>
 
   <div class="section">
     <h2 class="reveal">Task</h2>
-    <p>My objective was to build and deploy an end-to-end Machine Learning classifier that predicts delivery delinquency at the time of order placement. The solution had to support both real-time order testing via a web interface and bulk processing for hundreds of orders via CSV upload, with model files small enough for standard serverless hosting.</p>
+    <p>My objective was to build and deploy an end-to-end Machine Learning Decision Support System (DSS) that not only predicts delivery delinquency prior to warehouse dispatch, but also prescriptively optimizes intervention ROI — determining whether paying for expedited freight saves net profit compared to absorbing expected SLA penalties.</p>
   </div>
 
   <div class="section">
     <h2 class="reveal">Action</h2>
-    <p>I structured my approach around data preparation, modeling optimization, and front-end interface engineering:</p>
+    <p>I structured my approach around data pruning, machine learning validation, prescriptive financial optimization, and high-performance API engineering:</p>
     
     <div class="diagram-box reveal">
       <svg width="100%" height="90" viewBox="0 0 700 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
-        <rect x="10" y="25" width="100" height="40" rx="6" fill="var(--svg-fact-bg)" />
-        <text x="60" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">1. Feature Engineering</text>
+        <rect x="10" y="25" width="120" height="40" rx="6" fill="var(--svg-fact-bg)" />
+        <text x="70" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">1. Feature Pruning (239 &rarr; 4)</text>
         
-        <path d="M115 45H135" stroke="var(--svg-line)" stroke-width="2" />
+        <path d="M135 45H155" stroke="var(--svg-line)" stroke-width="2" />
         
-        <rect x="140" y="25" width="100" height="40" rx="6" fill="var(--svg-fact-bg)" />
-        <text x="190" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">2. Model Tuning</text>
+        <rect x="160" y="25" width="110" height="40" rx="6" fill="var(--svg-fact-bg)" />
+        <text x="215" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">2. Random Forest Tuning</text>
         
-        <path d="M245 45H265" stroke="var(--svg-line)" stroke-width="2" />
+        <path d="M275 45H295" stroke="var(--svg-line)" stroke-width="2" />
         
-        <rect x="270" y="25" width="110" height="40" rx="6" fill="var(--svg-fact-bg)" />
-        <text x="325" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">3. Matrix Aligning</text>
+        <rect x="300" y="25" width="120" height="40" rx="6" fill="var(--svg-fact-bg)" />
+        <text x="360" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">3. Prescriptive ROI Engine</text>
         
-        <path d="M385 45H405" stroke="var(--svg-line)" stroke-width="2" />
+        <path d="M425 45H445" stroke="var(--svg-line)" stroke-width="2" />
         
-        <rect x="410" y="25" width="120" height="40" rx="6" fill="var(--svg-fact-bg)" />
-        <text x="470" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">4. Healing Scaler</text>
+        <rect x="450" y="25" width="110" height="40" rx="6" fill="var(--svg-fact-bg)" />
+        <text x="505" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">4. SHAP Explainability</text>
         
-        <path d="M535 45H555" stroke="var(--svg-line)" stroke-width="2" />
+        <path d="M565 45H585" stroke="var(--svg-line)" stroke-width="2" />
         
-        <rect x="560" y="25" width="120" height="40" rx="6" fill="var(--svg-fact-bg)" />
-        <text x="620" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">5. Gradio Hosting</text>
+        <rect x="590" y="25" width="100" height="40" rx="6" fill="var(--svg-fact-bg)" />
+        <text x="640" y="49" fill="var(--svg-fact-text)" font-family="'DM Sans', sans-serif" font-size="9" text-anchor="middle" dominant-baseline="middle">5. FastAPI Deployment</text>
       </svg>
     </div>
 
     <ul>
-      <li><strong>Feature Preprocessing</strong>: Cleaned 180,519 records. Engineered features for order categories, locations, and shipping modes. One-hot encoded categorical columns, yielding a sparse matrix of 240+ dimensions.</li>
-      <li><strong>Model Size Optimisation</strong>: The initial Random Forest model, while accurate, grew to 749MB due to unconstrained tree depth. Applying hyperparameter limits (<code>max_depth=25, min_samples_leaf=3</code>) pruned the forest, shrinking the model size to <strong>22MB</strong> while maintaining performance.</li>
-      <li><strong>Matrix Dimension Alignment</strong>: The Gradio web form collects only 4 essential parameters from users. The model, however, was trained on 240+ encoded columns. I resolved this mismatch by storing the training feature structure in <code>model.feature_names_in_</code>, generating a zero-filled skeleton matrix on user submit, and mapping the web inputs to their matching encoded indices.</li>
-      <li><strong>Self-Healing Scaler</strong>: Programmed a custom scaling routine that uses <code>scaler.feature_names_in_</code> to dynamically isolate only the continuous variables in the inference data, apply scaling, and re-stitch them with categorical indices, preventing shape exceptions.</li>
-      <li><strong>Interface Deployment</strong>: Designed a clean Gradio interface showing risk scores (0–100%) and local feature weights to help coordinators understand *why* an order is flagged.</li>
+      <li><strong>Two-Stage Feature Selection Pipeline</strong>: Cleaned 180,519 records. One-hot encoding expanded categorical attributes (160+ countries, 50+ categories) into 239 sparse binary columns. Applied Variance Thresholding (&lt;0.01) and Random Forest Gini Importance (<code>SelectFromModel</code>) to prune 239 columns down to 4 dominant predictive drivers (<code>Days_Scheduled</code>, <code>Sales</code>, <code>Order_Profit</code>, and <code>Shipping_Type_TRANSFER</code>) capturing ~97% of total variance and eliminating overfitting.</li>
+      <li><strong>Model Hyperparameters &amp; Footprint Optimization</strong>: Rebuilt the Random Forest ensemble (100 Trees, <code>max_depth=20</code>, StandardScaler). Pruning the feature space compressed the serialized model binary from 750MB to <strong>35MB</strong> (95% memory reduction), enabling sub-50ms inference.</li>
+      <li><strong>Prescriptive Financial Optimizer</strong>: Engineered mathematical decision logic comparing <code>Expected Profit (No Action)</code> against <code>Expected Profit (Expedited Shipping)</code>. Formulated real-time SLA penalty liability calculations to prevent over-intervention on low-value SKUs while salvaging net margin on high-risk orders.</li>
+      <li><strong>Explainable AI (SHAP TreeExplainer)</strong>: Integrated game-theoretic SHAP waterfall attribution to break down positive (+) and negative (-) risk drivers for warehouse floor coordinators.</li>
+      <li><strong>High-Performance Production Stack</strong>: Migrated from a Gradio prototype to an asynchronous <strong>FastAPI + Uvicorn</strong> backend and a responsive Glassmorphic SPA featuring Tri-Capsule navigation, dynamic parameter consoles, and automated formatted Excel (<code>.xlsx</code>) batch reporting.</li>
     </ul>
   </div>
 
   <div class="section">
     <h2 class="reveal">Result</h2>
     <div class="highlight-box reveal">
-      <div class="highlight-title">Quantified System Performance</div>
+      <div class="highlight-title">Quantified System Performance &amp; Business Lift</div>
       <ul>
-        <li><strong>80% Precision Score</strong>: Achieved high accuracy on delinquent delivery flagging, helping managers isolate high-risk shipments prior to routing.</li>
-        <li><strong>97% Reduction in Model Footprint</strong>: Successfully reduced binary size from 749MB to 22MB. This allowed the app to run on Hugging Face's free tier without timeouts.</li>
-        <li><strong>Dual-mode Prediction Backend</strong>: Enabled real-time evaluation for single transactions, alongside a batch CSV uploader which evaluates 500+ orders in under 5 seconds.</li>
+        <li><strong>71.9% Validation AUC-ROC</strong>: Achieved high discriminative power across varying probability thresholds (66.6% Accuracy, 66.3% F1-Score) on benchmark supply chain data.</li>
+        <li><strong>95% Reduction in Model Footprint</strong>: Successfully reduced model artifact from 750MB to 35MB, eliminating memory leaks and ensuring sub-50ms response latency.</li>
+        <li><strong>Automated Prescriptive Mitigation</strong>: Delivered dollar-for-dollar ROI calculations preventing costly blind expedited freight while protecting customer SLAs.</li>
+        <li><strong>Dual-Mode Real-Time &amp; Enterprise Batch Processing</strong>: Enabled single-order live simulations alongside a non-blocking batch engine processing thousands of orders with automated conditional-formatted Excel downloads.</li>
       </ul>
     </div>
   </div>

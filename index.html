@@ -3163,14 +3163,14 @@ body.dark .mesh-blob {
           <div style="display:flex;align-items:center;gap:.6rem"><span class="card-num">02</span><span class="card-ai-badge">🤖 ML / AI</span></div>
           <span class="card-status status-complete">Complete</span>
         </div>
-        <div class="card-title">DataCo Supply Chain:<br><span style="color:var(--accent2)">AI Delivery Risk Predictor</span></div>
-        <div class="card-tags"><span class="tag">Machine Learning</span><span class="tag">Random Forest</span><span class="tag">Gradio</span><span class="tag">Render</span><span class="tag">Python</span><span class="tag">Scikit-Learn</span></div>
-        <div class="card-desc">End-to-end ML web application predicting supply chain delivery delays before they happen using a Random Forest Classifier. Outputs a probability risk score with Explainable AI feature importance, plus bulk CSV processing for 500+ orders at once.</div>
+        <div class="card-title">DataCo Supply Chain:<br><span style="color:var(--accent2)">AI Prescriptive Decision Support System</span></div>
+        <div class="card-tags"><span class="tag">FastAPI</span><span class="tag">Scikit-Learn</span><span class="tag">Random Forest</span><span class="tag">Prescriptive DSS</span><span class="tag">Apache ECharts</span><span class="tag">Python 3.11</span><span class="tag">Docker</span></div>
+        <div class="card-desc">End-to-end Machine Learning Decision Support System (DSS) predicting late delivery risks and computing prescriptive freight mitigation ROI (expedited shipping vs. SLA penalty liabilities). Features SHAP feature attribution and automated Excel batch analytics.</div>
         <div class="card-metrics">
-          <div class="metric"><div class="metric-val">180K+</div><div class="metric-lbl">Records Trained On</div></div>
-          <div class="metric"><div class="metric-val">80%</div><div class="metric-lbl">Precision Score</div></div>
-          <div class="metric"><div class="metric-val">240+</div><div class="metric-lbl">Engineered Features</div></div>
-          <div class="metric"><div class="metric-val">Real-time + Bulk</div><div class="metric-lbl">Prediction Modes</div></div>
+          <div class="metric"><div class="metric-val">180K+</div><div class="metric-lbl">Training Records</div></div>
+          <div class="metric"><div class="metric-val">71.9%</div><div class="metric-lbl">Validation AUC-ROC</div></div>
+          <div class="metric"><div class="metric-val">239 &rarr; 4</div><div class="metric-lbl">Pruned Core Drivers</div></div>
+          <div class="metric"><div class="metric-val">&lt;50ms</div><div class="metric-lbl">FastAPI Inference</div></div>
         </div>
         <button class="project-details-btn" onclick="toggleProjectDetails(this)" aria-expanded="false">
           <span class="btn-toggle-text">Show Architecture &amp; Details</span>
@@ -3178,15 +3178,15 @@ body.dark .mesh-blob {
         </button>
         <div class="hood-wrapper">
           <div class="hood-body">
-            <div class="hood-item"><span class="hood-num">01</span><div><div class="hood-title">Matrix Dimensionality Fix</div><div class="hood-desc">Model trained on 240+ One-Hot Encoded columns, UI takes 4 inputs. Solved via <code>model.feature_names_in_</code> generating a zero-filled skeleton matrix and mapping inputs to correct indices.</div></div></div>
-            <div class="hood-item"><span class="hood-num">02</span><div><div class="hood-title">Self-Healing Scaler</div><div class="hood-desc">Isolates numerical columns via <code>scaler.feature_names_in_</code>, scales only those, then re-stitches the dataframe, preventing shape mismatch errors during inference.</div></div></div>
-            <div class="hood-item"><span class="hood-num">03</span><div><div class="hood-title">Model Size Optimisation</div><div class="hood-desc">Rebuilt a 749MB overfit model using <code>max_depth=25, min_samples_leaf=3</code>, reducing size to 22MB while retaining 80% precision on late delivery detection.</div></div></div>
+            <div class="hood-item"><span class="hood-num">01</span><div><div class="hood-title">Two-Stage Feature Pruning (239 &rarr; 4 Drivers)</div><div class="hood-desc">Pruned high-dimensional one-hot noise down to 4 dominant predictive drivers (<code>Sales</code>, <code>Order Profit</code>, <code>Days_Scheduled</code>, <code>Transfer Payment</code>) via Variance Thresholding (&lt;0.01) and Gini Importance, shrinking model size from 750MB to <strong>35MB</strong> and preventing overfitting.</div></div></div>
+            <div class="hood-item"><span class="hood-num">02</span><div><div class="hood-title">Prescriptive Financial Optimization Engine</div><div class="hood-desc">Engineered decision logic comparing <code>Expected Profit (No Action)</code> vs <code>Expected Profit (Expedited Shipping)</code>. Automatically identifies when paying expedited freight fees saves net order profit against contractual SLA penalty liabilities.</div></div></div>
+            <div class="hood-item"><span class="hood-num">03</span><div><div class="hood-title">High-Performance FastAPI + Glassmorphism UI</div><div class="hood-desc">Migrated from Gradio to an asynchronous FastAPI backend delivering &lt;50ms inference. Engineered a custom Glassmorphic SPA featuring Tri-Capsule navigation with liquid spring physics, Apache ECharts 5.5 bidirectional SHAP attribution, and formatted Excel batch reports.</div></div></div>
           </div>
         </div>
-        <div class="hf-notice"><span class="hf-notice-dot"></span><span>Production Web App · High-performance real-time ML inference</span></div>
+        <div class="hf-notice"><span class="hf-notice-dot"></span><span>⚡ Production Web App · Prescriptive Decision Support System</span></div>
         <div class="card-actions">
           <a href="https://github.com/AnshulSilhare/ai-dataco-supply-chain" target="_blank" rel="noopener noreferrer" class="card-btn card-btn-gh"><span class="icon-svg"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55v-1.93c-3.2.69-3.87-1.54-3.87-1.54-.52-1.33-1.27-1.69-1.27-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.74 2.68 1.24 3.33.95.1-.74.39-1.24.71-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.77 1.06.77 2.13v3.16c0 .3.21.66.79.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg></span> GitHub</a>
-          <button class="card-btn card-btn-demo" onclick="openModal('DataCo Supply Chain: AI Delivery Risk Predictor','https://ai-dataco-supply-chain.onrender.com/','render')">🚀 Live Demo</button>
+          <button class="card-btn card-btn-demo" onclick="openModal('DataCo Supply Chain: AI Prescriptive Decision Support System','https://ai-dataco-supply-chain.onrender.com/','render')">🚀 Live Demo</button>
         </div>
       </div>
 
