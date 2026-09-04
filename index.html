@@ -472,6 +472,34 @@ section { position: relative; }
 .card-num { font-family: var(--mono); font-size: .65rem; color: var(--text3); }
 .card-title { font-family: var(--display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: .6rem; line-height: 1.25; }
 .card-tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.1rem; }
+.tag {
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: rgba(30, 58, 95, 0.06);
+  border: 1px solid rgba(30, 58, 95, 0.14);
+  padding: .22rem .6rem;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.3;
+  transition: all 0.2s ease;
+}
+.tag:hover {
+  background: rgba(30, 58, 95, 0.1);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+body.dark .tag {
+  color: var(--teal);
+  background: rgba(45, 212, 191, 0.08);
+  border-color: rgba(45, 212, 191, 0.2);
+}
+body.dark .tag:hover {
+  background: rgba(45, 212, 191, 0.16);
+  border-color: var(--teal);
+}
 .card-desc { font-size: .88rem; color: var(--text2); line-height: 1.68; margin-bottom: .85rem; flex: 1; }
 .card-metrics {
   display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: .95rem;
