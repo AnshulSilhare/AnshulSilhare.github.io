@@ -171,44 +171,44 @@ Agile Project Management · Jira
 
 ## Featured Projects.
 
-01⚡ Enterprise SC Engine
+01⚡ Agentic AI Decision System
 
-Production Ready
+Live Decision System
 
 DemandSense AI: Indian FMCG
-Multi-Echelon Demand & Inventory Engine
+Agentic AI-First Demand Planning & Multi-Echelon Inventory Engine
 
-Auto-ML Forecasting | Prescriptive LLM Agent | Indian Seasonality | Safety Stock Sizing | What-If Price Elasticity | Streamlit & Plotly
+Agentic AI Decision Support | Cross-Functional Decision Hub | Demand Forecasting & S&OP | Safety Stock & ROP | Indian Festival Seasonality | ReAct Tool Calling
 
-Enterprise-grade demand sensing and inventory planning engine built for Indian FMCG supply chains. Automates multi-model forecasting & benchmarking (XGBoost, Prophet, SARIMAX, Holt-Winters) to eliminate stockouts during festive peaks (Diwali, Holi), dynamically size safety stocks across 90%-98% service level SLAs, and simulate lead-time disruptions to protect working capital.
+An agentic AI-first demand planning and inventory decision-support system built for Indian FMCG supply chains. Models multi-echelon demand across 20 SKUs and 5 regional hubs, capturing festival surges (Diwali, Holi), monsoon logistics, and salary-cycle buying patterns. Features an autonomous multi-agent architecture where specialized AI roles (Demand Planner, Inventory Controller, and Risk Analyst) query live operational tools via ReAct function calling, dynamically sizing Safety Stock, flagging Reorder Point (ROP) stockout risks, and stress-testing working capital through interactive what-if simulations.
 
 ₹1.8 Cr+
-Revenue at Risk Protected
+Stockout Exposure Analyzed
 
-95.2%
-Forecast Accuracy (MAPE < 5%)
+5 Tools
+Autonomous ReAct Registry
 
--28%
-Excess Inventory Holding Cost
+3 Roles
+Cross-Functional Decision Hub
 
-5 Regional Hubs
-20 SKUs · 109K+ Records
+20 SKUs · 5 Hubs
+Multi-Region FMCG Scale
 
 ▶
 Under the Hood
 3 Supply Chain Challenges Solved
 
 01
-5-Model Auto-ML Selection Arena
-Eliminates planner bias by running parallel backtesting across 5 statistical and ML models (XGBoost, Prophet with Indian Holiday Regressors, SARIMAX, Holt-Winters, 14d WMA). Automatically deploys the lowest-MAPE algorithm per SKU-region echelon over 60-day unseen test sets.
+Domain Modeling: Indian FMCG Demand Dynamics
+Addressed the unique volatility of Indian retail by embedding domain-specific drivers into the demand pipeline: shifting luni-solar festival surges (Diwali gifting +180%, Holi beverages +40%), regional monsoon disruptions, and consumer salary-cycle buying spikes (25th–5th monthly lift). Decomposes true baseline demand from event-driven spikes to prevent stockouts during peak retail windows.
 
 02
-Indian Market Intelligence & Luni-Solar Festival Elasticity
-Decomposes baseline trend from volatile Indian calendar shifts (Diwali +180% surge, Holi, Navratri, Eid, Ganesh Chaturthi, Pongal), monsoon spikes, and salary cycle effects (+8% lift on 25th-5th), preventing stockouts during peak retail windows.
+Comparative Forecasting & Inventory Sizing (Safety Stock & ROP)
+Benchmarked 5 forecasting methods (statistical models like Holt-Winters and ML approaches like XGBoost) across 60-day out-of-sample test splits to automatically assign the lowest-error model per SKU. Directly connected forecast variance into operations: dynamically calculating Safety Stock (Z × σ × √LT) across 90%–98% service level SLAs and automating Reorder Point (ROP) triggers to balance product availability against holding costs.
 
 03
-Prescriptive LLM Agent & What-If Price Elasticity
-Combines Google Gemini API (with offline rule-engine fallback) to generate executive procurement briefs with real-time what-if simulations modeling price elasticity feedback loops and supply lead-time disruptions to safeguard working capital.
+Agentic Decision Architecture & Cross-Functional Decision Hub
+Built an autonomous decision-support workflow powered by a ReAct reasoning loop with dynamic tool execution (fetching real-time inventory, running scenario simulations, and checking festival calendars). Features a Cross-Functional Decision Hub where 3 domain-specialized agents collaborate in parallel: Demand Planner (forecast trends & seasonality), Inventory Controller (safety stock & PO timing), and Risk Analyst (rupee exposure & holding costs). Harmonizes their findings into concise, actionable procurement directives.
 
 02🤖 ML / AI
 
