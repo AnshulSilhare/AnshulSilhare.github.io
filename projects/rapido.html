@@ -448,7 +448,22 @@ h2 {
       <li><strong>Database Normalization</strong>: Migrated base logs into a Star Schema structure of <strong>8 tables</strong> (2 Fact tables: <code>Fact_Bookings</code>, <code>Fact_Incomplete_Logs</code>; and 6 Dimension tables: <code>Dim_Customers</code>, <code>Dim_Drivers</code>, <code>Dim_Locations</code>, <code>Dim_Vehicle_Types</code>, <code>Dim_Fares</code>, and <code>Dim_Time_Schedules</code>). Enforced 3NF normal form to eliminate data anomalies.</li>
       <li><strong>Revenue Auditing</strong>: Constructed subqueries to isolate actual ride payment amounts from baseline expected tariffs, flagging instances of leakage.</li>
       <li><strong>Turnaround Time (TAT) Analysis</strong>: Computed and compared operational duration columns (<code>Pickup_Time</code> - <code>Booking_Time</code> + <code>Trip_Duration</code>) grouped by shifts to identify service lag patterns.</li>
-      <li><strong>Interactive Dashboarding</strong>: Connected the MySQL data warehouse to Power BI, mapping geo-locations of incomplete logs to guide field planners.</li>
+      <li><strong>Interactive Power BI Dashboarding &amp; DAX Analytics</strong>: Connected the normalized MySQL database to Power BI, engineering 13 centralized DAX measures across 45 visuals to provide a 360-degree operational view:
+        <div class="case-media-grid" style="grid-template-columns: 1fr; gap: 2rem; margin: 1.8rem 0;">
+          <div class="media-card reveal">
+            <div class="media-title">Perspective 1 · Executive Overview &amp; Fleet Performance (30K Bookings · ₹4.2M Revenue)</div>
+            <img src="../images/rapido/rapido-executive-overview.png" alt="Rapido Executive Performance Power BI Dashboard" loading="lazy">
+          </div>
+          <div class="media-card reveal">
+            <div class="media-title">Perspective 2 · Operations &amp; Friction (17-Min Wait Time · ₹251.9K Revenue Loss)</div>
+            <img src="../images/rapido/rapido-operations-friction.png" alt="Rapido Operations and Friction Power BI Dashboard" loading="lazy">
+          </div>
+          <div class="media-card reveal">
+            <div class="media-title">Perspective 3 · Financial Health &amp; Payment Method Breakdown (₹10.6 / KM · 49.9% UPI)</div>
+            <img src="../images/rapido/rapido-financial-health.png" alt="Rapido Financial Health Power BI Dashboard" loading="lazy">
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 

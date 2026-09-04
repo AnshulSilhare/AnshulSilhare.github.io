@@ -107,7 +107,7 @@ Log-Scaled Scorecard
 Approved
 Cleared for Network Rollout
 
-View Case Study (Anonymized) | Enterprise Data Anonymized
+View Case Study & Anonymized Dashboards | Enterprise Data Anonymized
 
 03 · Expertise
 
@@ -268,9 +268,9 @@ Hosted on Hugging Face Spaces · loads instantly in-page
 
 Rapido Logistics: Revenue Leakage & Loss Analytics
 
-SQLPower BIDatabase DesignRevenue Analytics
+SQLPower BI (3 Views)Database DesignDAX AnalyticsRevenue Audit
 
-Designed an operational MySQL database backend with 8 normalized entities. Analyzed 30,000 bookings to identify ₹251.9K in revenue leakage and flagged a 20% lead time spike in night shifts.
+Designed an operational MySQL database backend with 8 normalized entities and built an interactive 3-perspective Power BI dashboard with 13 custom DAX measures. Analyzed 30,000 bookings to identify ₹251.9K in revenue leakage and flagged a 20% lead time spike in night shifts.
 
 30K+
 
